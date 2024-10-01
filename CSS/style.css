@@ -1,0 +1,69 @@
+@import url(links.css);
+@import url(texts.css);
+@import url(button.css);
+@import url(card.css);
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Coolvetica', normal;
+    background-color: #000000;
+    color: white;
+}
+
+header {
+    background-image: url("../img/filmes.png");
+    background-size: cover;
+    background-position: center;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-height: 80vh; 
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1800px;
+    padding: 20px;
+    
+}
+
+
+.logo__image {
+    width: 150px;
+    height: auto;
+    display: flex;
+    justify-content: flex-start;
+    padding-right: 300px;
+}
+
+.header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 800px;
+    z-index: 10;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding: 20px;
+}
+
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+    }
+
+    .links, .icons {
+        margin-top: 10px;
+    }
+
+    .cards-container {
+        grid-template-columns: 1fr;
+    }
+}

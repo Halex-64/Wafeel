@@ -1,0 +1,12 @@
+.links {
+    display: flex;
+    gap: 150px;
+    list-style-type: none; 
+}
+
+.links a {
+    color: white;
+    font-weight: 100;
+    font-size: 1.8rem;
+    text-decoration: none;
+}
