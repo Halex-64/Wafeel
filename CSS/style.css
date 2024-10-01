@@ -1,4 +1,4 @@
-@import url(links.css);
+@import url(nav.css);
 @import url(texts.css);
 @import url(button.css);
 @import url(card.css);
@@ -13,7 +13,7 @@ body {
 }
 
 header {
-    background-image: url("../img/filmes.png");
+    background-image: url("../assets/img/filmes.png");
     background-size: cover;
     background-position: center;
     color: white;
@@ -22,25 +22,6 @@ header {
     align-items: center;
     text-align: center;
     min-height: 80vh; 
-}
-
-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    max-width: 1800px;
-    padding: 20px;
-    
-}
-
-
-.logo__image {
-    width: 150px;
-    height: auto;
-    display: flex;
-    justify-content: flex-start;
-    padding-right: 300px;
 }
 
 .header-content {
