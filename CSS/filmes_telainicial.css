@@ -1,0 +1,10 @@
+.texto_filmesTelaInicial {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #000000;
+}
+
+.texto_filmesTelaInicial h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}

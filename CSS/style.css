@@ -1,0 +1,51 @@
+@import url(nav.css);
+@import url(texts.css);
+@import url(button.css);
+@import url(card.css);
+@import url(recomendacoes.css);
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Coolvetica', normal;
+    background-color: #000000;
+    color: white;
+}
+
+header {
+    background-image: url("../assets/img/filmes.png");
+    background-size: cover;
+    background-position: center;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-height: 80vh; 
+}
+
+.header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 800px;
+    z-index: 10;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding: 20px;
+}
+
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+    }
+
+    .links, .icons {
+        margin-top: 10px;
+    }
+
+    .cards-container {
+        grid-template-columns: 1fr;
+    }
+}
