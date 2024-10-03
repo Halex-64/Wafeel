@@ -1,0 +1,60 @@
+.recomendacoes_telainicial {
+    text-align: center;
+    padding: 40px;
+    padding-left: 450px;
+    background-color: #000000;
+}
+
+.recomendacoes_telainicial h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.recomendacoes_telainicial p {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+}
+
+.recomendacoes-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1.5fr);
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.recomendacoes_card {
+    background-color: #000000;
+    border: 2px solid #8500F2;
+    border-radius: 10px;
+    padding: 40px;
+    text-align: center;
+    color: white;
+}
+
+.recomendacoes_card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.recomendacoes_card p {
+    margin-bottom: 10px;
+    font-size: 0.87rem;
+}
+
+.recomendacoes_card span {
+    font-size: 2rem;
+}
+
+.descubraMagia {
+    width: 80%;
+}
+
+.assistirDepois {
+    width: 80%;
+}
+
+.subtitulo_recomendacoes {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+}
