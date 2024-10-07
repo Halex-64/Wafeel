@@ -9,3 +9,57 @@
     margin-bottom: 10px;
 }
 
+
+/* Carrossel de filmes */
+.carousel-container {
+    position: relative;
+    max-width: 100%;
+    margin: 20px auto;
+    overflow: hidden;
+}
+
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+/* Centralizar o carrossel e aumentar o tamanho dos itens e o espaçamento */
+.carousel {
+    width: calc(300px * 6 + 30px * 5); /* Exibe 6 itens, com filmes maiores e espaçamento maior */
+    margin: 0 auto; /* Centraliza o carrossel */
+}
+
+.carousel-item {
+    min-width: 300px; /* Aumenta a largura dos filmes */
+    margin-right: 30px; /* Aumenta o espaçamento entre os filmes */
+}
+
+.carousel-item img {
+    width: 100%; /* Garante que a imagem ocupe toda a largura do item */
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    font-size: 2rem;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.carousel-button.prev {
+    left: 0;
+}
+
+.carousel-button.next {
+    right: 0;
+}
