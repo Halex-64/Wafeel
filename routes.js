@@ -27,12 +27,21 @@ router.get('/listas', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'listas.html'));
 });
 
-router.get('/quiz', (req, res) => {
+router.get('/assistir_mais_tarde', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'assistir_mais_tarde.html'));
 });
 
-router.get('/quiz', (req, res) => {
+router.get('/perfil', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'perfil.html'));
 });
+
+router.get('/cadastro', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'cadastro.html'));
+});
+
+router.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'login.html'));
+});
+
 
 module.exports = router;
