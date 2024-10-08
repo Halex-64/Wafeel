@@ -25,7 +25,11 @@ router.post('/cadastro', (req, res) => {
 router.post('/login', (req, res) => {
     const { email, password } = req.body;
 
-    if (!isLoggedin){
+    if(isLoggedin){
+        res.redirect('/perfil.html')
+    }
+
+    if (isLoggedin = false){
         res.redirect('/cadastro.html')
     }
 
