@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const { isLoggedIn } = require('./auth');
 
 // Criar um roteador
 const router = express.Router();
@@ -7,6 +8,7 @@ const router = express.Router();
 // Rota para a página inicial
 router.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.render('index', { isLoggedIn: isLoggedIn });
 });
 
 // Rota para a página de filmes
@@ -27,8 +29,13 @@ router.get('/listas', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'listas.html'));
 });
 
-router.get('/assistir_mais_tarde', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'assistir_mais_tarde.html'));
+router.get('/favoritos', (req, res) => {
+    if (isLoggedIn){
+        res.sendFile(path.join(__dirname, 'public', 'favoritos.html'));
+    } else{
+        res.redirect('/login.html')
+    }
+    
 });
 
 router.get('/perfil', (req, res) => {
