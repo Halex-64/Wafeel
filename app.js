@@ -1,12 +1,19 @@
 const express = require('express');
-const path = require('path');
 const bodyParser = require('body-parser');
 const routes = require('./routes');
+const session = require('express-session');
 const authRoutes = require('./auth');
 
 const app = express();
 
 const PORT = 3000;
+
+app.use(session({
+    secret: 'chave-secreta', 
+    resave: false, 
+    saveUninitialized: false, 
+    cookie: { maxAge: 1000 * 60 * 60 * 24 } 
+}));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 

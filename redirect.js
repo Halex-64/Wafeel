@@ -1,11 +1,11 @@
 import {isLoggedIn} from './auth.js';
 
 window.onload = function() {
-    const loginLink = document.getElementById('loginLink')
+    const userLink = document.getElementById('userLink')
 }
 
-if(isLoggedIn()){
-    loginLink.href = './perfil.html';
+if(isLoggedIn === true){
+    userLink.href = './perfil.html';
 } else {
-    loginLink.href = './login.html';
+    userLink.href = './login.html';
 }

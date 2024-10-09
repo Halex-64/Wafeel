@@ -30,16 +30,21 @@ router.get('/listas', (req, res) => {
 });
 
 router.get('/favoritos', (req, res) => {
-    if (isLoggedIn){
+    if (req.session.isLoggedin) {
         res.sendFile(path.join(__dirname, 'public', 'favoritos.html'));
-    } else{
-        res.redirect('/login.html')
+    } else {
+        res.redirect('/login.html');
     }
-    
 });
 
 router.get('/perfil', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'perfil.html'));
+    if(req.session.isLoggedIn) {
+        res.sendFile(path.join(__dirname, 'public', 'perfil.html'));
+    } else {
+        res.redirect('/login.html')
+    }
+    
+
 });
 
 router.get('/cadastro', (req, res) => {

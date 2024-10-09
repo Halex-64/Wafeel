@@ -24,33 +24,29 @@ router.post('/cadastro', (req, res) => {
 // Rota de login
 router.post('/login', (req, res) => {
     const { email, password } = req.body;
-
-    if(isLoggedin){
-        res.redirect('/perfil.html')
-    }
-
-    if (isLoggedin = false){
-        res.redirect('/cadastro.html')
-    }
-
+ 
     // Verificar se o usuário existe e a senha está correta
     const user = users.find(user => user.email === email && user.password === password);
     if (!user) {
         return res.status(400).send('Email ou senha inválidos!');
-    }
+    };
+
+    req.session.isLoggedin = true;
+    req.session.user = user;
     
-    isLoggedin = true;
-    res.redirect('/index.html');
+    res.redirect('/perfil.html');
+
     res.send(console.log(users));
 });
 
-router.get('/logout', (req,res) =>{
-    isLoggedin = false;
-    res.redirect('/login.html')
+router.get('/logout', (req, res) => {
+    req.session.destroy(err => {
+        if (err) {
+            return res.redirect('/perfil.html');
+        }
+        res.clearCookie('connect.sid');
+        res.redirect('/login.html'); 
+    });
 });
-
-router.get('/users', (req, res) =>[
-    res.json(users)
-]);
 
 module.exports = router;
