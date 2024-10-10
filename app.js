@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
 const routes = require('./routes');
 const session = require('express-session');
 const authRoutes = require('./auth');
@@ -14,6 +15,11 @@ app.use(session({
     saveUninitialized: false, 
     cookie: { maxAge: 1000 * 60 * 60 * 24 } 
 }));
+
+app.use((req, res, next) => {
+    res.locals.isLoggedin = req.session.isLoggedin || false;
+    next();
+});
 
 app.use(bodyParser.urlencoded({ extended: true }));
 

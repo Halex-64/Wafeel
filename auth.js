@@ -2,7 +2,12 @@ const express = require('express');
 const router = express.Router();
 
 // Simulação de banco de dados (pode usar um DB real como MongoDB, MySQL, etc.)
-const users = [];
+const users = [
+    {
+        email: 'nokotan@123',
+        password: '123'
+    }
+];
 
 let isLoggedin = false;
 
@@ -35,17 +40,16 @@ router.post('/login', (req, res) => {
     req.session.user = user;
     
     res.redirect('/perfil.html');
-
-    res.send(console.log(users));
+    console.log('isLoggedin: ', req.session.isLoggedin);
 });
 
 router.get('/logout', (req, res) => {
     req.session.destroy(err => {
         if (err) {
-            return res.redirect('/perfil.html');
+            return res.redirect('/');
         }
         res.clearCookie('connect.sid');
-        res.redirect('/login.html'); 
+        res.redirect('/login.html');
     });
 });
 

@@ -33,7 +33,7 @@ router.get('/favoritos', (req, res) => {
     if (req.session.isLoggedin) {
         res.sendFile(path.join(__dirname, 'public', 'favoritos.html'));
     } else {
-        res.redirect('/login.html');
+        res.redirect('login.html');
     }
 });
 
@@ -41,10 +41,14 @@ router.get('/perfil', (req, res) => {
     if(req.session.isLoggedIn) {
         res.sendFile(path.join(__dirname, 'public', 'perfil.html'));
     } else {
-        res.redirect('/login.html')
+        res.redirect('login.html')
     }
     
 
+});
+
+router.get('/api/check-login', (req, res) => {
+    res.json({ isLoggedin: req.session.isLoggedin || false });
 });
 
 router.get('/cadastro', (req, res) => {
