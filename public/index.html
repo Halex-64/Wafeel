@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wafeel</title>
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> 
+</head>
+<body>
+    <header>
+        <nav class="barradenavegacao">
+            <img class="logo__image" src="assets/img/logo.png" alt="Logo">
+            <ul class="links">
+                <li><a href="/quiz.html">Quiz</a></li>
+                <li><a href="">Filmes</a></li>
+                <li><a href="">Séries</a></li>
+                <li><a href="">Listas</a></li>
+
+                <li><a id = "favLink" href="./favoritos.html"><img class="fa-solid fa-heart" src="assets/img/favoritosicon.png"></img></a></li> 
+                <li><a id = "userLink" href="./login.html"><img class="fa-solid fa-right-to-bracket" src="assets/img/usuarioicon.png"></img></a></li>
+            </ul>
+        </nav>
+        <div class="header-content">
+            <h1 class="textoPrincipal_telainicial">Filmes e séries de acordo com <br> suas emoções, e tempo disponível!</h1>
+            <h2 class="textoSecundario_telainicial">Recomendamos os melhores conteúdos com base <br> na forma em que você está se sentindo! Faça já o <br> quiz abaixo</h2>
+            <div class="btn animate__animated animate__backInLeft espaco_botao">
+                <button class="btn__quiz"><a href="">Quiz</a></button>
+            </div>
+        </div>
+    </header>
+
+    <section class="recomendacoes_telainicial">
+        <div class="recomendacoes-container">
+            <div class="recomendacoes_card">
+                <img class="descubraMagia" src="assets/img/descubramagia.png" alt="">
+                <h3>Descubra a magia do<br> entretenimento personalizado</h3>
+                <p class="subtitulo_recomendacoes">Diga-nos como você está se sentindo e <br>quanto tempo tem disponível, 
+                    e nós <br>encontramos filmes e séries que <br>combinam perfeitamente com seu estado <br>de espírito, na sua plataforma 
+                    de <br>streaming escolhida. Descubra uma nova <br>maneira de assistir, feita especialmente <br>para você!</p>
+            </div>
+            <div class="recomendacoes_card">
+                <img class="assistirDepois" src="assets/img/assistirdepois.png" alt="">
+                <h3>Salve para <br>assistir depois</h3>
+                <p class="subtitulo_recomendacoes">Com a função “Salvar para Assistir Depois” do Wafeel, 
+                    você pode guardar filmes e séries recomendados com base no seu estado emocional atual. 
+                    Organize suas seleções por humor e nunca mais perca uma recomendação que se encaixa perfeitamente no seu momento."</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="emotion-cards">
+        <h2>Na dúvida do que assistir?</h2>
+        <p class="textoSecundario_telainicial">Veja nossos filmes e séries filtrados por emoção.</p>
+        <div class="cards-container">
+            <div class="emotion-card">
+                <h3>Felicidade</h3>
+                <p class="subtitulo_card">Mantenha seu bom humor e diversão.</p>
+                <img class="emojiFeliz" src="assets/img/emojifeliz.png" alt="">
+            </div>
+            <div class="emotion-card">
+                <h3>Tristeza</h3>
+                <p class="subtitulo_card">Seu conforto para momentos difíceis.</p>
+                <img class="emojiTriste" src="assets/img/emojitriste.png" alt="">
+            </div>
+            <div class="emotion-card">
+                <h3>Tédio</h3>
+                <p class="subtitulo_card">Transforme seu tédio em diversão.</p>
+                <img class="emojiTedio" src="assets/img/emojitedio.png" alt="">
+            </div>
+            <div class="emotion-card">
+                <h3>Estresse</h3>
+                <p class="subtitulo_card">Escolha relaxar e aliviar o estresse.</p>
+                <img class="emojiEstresse" src="assets/img/emojiestresse.png" alt="">
+            </div>
+            <div class="emotion-card">
+                <h3>Ansiedade</h3>
+                <p class="subtitulo_card">Para distrair e acalmar sua mente.</p>
+                <img class="emojiAnsiedade" src="assets/img/emojiansiedade.png" alt="">
+            </div>
+            <div class="emotion-card">
+                <h3>Nostalgia</h3>
+                <p class="subtitulo_card">Volte no tempo e veja alguns clássicos.</p>
+                <img class="emojiNostalgia" src="assets/img/emojinostalgia.png" alt="">
+            </div>
+        </div>
+    </section>
+    <section class="texto_filmesTelaInicial">
+        <h2>Lançamentos recentes</h2>
+        <div class="carousel-container">
+            <button class="carousel-button prev">&#10094;</button>
+            <div class="carousel">
+                <div class="carousel-track">
+                    <div class="carousel-item"><img src="assets/img/CVA.png" alt="Filme 1"></div>
+                    <div class="carousel-item"><img src="assets/img/AQSNS.png" alt="Filme 2"></div>
+                    <div class="carousel-item"><img src="assets/img/quizlady.png" alt="Filme 3"></div>
+                    <div class="carousel-item"><img src="assets/img/reidoshow.png" alt="Filme 4"></div>
+                    <div class="carousel-item"><img src="assets/img/queremacabarcomigo.png" alt="Filme 5"></div>
+                    <div class="carousel-item"><img src="assets/img/osgoonies2.png" alt="Filme 6"></div>
+                    <div class="carousel-item"><img src="assets/img/CSFPV.png" alt="Filme 7"></div>
+                    <div class="carousel-item"><img src="assets/img/happyfeet.png" alt="Filme 8"></div>
+                    <div class="carousel-item"><img src="assets/img/happyfeet.png" alt="Filme 9"></div>
+                    <div class="carousel-item"><img src="assets/img/happyfeet.png" alt="Filme 10"></div>
+                    <div class="carousel-item"><img src="assets/img/happyfeet.png" alt="Filme 11"></div>
+                    <div class="carousel-item"><img src="assets/img/happyfeet.png" alt="Filme 12"></div>
+                    <div class="carousel-item"><img src="assets/img/happyfeet.png" alt="Filme 13"></div>
+                    <div class="carousel-item"><img src="assets/img/happyfeet.png" alt="Filme 14"></div>
+                    <div class="carousel-item"><img src="assets/img/happyfeet.png" alt="Filme 15"></div>
+                    <div class="carousel-item"><img src="assets/img/happyfeet.png" alt="Filme 16"></div>
+                </div>
+            </div>
+            <button class="carousel-button next">&#10095;</button>
+        </div>
+    </section>    
+    <script>
+            const carouselTrack = document.querySelector('.carousel-track');
+            const prevButton = document.querySelector('.carousel-button.prev');
+            const nextButton = document.querySelector('.carousel-button.next');
+            const carouselItems = document.querySelectorAll('.carousel-item');
+
+            let currentIndex = 0;
+            const itemsVisible = 6; // Número de itens visíveis
+            const itemWidth = carouselItems[0].offsetWidth + 30; // Largura do item + margem direita aumentada
+            const maxIndex = Math.ceil(carouselItems.length / itemsVisible) - 1; // Máximo índice baseado em 6 itens por vez
+
+            nextButton.addEventListener('click', () => {
+                currentIndex++;
+                if (currentIndex > maxIndex) {
+                    currentIndex = 0; // Volta ao início quando chegar ao fim
+                }
+                carouselTrack.style.transform = `translateX(-${currentIndex * itemWidth * itemsVisible}px)`;
+            });
+
+            prevButton.addEventListener('click', () => {
+                currentIndex--;
+                if (currentIndex < 0) {
+                    currentIndex = maxIndex; // Vai para o último conjunto de itens
+                }
+                carouselTrack.style.transform = `translateX(-${currentIndex * itemWidth * itemsVisible}px)`;
+            });
+
+
+    </script>  
+</body>
+<script src="./assets/js/redirect.js"></script>
+</html>
