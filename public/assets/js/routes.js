@@ -48,7 +48,11 @@ router.get('/perfil', (req, res) => {
 });
 
 router.get('/api/check-login', (req, res) => {
-    res.json({ isLoggedin: req.session.isLoggedin || false });
+    if (req.session.isLoggedin) {
+        res.json({ isLoggedin: true });
+    } else {
+        res.json({ isLoggedin: false });
+    }
 });
 
 router.get('/cadastro', (req, res) => {

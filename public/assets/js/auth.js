@@ -5,7 +5,7 @@ const router = express.Router();
 const users = [
     {
         email: 'nokotan@123',
-        password: '123'
+        password: 'nokonoko'
     }
 ];
 
@@ -13,12 +13,20 @@ let isLoggedin = false;
 
 // Rota de cadastro
 router.post('/cadastro', (req, res) => {
-    const { email, password } = req.body;
+    const { email, password, confirm_password} = req.body;
 
     // Validação e verificação de usuário já existente
     const userExists = users.find(user => user.email === email);
     if (userExists) {
         return res.status(400).send('Usuário já cadastrado!');
+    }
+
+    if(password.length < 8){
+        return res.status(400).send('Senha muito curta')
+    }
+
+    if (password != confirm_password){
+        return res.status(400).send('Senhas diferentes!')
     }
 
     // Cadastrar novo usuário
@@ -50,6 +58,7 @@ router.get('/logout', (req, res) => {
         }
         res.clearCookie('connect.sid');
         res.redirect('/login.html');
+        console.log(isLoggedin)
     });
 });
 
