@@ -132,7 +132,7 @@ label{
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('/assets/img/filme_garfield.png'); 
+  background-image: url('/public/assets/img/filme_garfield.png'); 
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -158,7 +158,7 @@ label{
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('/assets/img/filme_lady_gaga.png'); 
+  background-image: url('/public/assets/img/filme_lady_gaga.png'); 
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
