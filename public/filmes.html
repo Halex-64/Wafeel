@@ -1,11 +1,35 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Filmes Populares</title>
 </head>
 <body>
-    <h1>Deu certo</h1>
+    <h1>Filmes Populares</h1>
+    <div id="filmes"></div>
+
+    <script>
+        // Fazer a requisição para a rota /filmes-populares no servidor
+        fetch('/filmes-populares')
+            .then(response => response.json())
+            .then(filmes => {
+                const filmesDiv = document.getElementById('filmes');
+
+                // Percorre os filmes e os adiciona ao DOM
+                filmes.forEach(filme => {
+                    const filmeElement = document.createElement('div');
+                    filmeElement.innerHTML = `
+                        <h2>${filme.title}</h2>
+                        <img src="https://image.tmdb.org/t/p/w500${filme.poster_path}" alt="${filme.title}" />
+                        <p>${filme.overview}</p>
+                    `;
+                    filmesDiv.appendChild(filmeElement);
+                });
+            })
+            .catch(error => {
+                console.error('Erro ao carregar filmes: ', error);
+            });
+    </script>
 </body>
 </html>
