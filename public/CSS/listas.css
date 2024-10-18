@@ -1,35 +1,41 @@
 .frame_1, .frame_2{
     display: flex;
-    justify-content: space-around;
+    justify-content:center;
     align-items: flex-start;
-    gap: 200px;
-    padding-bottom: 24px;
+    gap: 48px;
 }
 
 .container_filme{
-    text-align:center;
+    width: 390px;
+    margin-bottom: 40px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;   
 }
 
-.container_filme li{
+.container_filme p{
     font-family: "Poppins", sans-serif;
-    font-style:normal;
     font-weight: bold;
+    font-size: 16px;
+    margin: 0;
+}
+
+.container_filme:hover{
+    cursor: pointer;
 }
 
 .poster_filmes{
     position: relative;
-    border-radius: 10px;
-    width: 390px;
-    height: 249px;  
-    margin: auto; 
-    margin-bottom: 20px;
+    border-radius: 10px; 
+    height: 249px;   
 }
 
 .poster_filmes img{
     position: absolute;
     width: 160px;
     height: 249px;
-    border-radius: 10px;
+    border-radius: 5px;
     box-shadow: 5px 0px 15px rgb(0, 0, 0, 1.0);
 }
 
@@ -58,6 +64,10 @@
     z-index: 1;
 }
 
+.poster_filmes:hover{
+    box-shadow: 5px 0px 15px rgba(255, 255, 255, 0.315);
+}
+
 .barra_listas{
     display: flex;
     padding-left: 56px;
@@ -69,11 +79,10 @@
     text-decoration: none;
     color: white;
     font-family: "Poppins", sans-serif;
-    font-style: normal;
 }
 
 #linha_horizontal{
-    width: 1800px;
+    width: 1790px;
     margin-left: 56px;
     height: 0.5px;             
     background-color: #f7f7f7; 
