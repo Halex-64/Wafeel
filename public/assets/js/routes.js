@@ -1,6 +1,9 @@
 const express = require('express');
 const path = require('path');
+const axios = require('axios');
 const { isLoggedIn } = require('./auth');
+
+const API_KEY = '7f6389b64c42fc1d7f31d28e949cbf36';
 
 // Criar um roteador
 const router = express.Router();
@@ -63,5 +66,15 @@ router.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'login.html'));
 });
 
+router.get('/filmes-populares', async (req, res) => {
+    try {
+        const response = await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=pt-BR`);
+
+        res.json(response.data.results);
+    } catch (error) {
+        console.error('Erro ao buscar filmes populares: ', error.message);
+        res.status(500).send('Erro ao buscar filmes populares');
+    }
+});
 
 module.exports = router;

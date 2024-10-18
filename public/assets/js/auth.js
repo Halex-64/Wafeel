@@ -5,7 +5,7 @@ const router = express.Router();
 const users = [
     {
         email: 'nokotan@123',
-        password: 'nokonoko'
+        password: '12345678'
     }
 ];
 
@@ -21,6 +21,7 @@ router.post('/cadastro', (req, res) => {
         return res.status(400).send('Usuário já cadastrado!');
     }
 
+    //Validação da senha
     if(password.length < 8){
         return res.status(400).send('Senha muito curta')
     }
@@ -51,6 +52,7 @@ router.post('/login', (req, res) => {
     console.log('isLoggedin: ', req.session.isLoggedin);
 });
 
+// Rota de logout, implementar em algum botão depois na tela de perfil
 router.get('/logout', (req, res) => {
     req.session.destroy(err => {
         if (err) {
