@@ -4,7 +4,7 @@
 @import url(card.css);
 @import url(recomendacoes.css);
 @import url(filmes_telainicial.css);
-
+@import url(login.css);
 
 body {
     margin: 0;
@@ -44,6 +44,7 @@ header {
     }
 
     .links, .icons {
+        flex-direction: column;/*mudar o menu para coluna*/
         margin-top: 10px;
     }
 

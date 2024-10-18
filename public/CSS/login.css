@@ -1,0 +1,199 @@
+body.no-scroll {
+    overflow: hidden; /* Impede a rolagem */
+}
+.menu-icon {
+    display: none;
+    position: absolute;
+    top: 15px;
+    right: 32px;
+    width: 30px; /* Largura do ícone */
+    cursor: pointer; /* Cursor de ponteiro ao passar o mouse */
+  }
+  
+  .bar {
+    height: 4px; /* Altura de cada barra */
+    width: 100%; /* Largura da barra */
+    background-color: #8500F2; /* Cor das barras */
+    margin: 5px 0; /* Espaçamento entre as barras */
+    transition: all 0.3s ease; /* Transição suave */
+  }
+
+/* modal de login e cadastro */
+.modal_login{
+    position: fixed;
+    top: 10rem;
+    left: 20rem;
+    display: flex;
+    justify-content: space-evenly;
+    width: 1070px;
+    height: 500px;
+    border-radius: 20px;
+    /* background-color: white; */
+    z-index: -1;
+    opacity: 0;
+    transition: visibility 0.5s, opacity 0.5s;
+}
+
+/* ativa o modal de login e cadastro */
+.modal_login.active {
+    z-index: 11;
+    opacity: 1;
+    box-shadow: 1px 1px 10px black;
+}
+
+/* lado de login */
+.login{
+    border-end-start-radius: 20px;
+    border-start-start-radius: 20px;
+    display: flex;
+    .iniciologin{
+        align-items: center;
+        h2{
+            margin: 10px 0 0 0;
+            display: flex;
+            justify-content: center;
+            font-size: 3rem;
+            font-family: 'Coolvetica', normal;
+        }
+        h3{
+            display: flex;
+            justify-content: center;
+        }
+}
+    button{
+        margin: 4rem;
+    }
+    background-color: white;
+    flex-direction: column;
+    color: black;
+    width: 50%;
+    padding: 1rem;      
+}
+
+/* lado de cadastro */
+.cadastro{
+    border-end-end-radius: 20px;
+    border-start-end-radius: 20px;
+    padding: 1rem;
+    button{
+        margin: 5rem;
+        width: 20rem;
+    }
+    .cadastroinicio{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        /* justify-content: space-between; */
+        h2{
+            font-size: 2rem;
+            font-family: 'Coolvetica', normal;
+        }
+        span{
+            position: fixed;
+            top: 11rem;
+            right: 34rem;
+        }
+    }
+    width: 50%;
+    background-color: black;
+    color: white;
+}
+
+/* icone para fechar o modal */
+.modalClose{
+    cursor: pointer;
+    display: block;
+    border-radius: 50%;
+    height: 1.5rem;
+    width: 1.5rem;
+    border: 2px solid white;
+    text-align: center;
+    user-select: none;
+   
+}
+
+.confirmacao{
+    position: fixed;
+    top: 17rem;
+    left: 40rem;
+    background-color: #000000;
+    z-index: -99;
+    border: 3px solid #8500F2;
+    width: 25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0;
+}
+
+.confirmacao.active{
+    z-index: 12;
+    opacity: 1;
+    overflow: hidden;
+}
+
+input{
+    height: 2rem;
+    width: 80%;
+    background-color: #E9E9E9;
+    border: none;
+}
+
+#conflogin{
+    border-radius: 10px;
+    background-color: #000000;
+    color: #ffffff;
+    font-size: 1.5rem;
+    margin-top: 10px;
+}
+#confcad{
+    border-radius: 10px;
+    background-color: #ffffff;
+    color: #000000;
+    font-size: 1.5rem;
+    margin-top: 10px;
+}
+
+
+/* responsividade para tela ate 768pixel */
+@media (max-width: 768px){
+    /* .menu-icon {
+        display: block;
+    }
+   .links{
+        display: none;
+    }  */
+    .modal_login{
+        width: 70%;
+        flex-direction: column;
+        top: 3rem;
+        left: 7rem;
+        /* height: 95vw; */
+    }
+    .login{
+        width: 94.5%;
+        border-end-start-radius: 0px;
+        border-start-start-radius: 20px; 
+        border-start-end-radius: 20px; 
+    }
+
+    .cadastro{
+        width: 94.5%; 
+        border-start-end-radius: 0;
+        border-end-end-radius: 20px;
+        border-end-start-radius: 20px;       
+        .cadastroinicio{
+            span{
+                top: 32rem;
+                right: 9rem;
+            }
+        }
+    }
+
+    .confirmacao{
+        top: 17rem;
+        left: 13rem;
+    }
+
+}
