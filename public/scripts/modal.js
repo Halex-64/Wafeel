@@ -41,8 +41,21 @@ function login() {
 setTimeout(() => {
   document.getElementById('confirmacao').classList.remove('active')
   clearInterval(intervalo); 
-}, 3000); // 3 segundos
+}, 3000);fechaModal(); // 3 segundos
 }
+
+
+//fecha o modal automaticamente
+function fechaModal(){
+  const intervalo = setInterval(() => {
+}, 1000); 
+// Após 3 segundos, para a execução.
+setTimeout(() => {
+  clearInterval(intervalo);
+  modalClose(); 
+}, 4000); // 3 segundos
+}
+
 
 // abre a confirmacao de cadastro
 document.getElementById('confcad').addEventListener('click', () => {
