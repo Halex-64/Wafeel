@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/CSS/style.css">
     <title>Filmes Populares</title>
 </head>
 <body>
@@ -16,13 +17,14 @@
             .then(filmes => {
                 const filmesDiv = document.getElementById('filmes');
 
-                // Percorre os filmes e os adiciona ao DOM
                 filmes.forEach(filme => {
                     const filmeElement = document.createElement('div');
+                    filmeElement.classList.add('filme-card');
                     filmeElement.innerHTML = `
-                        <h2>${filme.title}</h2>
+                        <h2 class = 'titulo'>${filme.title}</h2>
                         <img src="https://image.tmdb.org/t/p/w500${filme.poster_path}" alt="${filme.title}" />
                         <p>${filme.overview}</p>
+                        <p>${filme.release_date}<p>
                     `;
                     filmesDiv.appendChild(filmeElement);
                 });

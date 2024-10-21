@@ -9,6 +9,10 @@ const app = express();
 
 const PORT = 3000;
 
+app.listen(PORT, () => {
+    console.log(`Servidor rodando na porta ${PORT}`);
+});
+
 app.use(session({
     secret: 'chave-secreta', 
     resave: false, 
@@ -35,9 +39,6 @@ app.use('/', authRoutes);
 
 app.use('/', routes);
 
-app.listen(PORT, () => {
-    console.log(`Servidor rodando na porta ${PORT}`);
-});
 
 
 

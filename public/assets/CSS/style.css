@@ -4,8 +4,11 @@
 @import url(card.css);
 @import url(recomendacoes.css);
 @import url(filmes_telainicial.css);
+@import url(filmes.css);
 
-
+.titulo{
+    color: aqua;
+}
 body {
     margin: 0;
     padding: 0;
@@ -14,6 +17,7 @@ body {
     background-color: #000000;
     color: white;
 }
+
 
 header {
     background-image: url("../assets/img/filmes.png");
@@ -25,6 +29,10 @@ header {
     align-items: center;
     text-align: center;
     min-height: 80vh; 
+}
+
+.titulo{
+    color: aqua;
 }
 
 .header-content {
