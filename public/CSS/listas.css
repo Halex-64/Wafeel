@@ -1,8 +1,13 @@
-.frame_1, .frame_2{
+body{
+    width: auto;
+    height: auto;
+}
+
+.frame_1{
     display: flex;
     justify-content:center;
     align-items: flex-start;
-    gap: 48px;
+    gap: 72px;
 }
 
 .container_filme{

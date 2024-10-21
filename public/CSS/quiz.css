@@ -3,7 +3,8 @@
 @import url(button.css);
 @import url(card.css);
 
-body{
+html, body{
+  height: 100%;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -236,14 +237,6 @@ label{
   background-color: #5e02aa;
 }
 
-
-footer{
-  background-color: #8500F2;
-  padding: 8px;
-  margin-top: 96px;
-  text-align: center;  
-}
-
 #WhatsApp_icon{
   width: 56px;
   margin: 0 40px;
@@ -252,4 +245,16 @@ footer{
 #Instagram_icon, #suporte_icon{
   width: 48px;
   margin: 0 40px;
+}
+
+footer{
+  background-color: #8500F2;
+  padding: 8px;
+  margin-top: 96px;
+  text-align: center;
+}
+
+.wrapper {
+  min-height: 100%;
+  margin-bottom: -50px;
 }
