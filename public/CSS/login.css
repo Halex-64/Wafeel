@@ -167,7 +167,7 @@ input{
     .modal_login{
         width: 70%;
         flex-direction: column;
-        top: 3rem;
+        top: 1rem;
         left: 7rem;
         /* height: 95vw; */
     }

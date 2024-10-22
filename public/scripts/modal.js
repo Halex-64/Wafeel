@@ -1,14 +1,34 @@
 const menu = document.getElementById('links');
 const menuIcon = document.getElementById('menu-icon');
 
-window.addEventListener('resize', () => {
-  if (window.innerWidth > 768) { // Ajuste o valor conforme necessário
+// window.addEventListener('resize', () => {
+//   if (window.innerWidth > 768) { // Ajuste o valor conforme necessário
+//     menuIcon.style.display = 'none'
+//     menu.style.display = 'flex'; // Mostra o menu em telas maiores
+//   } else {
+//     menuIcon.style.display = 'block'
+//     menu.style.display = 'none'; // Oculta o menu em telas menores
+//   }
+// });
+
+let resizeTimeout;
+
+const updateMenuDisplay = () => {
+  if (window.innerWidth > 768) {
     menuIcon.style.display = 'none'
     menu.style.display = 'flex'; // Mostra o menu em telas maiores
   } else {
     menuIcon.style.display = 'block'
     menu.style.display = 'none'; // Oculta o menu em telas menores
   }
+};
+
+// Chama a função para ajustar o menu ao carregar a página
+updateMenuDisplay();
+
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimeout);
+  resizeTimeout = setTimeout(updateMenuDisplay);
 });
 document.getElementById('ModalOpen').addEventListener('click', modal);// chama a funcao do modal
 
@@ -64,10 +84,10 @@ document.getElementById('confcad').addEventListener('click', () => {
 });
 
 // cria um teste para quando clicar no quiz abre uma confirmação
-document.getElementById('quiz').addEventListener('click', () => {
-  document.getElementById('contex').innerHTML = `<h2>Gerando QUIZ!</h2>`
-  login();
-});
+// document.getElementById('quiz').addEventListener('click', () => {
+//   document.getElementById('contex').innerHTML = `<h2>Gerando QUIZ!</h2>`
+//   login();
+// });
 
 // mostra e oculta os menus
 
