@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wafeel</title>
     <link rel="stylesheet" href="./assets/CSS/style.css">
+    <script defer src="./scripts/modal.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
@@ -12,26 +13,70 @@
 </head>
 <body>
     <header>
-        <nav class="barradenavegacao">
-            <img class="logo__image" src="assets/img/logo.png" alt="Logo">
-            <ul class="links">
+        <nav class="barradenavegacao"><a href="index.html">
+            <img class="logo__image" src="assets/img/logo.png" alt="Logo"></a>
+            <ul class="links"  id="links">
                 <li><a href="./quiz.html">Quiz</a></li>
-                <li><a href="./filmes.html">Filmes</a></li>
-                <li><a href="">Séries</a></li>
-                <li><a href="">Listas</a></li>
-
-                <li><a id = "favLink" href="./favoritos.html"><img class="fa-solid fa-heart" src="assets/img/favoritosicon.png"></img></a></li> 
-                <li><a id = "userLink" href="./login.html"><img class="fa-solid fa-right-to-bracket" src="assets/img/usuarioicon.png"></img></a></li>
+                <li><a href="#">Filmes</a></li>
+                <li><a href="#">Séries</a></li>
+                <li><a href="./listas.html">Listas</a></li>
+                <li><img class="fa-solid fa-heart" src="assets/img/favoritosicon.png"></a></img></li> 
+                <li><img  id="ModalOpen" class="fa-solid fa-right-to-bracket" src="assets/img/usuarioicon.png"></img></li>
             </ul>
         </nav>
+        <div class="menu-icon"  id="menu-icon">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+          </div>
         <div class="header-content">
             <h1 class="textoPrincipal_telainicial">Filmes e séries de acordo com <br> suas emoções, e tempo disponível!</h1>
             <h2 class="textoSecundario_telainicial">Recomendamos os melhores conteúdos com base <br> na forma em que você está se sentindo! Faça já o <br> quiz abaixo</h2>
             <div class="btn animate__animated animate__backInLeft espaco_botao">
-                <button class="btn__quiz"><a href="./quiz.html">Quiz</a></button>
+                <button id="quiz" class="btn__quiz"><a href="">Quiz</a></button>
             </div>
         </div>
     </header>
+<!-- cria o modal/menu de cadastro e login -->
+    <section class="modal_login" id="modal_login">
+        <div class="login">
+            <div class="iniciologin">
+                <h2>Faça seu Login</h2>
+                <h3>Informe seu email e Senha</h3>
+            </div>
+            <h3>Email</h3>
+            <input type="text" id="email" placeholder="Informe seu email">
+            <h3>Senha</h3>
+            <input type="text" id="senha" placeholder="Informe sua senha">
+            <button id="conflogin">ENTRAR</button>
+        </div>
+        <div class="cadastro">
+            <div class="cadastroinicio">
+                <h2>Cadastre-se</h2>
+                <span class="modalClose" id="modalClose">&#10008</span>
+                <h3>Insira um email, nome de usuario e senha validos</h3>
+            </div>
+            <h3>Email</h3>
+            <input type="text" id="email" placeholder="Informe seu email">
+            <h3>Nome de Usuário</h3>
+            <input type="text" id="usuario" placeholder="Informe seu usuário">
+            <h3>Senha</h3>
+            <input type="text" id="senha" placeholder="Informe sua senha">
+            <button id="confcad">CADASTRE-SE</button>
+        </div>
+    </section>
+<!-- fim do modal/menu  -->
+
+ <!--animação de confirmação de login e cadastro  -->
+        <section class="confirmacao" id="confirmacao">
+            <div class="contex" id="contex">
+                <h2>Seu login foi efetuado com sucesso!</h2>
+            </div>
+            <div class="conimg">
+                <img src="./assets/img/check2.gif" alt="imagem gif de confirmacao">
+            </div>
+        </section>
+<!-- fim animação de confirmação de login -->
 
     <section class="recomendacoes_telainicial">
         <div class="recomendacoes-container">

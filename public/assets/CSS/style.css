@@ -5,6 +5,7 @@
 @import url(recomendacoes.css);
 @import url(filmes_telainicial.css);
 @import url(filmes.css);
+@import url(series.css);
 
 .titulo{
     color: aqua;
@@ -13,7 +14,7 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Coolvetica', normal;
+    font-family: 'Coolvetica', sans-serif;
     background-color: #000000;
     color: white;
 }

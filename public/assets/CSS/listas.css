@@ -1,0 +1,106 @@
+body{
+    width: auto;
+    height: auto;
+}
+
+.frame_1{
+    display: flex;
+    justify-content:center;
+    align-items: flex-start;
+    gap: 72px;
+}
+
+.container_filme{
+    width: 390px;
+    margin-bottom: 40px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;   
+}
+
+.container_filme p{
+    font-family: "Poppins", sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    margin: 0;
+}
+
+.container_filme:hover{
+    cursor: pointer;
+}
+
+.poster_filmes{
+    position: relative;
+    border-radius: 10px; 
+    height: 249px;   
+}
+
+.poster_filmes img{
+    position: absolute;
+    width: 160px;
+    height: 249px;
+    border-radius: 5px;
+    box-shadow: 5px 0px 15px rgb(0, 0, 0, 1.0);
+}
+
+.poster_filmes img:nth-child(1) {
+    left: 0px;
+    z-index: 5;
+}
+
+.poster_filmes img:nth-child(2) {
+    left: 64px;
+    z-index: 4;
+}
+
+.poster_filmes img:nth-child(3) {
+    left: 120px;
+    z-index: 3;
+}
+
+.poster_filmes img:nth-child(4) {
+    left: 176px;
+    z-index: 2;
+}
+
+.poster_filmes img:nth-child(5) {
+    left: 232px;
+    z-index: 1;
+}
+
+.poster_filmes:hover{
+    box-shadow: 5px 0px 15px rgba(255, 255, 255, 0.315);
+}
+
+.barra_listas{
+    display: flex;
+    padding-left: 56px;
+    gap: 24px;
+    margin: 10px 0;
+}
+
+.barra_listas li a{
+    text-decoration: none;
+    color: white;
+    font-family: "Poppins", sans-serif;
+}
+
+#linha_horizontal{
+    width: 1790px;
+    margin-left: 56px;
+    height: 0.5px;             
+    background-color: #f7f7f7; 
+    border: none;              
+    margin-top: -10px; 
+}
+
+#linha_vertical{
+    width: 0.5px;
+    height: 20px;
+    background-color: #f7f7f7   
+}
+
+.nav_listas{
+    padding-bottom: 40px;
+}

@@ -1,109 +1,117 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz de Recomendações</title>
-    <link href="https://fonts.googleapis.com/css?family=Coolvetica&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
-    <link href="./css/quiz.css" rel="stylesheet">
-</head>
-
+    <title>Wafeel</title>
+    <link rel="stylesheet" href="CSS/quiz.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> 
+</head>  
 <body>
-    <div class="body_quiz"> <!-- v192_404 -->
-        <header>
-            <nav class="barradenavegacao"></nav>
-                <img class="logo__image" src="assets/img/logo.png" alt="Logo">
-                <ul class="links">
-                    <li><a href="">Quiz</a></li>
-                    <li><a href="">Filmes</a></li>
-                    <li><a href="">Séries</a></li>
-                    <li><a href="">Listas</a></li>
-                    <li><img class="fa-solid fa-heart" src="assets/img/favoritosicon.png"></a></img></li> 
-                    <li><img class="fa-solid fa-right-to-bracket" src="assets/img/usuarioicon.png">  </img></li>
-                </ul>
-            </nav>
-        </header>
+    <header class="header_quiz">
+        <nav class="barradenavegacao">
+            <img class="logo__image" src="assets/img/logo.png" alt="Logo">
+            <ul class="links">
+                <li><a id="selecao_roxo" href="./quiz.html">Quiz</a></li>
+                <li><a href="#">Filmes</a></li>
+                <li><a href="#">Séries</a></li>
+                <li><a href="./listas.html">Listas</a></li>
+                <li><img class="fa-solid fa-heart" src="assets/img/favoritosicon.png"></a></img></li> 
+                <li><img class="fa-solid fa-right-to-bracket" src="assets/img/usuarioicon.png">  </img></li>
+            </ul>
+        </nav>
+    </header>
 
-        <div class="titulo"> <!-- v229_349 --> 
-            <span class="boas_vindas">Boas-Vindas ao Quiz</span> <!-- v229_347 --> 
-            <span class="faca_quiz">Faça um quiz rápido para descobrir as recomendações certas para você!</span> <!-- v229_348 -->
-        </div>
+    <section class="quiz">
+        <div class="welcomeContainer">
+            <h2 class="welcomeHeading">Boas-Vindas ao Quiz</h2>
+            <p class="welcomeDescription">Faça um quiz rápido para descobrir as recomendações certas para você!</p>
+          </div>
 
-        <div class="questao_1"> <!-- v235_394 -->
-            <span class="pergunta_1">Como você descreveria seu humor atual?</span> <!-- v229_350 -->
-            <div class="sentimento_1"> <!-- v229_413 -->
-                <span class="alegre">Alegre</span> <!-- v229_414 -->
-            </div>
-            <div class="sentimento_2"> <!-- v229_434 -->
-                <span class="reflexivo">Reflexivo</span><!-- v229_435 -->
-            </div>
-            <div class="sentimento_3"><!-- v229_441 -->
-                <span class="triste">Triste</span><!-- v229_442 -->
-            </div>
-            <div class="sentimento_4"><!-- v229_448 -->
-                <span class="ansioso">Ansioso</span><!-- v229_449 -->
-            </div>
-        </div>
+          <form>
+            <div class="figura_container">
+                <div class="question">
+                    <h3>Como você descreveria seu humor atual?</h3>
+                    <input type="radio" name="humor" value="Alegre" id="alegre">
+                    <label for="alegre">Alegre</label>
 
-        <div class="questao_2"> <!-- v242_414 -->
-            <span class="pergunta_2">O que te faz gostar de um filme/série?</span> <!-- v242_415 -->
-            <div class="caracteristica_1"> <!-- v242_416 -->
-                <span class="acao_frenetica">A ação frenética</span> <!-- v242_417 -->
-            </div>
-            <div class="caracteristica_2"> <!-- v242_419 -->
-                <span class="emocoes_intensas">As emoções intensas</span> <!-- v242_420 -->
-            </div>
-            <div class="caracteristica_3"> <!-- v242_422 -->
-                <span class="humor">O humor</span> <!-- v242_423 -->
-            </div>
-            <div class="caracteristica_4"> <!-- v242_425 -->
-                <span class="misterio_tensao">O mistério e a tensão</span> <!-- v242_426 -->
-            </div>
-        </div>
+                    <input type="radio" name="humor" value="Reflexivo" id="reflexivo">
+                    <label for="reflexivo">Reflexivo</label>
 
-        <div class="questao_3"> <!-- v242_444 -->
-            <span class="pergunta_3">Como você quer se sentir depois de assistir ao filme/série?</span> <!-- v242_445 -->
-            <div class="sentir_emocao_1"> <!-- v242_446 -->
-                <span class="reflexivo">Reflexivo</span> <!-- v242_447 -->
-            </div>
-            <div class="sentir_emocao_2"> <!-- v242_449 -->
-                <span class="inspirado">Inspirado</span> <!-- v242_450 -->
-            </div>
-            <div class="sentir_emocao_3"> <!-- v242_452 -->
-                <span class="relaxado">Relaxado</span> <!-- v242_453 -->
-            </div>
-            <div class="sentir_emocao_4"> <!-- v242_455 -->
-                <span class="intrigado">Intrigado</span> <!-- v242_456 -->
-            </div>
-        </div>
+                    <input type="radio" name="humor" value="Triste" id="triste">
+                    <label for="triste">Triste</label>
 
-        <div class="questao_4"> <!-- v248_627 -->
-            <span class="pergunta_4">Que tipo de emoção você gostaria de evitar no momento?</span> <!-- v248_628 -->
-            <div class="evita_emocao_1"> <!-- v248_629 -->
-                <span class="monotonia">Monotonia</span> <!-- v248_630 -->
+                    <input type="radio" name="humor" value="Ansioso" id="ansioso">
+                    <label for="ansioso">Ansioso</label>
+                </div>
             </div>
-            <div class="evita_emocao_2"> <!-- v248_632 -->
-                <span class="frieza">Frieza</span> <!-- v248_633 -->
-            </div>
-            <div class="evita_emocao_3"> <!-- v248_635 -->
-                <span class="tensao">Tensão</span> <!-- v248_636 -->
-            </div> 
-            <div class="evita_emocao_4"> <!-- v248_638 -->
-                <span class="simplicidade">Simplicidade</span> <!-- v248_639 -->
-            </div>
-        </div>
 
-        <div class="botoes_quiz"> <!-- v248_639 -->
-            <div class="gerar_recomendacao"> <!-- v248_639 -->
-                <span class="botao_recomendacao">Gerar Recomendação</span> <!-- v248_639 -->
+            <div class="question_container">
+                <div class="question">
+                    <h3>O que te faz gostar de um filme/série?</h3>
+                    <input type="radio" name="gostar" value="Ação frenética" id="acao">
+                    <label for="acao">A ação frenética</label>
+
+                    <input type="radio" name="gostar" value="Emoções intensas" id="emocoes">
+                    <label for="emocoes">As emoções intensas</label>
+
+                    <input type="radio" name="gostar" value="Humor" id="humor">
+                    <label for="humor">O humor</label>
+
+                    <input type="radio" name="gostar" value="Mistério e tensão" id="misterio">
+                    <label for="misterio">O mistério e a tensão</label>
+                </div>
             </div>
-            <div class="gerar_lista"> <!-- v248_639 -->
-                <span class="botao_lista">Gerar Lista</span> <!-- v248_639 -->
+
+            <div class="figura_container_2"> 
+                <div class="question">
+                    <h3>Como você quer se sentir depois de assistir o filme/série?</h3>
+                    <input type="radio" name="sentir" value="Reflexivo" id="sentir_reflexivo">
+                    <label for="sentir_reflexivo">Reflexivo</label>
+
+                    <input type="radio" name="sentir" value="Inspirado" id="sentir_inspirado">
+                    <label for="sentir_inspirado">Inspirado</label>
+
+                    <input type="radio" name="sentir" value="Relaxado" id="sentir_relaxado">
+                    <label for="sentir_relaxado">Relaxado</label>
+
+                    <input type="radio" name="sentir" value="Intrigado" id="sentir_intrigado">
+                    <label for="sentir_intrigado">Intrigado</label>
+                </div>
             </div>
-        </div>
-    </div>
+
+            <div class="question_container">
+                <div class="question">
+                    <h3>Que tipo de emoção você gostaria de evitar no momento?</h3>
+                    <input type="radio" name="evitar" value="Monotonia" id="monotonia">
+                    <label for="monotonia">Monotonia</label>
+
+                    <input type="radio" name="evitar" value="Frieza" id="frieza">
+                    <label for="frieza">Frieza</label>
+
+                    <input type="radio" name="evitar" value="Tensão" id="tensao">
+                    <label for="tensao">Tensão</label>
+
+                    <input type="radio" name="evitar" value="Simplicidade" id="simplicidade">
+                    <label for="simplicidade">Simplicidade</label>
+                </div>
+            </div>
+
+            <div class="buttons">
+                <button type="submit" class="btn">Gerar Recomendação</button>
+                <button type="button" class="btn">Gerar Lista</button>
+            </div>
+          </form>
+    </section>
 </body>
-
+<footer>
+    <div class="social-icons">
+        <a href="#"><img src="/public/assets/img/whatsapp_icon.png" id="WhatsApp_icon" alt="WhatsApp"></a>
+        <a href="#"><img src="/public/assets/img/instagram_icon.png" id="Instagram_icon" alt="Instagram"></a>
+        <a href="#"><img src="/public/assets/img/help_icon.png" id="suporte_icon" alt="suporte"></a>
+    </div>                
+</footer>
 </html>
