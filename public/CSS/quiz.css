@@ -1,0 +1,445 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 14px;
+}
+
+.body_quiz {
+  width: 100%;
+  height: 1845px;
+  background: rgba(0, 0, 0, 1);
+  opacity: 1;
+  position: relative;
+  top: 0px;
+  left: 0px;
+  overflow: hidden;
+}
+
+.barradenavegacao {
+  width: 100%;
+  height: 122px;
+  background: url("../images/v192_405.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  padding: 9px 75px;
+  margin: 124px;
+  opacity: 1;
+  position: relative;
+  top: 0px;
+  left: 0px;
+  overflow: hidden;
+}
+
+.logo__image {
+  width: 190px;
+  height: 49px;
+  background: url("../images/v192_406.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  opacity: 1;
+  position: absolute;
+  top: 36px;
+  left: 75px;
+  overflow: hidden;
+}
+
+.titulo {
+  width: 888px;
+  height: 81px;
+  background: url("../images/v229_349.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  opacity: 1;
+  position: absolute;
+  top: 165px;
+  left: 279px;
+  overflow: hidden;
+}
+
+.boas_vindas {
+  width: 267px;
+  color: rgba(255, 255, 255, 1);
+  position: absolute;
+  top: 0px;
+  left: 307px;
+  font-family: Coolvetica;
+  font-weight: Regular;
+  font-size: 32px;
+  opacity: 1;
+  text-align: left;
+}
+
+.faca_quiz {
+  width: 888px;
+  color: rgba(255, 255, 255, 1);
+  position: absolute;
+  top: 31px;
+  left: 0px;
+  font-family: Poppins;
+  font-weight: Regular;
+  font-size: 24px;
+  opacity: 1;
+  text-align: left;
+}
+
+.questao_1 {
+  width: 652px;
+  height: 268px;
+  background: url("../images/v235_394.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  opacity: 1;
+  position: absolute;
+  top: 289px;
+  left: 405px;
+  overflow: hidden;
+}
+
+.pergunta_1 {
+  width: 546px;
+  color: rgba(255, 255, 255, 1);
+  position: absolute;
+  top: 10px;
+  left: 38px;
+  font-family: Coolvetica;
+  font-weight: Regular;
+  font-size: 32px;
+  opacity: 1;
+  text-align: left;
+}
+
+.sentimento_1,
+.sentimento_2,
+.sentimento_3,
+.sentimento_4 {
+  width: 112px;
+  height: 36px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  opacity: 1;
+  position: absolute;
+  overflow: hidden;
+}
+
+.sentimento_1 {
+  top: 72px;
+  left: 38px;
+}
+
+.sentimento_2 {
+  top: 122px;
+  left: 38px;
+}
+
+.sentimento_3 {
+  top: 172px;
+  left: 38px;
+}
+
+.sentimento_4 {
+  top: 222px;
+  left: 38px;
+}
+
+.alegre,
+.reflexivo,
+.triste,
+.ansioso {
+  width: 78px;
+  color: rgba(255, 255, 255, 1);
+  position: absolute;
+  top: 0px;
+  left: 34px;
+  font-family: Poppins;
+  font-weight: Regular;
+  font-size: 24px;
+  opacity: 1;
+  text-align: left;
+}
+
+.questao_2 {
+  width: 652px;
+  height: 268px;
+  background: url("../images/v242_414.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  opacity: 1;
+  position: absolute;
+  top: 615px;
+  left: 405px;
+  overflow: hidden;
+}
+
+.pergunta_2 {
+  width: 502px;
+  color: rgba(255, 255, 255, 1);
+  position: absolute;
+  top: 10px;
+  left: 38px;
+  font-family: Coolvetica;
+  font-weight: Regular;
+  font-size: 32px;
+  opacity: 1;
+  text-align: left;
+}
+
+.caracteristica_1,
+.caracteristica_2,
+.caracteristica_3,
+.caracteristica_4 {
+  width: 233px;
+  height: 36px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  opacity: 1;
+  position: absolute;
+  overflow: hidden;
+}
+
+.caracteristica_1 {
+  top: 72px;
+  left: 38px;
+}
+
+.caracteristica_2 {
+  top: 122px;
+  left: 38px;
+}
+
+.caracteristica_3 {
+  top: 172px;
+  left: 38px;
+}
+
+.caracteristica_4 {
+  top: 222px;
+  left: 38px;
+}
+
+.acao_frenetica,
+.emocoes_intensas,
+.humor,
+.misterio_tensao {
+  width: 199px;
+  color: rgba(255, 255, 255, 1);
+  position: absolute;
+  top: 0px;
+  left: 34px;
+  font-family: Poppins;
+  font-weight: Regular;
+  font-size: 24px;
+  opacity: 1;
+  text-align: left;
+}
+
+.questao_3 {
+  width: 652px;
+  height: 321px;
+  background: url("../images/v242_444.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  opacity: 1;
+  position: absolute;
+  top: 911px;
+  left: 405px;
+  overflow: hidden;
+}
+
+.pergunta_3 {
+  width: 583px;
+  color: rgba(255, 255, 255, 1);
+  position: absolute;
+  top: 10px;
+  left: 38px;
+  font-family: Coolvetica;
+  font-weight: Regular;
+  font-size: 32px;
+  opacity: 1;
+  text-align: left;
+}
+
+.sentir_emocao_1,
+.sentir_emocao_2,
+.sentir_emocao_3,
+.sentir_emocao_4 {
+  width: 139px;
+  height: 36px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  opacity: 1;
+  position: absolute;
+  overflow: hidden;
+}
+
+.sentir_emocao_1 {
+  top: 110px;
+  left: 38px;
+}
+
+.sentir_emocao_2 {
+  top: 160px;
+  left: 38px;
+}
+
+.sentir_emocao_3 {
+  top: 210px;
+  left: 38px;
+}
+
+.sentir_emocao_4 {
+  top: 260px;
+  left: 38px;
+}
+
+.reflexivo,
+.inspirado,
+.relaxado,
+.intrigado {
+  width: 105px;
+  color: rgba(255, 255, 255, 1);
+  position: absolute;
+  top: 0px;
+  left: 34px;
+  font-family: Poppins;
+  font-weight: Regular;
+  font-size: 24px;
+  opacity: 1;
+  text-align: left;
+}
+
+.questao_4 {
+  width: 652px;
+  height: 321px;
+  background: url("../images/v248_627.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  opacity: 1;
+  position: absolute;
+  top: 1275px;
+  left: 405px;
+  overflow: hidden;
+}
+
+.pergunta_4 {
+  width: 587px;
+  color: rgba(255, 255, 255, 1);
+  position: absolute;
+  top: 10px;
+  left: 38px;
+  font-family: Coolvetica;
+  font-weight: Regular;
+  font-size: 32px;
+  opacity: 1;
+  text-align: left;
+}
+
+.evita_emocao_1,
+.evita_emocao_2,
+.evita_emocao_3,
+.evita_emocao_4 {
+  width: 163px;
+  height: 36px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  opacity: 1;
+  position: absolute;
+  overflow: hidden;
+}
+
+.evita_emocao_1 {
+  top: 110px;
+  left: 38px;
+}
+
+.evita_emocao_2 {
+  top: 160px;
+  left: 38px;
+}
+
+.evita_emocao_3 {
+  top: 210px;
+  left: 38px;
+}
+
+.evita_emocao_4 {
+  top: 260px;
+  left: 38px;
+}
+
+.monotonia,
+.frieza,
+.tensao,
+.simplicidade {
+  width: 129px;
+  color: rgba(255, 255, 255, 1);
+  position: absolute;
+  top: 0px;
+  left: 34px;
+  font-family: Poppins;
+  font-weight: Regular;
+  font-size: 24px;
+  opacity: 1;
+  text-align: left;
+}
+
+.botoes_quiz {
+  width: 614px;
+  height: 32px;
+  background: url("../images/v329_1810.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  opacity: 1;
+  position: absolute;
+  top: 1626px;
+  left: 413px;
+  overflow: hidden;
+}
+
+.gerar_recomendacao,
+.gerar_lista {
+  width: 270px;
+  height: 32px;
+  background: rgba(133, 0, 242, 1);
+  opacity: 1;
+  position: absolute;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.gerar_recomendacao {
+  top: 0px;
+  left: 0px;
+}
+
+.gerar_lista {
+  top: 0px;
+  left: 344px;
+}
+
+.botao_recomendacao,
+.botao_lista {
+  width: 250px;
+  color: rgba(233, 233, 233, 1);
+  position: absolute;
+  top: 0px;
+  left: 10px;
+  font-family: Coolvetica;
+  font-weight: Regular;
+  font-size: 24px;
+  opacity: 1;
+  text-align: center;
+}
