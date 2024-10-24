@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css"> <!-- Seu CSS -->
+    <title>Detalhes de </title>
+</head>
+<body>
+    <div id="filme-detalhes"></div>
+
+    <script>
+        // Função para capturar o ID do filme da URL
+        function getMovieIdFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('id');
+        }
+
+        // Função para buscar os detalhes do filme usando o ID
+        async function fetchMovieDetails() {
+            const movieId = getMovieIdFromUrl();
+            const response = await fetch(`/filmes-detalhes?id=${movieId}`);
+            const filme = await response.json();
+
+            const generos = filme.genres.map(genre => genre.name).join(', ');
+
+            const filmeDetalhesDiv = document.getElementById('filme-detalhes');
+            filmeDetalhesDiv.innerHTML = `
+                <h1>${filme.title}</h1>
+                <img src="https://image.tmdb.org/t/p/w500${filme.poster_path}" alt="${filme.title}">
+                <p>${filme.overview}</p>
+                <p>Data de lançamento: ${filme.release_date}</p>
+                <p>Popularidade: ${filme.popularity}</p>
+                <p>Avaliação: ${filme.vote_average}</p>
+                <p>Gêneros: ${generos} </p>
+            `;
+
+            document.title = `Detalhes de ${filme.title}`;
+        }
+
+        // Chama a função ao carregar a página
+        fetchMovieDetails();
+    </script>
+</body>
+</html>

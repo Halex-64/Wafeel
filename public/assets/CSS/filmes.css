@@ -1,0 +1,30 @@
+.filme-card {
+    display: flex;
+    justify-content: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 40px;
+    background-color: transparent;
+    transition: transform 0.2s ease-in-out;
+}
+
+.filme-card:hover {
+    transform: scale(1.05);
+}
+
+.filme-card img {
+    max-width: 100%;
+    border-radius: 5px;
+}
+
+.filme-card .titulo {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.filme-card p {
+    font-size: 1em;
+    color: #666;
+}

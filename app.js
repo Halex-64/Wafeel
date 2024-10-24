@@ -9,6 +9,10 @@ const app = express();
 
 const PORT = 3000;
 
+app.listen(PORT, () => {
+    console.log(`Servidor rodando na porta ${PORT}`);
+});
+
 app.use(session({
     secret: 'chave-secreta', 
     resave: false, 
@@ -29,15 +33,12 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', authRoutes)
+app.use('/', authRoutes);
 
 app.use('/', routes);
 
-app.listen(PORT, () => {
-    console.log(`Servidor rodando na porta ${PORT}`);
-});
 
 
 
