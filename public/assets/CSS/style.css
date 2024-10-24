@@ -7,56 +7,58 @@
 @import url(filmes.css);
 @import url(series.css);
 
-.titulo{
-    color: aqua;
+.titulo {
+  color: aqua;
 }
 body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Coolvetica', sans-serif;
-    background-color: #000000;
-    color: white;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Coolvetica", sans-serif;
+  background-color: #000000;
+  color: white;
 }
-
 
 header {
-    background-image: url("../assets/img/filmes.png");
-    background-size: cover;
-    background-position: center;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    min-height: 80vh; 
+  background-image: url("../img/filmes.png");
+  background-size: cover;
+  background-position: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-height: 80vh;
 }
 
-.titulo{
-    color: aqua;
+.titulo {
+  color: aqua;
 }
 
 .header-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 800px;
-    z-index: 10;
-    margin-top: auto;
-    margin-bottom: auto;
-    padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 800px;
+  z-index: 10;
+  margin-top: auto;
+  margin-bottom: auto;
+  padding: 20px;
 }
 
 @media (max-width: 768px) {
-    nav {
-        flex-direction: column;
-    }
+  nav {
+    flex-direction: column;
+  }
 
-    .links, .icons {
-        margin-top: 10px;
-    }
+  .links,
+  .icons {
+    margin-top: 10px;
+  }
 
-    .cards-container {
-        grid-template-columns: 1fr;
-    }
+  .cards-container {
+    grid-template-columns: 1fr;
+  }
 }
