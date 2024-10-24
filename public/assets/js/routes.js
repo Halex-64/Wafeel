@@ -46,7 +46,7 @@ router.get('/favoritos', (req, res) => {
 
 // Rota para a página de Perfil
 router.get('/perfil', (req, res) => {
-    if(req.session.isLoggedIn) {
+    if (req.session.isLoggedIn) {
         res.sendFile(path.join(__dirname, 'public', 'perfil.html'));
     } else {
         res.redirect('login.html')
@@ -86,7 +86,7 @@ router.get('/filmes-populares', async (req, res) => {
 
 //Rota que faz a conexão com a API e busca os filmes recentes
 router.get('/filmes-recentes', async (req, res) => {
-    try{
+    try {
         const response = await axios.get(`https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}&language=pt-BR`);
 
         res.json(response.data.results);
@@ -109,4 +109,26 @@ router.get('/filmes-detalhes', async (req, res) => {
     }
 });
 
+router.get('/series-populares', async (req, res) => {
+    try {
+        const response = await axios.get(`https://api.themoviedb.org/3/trending/tv/week?api_key=${API_KEY}&language=pt-BR`);
+
+        res.json(response.data.results);
+    } catch (error) {
+        console.error('Erro ao buscar Series Populares: ', error.message);
+        res.status(500).send('Erro ao buscar series populares');
+    }
+});
+
+router.get('/series-detalhes', async (req, res) => {
+    const serieId = req.query.id; // Captura o ID da URL
+
+    try {
+        const response = await axios.get(`https://api.themoviedb.org/3/tv/${serieId}?api_key=${API_KEY}&language=pt-BR`);
+        res.json(response.data); // Retorna os detalhes do serie
+    } catch (error) {
+        console.error('Erro ao buscar detalhes do serie: ', error.message);
+        res.status(500).send('Erro ao buscar detalhes do serie');
+    }
+});
 module.exports = router;
