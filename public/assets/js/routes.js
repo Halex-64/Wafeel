@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const axios = require('axios');
 const { isLoggedIn } = require('./auth');
+require('dotenv').config();
 
 //Chave da API
 const API_KEY = process.env.API_KEY;
