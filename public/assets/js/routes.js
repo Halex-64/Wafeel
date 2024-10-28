@@ -4,7 +4,7 @@ const axios = require('axios');
 const { isLoggedIn } = require('./auth');
 
 //Chave da API
-const API_KEY = 'REMOVIDO';
+const API_KEY = process.env.API_KEY;
 
 // Criar um roteador
 const router = express.Router();
