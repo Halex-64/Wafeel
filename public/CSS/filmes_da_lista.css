@@ -1,0 +1,134 @@
+.nav_filtro{
+    margin-top: 40px;
+    margin-bottom: 16px;
+}
+
+.constainer_filmes{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+}
+
+.titulo_lista{
+    margin-left: 56px;
+}
+.barra_filtro{
+    display: flex;
+    align-items: center;
+    padding-left: 56px;
+    gap: 24px;
+    margin-bottom: 10px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.barra_filtro li a{
+    text-decoration: none;
+    color: white;
+    font-family: "Poppins", sans-serif;
+}
+
+.seta {
+    display: flex;
+    align-items: center; /* Alinha verticalmente */
+    justify-content: center; /* Centraliza horizontalmente */
+    gap: 8px;
+    cursor: pointer;
+}
+
+.arrow {
+    box-sizing: border-box;
+    height: 10px;
+    width: 10px;
+    border-style: solid;
+    border-color: white;
+    border-width: 0px 2px 2px 0px;
+    transform: rotate(45deg);
+    transition: border-width 150ms ease-in-out;
+    margin-bottom: 5px;
+}
+
+.arrow:hover {
+    border-bottom-width: 3px;
+    border-right-width: 3px;
+}
+
+.resumo_filme{
+    margin-bottom: 24px;
+}
+
+.resumo_filme_imagem {
+    position: relative; /* Necessário para posicionar o ::before */
+    width: 405px;
+    height: 218px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-image: url(/public/assets/img/resumo_filme/furiosa_resumo.jpg);
+    background-size: 100%;
+    background-position: center;
+    color: white; /* Garante que o texto seja branco e visível */
+    transition: background-size 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+    overflow: hidden;
+}
+
+.resumo_filme_imagem:hover {
+    background-size: 110%; /* Aumenta a imagem de fundo em 10% */
+}
+
+.resumo_filme_imagem::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    transition: background 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+#titulo_filme, #genero_filme {
+    position: relative;
+    z-index: 2;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.novo_texto {
+    position: absolute;
+    z-index: 2;
+    opacity: 0; /* Inicialmente invisível */
+    color: white;
+    font-size: 24px;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.novo_texto li{
+    width: 267px;
+    height: auto;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+}
+
+.resumo_filme_imagem:hover #titulo_filme,
+.resumo_filme_imagem:hover #genero_filme {
+    opacity: 0; /* Esconde o texto inicial */
+}
+
+.resumo_filme_imagem:hover .novo_texto {
+    opacity: 1; /* Mostra o novo texto */
+}
+
+#titulo_filme{
+    font-size: 48px;
+}
+
+#genero_filme{
+    font-size: 16px;
+}

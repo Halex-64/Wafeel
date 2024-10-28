@@ -6,13 +6,14 @@
     <title>Wafeel</title>
     <link rel="stylesheet" href="CSS/quiz.css">
     <link rel="stylesheet" href="CSS/listas.css">
+    <link rel="stylesheet" href="CSS/filmes_da_lista.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> 
 </head>  
 <body>
-    <header class="header_quiz">
+    <header class="header_container">
         <nav class="barradenavegacao">
             <img class="logo__image" src="assets/img/logo.png" alt="Logo">
             <ul class="links">
@@ -29,25 +30,129 @@
     <section>
         <div class="nav_listas">
             <div class="barra_listas">
-                <li><a>GÊNERO</a></li>
-                <li><a>ANO</a></li>
-                <li><a>FAIXA ETÁRIA</a></li>
-                <li><a>SERVIÇO</a></li>
+                <li><a id="selecao_roxo" href="./listas.html">PRINCIPAIS LISTAS</a></li>
+                <div id="linha_vertical"></div>
+                <li><a href="./sua_lista.html">SUAS LISTAS</a></li>
             </div>    
+            <div id="linha_horizontal"></div>            
+        </div>
+
+        <h1 class="titulo_lista">FILMES POPULARES DE 2024</h1>
+
+        <div class="nav_filtro">            
             <div id="linha_horizontal"></div>
-        </div>  
+                <div class="barra_filtro">
+                    <div class="seta">
+                        <li><a>GÊNERO</a></li>
+                        <div class="arrow"></div>
+                    </div>
+                    <div class="seta">
+                        <li><a>ANO</a></li>
+                        <div class="arrow"></div>
+                    </div>
+                    <div class="seta">
+                        <li><a>FAIXA ETÁRIA</a></li>
+                        <div class="arrow"></div>
+                    </div>
+                    <div class="seta">
+                        <li><a>SERVIÇO</a></li>
+                        <div class="arrow"></div>
+                    </div>
+                </div>                
+            <div id="linha_horizontal"></div>
+        </div>   
         
-        <div class="frame_1">
-            <div class="container_filme">
-                <div class="poster_filmes">
-                    <img src="/public/assets/img/poster_filmes/furiosa_poster.png" alt="">
-                    <img src="/public/assets/img/poster_filmes/omen_poster.png" alt="">
-                    <img src="/public/assets/img/poster_filmes/quiet_place_poster.png" alt="">
-                    <img src="/public/assets/img/poster_filmes/guerra_civil_poster.png" alt="">
-                    <img src="/public/assets/img/poster_filmes/abgail_poster.png" alt="">
-                </div>
-                <p>FILMES POPULARES DE 2024</p>
+        <div class="constainer_filmes">
+            <div class="resumo_filme">
+                <div class="resumo_filme_imagem">
+                    <li id="titulo_filme">FURIOSA</li> 
+                    <li id="genero_filme">Ação • Aventura</li>
+                    <div class="novo_texto">
+                        <li>Sequestrada, Furiosa enfrenta desafios enquanto dois tiranos disputam o poder, lutando para voltar ao seu lar.</li>
+                        <li>2024 • 2h28 min • 16 Anos</li>
+                    </div>
+                </div> 
             </div>
+    
+            <div class="resumo_filme">
+                <div class="resumo_filme_imagem">
+                    <li id="titulo_filme">FURIOSA</li> 
+                    <li id="genero_filme">Ação • Aventura</li>
+                    <div class="novo_texto">
+                        <li>Sequestrada, Furiosa enfrenta desafios enquanto dois tiranos disputam o poder, lutando para voltar ao seu lar.</li>
+                        <li>2024 • 2h28 min • 16 Anos</li>
+                    </div>
+                </div> 
+            </div>
+    
+            <div class="resumo_filme">
+                <div class="resumo_filme_imagem">
+                    <li id="titulo_filme">FURIOSA</li> 
+                    <li id="genero_filme">Ação • Aventura</li>
+                    <div class="novo_texto">
+                        <li>Sequestrada, Furiosa enfrenta desafios enquanto dois tiranos disputam o poder, lutando para voltar ao seu lar.</li>
+                        <li>2024 • 2h28 min • 16 Anos</li>
+                    </div>
+                </div> 
+            </div>
+
+            <div class="resumo_filme">
+                <div class="resumo_filme_imagem">
+                    <li id="titulo_filme">FURIOSA</li> 
+                    <li id="genero_filme">Ação • Aventura</li>
+                    <div class="novo_texto">
+                        <li>Sequestrada, Furiosa enfrenta desafios enquanto dois tiranos disputam o poder, lutando para voltar ao seu lar.</li>
+                        <li>2024 • 2h28 min • 16 Anos</li>
+                    </div>
+                </div> 
+            </div>
+        </div>
+
+        <div class="constainer_filmes">
+            <div class="resumo_filme">
+                <div class="resumo_filme_imagem">
+                    <li id="titulo_filme">FURIOSA</li> 
+                    <li id="genero_filme">Ação • Aventura</li>
+                    <div class="novo_texto">
+                        <li>Sequestrada, Furiosa enfrenta desafios enquanto dois tiranos disputam o poder, lutando para voltar ao seu lar.</li>
+                        <li>2024 • 2h28 min • 16 Anos</li>
+                    </div>
+                </div> 
+            </div>
+    
+            <div class="resumo_filme">
+                <div class="resumo_filme_imagem">
+                    <li id="titulo_filme">FURIOSA</li> 
+                    <li id="genero_filme">Ação • Aventura</li>
+                    <div class="novo_texto">
+                        <li>Sequestrada, Furiosa enfrenta desafios enquanto dois tiranos disputam o poder, lutando para voltar ao seu lar.</li>
+                        <li>2024 • 2h28 min • 16 Anos</li>
+                    </div>
+                </div> 
+            </div>
+    
+            <div class="resumo_filme">
+                <div class="resumo_filme_imagem">
+                    <li id="titulo_filme">FURIOSA</li> 
+                    <li id="genero_filme">Ação • Aventura</li>
+                    <div class="novo_texto">
+                        <li>Sequestrada, Furiosa enfrenta desafios enquanto dois tiranos disputam o poder, lutando para voltar ao seu lar.</li>
+                        <li>2024 • 2h28 min • 16 Anos</li>
+                    </div>
+                </div> 
+            </div>
+
+            <div class="resumo_filme">
+                <div class="resumo_filme_imagem">
+                    <li id="titulo_filme">FURIOSA</li> 
+                    <li id="genero_filme">Ação • Aventura</li>
+                    <div class="novo_texto">
+                        <li>Sequestrada, Furiosa enfrenta desafios enquanto dois tiranos disputam o poder, lutando para voltar ao seu lar.</li>
+                        <li>2024 • 2h28 min • 16 Anos</li>
+                    </div>
+                </div> 
+            </div>
+        </div>                
     </section>   
 </body>
 

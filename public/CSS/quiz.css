@@ -45,7 +45,7 @@ nav {
   text-decoration: none;
 }
 
-.header_quiz {
+.header_container {
   color: white;
   display: flex;
   flex-direction: column;
@@ -252,9 +252,4 @@ footer{
   padding: 8px;
   margin-top: 96px;
   text-align: center;
-}
-
-.wrapper {
-  min-height: 100%;
-  margin-bottom: -50px;
 }
