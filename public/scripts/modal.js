@@ -44,12 +44,39 @@ function modalClose() {
   document.getElementById('modal_login').classList.remove('active')
   document.body.classList.remove("no-scroll");//remove a class para voltar a rolagem
 }
+function clear() {
+  document.getElementById('usuario').value = '';
+  document.getElementById('cemail').value = '';
+  document.getElementById('csenha').value = '';
+  document.getElementById('email').value = '';
+  document.getElementById('senha').value = '';
+}
 
+// Carrega a lista de usuários do localStorage quando a página é carregada
+window.onload = () => {
+  const storedUsers = localStorage.getItem('users');
+  if (storedUsers) {
+    listUser  = JSON.parse(storedUsers);
+  }
+};
 
 // abre a confirmacao de login
 document.getElementById('conflogin').addEventListener('click', () => {
-  document.getElementById('contex').innerHTML = `<h2>Seu login foi efetuado com sucesso!</h2>`
+  const lemail = document.getElementById("email").value;
+  const lsenha = document.getElementById("senha").value; 
+  
+  const user = listUser.find(user => user.email === lemail && user.senha === lsenha);
+  
+  if (!user) { 
+    alert("Login ERRO");
+    clear();
+    return;
+  }
+  
+  alert("Login realizado com sucesso");
+  document.getElementById('contex').innerHTML = `<h2>Seu login foi efetuado com sucesso!</h2>`;
   login();
+  clear();     
 });
 
 function login() {
@@ -76,11 +103,31 @@ setTimeout(() => {
 }, 4000); // 3 segundos
 }
 
+let listUser = []
+function cadUser(){
+  // event.preventDefault();
+  
+  const userData = {
+      id:(Math.random()*100).toFixed(),
+      usuario:document.getElementById('usuario').value,
+      email:document.getElementById('cemail').value,
+      senha:document.getElementById('csenha').value
+  }
+
+  listUser.push(userData)
+  localStorage.setItem('users', JSON.stringify(listUser))
+
+}
+
+//limpar os imputs
+
 
 // abre a confirmacao de cadastro
 document.getElementById('confcad').addEventListener('click', () => {
+  cadUser();
   document.getElementById('contex').innerHTML = `<h2>Seu cadastro foi efetuado com sucesso!</h2>`
   login();
+  clear();
 });
 
 // cria um teste para quando clicar no quiz abre uma confirmação
@@ -89,8 +136,8 @@ document.getElementById('confcad').addEventListener('click', () => {
 //   login();
 // });
 
-// mostra e oculta os menus
 
+// mostra e oculta os menus
 document.getElementById('menu-icon').addEventListener('click', () => { 
  // Alterna a visibilidade do menu
   if (menu.style.display === 'none') {
