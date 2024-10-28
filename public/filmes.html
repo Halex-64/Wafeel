@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,63 +8,78 @@
     <link rel="icon" type="image/png" href="assets/img/icon.png">
     <title>Filmes</title>
 </head>
+
 <body>
-    <h1>Filmes Populares</h1>
-    <div id="filmes-populares"></div>
+    <header class="header_sem_fundo">
+        <nav class="barradenavegacao"><a href="index.html">
+                <img class="logo__image" src="assets/img/logo.png" alt="Logo"></a>
+            <ul class="links" id="links">
+                <li><a href="./quiz.html">Quiz</a></li>
+                <li><a href="./filmes.html">Filmes</a></li>
+                <li><a href="./series.html">Séries</a></li>
+                <li><a href="./listas.html">Listas</a></li>
+                <li><img class="fa-solid fa-heart" src="assets/img/favoritosicon.png"></a></img></li>
+                <li><img id="ModalOpen" class="fa-solid fa-right-to-bracket" src="assets/img/usuarioicon.png"></img>
+                </li>
+            </ul>
+        </nav>
+        <h1>Filmes Populares</h1>
+        <div id="filmes-populares"></div>
 
-    <h1>Filmes Recentes</h1>
-    <div id="filmes-recentes"></div>
+        <h1>Filmes Recentes</h1>
+        <div id="filmes-recentes"></div>
 
-    <script>
-        // Fazer a requisição para a rota /filmes-populares no servidor
-        fetch('/filmes-populares')
-            .then(response => response.json())
-            .then(filmes => {
-                const filmesDiv = document.getElementById('filmes-populares');
-                filmes.forEach(filme => {
-                    const filmeElement = document.createElement('div');
-                    filmeElement.classList.add('filme-card');
-                    filmeElement.innerHTML = `
+        <script>
+            // Fazer a requisição para a rota /filmes-populares no servidor
+            fetch('/filmes-populares')
+                .then(response => response.json())
+                .then(filmes => {
+                    const filmesDiv = document.getElementById('filmes-populares');
+                    filmes.forEach(filme => {
+                        const filmeElement = document.createElement('div');
+                        filmeElement.classList.add('filme-card');
+                        filmeElement.innerHTML = `
                         <h2 class = 'titulo'>${filme.title}</h2>
                         <img src="https://image.tmdb.org/t/p/w500${filme.poster_path}" alt="${filme.title}" />
                         <p>${filme.overview}</p>
                         <p>${filme.popularity}<p>
                     `;
-                    filmeElement.addEventListener('click', () => {
-                        window.location.href = `./filmes-detalhes.html?id=${filme.id}`;
+                        filmeElement.addEventListener('click', () => {
+                            window.location.href = `./filmes-detalhes.html?id=${filme.id}`;
+                        });
+                        filmesDiv.appendChild(filmeElement);
                     });
-                    filmesDiv.appendChild(filmeElement);
+                })
+                .catch(error => {
+                    console.error('Erro ao carregar filmes: ', error);
                 });
-            })
-            .catch(error => {
-                console.error('Erro ao carregar filmes: ', error);
-            });
-    </script>
+        </script>
 
-        
-    <script>
-        //faz a requisição dos filmes recentes para a rota /filmes-populares no servidor
-        fetch('/filmes-recentes')
-            .then(response => response.json())
-            .then(filmes => {
-                const filmesDiv = document.getElementById('filmes-recentes');
-                filmes.forEach(filme => {
-                    const filmeElement = document.createElement('div');
-                    filmeElement.classList.add('filme-card');
-                    filmeElement.innerHTML = `
+
+        <script>
+            //faz a requisição dos filmes recentes para a rota /filmes-populares no servidor
+            fetch('/filmes-recentes')
+                .then(response => response.json())
+                .then(filmes => {
+                    const filmesDiv = document.getElementById('filmes-recentes');
+                    filmes.forEach(filme => {
+                        const filmeElement = document.createElement('div');
+                        filmeElement.classList.add('filme-card');
+                        filmeElement.innerHTML = `
                     <h2>${filme.title}</h2>
                     <img src="https://image.tmdb.org/t/p/w500${filme.poster_path}" alt="${filme.title}" />
                     <p>${filme.overview}</p> 
                     `;
-                    filmeElement.addEventListener('click', () => {
-                        window.location.href = `./filmes-detalhes.html?id=${filme.id}`;
+                        filmeElement.addEventListener('click', () => {
+                            window.location.href = `./filmes-detalhes.html?id=${filme.id}`;
+                        });
+                        filmesDiv.appendChild(filmeElement);
                     });
-                    filmesDiv.appendChild(filmeElement);
+                })
+                .catch(error => {
+                    console.error('Erro ao carregar filmes: ', error);
                 });
-            })
-            .catch(error => {
-                console.error('Erro ao carregar filmes: ', error);
-            });
-    </script>
+        </script>
 </body>
+
 </html>
