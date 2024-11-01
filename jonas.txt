@@ -1,0 +1,9 @@
+<td-step #stepRef sublabel="Step subtitle" [active]="true" state="none">
+    <template td-step-label>
+        Step title
+    </template>
+    body
+    <template td-step-actions>
+        actions
+    </template>
+</td-step>
