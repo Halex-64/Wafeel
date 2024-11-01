@@ -10,6 +10,10 @@ const API_KEY = process.env.API_KEY;
 // Criar um roteador
 const router = express.Router();
 
+const platforms = data.results['BR']?.flatrate || [];
+
+const platformNames = platforms.map(platform => platform.provider_name)
+
 // Rota para a página inicial
 router.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
@@ -73,10 +77,30 @@ router.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'login.html'));
 });
 
+router.get('/providers', async (req, res) => {
+    try {
+        const response = await axios.get(`https://api.themoviedb.org/3/watch/providers/movie?api_key=${API_KEY}&language=pt-BR&watch_region=BR`);
+        res.json(response.data.results);
+    } catch (error) {
+        console.error('Erro ao buscar provedores:', error.message);
+        res.status(500).send('Erro ao buscar provedores');
+    }
+});
+
+router.get('/filmes-streaming', async (req, res) => {
+    try {
+        const { data } = await axios.get(`https://api.themoviedb.org/3/movie/{movie_id}/watch/providers?api_key=${API_KEY}`);
+        res.json(data.results);
+    } catch (error) {
+        console.error('Erro ao buscar plataformas de streaming:', error.message);
+        res.status(500).send('Erro ao buscar plataformas de streaming');
+    }
+});
+
 //Rota que faz a conexão com a API e busca os filmes populares
 router.get('/filmes-populares', async (req, res) => {
     try {
-        const response = await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=pt-BR`);
+        const response = await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&with_watch_providers=${plataforma}&watch_region=BR&language=pt-BR`);
 
         res.json(response.data.results);
     } catch (error) {
