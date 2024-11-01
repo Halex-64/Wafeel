@@ -14,11 +14,17 @@
     gap: 16px;   
 }
 
+a{
+    text-decoration: none;
+}
+
 .container_filme p{
     font-family: "Poppins", sans-serif;
     font-weight: bold;
     font-size: 16px;
     margin: 0;
+    color: white;
+    text-decoration: none;
 }
 
 .container_filme:hover{
