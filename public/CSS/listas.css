@@ -1,8 +1,3 @@
-body{
-    width: auto;
-    height: auto;
-}
-
 .frame_1{
     display: flex;
     justify-content:center;
@@ -19,11 +14,17 @@ body{
     gap: 16px;   
 }
 
+a{
+    text-decoration: none;
+}
+
 .container_filme p{
     font-family: "Poppins", sans-serif;
     font-weight: bold;
     font-size: 16px;
     margin: 0;
+    color: white;
+    text-decoration: none;
 }
 
 .container_filme:hover{
@@ -102,5 +103,5 @@ body{
 }
 
 .nav_listas{
-    padding-bottom: 40px;
+    margin-bottom: 40px;
 }

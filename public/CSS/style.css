@@ -6,12 +6,14 @@
 @import url(filmes_telainicial.css);
 @import url(login.css);
 @import url(streaming.css);
+@import url(series.css);
+
 
 body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Coolvetica', normal;
+    font-family: 'Coolvetica', sans-serif;
     background-color: #000000;
     color: white;
 }
@@ -45,7 +47,6 @@ header {
     }
 
     .links, .icons {
-        flex-direction: column;/*mudar o menu para coluna*/
         margin-top: 10px;
     }
 
