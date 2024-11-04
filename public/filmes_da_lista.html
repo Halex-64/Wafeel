@@ -43,20 +43,20 @@
             <div id="linha_horizontal"></div>
                 <div class="barra_filtro">
                     
-                    <div class="filtro_seta" onclick="toggleDropdown()">
+                    <div class="filtro_seta" onclick="toggleDropdown('dropdown-genero', this)">
                         <li><a>GÊNERO</a></li>
                         <div class="arrow"></div>
                     </div>
 
-                    <div class="filtro_seta">
+                    <div class="filtro_seta" onclick="toggleDropdown('dropdown-ano', this)">
                         <li><a>ANO</a></li>
                         <div class="arrow"></div>
                     </div>
-                    <div class="filtro_seta">
+                    <div class="filtro_seta" onclick="toggleDropdown('dropdown-faixa-etaria', this)">
                         <li><a>FAIXA ETÁRIA</a></li>
                         <div class="arrow"></div>
                     </div>
-                    <div class="filtro_seta">
+                    <div class="filtro_seta" onclick="toggleDropdown('dropdown-servico', this)">
                         <li><a>SERVIÇO</a></li>
                         <div class="arrow"></div>
                     </div>
@@ -64,60 +64,93 @@
             <div id="linha_horizontal"></div>
         </div> 
 
-        <ul id="dropdown" class="options">
-            <li class="option">
-                                
-                <span class="label">Drama</span>                
-            </li>
-            <li class="option">                                
-                <span class="label">Crime</span>                
-            </li>
-            <li class="option">                                
-                <span class="label">Terror</span>                
-            </li>
-            <li class="option">                                
-                <span class="label">Ficção Científica</span>                
-            </li>
-            <li class="option">                                
-                <span class="label">Animação</span>                
-            </li>
-            <li class="option">                                
-                <span class="label">Romance</span>                
-            </li>
-            <li class="option">                                
-                <span class="label">Thriller</span>                
-            </li>
-            <li class="option">                                
-                <span class="label">Ação e Aventura</span>                
-            </li>
-            <li class="option">                                
-                <span class="label">Guerra</span>                
-            </li>
-            <li class="option">                                
-                <span class="label">Sobrenatural</span>                
-            </li>
-            <li class="option">                                
-                <span class="label">Western</span>                
-            </li>
-            <li class="option">                                
-                <span class="label">Esporte</span>                
-            </li>
+        <ul id="dropdown-genero" class="options">
+            <li class="option">Drama</li>
+            <li class="option">Crime</li>
+            <li class="option">Terror</li>
+            <li class="option">Ficção Científica</li>
+            <li class="option">Animação</li>
+            <li class="option">Romance</li>
+            <li class="option">Thriller</li>
+            <li class="option">Ação e Aventura</li>
+            <li class="option">Guerra</li>
+            <li class="option">Sobrenatural</li>
+            <li class="option">Western</li>
+            <li class="option">Esporte</li>
+        </ul>
+
+        <ul id="dropdown-ano" class="options">
+            <li class="option">2020s</li>
+            <li class="option">2010s</li>
+            <li class="option">2000s</li>
+            <li class="option">1990s</li>
+            <li class="option">1980s</li>
+            <li class="option">1970s</li>
+            <li class="option">1960s</li>
+            <li class="option">1950s</li>
+            <li class="option">1940s</li>
+            <li class="option">1930s</li>
+            <li class="option">1920s</li>
+            <li class="option">1910s</li>
+            <li class="option">1900s</li>
+        </ul>
+
+        <ul id="dropdown-faixa-etaria" class="options">
+            <li class="option">Livre</li>
+            <li class="option">10 Anos</li>
+            <li class="option">12 Anos</li>
+            <li class="option">14 Anos</li>
+            <li class="option">16 Anos</li>
+            <li class="option">18 Anos</li>           
+        </ul>
+
+        <ul id="dropdown-servico" class="options">
+            <li class="option">Netflix</li>
+            <li class="option">Max</li>
+            <li class="option">Prime Video</li>
+            <li class="option">Disney+</li>
+            <li class="option">Apple Tv</li>
+            <li class="option">Paramount+</li>
+            <li class="option">Globoplay</li> 
+            <li class="option">MUBI</li>            
         </ul>
 
         <script>
-            function toggleDropdown() {
-                const dropdown = document.getElementById("dropdown");
-                const button = document.querySelector('.filtro_seta:first-child'); // Seleciona o primeiro botão (GÊNERO)
-
+            function toggleDropdown(dropdownId, button) {
+                const dropdowns = document.querySelectorAll('.options');
+                
+                // Ocultar todos os outros dropdowns
+                dropdowns.forEach(dropdown => {
+                    if (dropdown.id !== dropdownId) {
+                        dropdown.style.display = 'none';
+                    }
+                });
+        
+                const dropdown = document.getElementById(dropdownId);
+                const isVisible = dropdown.style.display === "block";
+                
+                // Alterna a visibilidade do dropdown clicado
+                dropdown.style.display = isVisible ? "none" : "block";
+        
                 // Calcula a posição do botão
-                const rect = button.getBoundingClientRect();
-
-                // Define a posição e largura da lista
-                dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
-                dropdown.style.top = rect.bottom + 'px';
-                dropdown.style.left = rect.left + 'px';
-                dropdown.style.width = button.offsetWidth + 'px';
+                if (!isVisible) {
+                    const rect = button.getBoundingClientRect();
+                    dropdown.style.top = rect.bottom + 'px'; // Posiciona abaixo do botão
+                    dropdown.style.left = rect.left + 'px'; // Alinha à esquerda do botão
+                    dropdown.style.width = button.offsetWidth + 'px'; // Ajusta a largura do dropdown
+                }
             }
+        
+            // Adiciona um evento de clique no documento
+            document.addEventListener('click', (event) => {
+                const dropdowns = document.querySelectorAll('.options');
+                dropdowns.forEach(dropdown => {
+                    const button = document.querySelector(`.filtro_seta[onclick*="${dropdown.id}"]`);
+                    if (!dropdown.contains(event.target) && !button.contains(event.target)) {
+                        dropdown.style.display = 'none';
+                    }
+                });
+            });
         </script>
         
         <div class="constainer_filmes">
