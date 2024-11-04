@@ -1,0 +1,89 @@
+@import url(login.css);
+@import url(nav.css);
+@import url(streaming.css);
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Coolvetica', normal;
+    background-color: #000000;
+    color: white;
+}
+
+header {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+}
+
+.header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 800px;
+    z-index: 10;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding: 20px;
+}
+
+#selecao_roxo{
+    color: #8500F2;
+}
+
+.streaming{
+    display: flex;
+    justify-content: space-around;
+}
+
+.icostreaming{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #8500F2;
+    border-radius: 10px;
+    width: 250px;
+    height: 100px;
+    h1{
+        font-size: 30px;
+    }
+}
+
+.icostreaming1{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #8500F2;
+    border-radius: 10px;
+    width: 250px;
+    height: 100px;
+    h1{
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+    }
+
+    .links, .icons {
+        flex-direction: column;/*mudar o menu para coluna*/
+        margin-top: 10px;
+    }
+
+    .streaming{
+        flex-direction: column;
+    }
+    .icostreaming{
+        width: 100%;
+        display: none;
+    }
+    #icostreaming1 {
+        display: block;
+        }
+}

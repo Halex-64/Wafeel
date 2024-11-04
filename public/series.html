@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wafeel</title>
-    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="CSS/streaming.css">
     <script defer src="./scripts/modal.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,8 +17,8 @@
             <img class="logo__image" src="assets/img/logo.png" alt="Logo"></a>
             <ul class="links"  id="links">
                 <li><a href="./quiz.html">Quiz</a></li>
-                <li><a href="#">Filmes</a></li>
-                <li><a id="selecao_roxo" href="#">Séries</a></li>
+                <li><a href="./filmes.html">Filmes</a></li>
+                <li><a id="selecao_roxo" href="./series.html">Séries</a></li>
                 <li><a href="./listas.html">Listas</a></li>
                 <li><img class="fa-solid fa-heart" src="assets/img/favoritosicon.png"></a></img></li> 
                 <li><img  id="ModalOpen" class="fa-solid fa-right-to-bracket" src="assets/img/usuarioicon.png"></img></li>
@@ -29,13 +29,7 @@
             <div class="bar"></div>
             <div class="bar"></div>
           </div>
-        <div class="header-content">
-            <h1 class="textoPrincipal_telainicial">Filmes e séries de acordo com <br> suas emoções, e tempo disponível!</h1>
-            <h2 class="textoSecundario_telainicial">Recomendamos os melhores conteúdos com base <br> na forma em que você está se sentindo! Faça já o <br> quiz abaixo</h2>
-            <div class="btn animate__animated animate__backInLeft espaco_botao">
-                <button id="quiz" class="btn__quiz"><a href="./quiz.html">Quiz</a></button>
-            </div>
-        </div>
+      
     </header>
 <!-- cria o modal/menu de cadastro e login -->
     <section class="modal_login" id="modal_login">
@@ -45,9 +39,9 @@
                 <h3>Informe seu email e Senha</h3>
             </div>
             <h3>Email</h3>
-            <input type="text" id="email" placeholder="Informe seu email">
+            <input type="text" id="email" placeholder="Informe seu email" required>
             <h3>Senha</h3>
-            <input type="text" id="senha" placeholder="Informe sua senha">
+            <input type="password" id="senha" placeholder="Informe sua senha" required>
             <button id="conflogin">ENTRAR</button>
         </div>
         <div class="cadastro">
@@ -57,11 +51,11 @@
                 <h3>Insira um email, nome de usuario e senha validos</h3>
             </div>
             <h3>Email</h3>
-            <input type="text" id="email" placeholder="Informe seu email">
+            <input type="email" id="cemail" placeholder="Informe seu email" required>
             <h3>Nome de Usuário</h3>
-            <input type="text" id="usuario" placeholder="Informe seu usuário">
+            <input type="text" id="usuario" placeholder="Informe seu usuário" required>
             <h3>Senha</h3>
-            <input type="text" id="senha" placeholder="Informe sua senha">
+            <input type="password" id="csenha" placeholder="Informe sua senha" required>
             <button id="confcad">CADASTRE-SE</button>
         </div>
     </section>
@@ -77,6 +71,19 @@
             </div>
         </section>
 <!-- fim animação de confirmação de login -->
+
+    <section>
+        <section class="streaming" id="streaming">
+            <div class="icostreaming"><img src="./assets/img/streaming/Netflix.png" alt="netflix"></div>
+            <div class="icostreaming"><img src="./assets/img/streaming/Prime Video.png" alt="primevideos"></div>
+            <div class="icostreaming"><img src="./assets/img/streaming/Max.png" alt="max"></div>
+            <div class="icostreaming"><img src="./assets/img/streaming/Disney+.png" alt="disneyplus"></div>
+            <div class="icostreaming"><img src="./assets/img/streaming/Paramount+.png" alt="paramountplus"></div>
+            <div class="icostreaming" id="icostreaming"><h1>Ver Mais...</h1></div>
+        </section>
+        <div class="icostreaming1" id="icostreaming1"><h1>Ver Mais...</h1></div>
+
+    </section>
     
 </body>
 </html>

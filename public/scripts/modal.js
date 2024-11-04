@@ -1,30 +1,26 @@
 const menu = document.getElementById('links');
 const menuIcon = document.getElementById('menu-icon');
 
-// window.addEventListener('resize', () => {
-//   if (window.innerWidth > 768) { // Ajuste o valor conforme necessário
-//     menuIcon.style.display = 'none'
-//     menu.style.display = 'flex'; // Mostra o menu em telas maiores
-//   } else {
-//     menuIcon.style.display = 'block'
-//     menu.style.display = 'none'; // Oculta o menu em telas menores
-//   }
-// });
-
 let resizeTimeout;
 
 const updateMenuDisplay = () => {
   if (window.innerWidth > 768) {
     menuIcon.style.display = 'none'
     menu.style.display = 'flex'; // Mostra o menu em telas maiores
+
+ 
   } else {
+    
     menuIcon.style.display = 'block'
     menu.style.display = 'none'; // Oculta o menu em telas menores
+  
   }
 };
 
+
 // Chama a função para ajustar o menu ao carregar a página
 updateMenuDisplay();
+// updateMenuDisplay1();
 
 window.addEventListener('resize', () => {
   clearTimeout(resizeTimeout);
@@ -44,6 +40,8 @@ function modalClose() {
   document.getElementById('modal_login').classList.remove('active')
   document.body.classList.remove("no-scroll");//remove a class para voltar a rolagem
 }
+
+//limpar os inputs
 function clear() {
   document.getElementById('usuario').value = '';
   document.getElementById('cemail').value = '';
@@ -73,7 +71,7 @@ document.getElementById('conflogin').addEventListener('click', () => {
     return;
   }
   
-  alert("Login realizado com sucesso");
+  // alert("Login realizado com sucesso");
   document.getElementById('contex').innerHTML = `<h2>Seu login foi efetuado com sucesso!</h2>`;
   login();
   clear();     
@@ -119,8 +117,6 @@ function cadUser(){
 
 }
 
-//limpar os imputs
-
 
 // abre a confirmacao de cadastro
 document.getElementById('confcad').addEventListener('click', () => {
@@ -129,12 +125,6 @@ document.getElementById('confcad').addEventListener('click', () => {
   login();
   clear();
 });
-
-// cria um teste para quando clicar no quiz abre uma confirmação
-// document.getElementById('quiz').addEventListener('click', () => {
-//   document.getElementById('contex').innerHTML = `<h2>Gerando QUIZ!</h2>`
-//   login();
-// });
 
 
 // mostra e oculta os menus
