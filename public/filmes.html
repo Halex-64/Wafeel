@@ -23,92 +23,19 @@
                 </li>
             </ul>
         </nav>
-        <div class="sidebar">
-            <img src="assets/img/netflix.png" class="platform-logo" data-platform="netflix" alt="Netflix">
-            <img src="assets/img/primevideo.png" class="platform-logo" data-platform="primevideo" alt="Prime Video">
-            <img src="assets/img/disneyplus.png" class="platform-logo" data-platform="disneyplus" alt="Disney Plus">
-        </div>
-        <h1>Filmes Populares</h1>
-        <div id="filmes-populares"></div>
+  
+        <main class="main-container">
+            <aside id="sidebar" class="sidebar">
+            </aside>
+            <section id="content" class="content">
+                <h1>Filmes Populares</h1>
+                <div id="filmes-populares" class="filmes-container"></div>
+                <h1>Filmes Recentes</h1>
+                <div id="filmes-recentes" class="filmes-container"></div>
+            </section>
+        </main>
 
-        <h1>Filmes Recentes</h1>
-        <div id="filmes-recentes"></div>
-        
-        <script>
-            fetch('/providers')
-                .then(response => response.json())
-                .then(providers => {
-                    const sidebar = document.getElementById('sidebar');
-                    providers.forEach(provider => {
-                        const logo = document.createElement('img');
-                        logo.src = `https://image.tmdb.org/t/p/original${provider.logo_path}`;
-                        logo.alt = provider.provider_name;
-                        logo.classList.add('platform-logo');
-                        logo.dataset.platformId = provider.provider_id;
-                        logo.addEventListener('click', () => {
-                            fetch(`/filmes?plataforma=${provider.provider_id}`)
-                                .then(response => response.json())
-                                .then(filmes => {
-                                    displayFilmes(filmes); // Função que exibe os filmes
-                                });
-                        });
-                        sidebar.appendChild(logo);
-                    });
-                })
-                .catch(error => console.error('Erro ao carregar provedores:', error));
-        </script>
-
-        <script>
-            // Fazer a requisição para a rota /filmes-populares no servidor
-            fetch('/filmes-populares')
-                .then(response => response.json())
-                .then(filmes => {
-                    const filmesDiv = document.getElementById('filmes-populares');
-                    filmes.forEach(filme => {
-                        const filmeElement = document.createElement('div');
-                        filmeElement.classList.add('filme-card');
-                        filmeElement.innerHTML = `
-                        <h2 class = 'titulo'>${filme.title}</h2>
-                        <img src="https://image.tmdb.org/t/p/w500${filme.poster_path}" alt="${filme.title}" />
-                        <p>${filme.overview}</p>
-                        <p>${filme.popularity}<p>
-                    `;
-                        filmeElement.addEventListener('click', () => {
-                            window.location.href = `./filmes-detalhes.html?id=${filme.id}`;
-                        });
-                        filmesDiv.appendChild(filmeElement);
-                    });
-                })
-                .catch(error => {
-                    console.error('Erro ao carregar filmes: ', error);
-                });
-        </script>
-
-
-        <script>
-            //faz a requisição dos filmes recentes para a rota /filmes-populares no servidor
-            fetch('/filmes-recentes')
-                .then(response => response.json())
-                .then(filmes => {
-                    const filmesDiv = document.getElementById('filmes-recentes');
-                    filmes.forEach(filme => {
-                        const filmeElement = document.createElement('div');
-                        filmeElement.classList.add('filme-card');
-                        filmeElement.innerHTML = `
-                    <h2>${filme.title}</h2>
-                    <img src="https://image.tmdb.org/t/p/w500${filme.poster_path}" alt="${filme.title}" />
-                    <p>${filme.overview}</p> 
-                    `;
-                        filmeElement.addEventListener('click', () => {
-                            window.location.href = `./filmes-detalhes.html?id=${filme.id}`;
-                        });
-                        filmesDiv.appendChild(filmeElement);
-                    });
-                })
-                .catch(error => {
-                    console.error('Erro ao carregar filmes: ', error);
-                });
-        </script>
+        <script src="assets/js/filme.js"></script>
 </body>
 
 </html>

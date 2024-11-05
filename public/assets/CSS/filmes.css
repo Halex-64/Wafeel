@@ -28,3 +28,29 @@
   font-size: 1em;
   color: #666;
 }
+
+.sidebar {
+  width: 117.7rem;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  overflow-y: auto;
+  border-right: 1px solid #ddd;
+}
+
+.provider-logo {
+  width: 50px;
+  height: auto;
+  margin: 10px 0;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.provider-logo:hover {
+  transform: scale(1.1);
+}
+
+.content {
+  flex-grow: 1;
+  padding: 20px;
+}

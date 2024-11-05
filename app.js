@@ -9,6 +9,8 @@ const app = express();
 
 const PORT = 3000;
 
+const API_KEY = process.env.API_KEY;
+
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
 });
@@ -28,6 +30,12 @@ app.use((req, res, next) => {
 app.use((req, res, next) => {
     res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, private');
     next();
+});
+
+app.get('/api/providers', async (req, res) => {
+    const response = await fetch(`https://api.themoviedb.org/3/watch/providers/movie?api_key=${API_KEY}&watch_region=BR`);
+    const data = await response.json();
+    res.json(data.results);
 });
 
 
