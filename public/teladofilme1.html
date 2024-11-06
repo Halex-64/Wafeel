@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Wafeel</title>
+        <link rel="stylesheet" href="./assets/CSS/style.css">
+        <script defer src="./scripts/modal.js"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+            rel="stylesheet">
+        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    </head>
+<body>
+    <header class="header_quiz">
+        <nav class="barradenavegacao">
+            <img class="logo__image" src="assets/img/logo.png" alt="Logo">
+            <ul class="links">
+                <li><a id="selecao_roxo" href="./quiz.html">Quiz</a></li>
+                <li><a href="#">Filmes</a></li>
+                <li><a href="#">Séries</a></li>
+                <li><a href="./listas.html">Listas</a></li>
+                <li><img class="fa-solid fa-heart" src="assets/img/favoritosicon.png"></a></img></li> 
+                <li><img class="fa-solid fa-right-to-bracket" src="assets/img/usuarioicon.png">  </img></li>
+            </ul>
+        </nav>
+        
+    </header>   
+
+    <div class="container2">
+        <div class="left-section">
+         <h2>
+          Dr. House (2005)
+         </h2>
+         <img alt="Dr. House holding a cane with a background of medical images" height="400" src="./assets/img/poster-house.png" width="600"/>
+         <div class="platforms2">
+          <div>
+           <img alt="Netflix logo" height="60" src="https://storage.googleapis.com/a1aa/image/jIHekJtQqeih5EBfloRDfmkw34wGwwKMeO5JesJeDtEv56z2JA.jpg" width="100"/>
+          </div>
+          <div>
+           <img alt="Prime Video logo" height="60" src="https://storage.googleapis.com/a1aa/image/ffpoegPR7UURVJNpSP6w8JWyOj4pq8VvDDAQ3JkK0XPhrPbnA.jpg" width="100"/>
+          </div>
+          <div>
+           <img alt="Max logo" height="60" src="https://storage.googleapis.com/a1aa/image/2FTl8mfWzsTTHCrEJfgIzFOcnE10XpIAeqWnRoKs1UpdrPbnA.jpg" width="100"/>
+          </div>
+         </div>
+         <div class="watch-later">
+          Assistir mais Tarde
+         </div>
+        </div>
+        <div class="right-section">
+         <h2>
+          Sobre
+         </h2>
+         <p>
+          <a href="#">
+           89%
+          </a>
+          gostaram dessa série
+         </p>
+         <p>
+          No fictício Hospital-Escola Plainsboro de Princeton, no estado de Nova Jersey, o gênio afiado Dr. Gregory House ataca mistérios de saúde como o faria um Sherlock Holmes médico. Tudo isso enquanto se engaja em jogos mentais com os colegas, como o melhor amigo, o oncologista James Wilson. House, um amargurado especialista em doenças infecciosas, desvenda mistérios médicos com a ajuda de uma equipe de jovens profissionais. Instinto perfeito e raciocínio não-convencional trazem grande respeito a House, apesar de sua honestidade brutal e tendências antissociais
+         </p>
+         <div class="genres">
+          <h2>
+           Gêneros
+          </h2>
+          <p>
+           Mistério, Suspense, Drama Médico, Comédia
+          </p>
+         </div>
+         <div class="feedback2">
+          <h2>
+           Você gostou dessa série?
+          </h2>
+          <i class="fas fa-thumbs-up">
+          </i>
+          <i class="fas fa-thumbs-down">
+          </i>
+         </div>
+        </div>
+       </div>
+</body>
+<style>
+  
+         .container2 {
+             display: flex;
+             flex-direction: row;
+             justify-content: space-between;
+         }
+         .left-section, .right-section {
+             width: 48%;
+         }
+         .left-section img {
+             width: 100%;
+             border-radius: 10px;
+         }
+         .platforms2 {
+             display: flex;
+             justify-content: space-between;
+             margin-top: 20px;
+         }
+         .platforms2 div {
+             display: flex;
+             flex-direction: column;
+             align-items: center;
+         }
+         .platforms2 img {
+             width: 100px;
+             height: 60px;
+             object-fit: contain;
+             margin-bottom: 10px;
+         }
+         .watch-later {
+             background-color: #800080;
+             color: #fff;
+             padding: 5px 10px;
+             border-radius: 20px;
+             text-align: center;
+             margin-top: 20px;
+             cursor: pointer;
+             font-size: 14px;
+         }
+         .right-section a {
+             color: #8a2be2;
+             text-decoration: none;
+         }
+         .right-section a:hover {
+             text-decoration: underline;
+         }
+         .genres, .feedback2 {
+             margin-top: 20px;
+         }
+         .feedback2 i {
+             font-size: 24px;
+             margin-right: 10px;
+             cursor: pointer;
+         }
+   </style>
+</html>

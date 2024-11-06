@@ -6,6 +6,7 @@
 @import url(filmes_telainicial.css);
 @import url(filmes.css);
 @import url(series.css);
+@import url(teladofilme.css);
 
 .titulo {
   color: aqua;
