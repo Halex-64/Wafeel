@@ -4,7 +4,6 @@
 @import url(card.css);
 
 html, body{
-  height: 100%;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -12,6 +11,14 @@ html, body{
   background-color: #000000;
   color: white;
   overflow-x: hidden;
+}
+
+.header_quiz {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 nav {
@@ -252,4 +259,6 @@ footer{
   padding: 8px;
   margin-top: 96px;
   text-align: center;
+  width: 100%;
+  margin-bottom: 0;
 }

@@ -1,0 +1,23 @@
+.botao_criar_lista{
+    text-align: center;
+    display: flex;
+    margin: 56px;
+    padding: 8px;
+  }
+  
+  .botao_criar_lista .btn {
+    background-color: #8500F2;
+    color: #fff;
+    font-size: 24px;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    height: auto;
+    width: 300px;
+  }
+  
+  .botao_criar_lista .btn:hover {
+    background-color: #5e02aa;
+  }
