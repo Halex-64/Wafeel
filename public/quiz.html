@@ -13,8 +13,11 @@
 <body>
     <header class="header_quiz">
         <nav class="barradenavegacao">
+            <button class="menu-toggle" id="menu-toggle">
+                <i class="fa fas fa-bars"></i>
+            </button>
             <a href="/public/index.html"><img class="logo__image" src="assets/img/logo.png" alt="Logo"></a>
-            <ul class="links">
+            <ul class="links" id="mobile-menu">
                 <li><a id="selecao_roxo" href="./quiz.html">Quiz</a></li>
                 <li><a href="#">Filmes</a></li>
                 <li><a href="#">Séries</a></li>
@@ -24,6 +27,15 @@
             </ul>
         </nav>
     </header>
+
+    <script>
+        const toggleButton = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        toggleButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+    </script>
 
     <section class="quiz">
         <div class="welcomeContainer">
