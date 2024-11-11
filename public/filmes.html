@@ -11,30 +11,28 @@
 
 <body>
     <header class="header_sem_fundo">
-        <nav class="barradenavegacao"><a href="index.html">
+        <nav><a href="index.html">
                 <img class="logo__image" src="assets/img/logo.png" alt="Logo"></a>
             <ul class="links" id="links">
                 <li><a href="./quiz.html">Quiz</a></li>
                 <li><a href="./filmes.html">Filmes</a></li>
                 <li><a href="./series.html">Séries</a></li>
                 <li><a href="./listas.html">Listas</a></li>
-                <li><img class="fa-solid fa-heart" src="assets/img/favoritosicon.png"></a></img></li>
-                <li><img id="ModalOpen" class="fa-solid fa-right-to-bracket" src="assets/img/usuarioicon.png"></img>
+                <li><a id="favLink" href="./login.html"><img class="fa-solid fa-heart" src="assets/img/favoritosicon.png"></a></img></li>
+                <li><a id="userLink" href="./login.html"><img id="ModalOpen" class="fa-solid fa-right-to-bracket" src="assets/img/usuarioicon.png"></img></a>
                 </li>
             </ul>
         </nav>
-  
-        <main class="main-container">
-            <aside id="sidebar" class="sidebar">
-            </aside>
-            <section id="content" class="content">
-                <h1>Filmes Populares</h1>
-                <div id="movie-container" class="filmes-container"></div>
-                <h1>Filmes Recentes</h1>
-                <div id="filmes-recentes" class="filmes-container"></div>
-            </section>
-        </main>
-
+    <main class="main-container">
+        <aside id="sidebar" class="sidebar"></aside>
+        <section id="content" class="content">
+            <h1>Filmes Populares</h1>
+            <div id="movie-container" class="filmes-container"></div>
+            <h1>Filmes Recentes</h1>
+            <div id="filmes-recentes" class="filmes-container"></div>
+        </section>
+    </main>
+</header>
         <script src="assets/js/filme.js"></script>
 </body>
 </html>

@@ -48,7 +48,7 @@ router.post('/login', (req, res) => {
     req.session.isLoggedin = true;
     req.session.user = user;
     
-    res.redirect('/perfil.html');
+    res.redirect('/index.html');
     console.log('isLoggedin: ', req.session.isLoggedin);
 });
 
