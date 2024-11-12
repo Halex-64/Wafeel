@@ -265,7 +265,11 @@ footer{
 }
 
 .menu-toggle {
+  background: none;
   display: none;
+  font-size: 24px;
+  font-weight:bold;
+  border: none;
   color: #8500F2;
   cursor: pointer;
 }
@@ -275,30 +279,76 @@ footer{
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
   }
   .logo__image{
     padding-top: 8px;
     padding-bottom: 8px;
     padding-right: 0;
     padding-left: 0;
+    max-width: 96px;
+
   }
+
+  .menu-toggle {
+    display: block;
+    position: absolute;
+    left: 40px;
+    }
   
   .links {
     display: none; /* Esconde o menu em telas menores */
     flex-direction: column;
     position: absolute;
-    top: 60px;
+    top: 0;
     left: 0;
-    width: 100px;
+    width: 150px;
+    height: 866px;
     background-color: #8500F2;
-    padding: 10px;
-}
-
-.links.active {
-    display: flex; /* Mostra o menu quando a classe 'active' é adicionada */
-}
-
- .menu-toggle {
-  display: block;
+    padding: 0;
+    z-index: 1000;
+    margin: 0; 
+     align-items: center; 
+    text-align: center;
+    gap: 16px;
+    
+    opacity: 0;
+    transform: translateX(-100%); /* Inicia fora de vista */
+    transition: opacity 0.3s ease, transform 0.3s ease;
   }
+
+  .links li {
+    margin-left: 16px;
+  }
+
+  .links.active {
+    display: flex; /* Mostra o menu quando a classe 'active' é adicionada */
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .welcomeContainer h2{
+    font-size: 24px;
+  }
+  .welcomeContainer p{
+    font-size: 16px;
+    padding: 0 8px 0 8px ;
+    line-height: 1em;
+  }
+
+  .question{
+    margin: 56px;
+  }
+
+  .figura_container .question h3{
+    font-size: 24px;
+  }
+
+  .figura_container .question label{
+    font-size: 16px;
+  }
+
+  
+
+
 }

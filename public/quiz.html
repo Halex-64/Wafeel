@@ -13,9 +13,7 @@
 <body>
     <header class="header_quiz">
         <nav class="barradenavegacao">
-            <button class="menu-toggle" id="menu-toggle">
-                <i class="fa fas fa-bars"></i>
-            </button>
+            <button class="menu-toggle" id="menu-toggle">☰</button>
             <a href="/public/index.html"><img class="logo__image" src="assets/img/logo.png" alt="Logo"></a>
             <ul class="links" id="mobile-menu">
                 <li><a id="selecao_roxo" href="./quiz.html">Quiz</a></li>
@@ -29,12 +27,20 @@
     </header>
 
     <script>
-        const toggleButton = document.getElementById('menu-toggle');
-        const mobileMenu = document.getElementById('mobile-menu');
+     const menuToggle = document.getElementById('menu-toggle');
+const mobileMenu = document.getElementById('mobile-menu');
 
-        toggleButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('active');
-        });
+menuToggle.addEventListener('click', () => {
+    if (mobileMenu.classList.contains('active')) {
+        mobileMenu.classList.remove('active');
+        setTimeout(() => {
+            mobileMenu.style.display = 'none'; // Esconde após a transição
+        }, 300); // Tempo igual ao da transição
+    } else {
+        mobileMenu.style.display = 'flex'; // Mostra antes da transição
+        setTimeout(() => mobileMenu.classList.add('active'), 10); // Adiciona a classe após um pequeno atraso
+    }
+});
     </script>
 
     <section class="quiz">
