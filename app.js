@@ -78,6 +78,36 @@ app.get('/filmes-populares', async (req, res) => {
     }
 });
 
+// Função de exemplo para recomendação
+function getRecommendation(category) {
+    const recommendations = {
+        'Ação': { title: 'Mad Max: Estrada da Fúria', id: 1, description: 'Um filme cheio de ação e aventura' },
+        'Comédia': { title: 'A Vida é Bela', id: 2, description: 'Uma comédia com um toque emocional' },
+        'Drama': { title: 'O Poderoso Chefão', id: 3, description: 'Um clássico drama familiar' },
+        'Terror': { title: 'O Exorcista', id: 4, description: 'Um dos maiores filmes de terror da história' }
+        // Adicione outras categorias conforme necessário
+    };
+    return recommendations[category] || null; // Retorna `null` se a categoria não for encontrada
+}
+
+
+app.get('/api/recommendation', (req, res) => {
+    const category = req.query.category;
+    console.log('Categoria recebida:', category);
+
+    try {
+        const recommendation = getRecommendation(category);
+        if (recommendation) {
+            res.json(recommendation);
+        } else {
+            res.status(404).json({ error: 'Recomendação não encontrada para a categoria fornecida' });
+        }
+    } catch (error) {
+        console.error('Erro ao obter recomendação:', error);
+        res.status(500).json({ error: 'Erro interno do servidor' });
+    }
+});
+
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, 'public')));
