@@ -348,6 +348,12 @@ footer{
     font-size: 16px;
   }
 
+  .quiz .question label::before{
+    width: 10px;
+    height: 10px;
+  }
+  
+
   
 
 
