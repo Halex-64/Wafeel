@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css"> <!-- Seu CSS -->
+    <link rel="stylesheet" href="assets/CSS/style.css">
     <title>Detalhes de </title>
 </head>
 <body>
     <div id="filme-detalhes"></div>
 
-    <script>
+    <!-- <script>
         // Função para capturar o ID do filme da URL
         function getMovieIdFromUrl() {
             const params = new URLSearchParams(window.location.search);
@@ -22,7 +22,14 @@
             const response = await fetch(`/filmes-detalhes?id=${movieId}`);
             const filme = await response.json();
 
+            const providersResponse = await fetch(`https://api.themoviedb.org/3/movie/${filmeId}/watch/providers?api_key=YOUR_API_KEY`);
+            const providersData = await providersResponse.json();
+            const providers = providersData.results.BR?.flatrate || [];
+
             const generos = filme.genres.map(genre => genre.name).join(', ');
+            let providersHTML = providers.map(provider => `
+            <img src="https://image.tmdb.org/t/p/original${provider.logo_path}" alt="${provider.provider_name}" title="${provider.provider_name}" class="provider-logo">
+            `).join("");
 
             const filmeDetalhesDiv = document.getElementById('filme-detalhes');
             filmeDetalhesDiv.innerHTML = `
@@ -33,6 +40,10 @@
                 <p>Popularidade: ${filme.popularity}</p>
                 <p>Avaliação: ${filme.vote_average}</p>
                 <p>Gêneros: ${generos} </p>
+                <div class="providers">
+                <h3>Disponível em:</h3>
+                ${providersHTML || "<p>Sem plataformas disponíveis no momento</p>"}
+                </div>
             `;
 
             document.title = `Detalhes de ${filme.title}`;
@@ -40,6 +51,7 @@
 
         // Chama a função ao carregar a página
         fetchMovieDetails();
-    </script>
+    </script> -->
+    <script src="assets/js/filmes-detalhes.js"></script>
 </body>
 </html>

@@ -1,3 +1,12 @@
+const genreMap = {
+    Comédia: 35,
+    Suspense: 53,
+    Drama: 18,
+    Ação: 28,
+    Romance: 10749,
+    Ficção_Científica: 878
+};
+
 const scores = {
     Comédia: 0,
     Suspense: 0,
@@ -26,12 +35,20 @@ function submitQuiz() {
     // Encontra a categoria com a pontuação mais alta
     const topCategory = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
 
-    // Chama a API para recomendação
-    fetch(`/api/recommendation?category=${topCategory}`)
+    const genreId = genreMap[topCategory];
+
+    fetch(`/api/recommendation?category=${genreId}`)
         .then(response => response.json())
         .then(data => displayRecommendation(data))
         .catch(error => console.error("Erro ao obter recomendação:", error));
 }
+
+//     Chama a API para recomendação
+//     fetch(`/api/recommendation?category=${topCategory}`)
+//         .then(response => response.json())
+//         .then(data => displayRecommendation(data))
+//         .catch(error => console.error("Erro ao obter recomendação:", error));
+// }
 
 function displayRecommendation(movie) {
     const recommendationDiv = document.getElementById('recommendation');
@@ -40,4 +57,7 @@ function displayRecommendation(movie) {
         <h3>${movie.title}</h3>
         <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
     `;
+    recommendationDiv.addEventListener('click', () => {
+        window.location.href = `./filmes-detalhes.html?id=${movie.id}`;
+    });
 }

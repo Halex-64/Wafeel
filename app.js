@@ -79,35 +79,45 @@ app.get('/filmes-populares', async (req, res) => {
 });
 
 // Função de exemplo para recomendação
-function getRecommendation(category) {
+async function getRecommendation(category) {
+    const API_KEY = process.env.API_KEY;
+    const url = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=${category}&language=pt-BR&sort_by=popularity.desc`;
+
+    try{
+        const response = await axios.get(url);
+        const movies = response.data.results;
+        return movies.length > 0 ? movies[0] : null;
+    } catch (error) {
+        console.error('Erro ao buscar filmes na API do TMDb: ', error);
+        throw new Error('Erro ao buscar recomendação de filme');
+    }
+
     const recommendations = {
         'Ação': { title: 'Mad Max: Estrada da Fúria', id: 1, description: 'Um filme cheio de ação e aventura' },
         'Comédia': { title: 'A Vida é Bela', id: 2, description: 'Uma comédia com um toque emocional' },
         'Drama': { title: 'O Poderoso Chefão', id: 3, description: 'Um clássico drama familiar' },
-        'Terror': { title: 'O Exorcista', id: 4, description: 'Um dos maiores filmes de terror da história' }
+        'Terror': { title: 'O Exorcista', id: 4, description: 'Um dos maiores filmes de terror da história' },
+        'Romance': { title: 'De repente 30', id: 5, description: 'Um clássico dos filmes de romance'},
+        'Suspense': { title: 'Alien, o oitavo passageiro', id: 6, description: 'Um verdadeiro filme de suspense'},
         // Adicione outras categorias conforme necessário
     };
     return recommendations[category] || null; // Retorna `null` se a categoria não for encontrada
 }
 
 
-app.get('/api/recommendation', (req, res) => {
+app.get('/api/recommendation', async (req, res) => {
     const category = req.query.category;
-    console.log('Categoria recebida:', category);
-
     try {
-        const recommendation = getRecommendation(category);
+        const recommendation = await getRecommendation(category);
         if (recommendation) {
             res.json(recommendation);
         } else {
-            res.status(404).json({ error: 'Recomendação não encontrada para a categoria fornecida' });
+            res.status(404).json({ error: 'Nenhuma recomendação encontrada' });
         }
     } catch (error) {
-        console.error('Erro ao obter recomendação:', error);
-        res.status(500).json({ error: 'Erro interno do servidor' });
+        res.status(500).json({ error: 'Erro ao buscar recomendação' });
     }
 });
-
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, 'public')));
