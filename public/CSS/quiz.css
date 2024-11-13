@@ -274,10 +274,90 @@ footer{
   cursor: pointer;
 }
 
+.header_responsiva{
+  display: none;
+}
+
+.menu_responsivo{
+  display: none;
+}
+
 @media (max-width: 768px) {
-  .barradenavegacao{
+
+  .header_quiz{
+    display: none;
+  }
+
+  .header_responsiva{
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 8px;
+  }
+
+  .barradenavegacao_responsiva{
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  .barradenavegacao_responsiva .logo__image{
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-right: 0;
+    padding-left: 0;
+    max-width: 88px;
+    margin-left: 0;
+  }
+
+  .barradenavegacao_responsiva .links li a{
+    font-size: 16px;
+  }
+
+  .barradenavegacao_responsiva .links{
+    display: flex;
+    gap: 8px;
+    padding: 0;
+    margin-bottom: 3%;
     justify-content: center;
+    align-self: center;
+    flex-grow: 1;
+  }
+
+  .menu-toggle {
+    display: block;
+    margin-left: 8px;
+  }
+
+  /*-----------------------------*/
+
+  .menu_responsivo {
+    width: 100%;
+    height: 400px;
+    display: flex;
+    background-color: white;
+}
+
+.menu_responsivo .links {
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* Espaço entre as palavras */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+     /* Centraliza o conteúdo horizontalmente */
+}
+
+.menu_responsivo .links li a {
+    color: #8500F2;
+    font-size: 20px; /* Tamanho da fonte */
+    text-decoration: none;
+}
+
+
+
+ /* .barradenavegacao{
+    display: flex;
     align-items: center;
     position: relative;
   }
@@ -287,7 +367,7 @@ footer{
     padding-right: 0;
     padding-left: 0;
     max-width: 96px;
-    left: 40px;
+    margin-left: 24px;
   }
 
   .menu-toggle {
@@ -297,35 +377,42 @@ footer{
     }
   
   .links {
-    display: none; /* Esconde o menu em telas menores */
-    flex-direction: column;
+    display: flex;  
+    flex-direction: column; 
     position: absolute;
     top: 0;
     left: 0;
-    width: 150px;
-    height: 866px;
+    width: 100%;
+    height: 300px;
     background-color: #8500F2;
     padding: 0;
     z-index: 1000;
     margin: 0; 
-     align-items: center; 
-    text-align: center;
     gap: 16px;
+    text-align: left;
     
-    opacity: 0;
-    transform: translateX(-100%); /* Inicia fora de vista */
+     
+    transform: translateY(-100%);  
     transition: opacity 0.3s ease, transform 0.3s ease;
   }
 
   .links li {
     margin-left: 16px;
+    padding: 0 0 0 24px;
+  }
+
+  .links li a{
+    font-size: 24px;
   }
 
   .links.active {
-    display: flex; /* Mostra o menu quando a classe 'active' é adicionada */
+    display: flex; 
     opacity: 1;
     transform: translateX(0);
-  }
+  }  
+ */ 
+
+  /*-----------------------------*/
 
   .welcomeContainer h2{
     font-size: 24px;

@@ -21,9 +21,9 @@
             <a href="/public/index.html"><img class="logo__image" src="assets/img/logo.png" alt="Logo"></a>
             <button class="menu-toggle" id="menu-toggle">☰</button>
             <ul class="links" id="mobile-menu">
-                <li><a id="selecao_roxo" href="./quiz.html">Quiz</a></li>
-                <li><a href="#">Filmes</a></li>
-                <li><a href="#">Séries</a></li>
+                <li><a href="./quiz.html">Quiz</a></li>
+                <li><a href="./filmes.html">Filmes</a></li>
+                <li><a href="./series.html">Séries</a></li>
                 <li><a href="./listas.html">Listas</a></li>
                 <li><img class="fa-solid fa-heart" src="assets/img/favoritosicon.png"></a></img></li>
                 <li><img class="fa-solid fa-right-to-bracket" src="assets/img/usuarioicon.png"> </img></li>
@@ -31,22 +31,27 @@
         </nav>
     </header>
 
-    <script>
-        const menuToggle = document.getElementById('menu-toggle');
-        const mobileMenu = document.getElementById('mobile-menu');
+    <header class="header_responsiva">
+        <nav class="barradenavegacao_responsiva">
+            <a href="/public/index.html"><img class="logo__image" src="assets/img/logo.png" alt="Logo"></a>
+            <ul class="links" id="mobile-menu">
+                <li><a href="./quiz.html">QUIZ</a></li>
+                <li><a href="./filmes.html">FILMES</a></li>
+                <li><a href="./series.html">SÉRIES</a></li>                              
+            </ul>
+            <button class="menu-toggle" id="menu-toggle">☰</button>
+        </nav>
+    </header>
 
-        menuToggle.addEventListener('click', () => {
-            if (mobileMenu.classList.contains('active')) {
-                mobileMenu.classList.remove('active');
-                setTimeout(() => {
-                    mobileMenu.style.display = 'none'; // Esconde após a transição
-                }, 300); // Tempo igual ao da transição
-            } else {
-                mobileMenu.style.display = 'flex'; // Mostra antes da transição
-                setTimeout(() => mobileMenu.classList.add('active'), 10); // Adiciona a classe após um pequeno atraso
-            }
-        });
-    </script>
+    <div class="menu_responsivo">
+        <ul class="links" id="mobile-menu">
+            <li><a href="./quiz.html">QUIZ</a></li>
+            <li><a href="./filmes.html">FILMES</a></li>
+            <li><a href="./series.html">SÉRIES</a></li> 
+            <li><a href="./series.html">FAVORITOS</a></li>
+            <li><a href="./series.html">PERFIL</a></li>                             
+        </ul>
+    </div>
 
     <section class="quiz">
         <div class="welcomeContainer">
@@ -129,6 +134,23 @@
             </div>
         </form>
     </section>
+
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuToggle.addEventListener('click', () => {
+            if (mobileMenu.classList.contains('active')) {
+                mobileMenu.classList.remove('active');
+                setTimeout(() => {
+                    mobileMenu.style.display = 'none'; // Esconde após a transição
+                }, 300); // Tempo igual ao da transição
+            } else {
+                mobileMenu.style.display = 'flex'; // Mostra antes da transição
+                setTimeout(() => mobileMenu.classList.add('active'), 10); // Adiciona a classe após um pequeno atraso
+            }
+        });
+    </script>
 </body>
 <footer>
     <div class="social-icons">
