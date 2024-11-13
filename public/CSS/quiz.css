@@ -287,13 +287,13 @@ footer{
     padding-right: 0;
     padding-left: 0;
     max-width: 96px;
-
+    left: 40px;
   }
 
   .menu-toggle {
     display: block;
     position: absolute;
-    left: 40px;
+    right: 40px;
     }
   
   .links {
@@ -336,6 +336,8 @@ footer{
     line-height: 1em;
   }
 
+  /*-----------------------------*/
+
   .question{
     margin: 56px;
   }
@@ -352,9 +354,58 @@ footer{
     width: 10px;
     height: 10px;
   }
+
+  /*-----------------------------*/
+
+  .question_container .question h3{
+    font-size: 24px;
+  }
+
+  .question_container .question label{
+    font-size: 16px;
+  }
+
+  /*-----------------------------*/
+
+  .figura_container_2 .question h3{
+    font-size: 24px;
+  }
+
+  .figura_container_2 .question label{
+    font-size: 16px;
+  } 
+
+  /*-----------------------------*/
+
+  .buttons{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /*-----------------------------*/
+
+  footer{
+    padding: 0;
+  }
+
+  footer a{
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0 10px 0;
+  }
+
+  footer .social-icons{
+    padding: 16px 24px 16px 24px;
+  }
+
+  #WhatsApp_icon{
+    width: 32px;
+    margin: 0  ;
+  }
   
-
-  
-
-
+  #Instagram_icon, #suporte_icon{
+    width: 26px;
+    margin: 0  ;
+  }
 }
