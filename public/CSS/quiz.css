@@ -272,6 +272,7 @@ footer{
   border: none;
   color: #8500F2;
   cursor: pointer;
+  padding-right: 0;
 }
 
 .header_responsiva{
@@ -282,23 +283,37 @@ footer{
   display: none;
 }
 
+.footer_responsivo {
+  display: none;
+}
+
 @media (max-width: 768px) {
+
+  body {
+    margin-top: 85.8px; /* Ajuste de acordo com a altura da .header_responsiva */
+  }
 
   .header_quiz{
     display: none;
   }
-
+  
   .header_responsiva{
+    background-color: black;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 0 8px;
+    align-items: center;        
+    z-index: 3;
+    position: fixed;
+    width: 100%; /* Mantém a largura da header */
+    top: 0; /* Fixa a header no topo da tela */
+    left: 0; /* Garante que a header comece da borda esquerda */
   }
 
   .barradenavegacao_responsiva{
     display: flex;
     align-items: center;
     width: 100%;
+    margin-top: 0;
   }
 
   .barradenavegacao_responsiva .logo__image{
@@ -325,102 +340,69 @@ footer{
   }
 
   .menu-toggle {
-    display: block;
-    margin-left: 8px;
+    display: block;     
   }
 
   /*-----------------------------*/
 
   .menu_responsivo {
     width: 100%;
-    height: 400px;
+    transform: translateY(-100%); /* Move o menu para fora da tela */
+    transition: transform 0.4s ease; /* Animação suave */
     display: flex;
-    background-color: white;
-}
+    flex-direction: column;
+    background-color: #8500F2;
+    position: fixed;
+    top: -100%;
+    z-index: 2;
+  }
 
-.menu_responsivo .links {
+  .menu_responsivo.show {
+    transform: translateY(0); /* Posiciona o menu na tela */
+    top: auto;
+  }
+
+  .header_responsiva.header-active {
+    background-color: #8500F2; /* Cor roxa */
+  }
+
+  .menu-toggle.menu-toggle-active{
+    color: white;
+  }
+
+  .barradenavegacao_responsiva .logo__image.logoImage-active {
+    filter: invert(1) brightness(100);     
+  }
+  
+  .menu_responsivo .links {
     display: flex;
     flex-direction: column;
     gap: 16px; /* Espaço entre as palavras */
     list-style: none;
-    padding: 0;
-    margin: 0;
-     /* Centraliza o conteúdo horizontalmente */
-}
+    padding: 16px 8px;
+    margin: 0 24px;         
+  }
 
-.menu_responsivo .links li a {
-    color: #8500F2;
-    font-size: 20px; /* Tamanho da fonte */
+  .menu_responsivo .links li a {
+    color: white;
+    font-size: 16px; /* Tamanho da fonte */
     text-decoration: none;
-}
-
-
-
- /* .barradenavegacao{
-    display: flex;
-    align-items: center;
-    position: relative;
-  }
-  .logo__image{
-    padding-top: 8px;
-    padding-bottom: 8px;
-    padding-right: 0;
-    padding-left: 0;
-    max-width: 96px;
-    margin-left: 24px;
   }
 
-  .menu-toggle {
-    display: block;
-    position: absolute;
-    right: 40px;
-    }
-  
-  .links {
-    display: flex;  
-    flex-direction: column; 
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 300px;
-    background-color: #8500F2;
-    padding: 0;
-    z-index: 1000;
-    margin: 0; 
-    gap: 16px;
-    text-align: left;
-    
-     
-    transform: translateY(-100%);  
-    transition: opacity 0.3s ease, transform 0.3s ease;
+  .menu_responsivo .links li a:hover{
+    font-size: 17px;          
   }
-
-  .links li {
-    margin-left: 16px;
-    padding: 0 0 0 24px;
-  }
-
-  .links li a{
-    font-size: 24px;
-  }
-
-  .links.active {
-    display: flex; 
-    opacity: 1;
-    transform: translateX(0);
-  }  
- */ 
 
   /*-----------------------------*/
 
   .welcomeContainer h2{
     font-size: 24px;
+    margin-top: 0;
   }
   .welcomeContainer p{
     font-size: 16px;
-    padding: 0 8px 0 8px ;
-    line-height: 1em;
+    padding: 0 20px 0 20px ;
+    line-height: 125%;
   }
 
   /*-----------------------------*/
@@ -471,28 +453,98 @@ footer{
   }
 
   /*-----------------------------*/
-
+  
   footer{
-    padding: 0;
+    display: none;
   }
 
-  footer a{
+  .footer_responsivo{
+    display: flex; /* Exibe o footer */
+    flex-direction: column;
+    background-color: #8500F2; /* Adicione um fundo para o footer */   
+    padding: 0;  
+  }
+
+  .footer_responsivo .footer_links{
     display: flex;
     flex-direction: column;
-    margin: 10px 0 10px 0;
+    align-items:flex-start;
+    margin: 0 20px;
+    padding: 32px 0px 16px;
+    gap: 16px;
   }
 
-  footer .social-icons{
-    padding: 16px 24px 16px 24px;
+  .footer_responsivo .footer_links a{
+    color: rgba(255, 255, 255, 0.887);
+    text-decoration: none;
+    font-size: 20.5px;
   }
 
-  #WhatsApp_icon{
-    width: 32px;
-    margin: 0  ;
+  .footer_responsivo .footer_links a:hover{
+    color: white;
   }
-  
-  #Instagram_icon, #suporte_icon{
-    width: 26px;
-    margin: 0  ;
+
+  .footer_responsivo .social-icons{       
+    display: flex;
+    margin: 0 20px;
+    padding: 16px 0px;
+    gap: 16px;
+  }
+
+  .footer_responsivo .social-icons a {
+    display: flex; /* Usando flex para centralizar o ícone dentro do círculo */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    background-color: #5e02aa;
+    border-radius: 50%; /* Faz o círculo */
+    padding: 12px; /* Ajuste o padding para garantir que o círculo tenha o tamanho correto */
+    width: 30px;  /* Tamanho do círculo */
+    height: 30px; /* Tamanho do círculo, igual à largura para manter a forma redonda */
+  }
+
+  .social-icons #WhatsApp_icon{
+    width: 32px; /* Ajuste o tamanho dos ícones */
+    height: 32px; /* Garantir que o ícone não ultrapasse o tamanho do círculo */ 
+    margin: 0;
+    object-fit: contain;    
+  }
+
+  .footer_responsivo .social-icons #Instagram_icon {
+    width: 27px; /* Ajuste o tamanho conforme necessário */
+    height: 27px; /* Ajuste a altura também */
+    margin: 0;
+  }
+
+  .footer_responsivo h3{
+    margin: 0 20px;
+    padding: 16px 0;
+    font-size: 32px;
+    text-align: left;
+  }
+
+  .footer_responsivo .logo_footer_responsivo{
+    padding: 32px 0;    
+    margin: 0 20px;
+  }
+
+  .footer_responsivo .logo__image{
+    max-width: 88px;
+    filter: invert(1) brightness(100);
+  }
+
+  .footer_responsivo .politica_termos{
+    display: flex;
+    padding: 16px 0;
+    margin: 0 20px;
+    font-size: 13.4px;
+    gap: 16px;
+    color: rgba(255, 255, 255, 0.78);
+    font-family: "Poppins", sans-serif;
+  }
+
+  .footer_responsivo .politica_termos .politica_priv:hover,
+  .footer_responsivo .politica_termos .term_cond:hover{
+    color: white;
+    cursor: pointer;
   }
 }

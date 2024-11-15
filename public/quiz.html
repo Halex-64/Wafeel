@@ -18,8 +18,7 @@
 <body>
     <header class="header_quiz">
         <nav class="barradenavegacao">
-            <a href="/public/index.html"><img class="logo__image" src="assets/img/logo.png" alt="Logo"></a>
-            <button class="menu-toggle" id="menu-toggle">☰</button>
+            <a href="/public/index.html"><img class="logo__image" src="assets/img/logo.png" alt="Logo"></a>            
             <ul class="links" id="mobile-menu">
                 <li><a href="./quiz.html">Quiz</a></li>
                 <li><a href="./filmes.html">Filmes</a></li>
@@ -37,7 +36,7 @@
             <ul class="links" id="mobile-menu">
                 <li><a href="./quiz.html">QUIZ</a></li>
                 <li><a href="./filmes.html">FILMES</a></li>
-                <li><a href="./series.html">SÉRIES</a></li>                              
+                <li><a href="./series.html">SÉRIES</a></li>                                             
             </ul>
             <button class="menu-toggle" id="menu-toggle">☰</button>
         </nav>
@@ -48,8 +47,9 @@
             <li><a href="./quiz.html">QUIZ</a></li>
             <li><a href="./filmes.html">FILMES</a></li>
             <li><a href="./series.html">SÉRIES</a></li> 
-            <li><a href="./series.html">FAVORITOS</a></li>
-            <li><a href="./series.html">PERFIL</a></li>                             
+            <li><a href="./listas.html">LISTAS</a></li> 
+            <li><a href="./favoritos.html">FAVORITOS</a></li>
+            <li><a href="./perfil.html">PERFIL</a></li>                             
         </ul>
     </div>
 
@@ -60,7 +60,7 @@
         </div>
 
         <form>
-            <div class="figura_container">
+            <div class="figura_container" id="section1">
                 <div class="question">
                     <h3>Como você descreveria seu humor atual?</h3>
                     <input type="radio" name="humor" value="Alegre" id="alegre">
@@ -77,7 +77,7 @@
                 </div>
             </div>
 
-            <div class="question_container">
+            <div class="question_container" id="section2">
                 <div class="question">
                     <h3>O que te faz gostar de um filme/série?</h3>
                     <input type="radio" name="gostar" value="Ação frenética" id="acao">
@@ -94,7 +94,7 @@
                 </div>
             </div>
 
-            <div class="figura_container_2">
+            <div class="figura_container_2" id="section3">
                 <div class="question">
                     <h3>Como você quer se sentir depois de assistir o filme/série?</h3>
                     <input type="radio" name="sentir" value="Reflexivo" id="sentir_reflexivo">
@@ -111,7 +111,7 @@
                 </div>
             </div>
 
-            <div class="question_container">
+            <div class="question_container" id="section4">
                 <div class="question">
                     <h3>Que tipo de emoção você gostaria de evitar no momento?</h3>
                     <input type="radio" name="evitar" value="Monotonia" id="monotonia">
@@ -135,29 +135,59 @@
         </form>
     </section>
 
+    <footer>
+        <div class="social-icons">
+            <a href="#"><img src="/public/assets/img/whatsapp_icon.png" id="WhatsApp_icon" alt="WhatsApp"></a>
+            <a href="#"><img src="/public/assets/img/instagram_icon.png" id="Instagram_icon" alt="Instagram"></a>
+            <a href="#"><img src="/public/assets/img/help_icon.png" id="suporte_icon" alt="suporte"></a>
+        </div>
+    </footer>
+
+    <footer class="footer_responsivo">
+        <div class="footer_links">        
+            <a href="#">Login</a>
+            <a href="#">Suporte</a>
+            <a href="#">Sobre Nós</a>        
+        </div>
+        <div class="social-icons">
+            <a href="#"><img src="/public/assets/img/whatsapp_icon.png" id="WhatsApp_icon" alt="WhatsApp"></a>
+            <a href="#"><img src="/public/assets/img/instagram_icon.png" id="Instagram_icon" alt="Instagram"></a>         
+        </div>
+        <h3>Seu mundo de histórias, personalizado.</h3>
+        <a class="logo_footer_responsivo"><img class="logo__image" src="assets/img/logo.png" alt="Logo"></a>
+        <div class="politica_termos">
+            <p class="politica_priv">Política de Privacidade</p>
+            <p class="term_cond">Termos e Condições</p>
+        </div>    
+    </footer>
+
     <script>
         const menuToggle = document.getElementById('menu-toggle');
-        const mobileMenu = document.getElementById('mobile-menu');
+        const menuResponsive = document.querySelector('.menu_responsivo');
+        const headerResponsive = document.querySelector('.header_responsiva');
+        const toggleCor = document.querySelector('.menu-toggle');
+        const logoImage = document.querySelector('.barradenavegacao_responsiva .logo__image'); // Seleção específica
 
         menuToggle.addEventListener('click', () => {
-            if (mobileMenu.classList.contains('active')) {
-                mobileMenu.classList.remove('active');
+            menuResponsive.classList.toggle('show'); // Alterna a classe para abrir/fechar o menu
+            headerResponsive.classList.toggle('header-active'); // Alterna a cor da header_responsiva
+            toggleCor.classList.toggle('menu-toggle-active');
+            logoImage.classList.toggle('logoImage-active'); // Adiciona a classe que ativa o filtro
+        });
+
+        // rolagem automática para próxima questão
+        document.querySelectorAll('input[type="radio"]').forEach((radio) => {
+            radio.addEventListener('click', function() {
+            const currentSection = radio.closest('div.question_container, div.figura_container, div.figura_container_2');
+            const nextSection = currentSection.nextElementSibling;
+        
+            if (nextSection) {                
                 setTimeout(() => {
-                    mobileMenu.style.display = 'none'; // Esconde após a transição
-                }, 300); // Tempo igual ao da transição
-            } else {
-                mobileMenu.style.display = 'flex'; // Mostra antes da transição
-                setTimeout(() => mobileMenu.classList.add('active'), 10); // Adiciona a classe após um pequeno atraso
+                nextSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 300); 
             }
+            });
         });
     </script>
 </body>
-<footer>
-    <div class="social-icons">
-        <a href="#"><img src="/public/assets/img/whatsapp_icon.png" id="WhatsApp_icon" alt="WhatsApp"></a>
-        <a href="#"><img src="/public/assets/img/instagram_icon.png" id="Instagram_icon" alt="Instagram"></a>
-        <a href="#"><img src="/public/assets/img/help_icon.png" id="suporte_icon" alt="suporte"></a>
-    </div>
-</footer>
-
 </html>
