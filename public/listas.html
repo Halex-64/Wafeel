@@ -6,9 +6,10 @@
     <title>Wafeel</title>
     <link rel="stylesheet" href="CSS/quiz.css">
     <link rel="stylesheet" href="CSS/listas.css">
+    <link rel="stylesheet" href="CSS/responsividade.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> 
 </head>  
 <body>
@@ -26,16 +27,51 @@
         </nav>
     </header>
 
-    <section>
-        <div class="nav_listas">
-            <div class="barra_listas">
-                <li><a id="selecao_roxo" href="./listas.html">PRINCIPAIS LISTAS</a></li>
-                <div id="linha_vertical"></div>
-                <li><a href="./lista_usuario.html">SUAS LISTAS</a></li>
-            </div>    
-            <div id="linha_horizontal"></div>
-        </div>
+    <header class="header_responsiva">
+        <nav class="barradenavegacao_responsiva">
+            <a href="/public/index.html"><img class="logo__image" src="assets/img/logo.png" alt="Logo"></a>
+            <ul class="links" id="mobile-menu">
+                <li><a href="./quiz.html">QUIZ</a></li>
+                <li><a href="./filmes.html">FILMES</a></li>
+                <li><a href="./series.html">SÉRIES</a></li>                                             
+            </ul>
+            <button class="menu-toggle" id="menu-toggle">☰</button>
+        </nav>
+    </header>
 
+    <div class="menu_responsivo">
+        <ul class="links" id="mobile-menu">
+            <li><a href="./quiz.html">QUIZ</a></li>
+            <li><a href="./filmes.html">FILMES</a></li>
+            <li><a href="./series.html">SÉRIES</a></li> 
+            <li><a href="./listas.html">LISTAS</a></li> 
+            <li><a href="./favoritos.html">FAVORITOS</a></li>
+            <li><a href="./perfil.html">PERFIL</a></li>                             
+        </ul>
+    </div>
+
+    <div class="nav_listas">
+        <div class="barra_listas">
+            <li><a id="selecao_roxo" class="principais_listas" href="./listas.html">PRINCIPAIS LISTAS</a></li>
+            <div id="linha_vertical"></div>
+            <li><a href="./lista_usuario.html" class="suas_listas">SUAS LISTAS</a></li>
+        </div>    
+        <div id="linha_horizontal"></div>
+    </div>
+
+    <div class="nav_listas_responsiva_direita">
+        <div class="barra_listas">           
+            <li><a href="./lista_usuario.html" class="suas_listas">SUAS LISTAS</a></li>
+        </div>        
+    </div>
+
+    <div class="nav_listas_responsiva_esquerda">
+        <div class="barra_listas">
+            <li><a id="selecao_roxo" class="principais_listas" href="./listas.html">PRINCIPAIS LISTAS</a></li>
+        </div>
+    </div>
+
+    <section>
         <div class="containers_listas">
             <div class="frame_1">
                 <a href="/public/filmes_da_lista.html">
@@ -254,12 +290,59 @@
             </div>
         </div>
     </section>   
-</body>
+    <footer>
+        <div class="social-icons">
+            <a href="#"><img src="/public/assets/img/whatsapp_icon.png" id="WhatsApp_icon" alt="WhatsApp"></a>
+            <a href="#"><img src="/public/assets/img/instagram_icon.png" id="Instagram_icon" alt="Instagram"></a>
+            <a href="#"><img src="/public/assets/img/help_icon.png" id="suporte_icon" alt="suporte"></a>
+        </div>
+    </footer>
 
-<footer>
-    <div class="social-icons">
-        <a href="#"><img src="/public/assets/img/whatsapp_icon.png" id="WhatsApp_icon" alt="WhatsApp"></a>
-        <a href="#"><img src="/public/assets/img/instagram_icon.png" id="Instagram_icon" alt="Instagram"></a>
-        <a href="#"><img src="/public/assets/img/help_icon.png" id="suporte_icon" alt="suporte"></a>
-    </div>                
-</footer> 
+    <footer class="footer_responsivo">
+        <div class="footer_links">        
+            <a href="#">Login</a>
+            <a href="#">Suporte</a>
+            <a href="#">Sobre Nós</a>        
+        </div>
+        <div class="social-icons">
+            <a href="#"><img src="/public/assets/img/whatsapp_icon.png" id="WhatsApp_icon" alt="WhatsApp"></a>
+            <a href="#"><img src="/public/assets/img/instagram_icon.png" id="Instagram_icon" alt="Instagram"></a>         
+        </div>
+        <h3>Seu mundo de histórias, personalizado.</h3>
+        <a class="logo_footer_responsivo"><img class="logo__image" src="assets/img/logo.png" alt="Logo"></a>
+        <div class="politica_termos">
+            <p class="politica_priv">Política de Privacidade</p>
+            <p class="term_cond">Termos e Condições</p>
+        </div>    
+    </footer>
+
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const menuResponsive = document.querySelector('.menu_responsivo');
+        const headerResponsive = document.querySelector('.header_responsiva');
+        const toggleCor = document.querySelector('.menu-toggle');
+        const logoImage = document.querySelector('.barradenavegacao_responsiva .logo__image'); // Seleção específica
+
+        menuToggle.addEventListener('click', () => {
+            menuResponsive.classList.toggle('show'); // Alterna a classe para abrir/fechar o menu
+            headerResponsive.classList.toggle('header-active'); // Alterna a cor da header_responsiva
+            toggleCor.classList.toggle('menu-toggle-active');
+            logoImage.classList.toggle('logoImage-active'); // Adiciona a classe que ativa o filtro
+        });
+
+        // rolagem automática para próxima questão
+        document.querySelectorAll('input[type="radio"]').forEach((radio) => {
+            radio.addEventListener('click', function() {
+            const currentSection = radio.closest('div.question_container, div.figura_container, div.figura_container_2');
+            const nextSection = currentSection.nextElementSibling;
+        
+            if (nextSection) {                
+                setTimeout(() => {
+                nextSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 300); 
+            }
+            });
+        });
+    </script>
+</body>               
+ 

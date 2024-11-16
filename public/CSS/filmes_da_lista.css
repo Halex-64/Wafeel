@@ -1,19 +1,21 @@
-.nav_filtro{
+.nav_filtro {
     margin-top: 40px;
     margin-bottom: 16px;
 }
 
-.constainer_filmes{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 24px;
+.constainer_filmes {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Configura 4 colunas na grid */
+    gap: 24px; /* Espaçamento entre as colunas */
+    justify-items: center; /* Centraliza as divs horizontalmente */
+    align-items: center; /* Centraliza as divs verticalmente */
 }
 
-.titulo_lista{
+.titulo_lista {
     margin-left: 56px;
 }
-.barra_filtro{
+
+.barra_filtro {
     display: flex;
     align-items: center;
     padding-left: 56px;
@@ -23,33 +25,33 @@
     padding-bottom: 2px;
 }
 
-.barra_filtro li a{
+.barra_filtro li a {
     text-decoration: none;
     color: white;
     font-family: "Poppins", sans-serif;
 }
 
-.filtro_seta{
+.filtro_seta {
     display: flex;
-    align-items: center; /* Alinha verticalmente */
-    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center;
+    justify-content: center;
     gap: 8px;
     cursor: pointer;
     position: relative;
 }
 
 .options {
-    display: none; /* Inicialmente oculta */
+    display: none;
     position: absolute;
-    top: 100%; /* Ajusta para aparecer logo abaixo de "GÊNERO" */
-    left: 0; /* Alinha à esquerda do botão */
-    margin-top: 8px; /* Ajuste para criar um espaço entre o botão e a lista */
+    top: 100%;
+    left: 0;
+    margin-top: 8px;
     background-color: #8500F2;
     border-radius: 4px;
     padding: 0px;
     list-style: none;
     z-index: 10;
-    min-width: 150px; /* Para garantir uma largura mínima */
+    min-width: 150px;
     font-family: "Poppins", sans-serif;
     font-size: 15px;
 }
@@ -82,17 +84,12 @@
     margin-bottom: 5px;
 }
 
-/*.arrow:hover {
-    border-bottom-width: 3px;
-    border-right-width: 3px;
-}*/
-
-.resumo_filme{
+.resumo_filme {
     margin-bottom: 24px;
 }
 
 .resumo_filme_imagem {
-    position: relative; /* Necessário para posicionar o ::before */
+    position: relative;
     width: 405px;
     height: 218px;
     display: flex;
@@ -103,14 +100,14 @@
     background-image: url(/public/assets/img/resumo_filme/furiosa_resumo.jpg);
     background-size: 100%;
     background-position: center;
-    color: white; /* Garante que o texto seja branco e visível */
+    color: white;
     text-shadow: black 0.1em 0.1em 0.2em;
     transition: background-size 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
     overflow: hidden;
 }
 
 .resumo_filme_imagem:hover {
-    background-size: 110%; /* Aumenta a imagem de fundo em 10% */
+    background-size: 110%;
 }
 
 .resumo_filme_imagem::before {
@@ -135,13 +132,13 @@
 .novo_texto {
     position: absolute;
     z-index: 2;
-    opacity: 0; /* Inicialmente invisível */
+    opacity: 0;
     color: white;
     font-size: 24px;
     transition: opacity 0.3s ease-in-out;
 }
 
-.novo_texto li{
+.novo_texto li {
     width: 267px;
     height: auto;
     font-size: 16px;
@@ -152,17 +149,17 @@
 
 .resumo_filme_imagem:hover #titulo_filme,
 .resumo_filme_imagem:hover #genero_filme {
-    opacity: 0; /* Esconde o texto inicial */
+    opacity: 0;
 }
 
 .resumo_filme_imagem:hover .novo_texto {
-    opacity: 1; /* Mostra o novo texto */
+    opacity: 1;
 }
 
-#titulo_filme{
+#titulo_filme {
     font-size: 48px;
 }
 
-#genero_filme{
+#genero_filme {
     font-size: 16px;
 }
