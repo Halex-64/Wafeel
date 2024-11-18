@@ -330,20 +330,6 @@
             toggleCor.classList.toggle('menu-toggle-active');
             logoImage.classList.toggle('logoImage-active'); // Adiciona a classe que ativa o filtro
         });
-
-        // rolagem automática para próxima questão
-        document.querySelectorAll('input[type="radio"]').forEach((radio) => {
-            radio.addEventListener('click', function() {
-            const currentSection = radio.closest('div.question_container, div.figura_container, div.figura_container_2');
-            const nextSection = currentSection.nextElementSibling;
-        
-            if (nextSection) {                
-                setTimeout(() => {
-                nextSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }, 300); 
-            }
-            });
-        });
     </script>
 </body>               
 </html>

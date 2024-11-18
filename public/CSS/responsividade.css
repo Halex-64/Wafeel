@@ -15,7 +15,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;        
-      z-index: 3;
+      z-index: 5;
       position: fixed;
       width: 100%; /* Mantém a largura da header */
       top: 0; /* Fixa a header no topo da tela */
@@ -68,7 +68,7 @@
       background-color: #8500F2;
       position: fixed;
       top: -100%;
-      z-index: 2;
+      z-index: 4;
     }
   
     .menu_responsivo.show {

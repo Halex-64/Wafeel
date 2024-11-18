@@ -163,3 +163,76 @@
 #genero_filme {
     font-size: 16px;
 }
+
+
+@media (max-width: 768px) {
+
+    .header_container{
+        display: none;
+    }
+
+    .nav_listas{
+        top: 0;
+        display: none;
+    }
+
+    .nav_listas_responsiva_direita {
+        display: block;
+        position: fixed;
+        width: 50%;
+        right: 0;
+        background-color: black;    
+        padding-top: 8px;
+        padding-bottom: 11px;
+        margin: 0; 
+        z-index: 3;
+    }
+    
+    .nav_listas_responsiva_direita::after {
+        content: "";
+        position: absolute;
+        bottom: 0; /* Alinha no final de .nav_listas */
+        left: 0;
+        width: 100%; /* Mesma largura de .nav_listas */
+        height: 3px; /* Altura da faixa */
+        background-color: #8500F2; /* Cor da faixa */
+    }
+    
+    .nav_listas_responsiva_esquerda{
+        display: block;
+        position: fixed;
+        width: 50%;
+        left: 0;
+        background-color: black;    
+        padding-top: 8px;
+        padding-bottom: 11px;
+        margin: 0;
+        z-index: 3;
+    }
+    
+    .nav_listas_responsiva_esquerda::after {
+        display: none;
+        content: "";
+        position: absolute;
+        bottom: 0; /* Alinha no final de .nav_listas */
+        left: 0;
+        width: 100%; /* Mesma largura de .nav_listas */
+        height: 3px; /* Altura da faixa */
+        /*background-color: #8500F2; /* Cor da faixa */
+    }
+
+    #titulo_filme, #genero_filme {
+        z-index: 1;       
+    }
+
+    .titulo_lista{
+        margin-left: 24px;
+        margin-right: 24px;
+        font-size: 40px;
+    }
+
+    .barra_filtro{
+        padding: 0;
+        margin-left: ;
+    }
+}
