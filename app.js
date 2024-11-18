@@ -118,6 +118,43 @@ app.get('/api/recommendation', async (req, res) => {
         res.status(500).json({ error: 'Erro ao buscar recomendação' });
     }
 });
+
+app.get('/api/search', async (req, res) => {
+    const { name, type } = req.query;
+
+    if (!name || !type) {
+        return res.status(400).json({ error: 'Os parâmetros "name" e "type" são obrigatórios.' });
+    }
+
+    if (!['movie', 'tv'].includes(type)) {
+        return res.status(400).json({ error: 'O parâmetro "type" deve ser "movie" ou "tv".' });
+    }
+
+    try {
+        // Faz a busca na API do TMDb com base no tipo (movie ou tv)
+        const response = await axios.get(`https://api.themoviedb.org/3/search/${type}`, {
+            params: {
+                api_key: API_KEY,
+                query: name,
+                language: 'pt-BR'
+            }
+        });
+
+        const results = response.data.results;
+
+        if (results.length === 0) {
+            return res.status(404).json({ error: `${type === 'movie' ? 'Filme' : 'Série'} não encontrado(a).` });
+        }
+
+        // Retorna os resultados
+        res.json(results[0]); // Retorna apenas o primeiro resultado
+    } catch (error) {
+        console.error('Erro ao buscar:', error.message);
+        res.status(500).json({ error: 'Erro interno ao buscar.' });
+    }
+});
+
+
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, 'public')));

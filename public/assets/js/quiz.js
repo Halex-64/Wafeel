@@ -55,6 +55,7 @@ function displayRecommendation(movie) {
     recommendationDiv.innerHTML = `
         <h2>Recomendação para você:</h2>
         <h3>${movie.title}</h3>
+        <h3>${movie.id}</h3>
         <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
     `;
     recommendationDiv.addEventListener('click', () => {
