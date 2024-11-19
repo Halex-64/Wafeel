@@ -1,0 +1,110 @@
+body {
+    margin: 0; /* Remove margens padrão */
+    height: 100vh; /* Define a altura do corpo para preencher toda a janela */
+    display: flex; /* Habilita o Flexbox */
+    align-items: center; /* Centraliza verticalmente */
+    justify-content: center; /* Centraliza horizontalmente */
+    background-color: #ccc;
+}
+
+.pop-up_login_cadastro{
+    display: flex;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: white;
+}
+
+.cadastro, .login {
+    width: 413px;
+    height: 461px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 24px;
+}
+
+.cadastro{
+    background-color: black;
+}
+
+.login{
+    background-color: white;
+    color: black;
+}
+
+.cadastro h2, .login h2 {
+    font-size: 32px;
+}
+
+.cadastro h1, .login h1 {
+    font-size: 16px;
+}
+
+.input_cadastro {
+    display: flex;
+    flex-direction: column;
+}
+
+textarea {
+    width: 100%; /* Ajuste para ocupar toda a largura do contêiner */
+    height: 30px; /* Altura maior para mais espaço */
+    padding: 8px; /* Adiciona espaçamento interno para o texto */
+    resize: none; /* Remove a capacidade de redimensionar */
+    border: 1px solid #ccc; /* Estiliza a borda */
+    border-radius: 2px; /* Bordas arredondadas */
+    font-size: 16px; /* Aumenta o tamanho da fonte */
+    font-family: 'Poppins', sans-serif; /* Uniformiza com o restante do design */
+    box-sizing: border-box; /* Inclui o padding no cálculo do tamanho */
+    overflow: hidden;
+    line-height: 13px;
+}
+
+textarea:focus {
+    border-color: #141414; /* Cor verde, pode ser qualquer cor */
+    outline: none; /* Remove o contorno padrão do navegador */
+    box-shadow: 0 0 2px rgba(49, 49, 49, 0.5); /* Adiciona uma sombra suave ao redor */
+}
+
+.cadastro button {
+    width: 141px;
+    height: 50px;
+    background-color: white;
+    border: none;
+    font-size: 20px;
+    border-radius: 8px;
+}
+
+.login textarea {
+    width: 100%; /* Ajuste para ocupar toda a largura do contêiner */
+    height: 30px; /* Altura maior para mais espaço */
+    padding: 8px; /* Adiciona espaçamento interno para o texto */
+    resize: none; /* Remove a capacidade de redimensionar */
+    border:  none; /* Estiliza a borda */
+    background-color: #E9E9E9;
+    border-radius: 2px; /* Bordas arredondadas */
+    font-size: 16px; /* Aumenta o tamanho da fonte */
+    font-family: 'Poppins', sans-serif; /* Uniformiza com o restante do design */
+    box-sizing: border-box; /* Inclui o padding no cálculo do tamanho */
+    overflow: hidden;
+    line-height: 13px;
+}
+
+.login button {
+    width: 141px;
+    height: 50px;
+    background-color: black;
+    color: white;
+    border: none;
+    font-size: 20px;
+    border-radius: 8px;
+}
+
+button:hover{
+    cursor: pointer;
+}
+
+.login{
+    padding-top: 0;
+}
