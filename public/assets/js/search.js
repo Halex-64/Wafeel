@@ -1,5 +1,19 @@
+let API_KEY;
+
+async function fetchApiKey() {
+    try {
+        const response = await fetch('/api/key');
+        const data = await response.json();
+        API_KEY = data.apiKey;
+    } catch (error) {
+        console.error('Erro ao obter API_KEY:', error);
+    }
+}
+
+// Chame esta função assim que a página carregar
+fetchApiKey();
+
 async function searchContentByName(name, type) {
-    const API_KEY = 'Colocar Chave da API aqui';
     const query = encodeURIComponent(name); // Codifica o nome corretamente para a URL
     const url = `https://api.themoviedb.org/3/search/${type}?api_key=${API_KEY}&query=${query}&language=pt-BR`;
 

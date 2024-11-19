@@ -154,6 +154,10 @@ app.get('/api/search', async (req, res) => {
     }
 });
 
+app.get('/api/key', (req, res) => {
+    res.json({ apiKey: process.env.API_KEY });
+});
+
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
