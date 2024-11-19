@@ -80,28 +80,33 @@ app.get('/filmes-populares', async (req, res) => {
 
 // Função de exemplo para recomendação
 async function getRecommendation(category) {
-    const API_KEY = process.env.API_KEY;
-    const url = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=${category}&language=pt-BR&sort_by=popularity.desc`;
+    const API_KEY = process.env.API_KEY; // Use sua chave da API aqui
+    try {
+        // Faz uma requisição para buscar filmes dentro da categoria
+        const response = await axios.get(`https://api.themoviedb.org/3/discover/movie`, {
+            params: {
+                api_key: API_KEY,
+                with_genres: category, // Filtra pela categoria (gênero)
+                language: 'pt-BR',
+                sort_by: 'popularity.desc', // Ordena por popularidade
+                page: Math.floor(Math.random() * 10) + 1 // Página aleatória para maior variedade
+            }
+        });
 
-    try{
-        const response = await axios.get(url);
         const movies = response.data.results;
-        return movies.length > 0 ? movies[0] : null;
-    } catch (error) {
-        console.error('Erro ao buscar filmes na API do TMDb: ', error);
-        throw new Error('Erro ao buscar recomendação de filme');
-    }
 
-    const recommendations = {
-        'Ação': { title: 'Mad Max: Estrada da Fúria', id: 1, description: 'Um filme cheio de ação e aventura' },
-        'Comédia': { title: 'A Vida é Bela', id: 2, description: 'Uma comédia com um toque emocional' },
-        'Drama': { title: 'O Poderoso Chefão', id: 3, description: 'Um clássico drama familiar' },
-        'Terror': { title: 'O Exorcista', id: 4, description: 'Um dos maiores filmes de terror da história' },
-        'Romance': { title: 'De repente 30', id: 5, description: 'Um clássico dos filmes de romance'},
-        'Suspense': { title: 'Alien, o oitavo passageiro', id: 6, description: 'Um verdadeiro filme de suspense'},
-        // Adicione outras categorias conforme necessário
-    };
-    return recommendations[category] || null; // Retorna `null` se a categoria não for encontrada
+        // Se nenhum filme for encontrado
+        if (movies.length === 0) {
+            return null;
+        }
+
+        // Seleciona um filme aleatório da lista
+        const randomMovie = movies[Math.floor(Math.random() * movies.length)];
+        return randomMovie;
+    } catch (error) {
+        console.error('Erro ao buscar filmes:', error.message);
+        return null;
+    }
 }
 
 
@@ -118,6 +123,30 @@ app.get('/api/recommendation', async (req, res) => {
         res.status(500).json({ error: 'Erro ao buscar recomendação' });
     }
 });
+
+// Rota no backend para detalhes do filme
+app.get('/api/movie/:id', async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const response = await axios.get(`https://api.themoviedb.org/3/movie/${id}`, {
+            params: {
+                api_key: process.env.API_KEY, // Sua chave API
+                language: 'pt-BR'
+            }
+        });
+        const providersResponse = await axios.get(`https://api.themoviedb.org/3/movie/${id}/watch/providers`, {
+            params: { api_key: process.env.API_KEY }
+        });
+
+        const movieDetails = response.data;
+        const providersData = providersResponse.data.results.BR?.flatrate || [];
+        res.json({ movieDetails, providersData });
+    } catch (error) {
+        console.error('Erro ao buscar detalhes do filme:', error.message);
+        res.status(500).json({ error: 'Erro ao buscar detalhes do filme.' });
+    }
+}); 
 
 app.get('/api/search', async (req, res) => {
     const { name, type } = req.query;
