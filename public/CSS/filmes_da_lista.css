@@ -233,6 +233,26 @@
 
     .barra_filtro{
         padding: 0;
-        margin-left: ;
+        justify-content: center;
+        margin: 0;
+        font-size: 8px;
+    }
+
+    .resumo_filme_imagem {
+        position: relative;
+        width: 202.5px; /* 50% de 405px */
+        height: 109px; /* 50% de 218px */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        background-image: url(/public/assets/img/resumo_filme/furiosa_resumo.jpg);
+        background-size: 100%;
+        background-position: center;
+        color: white;
+        text-shadow: black 0.1em 0.1em 0.2em;
+        transition: background-size 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+        overflow: hidden;
     }
 }
