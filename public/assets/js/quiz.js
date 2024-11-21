@@ -1,3 +1,4 @@
+// Mapeamento de gêneros e pontuação
 const genreMap = {
     Comédia: 35,
     Suspense: 53,
@@ -16,6 +17,7 @@ const scores = {
     Ficção_Científica: 0
 };
 
+// Funções para lidar com o quiz
 function addScore(category) {
     scores[category]++;
 }
@@ -43,22 +45,25 @@ function submitQuiz() {
         .catch(error => console.error("Erro ao obter recomendação:", error));
 }
 
-//     Chama a API para recomendação
-//     fetch(`/api/recommendation?category=${topCategory}`)
-//         .then(response => response.json())
-//         .then(data => displayRecommendation(data))
-//         .catch(error => console.error("Erro ao obter recomendação:", error));
-// }
-
-function displayRecommendation(movie) {
+// Função para exibir a recomendação
+function displayRecommendation(media) {
     const recommendationDiv = document.getElementById('recommendation');
+    const type = media.media_type || 'movie'; // Certifique-se de pegar o tipo da mídia
+
     recommendationDiv.innerHTML = `
         <h2>Recomendação para você:</h2>
-        <h3>${movie.title}</h3>
-        <h3>${movie.id}</h3>
-        <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
+        <h3>${media.title || media.name}</h3>
+        <img src="https://image.tmdb.org/t/p/w500${media.poster_path}" alt="${media.title || media.name}">
     `;
     recommendationDiv.addEventListener('click', () => {
-        window.location.href = `./filmes-detalhes.html?id=${movie.id}`;
+        // Redireciona para a página de detalhes com o tipo e o ID
+        window.location.href = `./filmes-detalhes.html?id=${media.id}&type=${type}`;
     });
 }
+
+// Event listener no formulário
+const quizForm = document.getElementById('quiz-form');
+quizForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    submitQuiz();
+});

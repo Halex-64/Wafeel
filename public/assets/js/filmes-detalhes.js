@@ -1,35 +1,38 @@
-// Função para capturar o ID do filme da URL
-function getMovieIdFromUrl() {
+function getMediaTypeFromUrl() {
     const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get('id'); // Agora retorna o valor do filmeId
+    return urlParams.get('type'); // Retorna "movie" ou "tv"
 }
-
-const filmeDetalhesDiv = document.getElementById('filme-detalhes');
-
-// Função para buscar detalhes do filme e plataformas de streaming
-async function fetchFilmeDetalhes() {
+async function fetchMediaDetalhes() {
     try {
-        const filmeId = getMovieIdFromUrl();
-        if (!filmeId) {
-            filmeDetalhesDiv.innerHTML = `<p>Filme não encontrado.</p>`;
+        const { id, type } = getMediaInfoFromUrl();
+        if (!id || !['movie', 'tv'].includes(type)) {
+            mediaDetalhesDiv.innerHTML = `<p>Mídia inválida ou não encontrada.</p>`;
             return;
         }
 
-        const response = await fetch(`/api/movie/${filmeId}`);
-        const { movieDetails, providersData } = await response.json();
+        // Faz a requisição para obter os detalhes da mídia
+        const response = await fetch(`/api/media/${type}/${id}`);
+        if (!response.ok) {
+            throw new Error(`Erro ao buscar mídia: ${response.statusText}`);
+        }
 
-        const generos = movieDetails.genres.map(genre => genre.name).join(", ");
+        const { mediaDetails, providersData } = await response.json();
+
+        // Renderiza os detalhes da mídia
+        const title = mediaDetails.title || mediaDetails.name;
+        const releaseDate = mediaDetails.release_date || mediaDetails.first_air_date;
+        const generos = mediaDetails.genres.map(genre => genre.name).join(", ");
         const providersHTML = providersData.map(provider => `
             <img src="https://image.tmdb.org/t/p/original${provider.logo_path}" alt="${provider.provider_name}" title="${provider.provider_name}" class="provider-logo">
         `).join("");
 
-        filmeDetalhesDiv.innerHTML = `
-            <h1>${movieDetails.title}</h1>
-            <img src="https://image.tmdb.org/t/p/w500${movieDetails.poster_path}" alt="${movieDetails.title}">
-            <p>${movieDetails.overview}</p>
-            <p><strong>Data de lançamento:</strong> ${movieDetails.release_date}</p>
-            <p><strong>Popularidade:</strong> ${movieDetails.popularity}</p>
-            <p><strong>Avaliação:</strong> ${movieDetails.vote_average}</p>
+        mediaDetalhesDiv.innerHTML = `
+            <h1>${title}</h1>
+            <img src="https://image.tmdb.org/t/p/w500${mediaDetails.poster_path}" alt="${title}">
+            <p>${mediaDetails.overview}</p>
+            <p><strong>Data de lançamento:</strong> ${releaseDate}</p>
+            <p><strong>Popularidade:</strong> ${mediaDetails.popularity}</p>
+            <p><strong>Avaliação:</strong> ${mediaDetails.vote_average}</p>
             <p><strong>Gêneros:</strong> ${generos}</p>
             <div class="providers">
                 <h3>Disponível em:</h3>
@@ -37,9 +40,7 @@ async function fetchFilmeDetalhes() {
             </div>
         `;
     } catch (error) {
-        console.error("Erro ao buscar detalhes do filme:", error);
-        filmeDetalhesDiv.innerHTML = `<p>Erro ao carregar os detalhes do filme.</p>`;
+        console.error("Erro ao buscar detalhes da mídia:", error);
+        mediaDetalhesDiv.innerHTML = `<p>Erro ao carregar os detalhes da mídia.</p>`;
     }
 }
-// Chamada inicial para carregar os detalhes do filme
-fetchFilmeDetalhes();

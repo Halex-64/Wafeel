@@ -17,10 +17,10 @@ app.listen(PORT, () => {
 });
 
 app.use(session({
-    secret: 'chave-secreta', 
-    resave: false, 
-    saveUninitialized: false, 
-    cookie: { maxAge: 1000 * 60 * 60 * 24, httpOnly: true, sameSite: 'strict' } 
+    secret: 'chave-secreta',
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maxAge: 1000 * 60 * 60 * 24, httpOnly: true, sameSite: 'strict' }
 }));
 
 app.use((req, res, next) => {
@@ -79,19 +79,19 @@ app.get('/filmes-populares', async (req, res) => {
 });
 
 // Função de exemplo para recomendação
-async function getRecommendation(category) {
-    const API_KEY = process.env.API_KEY; // Use sua chave da API aqui
-    const excludedKeywords = ['erótica', 'adulto', 'sensual', 'sexo', 'sexuais',];
-    //const excludedGenres = [18];
+async function getRecommendation(category, type = 'movie') {
+    const API_KEY = process.env.API_KEY;
+    const excludedKeywords = ['erótica', 'adulto', 'sensual', 'sexo', 'sexuais'];
+
     try {
-        // Faz uma requisição para buscar filmes dentro da categoria
-        const response = await axios.get(`https://api.themoviedb.org/3/discover/movie`, {
+        // Faz uma requisição para buscar filmes ou séries
+        const response = await axios.get(`https://api.themoviedb.org/3/discover/${type}`, {
             params: {
                 api_key: API_KEY,
-                with_genres: category, // Filtra pela categoria (gênero)
+                with_genres: category,
                 language: 'pt-BR',
-                sort_by: 'popularity.desc', // Ordena por popularidade
-                page: Math.floor(Math.random() * 10) + 1, // Página aleatória para maior variedade
+                sort_by: 'popularity.desc',
+                page: Math.floor(Math.random() * 10) + 1,
                 certification_country: 'BR',
                 certification_lte: '16',
                 include_adult: false,
@@ -99,24 +99,31 @@ async function getRecommendation(category) {
             }
         });
 
-        let movies = response.data.results;
+        let mediaItems = response.data.results;
 
-       movies = movies.filter(movie => {
+        mediaItems = mediaItems.filter(item => {
+            const titleOrName = item.title || item.name || '';
+            const overview = item.overview || '';
 
-        const hasExcludedKeyword = excludedKeywords.some(keyword =>movie.title && movie.overview && movie.overview.toLowerCase().includes(keyword));
-        //const hasExcludedGenre = movie.genre_ids.some(genre => excludedGenres.includes(genre));
-        const hasValidTitle = /^[\w\sÀ-ÿ.,!?'()-]+$/.test(movie.title || '');
-        const hasValidPoster = movie.poster_path && !movie.title.includes("가슴");
-        const hasCertification = movie.certification || movie.vote_average >= 5.0;
+            const hasExcludedKeyword = excludedKeywords.some(keyword =>
+                titleOrName.toLowerCase().includes(keyword) ||
+                overview.toLowerCase().includes(keyword)
+            );
 
-        return hasValidTitle && hasValidPoster && hasCertification && !hasExcludedKeyword;
-    });
+            const hasValidPoster = item.poster_path;
+            const hasValidTitle = /^[\w\sÀ-ÿ.,!?'()-]+$/.test(titleOrName);
 
-        // Seleciona um filme aleatório da lista
-        const randomMovie = movies[Math.floor(Math.random() * movies.length)];
-        return randomMovie;
+            return !hasExcludedKeyword && hasValidPoster && hasValidTitle;
+        });
+
+        if (mediaItems.length === 0) {
+            return null;
+        }
+
+        const randomMedia = mediaItems[Math.floor(Math.random() * mediaItems.length)];
+        return randomMedia;
     } catch (error) {
-        console.error('Erro ao buscar filmes:', error.message);
+        console.error(`Erro ao buscar ${type}s:`, error.message);
         return null;
     }
 }
@@ -124,41 +131,57 @@ async function getRecommendation(category) {
 
 app.get('/api/recommendation', async (req, res) => {
     const category = req.query.category;
+    const type = req.query.type || 'movie'; // Padrão para 'movie' se 'type' não for especificado
     try {
-        const recommendation = await getRecommendation(category);
+        const recommendation = await getRecommendation(category, type);
         if (recommendation) {
             res.json(recommendation);
         } else {
             res.status(404).json({ error: 'Nenhuma recomendação encontrada' });
         }
     } catch (error) {
+        console.error('Erro ao buscar recomendação:', error.message);
         res.status(500).json({ error: 'Erro ao buscar recomendação' });
     }
 });
 
-// Rota no backend para detalhes do filme
-app.get('/api/movie/:id', async (req, res) => {
-    const { id } = req.params;
+app.get('/api/media/:type/:id', async (req, res) => {
+    const { type, id } = req.params; // Captura o tipo e o ID
+    const API_KEY = process.env.API_KEY;
+
+    // Verifica se o tipo de mídia é válido
+    if (!['movie', 'tv'].includes(type)) {
+        return res.status(400).json({ error: "Tipo de mídia inválido" });
+    }
 
     try {
-        const response = await axios.get(`https://api.themoviedb.org/3/movie/${id}`, {
+        // Requisição para detalhes da mídia
+        const detailsResponse = await axios.get(`https://api.themoviedb.org/3/${type}/${id}`, {
             params: {
-                api_key: process.env.API_KEY, // Sua chave API
+                api_key: API_KEY,
                 language: 'pt-BR'
             }
         });
-        const providersResponse = await axios.get(`https://api.themoviedb.org/3/movie/${id}/watch/providers`, {
-            params: { api_key: process.env.API_KEY }
+
+        // Requisição para provedores de streaming
+        const providersResponse = await axios.get(`https://api.themoviedb.org/3/${type}/${id}/watch/providers`, {
+            params: {
+                api_key: API_KEY
+            }
         });
 
-        const movieDetails = response.data;
+        const mediaDetails = detailsResponse.data;
         const providersData = providersResponse.data.results.BR?.flatrate || [];
-        res.json({ movieDetails, providersData });
+
+        res.json({ mediaDetails, providersData });
     } catch (error) {
-        console.error('Erro ao buscar detalhes do filme:', error.message);
-        res.status(500).json({ error: 'Erro ao buscar detalhes do filme.' });
+        console.error("Erro ao buscar detalhes da mídia:", error.message);
+        if (error.response?.status === 404) {
+            return res.status(404).json({ error: "Mídia não encontrada" });
+        }
+        res.status(500).json({ error: "Erro ao buscar detalhes da mídia" });
     }
-}); 
+});
 
 app.get('/api/search', async (req, res) => {
     const { name, type } = req.query;
