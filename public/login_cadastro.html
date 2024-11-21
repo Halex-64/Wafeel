@@ -10,7 +10,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.cdnfonts.com/css/coolvetica-2" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>     
 </head>
 
 <body>
@@ -20,27 +21,29 @@
             <div class="input_cadastro">
                 <h1>Insira seu email e senha</h1>
                 <label for="message" class="form_message_label"> Email</label>
-                <textarea name="mensagem" id="message" cols="30" rows="3" class="form_input message_input" required></textarea>
+                <input type="email" id="email" class="form_input" required>
     
                 <label for="message" class="form_message_label"> Senha</label>
-                <textarea name="mensagem" id="message" cols="30" rows="3" class="form_input message_input" required></textarea>
+                <div class="password-field">
+                    <input type="password" id="password" class="form_input" required>
+                </div>
             </div>
-            <button>Entrar</button>
+            <button type="submit">Entrar</button>
         </div>
         <div class="cadastro">
             <h2>Cadastre-se</h2>
             <div class="input_cadastro">
                 <h1>Cadastre com email</h1>
                 <label for="message" class="form_message_label"> Email</label>
-                <textarea name="mensagem" id="message" cols="30" rows="3" class="form_input message_input" required></textarea>
+                <input type="email" id="email" class="form_input" required>
     
                 <label for="message" class="form_message_label"> Nome de usuário</label>
-                <textarea name="mensagem" id="message" cols="30" rows="3" class="form_input message_input" required></textarea>
+                <input type="text" id="username" class="form_input" required>
     
                 <label for="message" class="form_message_label"> Senha</label>
-                <textarea name="mensagem" id="message" cols="30" rows="3" class="form_input message_input" required></textarea>
+                <input type="password" id="password" class="form_input" required>
             </div>
-            <button>Cadastrar-se</button>
+            <button type="submit">Cadastrar-se</button>
         </div>
     </div>
 </body>

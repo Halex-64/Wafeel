@@ -47,7 +47,7 @@ body {
     flex-direction: column;
 }
 
-textarea {
+input {
     width: 100%; /* Ajuste para ocupar toda a largura do contêiner */
     height: 30px; /* Altura maior para mais espaço */
     padding: 8px; /* Adiciona espaçamento interno para o texto */
@@ -61,7 +61,7 @@ textarea {
     line-height: 13px;
 }
 
-textarea:focus {
+input:focus {
     border-color: #141414; /* Cor verde, pode ser qualquer cor */
     outline: none; /* Remove o contorno padrão do navegador */
     box-shadow: 0 0 2px rgba(49, 49, 49, 0.5); /* Adiciona uma sombra suave ao redor */
@@ -76,7 +76,7 @@ textarea:focus {
     border-radius: 8px;
 }
 
-.login textarea {
+.login input {
     width: 100%; /* Ajuste para ocupar toda a largura do contêiner */
     height: 30px; /* Altura maior para mais espaço */
     padding: 8px; /* Adiciona espaçamento interno para o texto */
@@ -108,3 +108,4 @@ button:hover{
 .login{
     padding-top: 0;
 }
+
