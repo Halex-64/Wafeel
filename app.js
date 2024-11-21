@@ -81,6 +81,8 @@ app.get('/filmes-populares', async (req, res) => {
 // Função de exemplo para recomendação
 async function getRecommendation(category) {
     const API_KEY = process.env.API_KEY; // Use sua chave da API aqui
+    const excludedKeywords = ['erótica', 'adulto', 'sensual', 'sexo', 'sexuais',];
+    //const excludedGenres = [18];
     try {
         // Faz uma requisição para buscar filmes dentro da categoria
         const response = await axios.get(`https://api.themoviedb.org/3/discover/movie`, {
@@ -89,16 +91,26 @@ async function getRecommendation(category) {
                 with_genres: category, // Filtra pela categoria (gênero)
                 language: 'pt-BR',
                 sort_by: 'popularity.desc', // Ordena por popularidade
-                page: Math.floor(Math.random() * 10) + 1 // Página aleatória para maior variedade
+                page: Math.floor(Math.random() * 10) + 1, // Página aleatória para maior variedade
+                certification_country: 'BR',
+                certification_lte: '16',
+                include_adult: false,
+                with_original_language: 'en'
             }
         });
 
-        const movies = response.data.results;
+        let movies = response.data.results;
 
-        // Se nenhum filme for encontrado
-        if (movies.length === 0) {
-            return null;
-        }
+       movies = movies.filter(movie => {
+
+        const hasExcludedKeyword = excludedKeywords.some(keyword =>movie.title && movie.overview && movie.overview.toLowerCase().includes(keyword));
+        //const hasExcludedGenre = movie.genre_ids.some(genre => excludedGenres.includes(genre));
+        const hasValidTitle = /^[\w\sÀ-ÿ.,!?'()-]+$/.test(movie.title || '');
+        const hasValidPoster = movie.poster_path && !movie.title.includes("가슴");
+        const hasCertification = movie.certification || movie.vote_average >= 5.0;
+
+        return hasValidTitle && hasValidPoster && hasCertification && !hasExcludedKeyword;
+    });
 
         // Seleciona um filme aleatório da lista
         const randomMovie = movies[Math.floor(Math.random() * movies.length)];
