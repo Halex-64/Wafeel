@@ -1,4 +1,4 @@
-body {
+body{
     margin: 0; /* Remove margens padrão */
     height: 100vh; /* Define a altura do corpo para preencher toda a janela */
     display: flex; /* Habilita o Flexbox */
@@ -27,6 +27,7 @@ body {
 
 .cadastro{
     background-color: black;
+    position: relative;
 }
 
 .login{
@@ -67,15 +68,6 @@ input:focus {
     box-shadow: 0 0 2px rgba(49, 49, 49, 0.5); /* Adiciona uma sombra suave ao redor */
 }
 
-.cadastro button {
-    width: 141px;
-    height: 50px;
-    background-color: white;
-    border: none;
-    font-size: 20px;
-    border-radius: 8px;
-}
-
 .login input {
     width: 100%; /* Ajuste para ocupar toda a largura do contêiner */
     height: 30px; /* Altura maior para mais espaço */
@@ -91,21 +83,71 @@ input:focus {
     line-height: 13px;
 }
 
-.login button {
+button{
     width: 141px;
     height: 50px;
-    background-color: black;
-    color: white;
+    position: relative;
+    overflow: hidden;
     border: none;
     font-size: 20px;
     border-radius: 8px;
+    transition: color 0.3s ease;
 }
 
-button:hover{
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%; /* Começa fora do botão, à esquerda */
+    width: 100%; /* Largura do botão */
+    height: 100%; /* Altura do botão */
+    background-color: #8500F2; /* Cor de fundo ao passar o mouse */
+    z-index: 0; /* Coloca o pseudo-elemento atrás do texto */
+    transition: left 0.3s ease; /* Faz o pseudo-elemento deslizar */
+}
+
+button:hover::before {
+    left: 0; /* Move o pseudo-elemento para cobrir todo o botão */
+}
+
+button:hover {
+    color: white; /* Altera a cor do texto */
     cursor: pointer;
+}
+  
+button span {
+    position: relative;
+    z-index: 1; /* Garante que o texto fique acima do pseudo-elemento */
+}
+
+.cadastro button {
+    background-color: white;
+}
+
+.login button {
+    background-color: black;
+    color: white;
 }
 
 .login{
     padding-top: 0;
 }
 
+.close {
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    background-color: black; /* A cor desejada aqui */
+    border: 2px solid white;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 13px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
