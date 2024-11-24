@@ -126,6 +126,10 @@ button span {
 
 .login button {
     background-color: black;
+    color: #E9E9E9;
+}
+
+.login button:hover{
     color: white;
 }
 
