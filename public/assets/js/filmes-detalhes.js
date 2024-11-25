@@ -1,39 +1,63 @@
 function getMediaTypeFromUrl() {
     const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get('type'); // Retorna "movie" ou "tv"
+    const type = urlParams.get('type') || 'movie'; // Obter o tipo
+    console.log("Tipo capturado da URL:", type); // Log para depuração
+    return type;
 }
-async function fetchMediaDetalhes() {
+function getMovieIdFromUrl() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id'); // Obter o ID
+    console.log("ID capturado da URL:", id); // Log para depuração
+    return id;
+}
+
+async function fetchFilmeDetalhes() {
+    const filmeDetalhesDiv = document.getElementById('filme-detalhes');
     try {
-        const { id, type } = getMediaInfoFromUrl();
-        if (!id || !['movie', 'tv'].includes(type)) {
-            mediaDetalhesDiv.innerHTML = `<p>Mídia inválida ou não encontrada.</p>`;
+        const mediaId = getMovieIdFromUrl();
+        const mediaType = getMediaTypeFromUrl();
+
+        if (!mediaId || !mediaType) {
+            console.error("ID ou tipo ausente:", { mediaId, mediaType });
+            filmeDetalhesDiv.innerHTML = `<p>Mídia não encontrada.</p>`;
             return;
         }
 
-        // Faz a requisição para obter os detalhes da mídia
-        const response = await fetch(`/api/media/${type}/${id}`);
+        console.log(`Buscando detalhes para ${mediaType} com ID: ${mediaId}`);
+
+        const response = await fetch(`/api/media/${mediaType}/${mediaId}`);
         if (!response.ok) {
-            throw new Error(`Erro ao buscar mídia: ${response.statusText}`);
+            console.error("Erro na resposta da API:", response.status, response.statusText);
+            filmeDetalhesDiv.innerHTML = `<p>Erro ao buscar os detalhes da mídia.</p>`;
+            return;
         }
 
         const { mediaDetails, providersData } = await response.json();
+        console.log("Detalhes da mídia recebidos:", mediaDetails);
 
-        // Renderiza os detalhes da mídia
-        const title = mediaDetails.title || mediaDetails.name;
-        const releaseDate = mediaDetails.release_date || mediaDetails.first_air_date;
-        const generos = mediaDetails.genres.map(genre => genre.name).join(", ");
-        const providersHTML = providersData.map(provider => `
+        if (!mediaDetails) {
+            filmeDetalhesDiv.innerHTML = `<p>Detalhes da mídia indisponíveis.</p>`;
+            return;
+        }
+
+        const mediaTitle = mediaDetails.title || mediaDetails.name || 'Título indisponível';
+        const posterPath = mediaDetails.poster_path
+            ? `https://image.tmdb.org/t/p/w500${mediaDetails.poster_path}`
+            : './placeholder.jpg';
+
+        const generos = (mediaDetails.genres || []).map(genre => genre.name).join(", ");
+        const providersHTML = (providersData || []).map(provider => `
             <img src="https://image.tmdb.org/t/p/original${provider.logo_path}" alt="${provider.provider_name}" title="${provider.provider_name}" class="provider-logo">
         `).join("");
 
-        mediaDetalhesDiv.innerHTML = `
-            <h1>${title}</h1>
-            <img src="https://image.tmdb.org/t/p/w500${mediaDetails.poster_path}" alt="${title}">
-            <p>${mediaDetails.overview}</p>
-            <p><strong>Data de lançamento:</strong> ${releaseDate}</p>
-            <p><strong>Popularidade:</strong> ${mediaDetails.popularity}</p>
-            <p><strong>Avaliação:</strong> ${mediaDetails.vote_average}</p>
-            <p><strong>Gêneros:</strong> ${generos}</p>
+        filmeDetalhesDiv.innerHTML = `
+            <h1>${mediaTitle}</h1>
+            <img src="${posterPath}" alt="${mediaTitle}">
+            <p>${mediaDetails.overview || 'Descrição indisponível.'}</p>
+            <p><strong>Data de lançamento:</strong> ${mediaDetails.release_date || mediaDetails.first_air_date || 'Indisponível'}</p>
+            <p><strong>Popularidade:</strong> ${mediaDetails.popularity || 'Indisponível'}</p>
+            <p><strong>Avaliação:</strong> ${mediaDetails.vote_average || 'Indisponível'}</p>
+            <p><strong>Gêneros:</strong> ${generos || 'Indisponível'}</p>
             <div class="providers">
                 <h3>Disponível em:</h3>
                 ${providersHTML || "<p>Sem plataformas disponíveis no momento</p>"}
@@ -41,6 +65,9 @@ async function fetchMediaDetalhes() {
         `;
     } catch (error) {
         console.error("Erro ao buscar detalhes da mídia:", error);
-        mediaDetalhesDiv.innerHTML = `<p>Erro ao carregar os detalhes da mídia.</p>`;
+        filmeDetalhesDiv.innerHTML = `<p>Erro ao carregar os detalhes da mídia.</p>`;
     }
 }
+fetchFilmeDetalhes()
+
+

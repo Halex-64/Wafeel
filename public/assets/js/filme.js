@@ -83,7 +83,7 @@ function loadInitialMovies() {
             }
         })
         .catch(error => console.error('Erro ao carregar filmes recentes:', error));
-}
+};
 
 // Carregamento das logos dos provedores e configuração dos eventos
 fetch('/api/providers')

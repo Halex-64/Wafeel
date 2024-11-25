@@ -146,40 +146,37 @@ app.get('/api/recommendation', async (req, res) => {
 });
 
 app.get('/api/media/:type/:id', async (req, res) => {
-    const { type, id } = req.params; // Captura o tipo e o ID
-    const API_KEY = process.env.API_KEY;
+    const { type, id } = req.params;
+    console.log(`Recebido tipo: ${type}, ID: ${id}`); // Log para depuração
 
-    // Verifica se o tipo de mídia é válido
     if (!['movie', 'tv'].includes(type)) {
-        return res.status(400).json({ error: "Tipo de mídia inválido" });
+        console.error('Tipo de mídia inválido:', type);
+        return res.status(400).json({ error: 'Tipo de mídia inválido.' });
     }
 
     try {
-        // Requisição para detalhes da mídia
-        const detailsResponse = await axios.get(`https://api.themoviedb.org/3/${type}/${id}`, {
+        const response = await axios.get(`https://api.themoviedb.org/3/${type}/${id}`, {
             params: {
-                api_key: API_KEY,
-                language: 'pt-BR'
-            }
+                api_key: process.env.API_KEY,
+                language: 'pt-BR',
+            },
         });
 
-        // Requisição para provedores de streaming
+        console.log('Detalhes da mídia recebidos:', response.data);
+
         const providersResponse = await axios.get(`https://api.themoviedb.org/3/${type}/${id}/watch/providers`, {
             params: {
-                api_key: API_KEY
-            }
+                api_key: process.env.API_KEY,
+            },
         });
 
-        const mediaDetails = detailsResponse.data;
         const providersData = providersResponse.data.results.BR?.flatrate || [];
+        console.log('Provedores recebidos:', providersData);
 
-        res.json({ mediaDetails, providersData });
+        res.json({ mediaDetails: response.data, providersData });
     } catch (error) {
-        console.error("Erro ao buscar detalhes da mídia:", error.message);
-        if (error.response?.status === 404) {
-            return res.status(404).json({ error: "Mídia não encontrada" });
-        }
-        res.status(500).json({ error: "Erro ao buscar detalhes da mídia" });
+        console.error('Erro ao buscar detalhes da mídia:', error.message);
+        res.status(404).json({ error: 'Mídia não encontrada.' });
     }
 });
 
