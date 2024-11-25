@@ -179,39 +179,17 @@
     .nav_listas_responsiva_direita {
         display: block;
         position: fixed;
+        z-index: 4;
         width: 50%;
         right: 0;
         background-color: black;    
         padding-top: 8px;
         padding-bottom: 11px;
         margin: 0; 
-        z-index: 3;
+        z-index: 2;
     }
-    
+
     .nav_listas_responsiva_direita::after {
-        content: "";
-        position: absolute;
-        bottom: 0; /* Alinha no final de .nav_listas */
-        left: 0;
-        width: 100%; /* Mesma largura de .nav_listas */
-        height: 3px; /* Altura da faixa */
-        background-color: #8500F2; /* Cor da faixa */
-    }
-    
-    .nav_listas_responsiva_esquerda{
-        display: block;
-        position: fixed;
-        width: 50%;
-        left: 0;
-        background-color: black;    
-        padding-top: 8px;
-        padding-bottom: 11px;
-        margin: 0;
-        z-index: 3;
-    }
-    
-    .nav_listas_responsiva_esquerda::after {
-        display: none;
         content: "";
         position: absolute;
         bottom: 0; /* Alinha no final de .nav_listas */
@@ -220,6 +198,31 @@
         height: 3px; /* Altura da faixa */
         /*background-color: #8500F2; /* Cor da faixa */
     }
+
+    /*-----------------------------------------------------------*/
+
+    .nav_listas_responsiva_esquerda{
+        display: block;
+        position: fixed;
+        z-index: 4;
+        width: 50%;
+        left: 0;
+        background-color: black;    
+        padding-top: 8px;
+        padding-bottom: 11px;
+        margin: 0; 
+        z-index: 2;
+    }
+
+    .nav_listas_responsiva_esquerda::after {
+        content: "";
+        position: absolute;
+        bottom: 0; /* Alinha no final de .nav_listas */
+        left: 0;
+        width: 100%; /* Mesma largura de .nav_listas */
+        height: 3px; /* Altura da faixa */
+        background-color: #8500F2; /* Cor da faixa */
+    }   
 
     #titulo_filme, #genero_filme {
         z-index: 1;       
@@ -238,10 +241,12 @@
         font-size: 8px;
     }
 
+    /*-----------------------------------------------------------*/
+
     .resumo_filme_imagem {
         position: relative;
-        width: 202.5px; /* 50% de 405px */
-        height: 109px; /* 50% de 218px */
+        width: 352px; /* 50% de 405px */
+        height: 189.44px; /* 50% de 218px */
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -255,4 +260,14 @@
         transition: background-size 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
         overflow: hidden;
     }
+
+    .constainer_filmes{
+        display: grid;
+        grid-template-columns: 1fr; /* Apenas uma coluna */
+        gap: 16px; /* Espaçamento vertical entre os itens */
+        justify-items: center; /* Centraliza horizontalmente os itens */
+        padding: 0 16px; /* Adiciona um padding para ajustar as laterais */
+    }
+
+    /*-----------------------------------------------------------*/
 }
