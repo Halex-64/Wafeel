@@ -73,7 +73,7 @@
         </div>
     </div>
 
-    <section>
+    <section class="section-content">
         <h1 class="titulo_lista">FILMES POPULARES DE 2024</h1>
 
         <div class="nav_filtro">            
@@ -153,6 +153,28 @@
                 </div>                
             <div id="linha_horizontal"></div>
         </div>      
+
+        <button id="botao-filtro" onclick="toggleFiltro()">
+            &#10011; Adicionar Filtro
+        </button>
+
+        <div id="filtro-container" class="barra_filtro_oculta">
+            <div class="barra_filtro">
+                <!-- Os elementos de filtro existentes -->
+                <div class="filtro_seta" onclick="toggleDropdown('dropdown-genero', this)">
+                    <li><a>GÊNERO</a></li>
+                    <div class="arrow"></div>
+                    <ul id="dropdown-genero" class="options">
+                        <li class="option">Drama</li>
+                        <li class="option">Crime</li>
+                        <li class="option">Terror</li>
+                        <!-- Outros itens -->
+                    </ul>
+                </div>
+    
+                <!-- Outros filtros (ANO, FAIXA ETÁRIA, etc.) -->
+            </div>
+        </div>
         
         <div class="constainer_filmes">
             <div class="resumo_filme">
@@ -327,6 +349,37 @@
             toggleCor.classList.toggle('menu-toggle-active');
             logoImage.classList.toggle('logoImage-active'); // Adiciona a classe que ativa o filtro
         });
+
+        // Função para alternar o filtro
+        function toggleFiltro() {
+            const filtroContainer = document.getElementById('filtro-container');
+            const sectionContent = document.querySelector('.section-content');
+            
+            // Alterna as classes de ativo e deslocado
+            filtroContainer.classList.toggle('ativo');
+            sectionContent.classList.toggle('deslocado');
+
+            // Adiciona ou remove o listener para fechar ao clicar fora
+            if (filtroContainer.classList.contains('ativo')) {
+                document.addEventListener('click', fecharAoClicarFora);
+            } else {
+                document.removeEventListener('click', fecharAoClicarFora);
+            }
+        }
+
+        // Fecha o filtro ao clicar fora
+        function fecharAoClicarFora(event) {
+            const filtroContainer = document.getElementById('filtro-container');
+            const botaoFiltro = document.getElementById('botao-filtro');
+            const sectionContent = document.querySelector('.section-content');
+
+            // Verifica se o clique foi fora do container e do botão
+            if (!filtroContainer.contains(event.target) && !botaoFiltro.contains(event.target)) {
+                filtroContainer.classList.remove('ativo');
+                sectionContent.classList.remove('deslocado'); // Remove o deslocamento
+                document.removeEventListener('click', fecharAoClicarFora); // Remove o listener
+            }
+        }     
     </script>
 </body>
 

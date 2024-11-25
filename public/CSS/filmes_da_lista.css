@@ -164,8 +164,80 @@
     font-size: 16px;
 }
 
+.filtro_responsivo{
+    display: none;
+}
+
 
 @media (max-width: 768px) {
+
+    #botao-filtro{
+        display: block;
+        padding: 7px 10px;
+        background-color: #8500F2;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        border: none;
+        border-radius: 2px;
+        margin-bottom: 16px;
+        margin-left: 24px;
+        width: 150px;
+        height: 40px;
+        text-align: center;     
+    }
+
+    #botao-filtro:hover{
+        background-color: #480083;
+    }
+
+    #filtro-container {
+        position: fixed;
+        top: 0;
+        left: -300%; /* Oculta a barra fora da tela inicialmente */
+        width: 300px;
+        height: 100%;
+        background-color: #8500F2;
+        padding: 20px;
+        overflow-y: auto;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        color: white;
+        transform: translateX(-100%);
+    }
+
+    #filtro-container.ativo {
+        left: 0;
+    }
+
+    .barra_filtro li a {
+        text-decoration: none;
+        color: white;
+        font-family: "Poppins", sans-serif;
+    }
+    
+    .barra_filtro .filtro_seta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+        margin-bottom: 10px;
+    }
+
+    .barra_filtro{
+        display: none;
+    }
+
+    .section-content{
+        transition: transform 0.3s ease;
+    }
+
+    .section-content.deslocado{
+        margin-left: 0;
+        transform: translateX(300px);
+    }
+
+    /*-----------------------------------------------------------*/
 
     .header_container{
         display: none;
@@ -231,14 +303,9 @@
     .titulo_lista{
         margin-left: 24px;
         margin-right: 24px;
-        font-size: 40px;
-    }
-
-    .barra_filtro{
-        padding: 0;
-        justify-content: center;
-        margin: 0;
-        font-size: 8px;
+        font-size: 40px; 
+        min-width: 360px;
+        max-width: 100%;
     }
 
     /*-----------------------------------------------------------*/
@@ -267,6 +334,7 @@
         gap: 16px; /* Espaçamento vertical entre os itens */
         justify-items: center; /* Centraliza horizontalmente os itens */
         padding: 0 16px; /* Adiciona um padding para ajustar as laterais */
+        margin-bottom: 32px;
     }
 
     /*-----------------------------------------------------------*/
