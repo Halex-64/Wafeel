@@ -215,6 +215,56 @@ app.get('/api/search', async (req, res) => {
     }
 });
 
+app.get('/tv-populares', async (req, res) => {
+    console.log('Requisição recebida para séries populares'); // Log para verificar a rota
+    try {
+        const response = await axios.get('https://api.themoviedb.org/3/tv/popular', {
+            params: {
+                api_key: process.env.API_KEY,
+                language: 'pt-BR',
+                page: 1,
+            },
+        });
+        res.json(response.data.results);
+    } catch (error) {
+        console.error('Erro ao buscar séries populares:', error.message);
+        res.status(500).json({ error: 'Erro ao buscar séries populares.' });
+    }
+});
+
+app.get('/api/tv/:id/', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const response = await axios.get(`https://api.themoviedb.org/3/tv/${id}`, {
+            params: {
+                api_key: process.env.API_KEY,
+                language: 'pt-BR',
+            },
+        });
+        res.json(response.data);
+    } catch (error) {
+        console.error('Erro ao buscar detalhes da série:', error.message);
+        res.status(404).json({ error: 'Série não encontrada.' });
+    }
+});
+
+app.get('/api/tv/:id/providers', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const response = await axios.get(`https://api.themoviedb.org/3/tv/${id}/watch/providers`, {
+            params: {
+                api_key: process.env.API_KEY,
+            },
+        });
+
+        const providers = response.data.results?.BR || {}; // Filtro para provedores do Brasil (ou ajuste conforme necessário)
+        res.json(providers);
+    } catch (error) {
+        console.error('Erro ao buscar provedores de streaming da série:', error.message);
+        res.status(500).json({ error: 'Erro ao buscar provedores de streaming.' });
+    }
+});
+
 app.get('/api/key', (req, res) => {
     res.json({ apiKey: process.env.API_KEY });
 });
