@@ -41,6 +41,7 @@ async function fetchFilmeDetalhes() {
         }
 
         const mediaTitle = mediaDetails.title || mediaDetails.name || 'Título indisponível';
+        document.title = `Detalhes de ${mediaTitle}`
         const posterPath = mediaDetails.poster_path
             ? `https://image.tmdb.org/t/p/w500${mediaDetails.poster_path}`
             : './placeholder.jpg';
