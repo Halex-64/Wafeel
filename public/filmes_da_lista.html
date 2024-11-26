@@ -13,6 +13,7 @@
     <link href="https://fonts.cdnfonts.com/css/coolvetica-2" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> <!--Impede de dar zoom-->
 </head>  
 <body>
     <header class="header_container">
@@ -73,17 +74,17 @@
         </div>
     </div>
 
-    <section class="section-content">
+    <section>
+        <!--TÍTULO DA LISTA-->
         <h1 class="titulo_lista">FILMES POPULARES DE 2024</h1>
 
+        <!--BARRA DE FILTRAGEM-->
         <div class="nav_filtro">            
             <div id="linha_horizontal"></div>
-                <div class="barra_filtro">
-                    
+                <div class="barra_filtro">                    
                     <div class="filtro_seta" onclick="toggleDropdown('dropdown-genero', this)">
                         <li><a>GÊNERO</a></li>
-                        <div class="arrow"></div>
-                        
+                        <div class="arrow"></div>                        
                         <ul id="dropdown-genero" class="options">
                             <li class="option">Drama</li>
                             <li class="option">Crime</li>
@@ -103,7 +104,6 @@
                     <div class="filtro_seta" onclick="toggleDropdown('dropdown-ano', this)">
                         <li><a>ANO</a></li>
                         <div class="arrow"></div>
-
                         <ul id="dropdown-ano" class="options">
                             <li class="option">2020s</li>
                             <li class="option">2010s</li>
@@ -124,7 +124,6 @@
                     <div class="filtro_seta" onclick="toggleDropdown('dropdown-faixa-etaria', this)">
                         <li><a>FAIXA ETÁRIA</a></li>
                         <div class="arrow"></div>
-
                         <ul id="dropdown-faixa-etaria" class="options">
                             <li class="option">Livre</li>
                             <li class="option">10 Anos</li>
@@ -138,7 +137,6 @@
                     <div class="filtro_seta" onclick="toggleDropdown('dropdown-servico', this)">
                         <li><a>SERVIÇO</a></li>
                         <div class="arrow"></div>
-
                         <ul id="dropdown-servico" class="options">
                             <li class="option">Netflix</li>
                             <li class="option">Max</li>
@@ -153,29 +151,31 @@
                 </div>                
             <div id="linha_horizontal"></div>
         </div>      
-
-        <button id="botao-filtro" onclick="toggleFiltro()">
-            &#10011; Adicionar Filtro
-        </button>
-
-        <div id="filtro-container" class="barra_filtro_oculta">
-            <div class="barra_filtro">
-                <!-- Os elementos de filtro existentes -->
-                <div class="filtro_seta" onclick="toggleDropdown('dropdown-genero', this)">
-                    <li><a>GÊNERO</a></li>
-                    <div class="arrow"></div>
-                    <ul id="dropdown-genero" class="options">
-                        <li class="option">Drama</li>
-                        <li class="option">Crime</li>
-                        <li class="option">Terror</li>
-                        <!-- Outros itens -->
-                    </ul>
-                </div>
-    
-                <!-- Outros filtros (ANO, FAIXA ETÁRIA, etc.) -->
-            </div>
-        </div>
         
+        <!--BARRA DE FILTRAGEM >>RESPONSIVA<<-->
+            <!--BOTÃO DE FILTRO<<-->
+            <button id="botao-filtro" onclick="toggleFiltro()">
+                &#10011; Adicionar Filtro
+            </button>
+            
+            <!--CONTAINER ROXO COM OS FILTROS<<-->
+            <div id="filtro-container" class="barra_filtro_oculta">
+                <div class="barra_filtro">
+                    <!-- Os elementos de filtro existentes -->
+                    <div class="filtro_seta" onclick="toggleDropdown('dropdown-genero', this)">
+                        <li><a>GÊNERO</a></li>
+                        <div class="arrow"></div>
+                        <ul id="dropdown-genero" class="options">
+                            <li class="option">Drama</li>
+                            <li class="option">Crime</li>
+                            <li class="option">Terror</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        <!------------------------------------->
+
+        <!--CARDS COM O RESUMO DOS FILMES-->        
         <div class="constainer_filmes">
             <div class="resumo_filme">
                 <div class="resumo_filme_imagem">
@@ -222,6 +222,7 @@
             </div>
         </div>
 
+        <!--CARDS COM O RESUMO DOS FILMES (SEGUNDA LINHA)-->
         <div class="constainer_filmes">
             <div class="resumo_filme">
                 <div class="resumo_filme_imagem">
@@ -269,6 +270,7 @@
         </div>                
     </section>   
 
+    <!--FOOTER-->
     <footer>
         <div class="social-icons">
             <a href="#"><img src="/public/assets/img/whatsapp_icon.png" id="WhatsApp_icon" alt="WhatsApp"></a>
@@ -277,6 +279,7 @@
         </div>                
     </footer>
 
+    <!--FOOTER RESPONSIVO-->
     <footer class="footer_responsivo">
         <div class="footer_links">        
             <a href="#">Login</a>
@@ -296,6 +299,21 @@
     </footer>
 
     <script>
+        //HEADER RESPONSIVA
+        const menuToggle = document.getElementById('menu-toggle');
+        const menuResponsive = document.querySelector('.menu_responsivo');
+        const headerResponsive = document.querySelector('.header_responsiva');
+        const toggleCor = document.querySelector('.menu-toggle');
+        const logoImage = document.querySelector('.barradenavegacao_responsiva .logo__image'); // Seleção específica
+
+        menuToggle.addEventListener('click', () => {
+            menuResponsive.classList.toggle('show'); // Alterna a classe para abrir/fechar o menu
+            headerResponsive.classList.toggle('header-active'); // Alterna a cor da header_responsiva
+            toggleCor.classList.toggle('menu-toggle-active');
+            logoImage.classList.toggle('logoImage-active'); // Adiciona a classe que ativa o filtro
+        });
+        
+        //FUNCIONAMENTO DO DROP-DOWN NA BARRA DE FILTRAGEM
         function toggleDropdown(dropdownId, button) {
             const dropdowns = document.querySelectorAll('.options');
             
@@ -314,18 +332,16 @@
     
             // Calcula a posição do botão
             if (!isVisible) {                    
-                const rect = button.getBoundingClientRect();                    
-                const parentRect = button.parentNode.getBoundingClientRect(); // Get parent rect
-                const windowTop = window.scrollY || window.pageYOffset;
+                // Calculate adjusted top position for the dropdown
+                const adjustedTop = rect.bottom + windowTop - parentRect.top + 'px'; // Corrected calculation
 
-                // Adjust top position considering parent offset
-                dropdown.style.top = rect.bottom + 'px'; // Posiciona abaixo do botão
-                dropdown.style.top = rect.bottom - parentRect.top + windowTop + 'px';
-                dropdown.style.left = rect.left - 'px'; // Left position remains the same
+                // Set the dropdown's position and width
+                dropdown.style.top = adjustedTop;
                 dropdown.style.width = button.offsetWidth + 'px';
             }
-        }        
-        // Adiciona um evento de clique no documento
+        }
+                
+        //DROP-DOWN FECHA AO CLICAR FORA
         document.addEventListener('click', (event) => {
             const dropdowns = document.querySelectorAll('.options');
             dropdowns.forEach(dropdown => {
@@ -334,54 +350,26 @@
                     dropdown.style.display = 'none';
                 }
             });
-        });
+        });        
 
-        //Header Responsiva
-        const menuToggle = document.getElementById('menu-toggle');
-        const menuResponsive = document.querySelector('.menu_responsivo');
-        const headerResponsive = document.querySelector('.header_responsiva');
-        const toggleCor = document.querySelector('.menu-toggle');
-        const logoImage = document.querySelector('.barradenavegacao_responsiva .logo__image'); // Seleção específica
-
-        menuToggle.addEventListener('click', () => {
-            menuResponsive.classList.toggle('show'); // Alterna a classe para abrir/fechar o menu
-            headerResponsive.classList.toggle('header-active'); // Alterna a cor da header_responsiva
-            toggleCor.classList.toggle('menu-toggle-active');
-            logoImage.classList.toggle('logoImage-active'); // Adiciona a classe que ativa o filtro
-        });
-
-        // Função para alternar o filtro
+        //CONTAINER ROXO DA FILTRAGEM RESPONSIVA
         function toggleFiltro() {
             const filtroContainer = document.getElementById('filtro-container');
-            const sectionContent = document.querySelector('.section-content');
-            
-            // Alterna as classes de ativo e deslocado
-            filtroContainer.classList.toggle('ativo');
-            sectionContent.classList.toggle('deslocado');
+            const body = document.body;
 
-            // Adiciona ou remove o listener para fechar ao clicar fora
-            if (filtroContainer.classList.contains('ativo')) {
-                document.addEventListener('click', fecharAoClicarFora);
+            // Alterna a classe "ativo" no filtro
+            const isActive = filtroContainer.classList.toggle('ativo');
+
+            // Alterna a classe "no-scroll" no body para desativar o scroll
+            if (isActive) {
+                body.classList.add('no-scroll');
             } else {
-                document.removeEventListener('click', fecharAoClicarFora);
+                body.classList.remove('no-scroll');
             }
         }
-
-        // Fecha o filtro ao clicar fora
-        function fecharAoClicarFora(event) {
-            const filtroContainer = document.getElementById('filtro-container');
-            const botaoFiltro = document.getElementById('botao-filtro');
-            const sectionContent = document.querySelector('.section-content');
-
-            // Verifica se o clique foi fora do container e do botão
-            if (!filtroContainer.contains(event.target) && !botaoFiltro.contains(event.target)) {
-                filtroContainer.classList.remove('ativo');
-                sectionContent.classList.remove('deslocado'); // Remove o deslocamento
-                document.removeEventListener('click', fecharAoClicarFora); // Remove o listener
-            }
-        }     
     </script>
 </body>
+</html>
 
  
 

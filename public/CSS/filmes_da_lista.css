@@ -164,13 +164,22 @@
     font-size: 16px;
 }
 
-.filtro_responsivo{
+#botao-filtro{
     display: none;
 }
 
+.barra_filtro_oculta{
+    display: none;
+}
+
+.no-scroll {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+}
 
 @media (max-width: 768px) {
-
+    
     #botao-filtro{
         display: block;
         padding: 7px 10px;
@@ -194,7 +203,7 @@
     #filtro-container {
         position: fixed;
         top: 0;
-        left: -300%; /* Oculta a barra fora da tela inicialmente */
+        left: -100%; 
         width: 300px;
         height: 100%;
         background-color: #8500F2;
@@ -203,20 +212,29 @@
         box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
         z-index: 1000;
         color: white;
-        transform: translateX(-100%);
+        transition: transform 0.3s ease, left 0.3s ease;
     }
 
     #filtro-container.ativo {
         left: 0;
     }
 
-    .barra_filtro li a {
+    #filtro-container .barra_filtro {
+        display: flex;    
+        justify-content: flex-start;     
+    }
+
+    .barra_filtro_oculta{
+        display: block;
+    }
+
+    .barra_filtro_oculta.barra_filtro li a {
         text-decoration: none;
         color: white;
         font-family: "Poppins", sans-serif;
     }
     
-    .barra_filtro .filtro_seta {
+    .barra_filtro_oculta.barra_filtro .filtro_seta {
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -226,15 +244,6 @@
 
     .barra_filtro{
         display: none;
-    }
-
-    .section-content{
-        transition: transform 0.3s ease;
-    }
-
-    .section-content.deslocado{
-        margin-left: 0;
-        transform: translateX(300px);
     }
 
     /*-----------------------------------------------------------*/
@@ -271,8 +280,6 @@
         /*background-color: #8500F2; /* Cor da faixa */
     }
 
-    /*-----------------------------------------------------------*/
-
     .nav_listas_responsiva_esquerda{
         display: block;
         position: fixed;
@@ -294,7 +301,9 @@
         width: 100%; /* Mesma largura de .nav_listas */
         height: 3px; /* Altura da faixa */
         background-color: #8500F2; /* Cor da faixa */
-    }   
+    }
+
+    /*-----------------------------------------------------------*/
 
     #titulo_filme, #genero_filme {
         z-index: 1;       
