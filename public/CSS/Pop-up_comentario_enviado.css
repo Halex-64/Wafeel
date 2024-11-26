@@ -116,3 +116,33 @@ form .botao_enviar{
     right: 10px;
     line-height: 24px;
 }
+
+
+/* Estilo do spinner de carregamento */
+.loading-spinner {
+    border: 4px solid #f3f3f3; /* Cor da borda externa */
+    border-top: 4px solid purple; /* Cor da borda rotativa */
+    border-radius: 50%; /* Torna o spinner circular */
+    width: 24px;
+    height: 24px;
+    animation: spin 1s linear infinite;
+    margin: 10px auto; /* Centraliza o spinner */
+}
+
+/* Estilo do ícone de check */
+.check-icon {
+    font-size: 24px;
+    color: green;
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Animação do spinner */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

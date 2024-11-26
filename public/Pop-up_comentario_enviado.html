@@ -16,8 +16,23 @@
     <div class="pop-up_suporte">        
         <div class="elementos_suporte">          
             <h1 class="sejamos_capazes">Seu comentário foi enviado com sucesso!</h1>
+            <div class="status">
+                <div class="loading-spinner" id="loading"></div>
+                <div class="check-icon" id="check" hidden>&#10004;</div>
+            </div>
         </div>
-        h
-    </div>    
+    </div> 
+    
+    <script>
+        // Simula um tempo de carregamento de 3 segundos
+        setTimeout(() => {
+            // Esconde o spinner de carregamento
+            document.getElementById("loading").style.display = "none";
+    
+            // Mostra o ícone de check
+            document.getElementById("check").hidden = false;
+        }, 3000); // Tempo em milissegundos
+    </script>
+    
 </body>
 </html>
