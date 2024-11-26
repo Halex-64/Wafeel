@@ -64,11 +64,52 @@ async function fetchFilmeDetalhes() {
                 ${providersHTML || "<p>Sem plataformas disponíveis no momento</p>"}
             </div>
         `;
+
+        const favoritarBtn = document.getElementById('favoritar-btn');
+        favoritarBtn.addEventListener('click', () => toggleFavorito(mediaDetails));
+
+        atualizarBotaoFavorito(mediaDetails.id);
     } catch (error) {
         console.error("Erro ao buscar detalhes da mídia:", error);
         filmeDetalhesDiv.innerHTML = `<p>Erro ao carregar os detalhes da mídia.</p>`;
     }
 }
 fetchFilmeDetalhes()
+
+function toggleFavorito(filme) {
+    // Obtém os favoritos salvos no Local Storage
+    const favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
+
+    // Verifica se o filme já está na lista de favoritos
+    const isFavorito = favoritos.some(item => item.id === filme.id);
+
+    if (isFavorito) {
+        // Remove dos favoritos
+        const novosFavoritos = favoritos.filter(item => item.id !== filme.id);
+        localStorage.setItem('favoritos', JSON.stringify(novosFavoritos));
+        alert('Filme removido dos favoritos!');
+    } else {
+        // Adiciona aos favoritos
+        favoritos.push(filme);
+        localStorage.setItem('favoritos', JSON.stringify(favoritos));
+        alert('Filme adicionado aos favoritos!');
+    }
+
+    // Atualiza a aparência do botão
+    atualizarBotaoFavorito(filme.id);
+}
+
+function atualizarBotaoFavorito(filmeId) {
+    const favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
+    const isFavorito = favoritos.some(item => item.id === filmeId);
+    const favoritarBtn = document.getElementById('favoritar-btn');
+
+    if (isFavorito) {
+        favoritarBtn.textContent = '💔 Remover dos Favoritos';
+    } else {
+        favoritarBtn.textContent = '❤️ Adicionar aos Favoritos';
+    }
+}
+
 
 

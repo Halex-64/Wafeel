@@ -1,14 +1,48 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Favoritos</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Certifique-se de incluir seu CSS -->
 </head>
+
 <body>
-    <h2>Meus Favoritos</h2>
-    <p>Esta página só pode ser acessada por usuários logados.</p>
-    <a href="/logout">Logout</a>
+    <header>
+        <h1>Favoritos</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Filmes para assistir mais tarde:</h2>
+            <div id="favoritos-filmes" class="favoritos-container"></div>
+        </section>
+        <section>
+            <h2>Séries para assistir mais tarde:</h2>
+            <div id="favoritos-series" class="favoritos-container"></div>
+        </section>
+    </main>
+    <script src="./assets/js/favoritos.js"></script>
+    <style>
+        .favoritos-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: start;
+            margin: 20px 0;
+        }
+
+        .favoritos-container img {
+            max-width: 150px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .favoritos-container img:hover {
+            transform: scale(1.05);
+        }
+    </style> <!-- Arquivo JS que gerencia os favoritos -->
 </body>
+
 </html>
