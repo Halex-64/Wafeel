@@ -7,38 +7,49 @@ body{
     background-color: #ccc;
 }
 
-.pop-up_excluir_conta{
+.pop-up_suporte{
     display: flex;
     border-radius: 10px;
     overflow: hidden;
 }
 
-.elementos_excluir_conta{
+.elementos_suporte{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    padding: 40px;
+    padding: 32px 48px;
 }
 
-.elementos_excluir_conta{
+.elementos_suporte{
     background-color: black;
     position: relative;
 }
 
-.elementos_excluir_conta h2{
+.elementos_suporte h2{
     font-size: 32px;
     margin: 16px 0;
 }
 
-.elementos_excluir_conta h1 {
+.elementos_suporte .escreva_duvida {
+    font-size: 18px;
+}
+
+.elementos_suporte .sejamos_capazes {
     font-size: 16px;
 }
 
-.botoes_sim_nao{
-    display: flex;
-    gap: 56px;
+form{
+    padding: 16px 24px;
+}
+
+form #comment{
+    width: 283px;
+    height: 138px;
+    resize: none;
+    outline: none;
+    background-color: #E9E9E9;
 }
 
 button{
@@ -50,7 +61,6 @@ button{
     font-size: 20px;
     border-radius: 8px;
     transition: color 0.3s ease;
-    background-color: #E9E9E9;
 }
 
 button::before {
@@ -77,6 +87,13 @@ button:hover {
 button span {
     position: relative;
     z-index: 1; /* Garante que o texto fique acima do pseudo-elemento */
+}
+
+form .botao_enviar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 16px;
 }
 
 .close {
