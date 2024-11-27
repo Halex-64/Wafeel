@@ -2,7 +2,7 @@ body{
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  display: flex; /* Opcional: ajuda no alinhamento do conteúdo */
+  display: flex; 
   flex-direction: column;
 }
 

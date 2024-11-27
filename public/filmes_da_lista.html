@@ -16,6 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> <!--Impede de dar zoom-->
 </head>  
 <body>
+    <!--HEADER-->
     <header class="header_container">
         <nav class="barradenavegacao">
             <a href="/public/index.html"><img class="logo__image" src="assets/img/logo.png" alt="Logo"></a>
@@ -30,6 +31,7 @@
         </nav>
     </header>
 
+    <!--HEADER RESPONSIVA-->
     <header class="header_responsiva">
         <nav class="barradenavegacao_responsiva">
             <a href="/public/index.html"><img class="logo__image" src="assets/img/logo.png" alt="Logo"></a>
@@ -42,6 +44,7 @@
         </nav>
     </header>
 
+    <!--MENU DROP-DOWN RESPONSIVO-->
     <div class="menu_responsivo">
         <ul class="links" id="mobile-menu">
             <li><a href="./quiz.html">QUIZ</a></li>
@@ -53,6 +56,7 @@
         </ul>
     </div>
 
+    <!--BARRA NAVEGAÇÃO ENTRE LISTAS-->
     <div class="nav_listas">
         <div class="barra_listas">
             <li><a id="selecao_roxo" href="./listas.html">PRINCIPAIS LISTAS</a></li>
@@ -62,12 +66,12 @@
         <div id="linha_horizontal"></div>            
     </div>
 
+    <!--BARRA NAVEGAÇÃO ENTRE LISTAS RESPONSIVA-->
     <div class="nav_listas_responsiva_direita">
         <div class="barra_listas">           
             <li><a class="suas_listas" href="./lista_usuario.html">SUAS LISTAS</a></li>
         </div>        
     </div>
-
     <div class="nav_listas_responsiva_esquerda">
         <div class="barra_listas">
             <li><a id="selecao_roxo" class="principais_listas" href="./listas.html">PRINCIPAIS LISTAS</a></li>
@@ -82,7 +86,7 @@
         <div class="nav_filtro">            
             <div id="linha_horizontal"></div>
                 <div class="barra_filtro">                    
-                    <div class="filtro_seta" onclick="toggleDropdown('dropdown-genero', this)">
+                    <div id="filtro_genero" class="filtro_seta" onclick="toggleDropdown('dropdown-genero', this)">
                         <li><a>GÊNERO</a></li>
                         <div class="arrow"></div>                        
                         <ul id="dropdown-genero" class="options">
@@ -101,7 +105,7 @@
                         </ul>
                     </div>
 
-                    <div class="filtro_seta" onclick="toggleDropdown('dropdown-ano', this)">
+                    <div id="filtro_ano" class="filtro_seta" onclick="toggleDropdown('dropdown-ano', this)">
                         <li><a>ANO</a></li>
                         <div class="arrow"></div>
                         <ul id="dropdown-ano" class="options">
@@ -121,7 +125,7 @@
                         </ul>
                     </div>
 
-                    <div class="filtro_seta" onclick="toggleDropdown('dropdown-faixa-etaria', this)">
+                    <div id="filtro_faixa_etaria" class="filtro_seta" onclick="toggleDropdown('dropdown-faixa-etaria', this)">
                         <li><a>FAIXA ETÁRIA</a></li>
                         <div class="arrow"></div>
                         <ul id="dropdown-faixa-etaria" class="options">
@@ -134,7 +138,7 @@
                         </ul>
                     </div>
 
-                    <div class="filtro_seta" onclick="toggleDropdown('dropdown-servico', this)">
+                    <div id="filtro_servico" class="filtro_seta" onclick="toggleDropdown('dropdown-servico', this)">
                         <li><a>SERVIÇO</a></li>
                         <div class="arrow"></div>
                         <ul id="dropdown-servico" class="options">
@@ -153,6 +157,8 @@
         </div>      
         
         <!--BARRA DE FILTRAGEM >>RESPONSIVA<<-->
+            <!-- Sobreposição de fundo escuro -->
+            <div id="overlay" class="overlay"></div>
             <!--BOTÃO DE FILTRO<<-->
             <button id="botao-filtro" onclick="toggleFiltro()">
                 &#10011; Adicionar Filtro
@@ -160,123 +166,258 @@
             
             <!--CONTAINER ROXO COM OS FILTROS<<-->
             <div id="filtro-container" class="barra_filtro_oculta">
-                <div class="barra_filtro">
-                    <!-- Os elementos de filtro existentes -->
-                    <div class="filtro_seta" onclick="toggleDropdown('dropdown-genero', this)">
-                        <li><a>GÊNERO</a></li>
-                        <div class="arrow"></div>
-                        <ul id="dropdown-genero" class="options">
-                            <li class="option">Drama</li>
-                            <li class="option">Crime</li>
-                            <li class="option">Terror</li>
-                        </ul>
-                    </div>
+                <div class="container_filtro">
+                    <h1>Gênero</h1>
+                    <ul>
+                        <li class="option">Drama</li>
+                        <li class="option">Crime</li>
+                        <li class="option">Terror</li>
+                        <li class="option">Ficção Científica</li>
+                        <li class="option">Animação</li>
+                        <li class="option">Romance</li>
+                        <li class="option">Thriller</li>
+                        <li class="option">Ação e Aventura</li>
+                        <li class="option">Guerra</li>
+                        <li class="option">Sobrenatural</li>
+                        <li class="option">Western</li>
+                        <li class="option">Esporte</li>
+                    </ul>
                 </div>
+
+                <div class="container_filtro">
+                    <h1>Ano</h1>
+                    <ul>
+                        <li class="option">2020s</li>
+                        <li class="option">2010s</li>
+                        <li class="option">2000s</li>
+                        <li class="option">1990s</li>
+                        <li class="option">1980s</li>
+                        <li class="option">1970s</li>
+                        <li class="option">1960s</li>
+                        <li class="option">1950s</li>
+                        <li class="option">1940s</li>
+                        <li class="option">1930s</li>
+                        <li class="option">1920s</li>
+                        <li class="option">1910s</li>
+                        <li class="option">1900s</li>
+                    </ul>
+                </div>
+
+                <div class="container_filtro">
+                    <h1>Fixa Etária</h1>
+                    <ul>
+                        <li class="option">Livre</li>
+                        <li class="option">10 Anos</li>
+                        <li class="option">12 Anos</li>
+                        <li class="option">14 Anos</li>
+                        <li class="option">16 Anos</li>
+                        <li class="option">18 Anos</li>
+                    </ul>
+                </div>
+
+                <div class="container_filtro">
+                    <h1>Serviço</h1>
+                    <ul>  
+                        <li class="option">Netflix</li>
+                        <li class="option">Max</li>
+                        <li class="option">Prime Video</li>
+                        <li class="option">Disney+</li>
+                        <li class="option">Apple TV</li>
+                        <li class="option">Paramount+</li>
+                        <li class="option">Globoplay</li> 
+                        <li class="option">MUBI</li>
+                    </ul>                   
+                </div> 
+                
+                
             </div>
         <!------------------------------------->
 
         <!--CARDS COM O RESUMO DOS FILMES-->        
         <div class="constainer_filmes">
             <div class="resumo_filme">
-                <div class="resumo_filme_imagem">
-                    <li id="titulo_filme">FURIOSA</li> 
-                    <li id="genero_filme">Ação • Aventura</li>
+                <div class="resumo_filme_imagem" style="background-image: url('/public/assets/img/resumo_filme/furiosa_resumo.jpg');">
+                    <li id="titulo_filme">FURIOSA</li>
+                    <ul id="genero_filme">
+                        <li id="genero_um">Ação</li>
+                        <li>•</li>
+                        <li id="genero_dois">Aventura</li>
+                    </ul>
                     <div class="novo_texto">
                         <li id="sinopse_filme">Sequestrada, Furiosa enfrenta desafios enquanto dois tiranos disputam o poder, lutando para voltar ao seu lar.</li>
-                        <li id="informacoes_filme">2024 • 2h28 min • 16 Anos</li>
+                        <ul id="informacoes_filme">
+                            <li id="ano_lancamento">2024</li>
+                            <li>•</li>
+                            <li id="duracao">2h28min</li>
+                            <li>•</li>
+                            <li id="classificacao_indicativa">16 Anos</li>
+                        </ul>
                     </div>
                 </div> 
             </div>
     
             <div class="resumo_filme">
-                <div class="resumo_filme_imagem">
+                <div class="resumo_filme_imagem" style="background-image: url('/public/assets/img/resumo_filme/furiosa_resumo.jpg');">
                     <li id="titulo_filme">FURIOSA</li> 
-                    <li id="genero_filme">Ação • Aventura</li>
+                    <ul id="genero_filme">
+                        <li id="genero_um">Ação</li>
+                        <li>•</li>
+                        <li id="genero_dois">Aventura</li>
+                    </ul>
                     <div class="novo_texto">
-                        <li>Sequestrada, Furiosa enfrenta desafios enquanto dois tiranos disputam o poder, lutando para voltar ao seu lar.</li>
-                        <li>2024 • 2h28 min • 16 Anos</li>
+                        <li id="sinopse_filme">Sequestrada, Furiosa enfrenta desafios enquanto dois tiranos disputam o poder, lutando para voltar ao seu lar.</li>
+                        <ul id="informacoes_filme">
+                            <li id="ano_lancamento">2024</li>
+                            <li>•</li>
+                            <li id="duracao">2h28min</li>
+                            <li>•</li>
+                            <li id="classificacao_indicativa">16 Anos</li>
+                        </ul>
                     </div>
                 </div> 
             </div>
     
             <div class="resumo_filme">
-                <div class="resumo_filme_imagem">
+                <div class="resumo_filme_imagem" style="background-image: url('/public/assets/img/resumo_filme/furiosa_resumo.jpg');">
                     <li id="titulo_filme">FURIOSA</li> 
-                    <li id="genero_filme">Ação • Aventura</li>
+                    <ul id="genero_filme">
+                        <li id="genero_um">Ação</li>
+                        <li>•</li>
+                        <li id="genero_dois">Aventura</li>
+                    </ul>
                     <div class="novo_texto">
-                        <li>Sequestrada, Furiosa enfrenta desafios enquanto dois tiranos disputam o poder, lutando para voltar ao seu lar.</li>
-                        <li>2024 • 2h28 min • 16 Anos</li>
+                        <li id="sinopse_filme">Sequestrada, Furiosa enfrenta desafios enquanto dois tiranos disputam o poder, lutando para voltar ao seu lar.</li>
+                        <ul id="informacoes_filme">
+                            <li id="ano_lancamento">2024</li>
+                            <li>•</li>
+                            <li id="duracao">2h28min</li>
+                            <li>•</li>
+                            <li id="classificacao_indicativa">16 Anos</li>
+                        </ul>
                     </div>
                 </div> 
             </div>
 
             <div class="resumo_filme">
-                <div class="resumo_filme_imagem">
+                <div class="resumo_filme_imagem" style="background-image: url('/public/assets/img/resumo_filme/furiosa_resumo.jpg');">
                     <li id="titulo_filme">FURIOSA</li> 
-                    <li id="genero_filme">Ação • Aventura</li>
+                    <ul id="genero_filme">
+                        <li id="genero_um">Ação</li>
+                        <li>•</li>
+                        <li id="genero_dois">Aventura</li>
+                    </ul>
                     <div class="novo_texto">
-                        <li>Sequestrada, Furiosa enfrenta desafios enquanto dois tiranos disputam o poder, lutando para voltar ao seu lar.</li>
-                        <li>2024 • 2h28 min • 16 Anos</li>
-                    </div>
-                </div> 
-            </div>
-        </div>
-
-        <!--CARDS COM O RESUMO DOS FILMES (SEGUNDA LINHA)-->
-        <div class="constainer_filmes">
-            <div class="resumo_filme">
-                <div class="resumo_filme_imagem">
-                    <li id="titulo_filme">FURIOSA</li> 
-                    <li id="genero_filme">Ação • Aventura</li>
-                    <div class="novo_texto">
-                        <li>Sequestrada, Furiosa enfrenta desafios enquanto dois tiranos disputam o poder, lutando para voltar ao seu lar.</li>
-                        <li>2024 • 2h28 min • 16 Anos</li>
-                    </div>
-                </div> 
-            </div>
-    
-            <div class="resumo_filme">
-                <div class="resumo_filme_imagem">
-                    <li id="titulo_filme">FURIOSA</li> 
-                    <li id="genero_filme">Ação • Aventura</li>
-                    <div class="novo_texto">
-                        <li>Sequestrada, Furiosa enfrenta desafios enquanto dois tiranos disputam o poder, lutando para voltar ao seu lar.</li>
-                        <li>2024 • 2h28 min • 16 Anos</li>
-                    </div>
-                </div> 
-            </div>
-    
-            <div class="resumo_filme">
-                <div class="resumo_filme_imagem">
-                    <li id="titulo_filme">FURIOSA</li> 
-                    <li id="genero_filme">Ação • Aventura</li>
-                    <div class="novo_texto">
-                        <li>Sequestrada, Furiosa enfrenta desafios enquanto dois tiranos disputam o poder, lutando para voltar ao seu lar.</li>
-                        <li>2024 • 2h28 min • 16 Anos</li>
+                        <li id="sinopse_filme">Sequestrada, Furiosa enfrenta desafios enquanto dois tiranos disputam o poder, lutando para voltar ao seu lar.</li>
+                        <ul id="informacoes_filme">
+                            <li id="ano_lancamento">2024</li>
+                            <li>•</li>
+                            <li id="duracao">2h28min</li>
+                            <li>•</li>
+                            <li id="classificacao_indicativa">16 Anos</li>
+                        </ul>
                     </div>
                 </div> 
             </div>
 
             <div class="resumo_filme">
-                <div class="resumo_filme_imagem">
+                <div class="resumo_filme_imagem" style="background-image: url('/public/assets/img/resumo_filme/furiosa_resumo.jpg');">
                     <li id="titulo_filme">FURIOSA</li> 
-                    <li id="genero_filme">Ação • Aventura</li>
+                    <ul id="genero_filme">
+                        <li id="genero_um">Ação</li>
+                        <li>•</li>
+                        <li id="genero_dois">Aventura</li>
+                    </ul>
                     <div class="novo_texto">
-                        <li>Sequestrada, Furiosa enfrenta desafios enquanto dois tiranos disputam o poder, lutando para voltar ao seu lar.</li>
-                        <li>2024 • 2h28 min • 16 Anos</li>
+                        <li id="sinopse_filme">Sequestrada, Furiosa enfrenta desafios enquanto dois tiranos disputam o poder, lutando para voltar ao seu lar.</li>
+                        <ul id="informacoes_filme">
+                            <li id="ano_lancamento">2024</li>
+                            <li>•</li>
+                            <li id="duracao">2h28min</li>
+                            <li>•</li>
+                            <li id="classificacao_indicativa">16 Anos</li>
+                        </ul>
                     </div>
                 </div> 
             </div>
-        </div>                
+    
+            <div class="resumo_filme">
+                <div class="resumo_filme_imagem" style="background-image: url('/public/assets/img/resumo_filme/furiosa_resumo.jpg');">
+                    <li id="titulo_filme">FURIOSA</li> 
+                    <ul id="genero_filme">
+                        <li id="genero_um">Ação</li>
+                        <li>•</li>
+                        <li id="genero_dois">Aventura</li>
+                    </ul>
+                    <div class="novo_texto">
+                        <li id="sinopse_filme">Sequestrada, Furiosa enfrenta desafios enquanto dois tiranos disputam o poder, lutando para voltar ao seu lar.</li>
+                        <ul id="informacoes_filme">
+                            <li id="ano_lancamento">2024</li>
+                            <li>•</li>
+                            <li id="duracao">2h28min</li>
+                            <li>•</li>
+                            <li id="classificacao_indicativa">16 Anos</li>
+                        </ul>
+                    </div>
+                </div> 
+            </div>
+    
+            <div class="resumo_filme">
+                <div class="resumo_filme_imagem" style="background-image: url('/public/assets/img/resumo_filme/furiosa_resumo.jpg');">
+                    <li id="titulo_filme">FURIOSA</li> 
+                    <ul id="genero_filme">
+                        <li id="genero_um">Ação</li>
+                        <li>•</li>
+                        <li id="genero_dois">Aventura</li>
+                    </ul>
+                    <div class="novo_texto">
+                        <li id="sinopse_filme">Sequestrada, Furiosa enfrenta desafios enquanto dois tiranos disputam o poder, lutando para voltar ao seu lar.</li>
+                        <ul id="informacoes_filme">
+                            <li id="ano_lancamento">2024</li>
+                            <li>•</li>
+                            <li id="duracao">2h28min</li>
+                            <li>•</li>
+                            <li id="classificacao_indicativa">16 Anos</li>
+                        </ul>
+                    </div>
+                </div> 
+            </div>
+
+            <div class="resumo_filme">
+                <div class="resumo_filme_imagem" style="background-image: url('/public/assets/img/resumo_filme/furiosa_resumo.jpg');">
+                    <li id="titulo_filme">FURIOSA</li> 
+                    <ul id="genero_filme">
+                        <li id="genero_um">Ação</li>
+                        <li>•</li>
+                        <li id="genero_dois">Aventura</li>
+                    </ul>
+                    <div class="novo_texto">
+                        <li id="sinopse_filme">Sequestrada, Furiosa enfrenta desafios enquanto dois tiranos disputam o poder, lutando para voltar ao seu lar.</li>
+                        <ul id="informacoes_filme">
+                            <li id="ano_lancamento">2024</li>
+                            <li>•</li>
+                            <li id="duracao">2h28min</li>
+                            <li>•</li>
+                            <li id="classificacao_indicativa">16 Anos</li>
+                        </ul>
+                    </div>
+                </div> 
+            </div>
+        </div>                       
     </section>   
 
     <!--FOOTER-->
     <footer>
         <div class="social-icons">
-            <a href="#"><img src="/public/assets/img/whatsapp_icon.png" id="WhatsApp_icon" alt="WhatsApp"></a>
-            <a href="#"><img src="/public/assets/img/instagram_icon.png" id="Instagram_icon" alt="Instagram"></a>
-            <a href="#"><img src="/public/assets/img/help_icon.png" id="suporte_icon" alt="suporte"></a>
-        </div>                
+            <a href="#">
+                <img src="/public/assets/img/whatsapp_icon.png" id="WhatsApp_icon" alt="WhatsApp">
+            </a>
+            <a href="#">
+                <img src="/public/assets/img/instagram_icon.png" id="Instagram_icon" alt="Instagram">
+            </a>
+            <a href="#">
+                <img src="/public/assets/img/help_icon.png" id="suporte_icon" alt="Suporte">
+            </a>
+        </div>
     </footer>
 
     <!--FOOTER RESPONSIVO-->
@@ -356,6 +497,7 @@
         function toggleFiltro() {
             const filtroContainer = document.getElementById('filtro-container');
             const body = document.body;
+            const overlay = document.getElementById('overlay');
 
             // Alterna a classe "ativo" no filtro
             const isActive = filtroContainer.classList.toggle('ativo');
@@ -363,13 +505,33 @@
             // Alterna a classe "no-scroll" no body para desativar o scroll
             if (isActive) {
                 body.classList.add('no-scroll');
+                overlay.style.display = 'block'; // Mostra a sobreposição escura
+                // Adiciona o event listener para fechar o filtro ao clicar fora
+                document.addEventListener('click', outsideClickListener);
             } else {
                 body.classList.remove('no-scroll');
+                overlay.style.display = 'none'; // Esconde a sobreposição escura
+                // Remove o event listener quando o filtro for fechado
+                document.removeEventListener('click', outsideClickListener);
+            }
+        }
+
+        function outsideClickListener(event) {
+            const filtroContainer = document.getElementById('filtro-container');
+            const botaoFiltro = document.getElementById('botao-filtro');
+            const overlay = document.getElementById('overlay');
+
+            // Verifica se o clique foi fora do filtro container e do botão de filtro
+            if (!filtroContainer.contains(event.target) && event.target !== botaoFiltro) {
+                // Fecha o filtro, remove o scroll e esconde a sobreposição
+                filtroContainer.classList.remove('ativo');
+                document.body.classList.remove('no-scroll');
+                overlay.style.display = 'none';
+                
+                // Remove o listener após fechar
+                document.removeEventListener('click', outsideClickListener);
             }
         }
     </script>
 </body>
 </html>
-
- 
-

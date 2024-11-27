@@ -88,12 +88,12 @@ a{
 }
 
 #linha_horizontal{
-    width: 1790px;
-    margin-left: 56px;
     height: 0.5px;             
     background-color: #f7f7f7; 
     border: none;              
     margin-top: -10px; 
+    margin-left: 56px;
+    margin-right: 56px;     
 }
 
 #linha_vertical{
