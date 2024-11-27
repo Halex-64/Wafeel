@@ -76,33 +76,26 @@ async function fetchFilmeDetalhes() {
 }
 fetchFilmeDetalhes()
 
-function toggleFavorito(filme) {
-    // Obtém os favoritos salvos no Local Storage
-    const favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
+async function toggleFavorito(filme) {
+    try {
+        const response = await fetch('/auth/favoritos', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                id: filme.id,
+                title: filme.title || filme.name,
+                poster_path: filme.poster_path,
+                media_type: filme.media_type || 'movie',
+            }),
+        });
 
-    // Verifica se o filme já está na lista de favoritos
-    const isFavorito = favoritos.some(item => item.id === filme.id);
-
-    if (isFavorito) {
-        // Remove dos favoritos
-        const novosFavoritos = favoritos.filter(item => item.id !== filme.id);
-        localStorage.setItem('favoritos', JSON.stringify(novosFavoritos));
-        alert('Filme removido dos favoritos!');
-    } else {
-        // Adiciona aos favoritos (garantindo o formato correto)
-        const novoFavorito = {
-            id: filme.id,
-            title: filme.title || filme.name,
-            poster_path: filme.poster_path,
-            media_type: filme.media_type || 'movie', // Defina 'tv' para séries
-        };
-        favoritos.push(novoFavorito);
-        localStorage.setItem('favoritos', JSON.stringify(favoritos));
-        alert('Filme adicionado aos favoritos!');
+        const data = await response.json();
+        alert(data.message);
+    } catch (error) {
+        console.error('Erro ao atualizar favoritos:', error);
     }
-
-    // Atualiza a aparência do botão
-    atualizarBotaoFavorito(filme.id);
 }
 
 // Quando a página carregar

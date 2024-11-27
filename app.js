@@ -274,7 +274,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', authRoutes);
+app.use('/auth', authRoutes);
 
 app.use('/', routes);
 

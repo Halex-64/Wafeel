@@ -1,19 +1,27 @@
 const express = require('express');
 const router = express.Router();
 
-// Simulação de banco de dados (pode usar um DB real como MongoDB, MySQL, etc.)
+// Simulação de banco de dados (incluindo favoritos por usuário)
 const users = [
     {
         email: 'nokotan@123',
-        password: '12345678'
+        password: '12345678',
+        favoritos: [] // Cada usuário tem sua lista de favoritos
     }
 ];
 
-let isLoggedin = false;
+// Middleware para verificar se o usuário está logado
+function verificarLogin(req, res, next) {
+    if (req.session.isLoggedin) {
+        next();
+    } else {
+        res.status(401).send('Você precisa estar logado para acessar esta funcionalidade.');
+    }
+}
 
 // Rota de cadastro
 router.post('/cadastro', (req, res) => {
-    const { email, password, confirm_password} = req.body;
+    const { email, password, confirm_password } = req.body;
 
     // Validação e verificação de usuário já existente
     const userExists = users.find(user => user.email === email);
@@ -21,38 +29,37 @@ router.post('/cadastro', (req, res) => {
         return res.status(400).send('Usuário já cadastrado!');
     }
 
-    //Validação da senha
-    if(password.length < 8){
-        return res.status(400).send('Senha muito curta')
+    // Validação da senha
+    if (password.length < 8) {
+        return res.status(400).send('Senha muito curta');
     }
 
-    if (password != confirm_password){
-        return res.status(400).send('Senhas diferentes!')
+    if (password !== confirm_password) {
+        return res.status(400).send('Senhas diferentes!');
     }
 
     // Cadastrar novo usuário
-    users.push({ email, password });
-    res.redirect('/index.html');
+    users.push({ email, password, favoritos: [] });
+    res.redirect('/login.html');
 });
 
 // Rota de login
 router.post('/login', (req, res) => {
     const { email, password } = req.body;
- 
+
     // Verificar se o usuário existe e a senha está correta
     const user = users.find(user => user.email === email && user.password === password);
     if (!user) {
         return res.status(400).send('Email ou senha inválidos!');
-    };
+    }
 
     req.session.isLoggedin = true;
     req.session.user = user;
-    
+
     res.redirect('/index.html');
-    console.log('isLoggedin: ', req.session.isLoggedin);
 });
 
-// Rota de logout, implementar em algum botão depois na tela de perfil
+// Rota de logout
 router.get('/logout', (req, res) => {
     req.session.destroy(err => {
         if (err) {
@@ -60,8 +67,33 @@ router.get('/logout', (req, res) => {
         }
         res.clearCookie('connect.sid');
         res.redirect('/login.html');
-        console.log(isLoggedin)
     });
 });
 
+// Rota para obter os favoritos do usuário logado
+router.get('/favoritos', verificarLogin, (req, res) => {
+    const user = req.session.user;
+    res.json(user.favoritos);
+});
+
+// Rota para adicionar/remover favoritos
+router.post('/favoritos', verificarLogin, (req, res) => {
+    const user = req.session.user;
+    const { id, title, poster_path, media_type } = req.body;
+
+    const favoritoExistente = user.favoritos.find(f => f.id === id);
+
+    if (favoritoExistente) {
+        // Remove dos favoritos
+        user.favoritos = user.favoritos.filter(f => f.id !== id);
+        res.json({ message: 'Removido dos favoritos.', favoritos: user.favoritos });
+    } else {
+        // Adiciona aos favoritos
+        const novoFavorito = { id, title, poster_path, media_type };
+        user.favoritos.push(novoFavorito);
+        res.json({ message: 'Adicionado aos favoritos!', favoritos: user.favoritos });
+    }
+});
+
 module.exports = router;
+
