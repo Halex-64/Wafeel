@@ -89,8 +89,14 @@ function toggleFavorito(filme) {
         localStorage.setItem('favoritos', JSON.stringify(novosFavoritos));
         alert('Filme removido dos favoritos!');
     } else {
-        // Adiciona aos favoritos
-        favoritos.push(filme);
+        // Adiciona aos favoritos (garantindo o formato correto)
+        const novoFavorito = {
+            id: filme.id,
+            title: filme.title || filme.name,
+            poster_path: filme.poster_path,
+            media_type: filme.media_type || 'movie', // Defina 'tv' para séries
+        };
+        favoritos.push(novoFavorito);
         localStorage.setItem('favoritos', JSON.stringify(favoritos));
         alert('Filme adicionado aos favoritos!');
     }
@@ -98,6 +104,19 @@ function toggleFavorito(filme) {
     // Atualiza a aparência do botão
     atualizarBotaoFavorito(filme.id);
 }
+
+// Quando a página carregar
+document.addEventListener('DOMContentLoaded', () => {
+    const filmeId = getFilmeIdFromURL(); // Função para obter o ID do filme da URL
+    const filmeDetalhes = getFilmeDetalhes(filmeId); // Função para obter detalhes do filme
+
+    // Atualiza o botão de favoritar com base nos favoritos
+    atualizarBotaoFavorito(filmeId);
+
+    // Adiciona o evento de clique ao botão
+    const favoritarBtn = document.getElementById('favoritar-btn');
+    favoritarBtn.addEventListener('click', () => toggleFavorito(filmeDetalhes));
+});
 
 function atualizarBotaoFavorito(filmeId) {
     const favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
