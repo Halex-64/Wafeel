@@ -1,0 +1,134 @@
+.tedioprincipal {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 70%;
+    margin-left: 170px;
+}
+
+.tedioimgprincipal {
+    width: 25%;
+    height: 25%;
+}
+
+.felicidadeprincipal {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 70%;
+    margin-left: 240px;
+}
+
+.felicidadeimgprincipal {
+    width: 18%;
+    height: 18%;
+}
+
+.descricaotedio {
+    font-size: 3rem;
+}
+
+.aventuraa{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 150px;
+}
+
+.superacao{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 100px;
+}
+
+.footer-tedio{
+    font-family: 'Poppins';
+}
+
+
+
+
+/* Carrossel de filmes */
+.carousel-container {
+    position: relative;
+    max-width: 100%;
+    margin: 20px auto;
+    overflow: hidden;   
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    flex-direction: column; /* Adiciona as linhas de cima e baixo */
+}
+
+/* Ajusta a largura do carrossel para as duas linhas */
+.carousel {
+    display: flex;
+    flex-direction: column; /* Organiza as linhas verticalmente */
+    margin: 0 auto;
+}
+
+.carousel-track {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Espaço entre as linhas */
+}
+
+.carousel-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px; /* Espaço entre os itens */
+}
+
+.carousel-item img {
+    width: 90px; /* Ajuste o tamanho conforme necessário */
+    height: auto;
+}
+
+
+.carousel {
+    overflow: hidden;
+    position: relative;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-item {
+    min-width: 15.15%; /* 6 itens por linha */
+    margin: 0 10px;
+    flex-shrink: 0;
+}
+
+
+.carousel-item img {
+    width: 100%; /* Garante que a imagem ocupe toda a largura do item */
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    font-size: 2rem;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.carousel-button.prev {
+    left: 0;
+}
+
+.carousel-button.next {
+    right: 0;
+}
