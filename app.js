@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const routes = require('./public/assets/js/routes');
 const session = require('express-session');
-const authRoutes = require('./public/assets/js/auth');
+const authRoutes = require('./routes/auth');
 const axios = require('axios');
 
 const app = express();
@@ -11,10 +11,6 @@ const app = express();
 const PORT = 3000;
 
 const API_KEY = process.env.API_KEY;
-
-app.listen(PORT, () => {
-    console.log(`Servidor rodando na porta ${PORT}`);
-});
 
 app.use(session({
     secret: 'chave-secreta',
@@ -28,9 +24,22 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/auth', require('./routes/auth'));
+
+app.use('/', routes);
+
+
 app.use((req, res, next) => {
     res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, private');
     next();
+});
+
+app.listen(PORT, () => {
+    console.log(`Servidor rodando na porta ${PORT}`);
 });
 
 app.get('/api/providers', async (req, res) => {
@@ -268,16 +277,6 @@ app.get('/api/tv/:id/providers', async (req, res) => {
 app.get('/api/key', (req, res) => {
     res.json({ apiKey: process.env.API_KEY });
 });
-
-
-app.use(bodyParser.urlencoded({ extended: true }));
-
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.use('/auth', authRoutes);
-
-app.use('/', routes);
-
 
 
 

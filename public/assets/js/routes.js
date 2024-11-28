@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const axios = require('axios');
-const { isLoggedIn } = require('./auth');
+const { isLoggedIn } = require('../../../routes/auth');
 require('dotenv').config();
 
 //Chave da API
@@ -38,7 +38,7 @@ router.get('/listas', (req, res) => {
 
 // Rota para a página de Favoritos
 router.get('/favoritos', (req, res) => {
-    if (req.session.isLoggedin) {
+    if (req.session.isLoggedin === true) {
         res.sendFile(path.join(__dirname, 'public', 'favoritos.html'));
     } else {
         res.redirect('login.html');

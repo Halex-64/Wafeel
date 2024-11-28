@@ -70,6 +70,12 @@ router.get('/logout', (req, res) => {
     });
 });
 
+router.get('/check-session', (req, res) => {
+    if (req.session.isLoggedin) {
+        return res.json({ loggedIn: true, user: req.session.user });
+    }
+    return res.json({ loggedIn: false });
+});
 // Rota para obter os favoritos do usuário logado
 router.get('/favoritos', verificarLogin, (req, res) => {
     const user = req.session.user;
