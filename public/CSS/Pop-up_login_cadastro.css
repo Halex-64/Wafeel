@@ -8,6 +8,8 @@ body{
 }
 
 .pop-up_login_cadastro{
+    width: 922px;
+    height: 509px;
     display: flex;
     border-radius: 10px;
     overflow: hidden;

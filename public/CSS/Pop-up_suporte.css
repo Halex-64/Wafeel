@@ -8,6 +8,8 @@ body{
 }
 
 .pop-up_suporte{
+    width: 447.75px ;
+    height: 514px;
     display: flex;
     border-radius: 10px;
     overflow: hidden;
