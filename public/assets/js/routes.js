@@ -102,17 +102,16 @@ router.get('/filmes-streaming', async (req, res) => {
     }
 });
 
-//Rota que faz a conexão com a API e busca os filmes populares
 router.get('/filmes-populares', async (req, res) => {
     const plataforma = req.query.plataforma;
+    let url = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=pt-BR&region=BR`;
 
-    if (!plataforma) {
-        return res.status(400).send("Parâmetro 'plataforma' é necessário.");
+    if (plataforma) {
+        url += `&with_watch_providers=${plataforma}`;
     }
 
     try {
-        const response = await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&with_watch_providers=${plataforma}&watch_region=BR&language=pt-BR`);
-
+        const response = await axios.get(url);
         res.json(response.data.results);
     } catch (error) {
         console.error('Erro ao buscar filmes populares: ', error.message);

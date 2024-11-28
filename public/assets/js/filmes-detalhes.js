@@ -4,6 +4,12 @@ function getMediaTypeFromUrl() {
     console.log("Tipo capturado da URL:", type); // Log para depuração
     return type;
 }
+
+function getFilmeIdFromURL() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('id');
+}
+
 function getMovieIdFromUrl() {
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('id'); // Obter o ID

@@ -101,5 +101,9 @@ router.post('/favoritos', verificarLogin, (req, res) => {
     }
 });
 
+router.get('/status', (req, res) => {
+    res.json({ isLoggedin: req.session.isLoggedin || false });
+});
+
 module.exports = router;
 

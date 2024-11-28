@@ -47,8 +47,16 @@ function renderMovies(movies) {
 
 // Carregamento inicial dos filmes populares e recentes
 function loadInitialMovies() {
-    fetch('/filmes-populares')
-        .then(response => response.json())
+    const defaultProvider = '8'; // Substitua pelo ID de um provedor padrão
+
+    // Atualização para incluir o parâmetro `plataforma`
+    fetch(`/filmes-populares?plataforma=${defaultProvider}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Erro na resposta: ${response.status}`);
+            }
+            return response.json();
+        })
         .then(filmes => {
             if (Array.isArray(filmes)) {
                 renderMovies(filmes);
@@ -58,13 +66,18 @@ function loadInitialMovies() {
         })
         .catch(error => console.error('Erro ao carregar filmes populares:', error));
 
+    // Código para carregar filmes recentes permanece inalterado
     fetch('/filmes-recentes')
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Erro na resposta: ${response.status}`);
+            }
+            return response.json();
+        })
         .then(filmes => {
-            const filmesDiv = document.getElementById('filmes-recentes');
-            filmesDiv.innerHTML = ''; // Limpa o conteúdo anterior
-
             if (Array.isArray(filmes)) {
+                const filmesDiv = document.getElementById('filmes-recentes');
+                filmesDiv.innerHTML = ''; // Limpa o conteúdo anterior
                 filmes.forEach(filme => {
                     const filmeElement = document.createElement('div');
                     filmeElement.classList.add('filme-card');
@@ -83,7 +96,7 @@ function loadInitialMovies() {
             }
         })
         .catch(error => console.error('Erro ao carregar filmes recentes:', error));
-};
+}
 
 // Carregamento das logos dos provedores e configuração dos eventos
 fetch('/api/providers')
