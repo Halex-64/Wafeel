@@ -132,3 +132,9 @@
 .carousel-button.next {
     right: 0;
 }
+
+.buttons2 {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
