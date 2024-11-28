@@ -1,0 +1,122 @@
+body{
+    margin: 0; /* Remove margens padrão */
+    height: 100vh; /* Define a altura do corpo para preencher toda a janela */
+    display: flex; /* Habilita o Flexbox */
+    align-items: center; /* Centraliza verticalmente */
+    justify-content: center; /* Centraliza horizontalmente */
+    background-color: #ccc;
+}
+
+.pop-up_criar_lista{
+    display: flex;
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: white;
+}
+
+.criar_lista{
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    justify-content: center;
+}
+
+.criar_lista{
+    background-color: black;
+    position: relative;
+}
+
+input {
+    width: 100%;  
+    height: 30px;  
+    padding: 8px;  
+    resize: none;  
+    border: 1px solid #ccc;  
+    border-radius: 2px;  
+    font-size: 16px; 
+    font-weight: 550; 
+    font-family: 'Poppins', sans-serif;  
+    box-sizing: border-box;  
+    overflow: hidden;
+    line-height: 13px;
+    margin-bottom: 24px;
+    color: #8500F2;
+}
+
+.input_criar_lista{
+    font-family: 'Poppins', sans-serif;  
+}
+
+input:focus {
+    border-color: #141414;  
+    outline: none;  
+    box-shadow: 0 0 2px rgba(49, 49, 49, 0.5);  
+}
+
+button{
+    width: auto;
+    height: 50px;
+    position: relative;
+    overflow: hidden;
+    border: none;
+    font-size: 20px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #8500F2;
+    background-color: inherit;
+    padding: 0;
+    margin: 0;
+} 
+
+.criar_cancelar {
+    display: flex;
+    gap: 32px;
+}
+
+/*-----------------------------------------------------------------------*/
+
+.input_criar_lista{
+    position: relative;
+}
+.suggestions-container {
+    border-radius: 0 0 5px 5px;
+    max-height: 200px;
+    overflow-y: auto;
+    position: absolute;
+    background-color: #fff;
+    width: 100%;
+    display: none;
+    z-index: 1000;
+    color: #8500F2;
+    position: relative;
+
+    scrollbar-width:thin;
+    scrollbar-color: #8500F2 transparent;
+
+    position: absolute; /* Permite posicionar em relação ao pai */
+    top: 100%; /* Faz o container aparecer logo abaixo do input */
+    left: 0; /* Alinha com o lado esquerdo do input */
+}
+
+.suggestion-item {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.suggestion-item:hover {
+    background-color: #f0f0f0;
+}
+
+.movie-poster {
+    width: 50px;
+    height: 75px;
+    object-fit: cover;
+    margin-right: 10px;
+    border-radius: 4px;
+}
+
+
