@@ -1,12 +1,19 @@
-@import url(nav.css);
-@import url(texts.css);
 @import url(button.css);
 @import url(card.css);
-@import url(recomendacoes.css);
-@import url(filmes_telainicial.css);
 @import url(filmes.css);
+@import url(filmes_da_lista.css);
+@import url(filmes_telainicial.css);
+@import url(lista_usuario.css);
+@import url(listas.css);
+@import url(login.css);
+@import url(nav.css);
+@import url(quiz.css);
+@import url(recomendacoes.css);
+@import url(responsividade.css);
 @import url(series.css);
-
+@import url(style.css);
+@import url(texts.css);
+  
 .titulo {
   color: aqua;
 }
