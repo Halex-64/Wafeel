@@ -62,16 +62,16 @@
             <div class="figura_container" id="section1">
                 <div class="question">
                     <h3>Como você descreveria seu humor atual?</h3>
-                    <input type="radio" name="humor" value="Alegre" id="alegre">
+                    <input type="radio" name="Q1" value="Suspense" id="alegre">
                     <label for="alegre">Alegre</label>
 
-                    <input type="radio" name="humor" value="Reflexivo" id="reflexivo">
+                    <input type="radio" name="Q1" value="Drama" id="reflexivo">
                     <label for="reflexivo">Reflexivo</label>
 
-                    <input type="radio" name="humor" value="Triste" id="triste">
+                    <input type="radio" name="Q1" value="Comédia" id="triste">
                     <label for="triste">Triste</label>
 
-                    <input type="radio" name="humor" value="Ansioso" id="ansioso">
+                    <input type="radio" name="Q1" value="Ação" id="ansioso">
                     <label for="ansioso">Ansioso</label>
                 </div>
             </div>
@@ -79,16 +79,16 @@
             <div class="question_container" id="section2">
                 <div class="question">
                     <h3>O que te faz gostar de um filme/série?</h3>
-                    <input type="radio" name="gostar" value="Ação frenética" id="acao">
+                    <input type="radio" name="Q2" value="Ação" id="acao">
                     <label for="acao">A ação frenética</label>
 
-                    <input type="radio" name="gostar" value="Emoções intensas" id="emocoes">
+                    <input type="radio" name="Q2" value="Romance" id="emocoes">
                     <label for="emocoes">As emoções intensas</label>
 
-                    <input type="radio" name="gostar" value="Humor" id="humor">
+                    <input type="radio" name="Q2" value="Comédia" id="humor">
                     <label for="humor">Humor</label>
 
-                    <input type="radio" name="gostar" value="Mistério e tensão" id="misterio">
+                    <input type="radio" name="Q2" value="Suspense" id="misterio">
                     <label for="misterio">Mistério e a tensão</label>
                 </div>
             </div>
@@ -96,16 +96,16 @@
             <div class="figura_container_2" id="section3">
                 <div class="question">
                     <h3>Como você quer se sentir depois de assistir o filme/série?</h3>
-                    <input type="radio" name="sentir" value="Reflexivo" id="sentir_reflexivo">
+                    <input type="radio" name="Q3" value="Drama" id="sentir_reflexivo">
                     <label for="sentir_reflexivo">Reflexivo</label>
 
-                    <input type="radio" name="sentir" value="Inspirado" id="sentir_inspirado">
+                    <input type="radio" name="Q3" value="Ação" id="sentir_inspirado">
                     <label for="sentir_inspirado">Inspirado</label>
 
-                    <input type="radio" name="sentir" value="Relaxado" id="sentir_relaxado">
+                    <input type="radio" name="Q3" value="Comédia" id="sentir_relaxado">
                     <label for="sentir_relaxado">Relaxado</label>
 
-                    <input type="radio" name="sentir" value="Intrigado" id="sentir_intrigado">
+                    <input type="radio" name="Q3" value="Romance" id="sentir_intrigado">
                     <label for="sentir_intrigado">Intrigado</label>
                 </div>
             </div>
@@ -113,26 +113,37 @@
             <div class="question_container" id="section4">
                 <div class="question">
                     <h3>Que tipo de emoção você gostaria de evitar no momento?</h3>
-                    <input type="radio" name="evitar" value="Monotonia" id="monotonia">
+                    <input type="radio" name="Q4" value="Suspense" id="monotonia">
                     <label for="monotonia">Monotonia</label>
 
-                    <input type="radio" name="evitar" value="Frieza" id="frieza">
+                    <input type="radio" name="Q4" value="Romance" id="frieza">
                     <label for="frieza">Frieza</label>
 
-                    <input type="radio" name="evitar" value="Tensão" id="tensao">
+                    <input type="radio" name="Q4" value="Ação" id="tensao">
                     <label for="tensao">Tensão</label>
 
-                    <input type="radio" name="evitar" value="Simplicidade" id="simplicidade">
+                    <input type="radio" name="Q4" value="Drama" id="simplicidade">
                     <label for="simplicidade">Simplicidade</label>
                 </div>
             </div>
 
             <div class="buttons">
-                <button type="submit" class="btn">Gerar Recomendação</button>
+                <button type="button" class="btn" onclick="submitQuiz()">Gerar Recomendação</button>
                 <button type="button" class="btn">Gerar Lista</button>
             </div>
+            <div id="recommendation" class="recommendation"> </div>
         </form>
     </section>
+</body>
+<footer>
+    <div class="social-icons">
+        <a href="#"><img src="/public/assets/img/whatsapp_icon.png" id="WhatsApp_icon" alt="WhatsApp"></a>
+        <a href="#"><img src="/public/assets/img/instagram_icon.png" id="Instagram_icon" alt="Instagram"></a>
+        <a href="#"><img src="/public/assets/img/help_icon.png" id="suporte_icon" alt="suporte"></a>
+    </div>
+</footer>
+<script src="assets/js/quiz.js"></script>
+
 
     <footer>
         <div class="social-icons">

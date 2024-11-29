@@ -1,4 +1,4 @@
-window.onload = async function() {
+window.onload = async function () {
     // Seleciona os elementos dos links de usuário e favoritos
     const userLink = document.getElementById('userLink');
     const favLink = document.getElementById('favLink');
@@ -9,13 +9,13 @@ window.onload = async function() {
         const data = await response.json();
 
         // Se estiver logado, altera o link para perfil e favoritos
-        if (data.isLoggedin) {
-            if (userLink) userLink.href = './perfil.html';
-            if (favLink) favLink.href = './favoritos.html';
-        } else {
-            // Caso contrário, direciona para login
+        if (data.isLoggedin !== true) {
             if (userLink) userLink.href = './login.html';
             if (favLink) favLink.href = './login.html';
+        } else {
+            // Caso contrário, direciona para login
+            if (userLink) userLink.href = './perfil.html';
+            if (favLink) favLink.href = './favoritos.html';
         }
     } catch (error) {
         console.error('Erro ao verificar login:', error);
@@ -23,7 +23,7 @@ window.onload = async function() {
 };
 
 // Recarrega a página ao usar o botão "voltar" do navegador
-window.addEventListener('pageshow', function(event) {
+window.addEventListener('pageshow', function (event) {
     if (event.persisted) {
         window.location.reload();
     }
