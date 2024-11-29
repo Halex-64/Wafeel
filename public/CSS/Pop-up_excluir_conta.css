@@ -29,11 +29,12 @@ body{
 
 .elementos_excluir_conta h2{
     font-size: 32px;
-    margin: 16px 0;
+    margin: 8px 0;
 }
 
 .elementos_excluir_conta h1 {
     font-size: 16px;
+    padding-bottom: 8px;
 }
 
 .botoes_sim_nao{
@@ -84,7 +85,7 @@ button span {
     width: 24px;
     height: 24px;
     background-color: black; /* A cor desejada aqui */
-    border: 2px solid white;
+    border: 1px solid white;
     color: white;
     display: flex;
     align-items: center;

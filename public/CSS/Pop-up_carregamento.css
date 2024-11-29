@@ -15,7 +15,7 @@ body{
     background-color: #ccc;
 }
 
-.pop-up_cometario{
+.pop-up_carregamento{
     width: 405.63px;
     height: 243px;
     display: flex;
@@ -27,7 +27,7 @@ body{
     justify-content: center;
 }
 
-.elementos_pop-up_cometario{
+.elementos_pop-up_carregamento{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -36,6 +36,6 @@ body{
     padding: 32px 48px;
 }
 
-.seu_comentario {
+.titulo_carregamento {
     font-size: 18px;
 }

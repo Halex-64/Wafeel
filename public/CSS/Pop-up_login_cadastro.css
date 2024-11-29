@@ -144,7 +144,7 @@ button span {
     width: 24px;
     height: 24px;
     background-color: black; /* A cor desejada aqui */
-    border: 2px solid white;
+    border: 1px solid white;
     color: white;
     display: flex;
     align-items: center;
