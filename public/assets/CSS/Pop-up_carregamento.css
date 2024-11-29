@@ -1,0 +1,41 @@
+/*Css usado em
+Pop_Cadastro_efetuado.html
+Pop-up_comentario_enviado.html
+Pop-up_gerando_lista.html
+Pop-up_gerando_recomendacao.html
+Pop-up_login_efetuado.html
+Pop-up_perfil_excluido.html*/
+
+body{
+    margin: 0; /* Remove margens padrão */
+    height: 100vh; /* Define a altura do corpo para preencher toda a janela */
+    display: flex; /* Habilita o Flexbox */
+    align-items: center; /* Centraliza verticalmente */
+    justify-content: center; /* Centraliza horizontalmente */
+    background-color: #ccc;
+}
+
+.pop-up_carregamento{
+    width: 405.63px;
+    height: 243px;
+    display: flex;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1.5px solid #8500F2;
+    background-color: black;
+    align-items: center;
+    justify-content: center;
+}
+
+.elementos_pop-up_carregamento{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 32px 48px;
+}
+
+.titulo_carregamento {
+    font-size: 18px;
+}

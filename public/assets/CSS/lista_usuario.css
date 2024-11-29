@@ -1,0 +1,118 @@
+body{
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex; 
+  flex-direction: column;
+}
+
+.botao_criar_lista{
+  text-align: center;
+  display: flex;
+  margin: 0 56px;
+  padding:  0px;
+}
+  
+.botao_criar_lista .btn {
+  background-color: #8500F2;
+  color: #fff;
+  font-size: 24px;
+  border: none;
+  padding: 10px 20px;
+  margin: 0;
+  cursor: pointer;
+  border-radius: 5px;
+  height: auto;
+  width: 300px;
+}
+  
+.botao_criar_lista .btn:hover {
+  background-color: #5e02aa;
+}
+
+section {
+  flex-grow: 1; /* Faz o section expandir para ocupar o espaço restante */
+  margin-top: 0;
+  height: auto;
+}
+
+footer {
+  margin-top: 0;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+
+  section{
+    margin-top: 44px;
+    height: 740px;
+  }
+  
+  .nav_listas{
+    top: 0;
+    display: none;
+  }
+
+  .nav_listas_responsiva_direita {
+    display: block;
+    position: fixed;
+    z-index: 4;
+    width: 50%;
+    right: 0;
+    background-color: black;    
+    padding-top: 8px;
+    padding-bottom: 11px;
+    margin: 0; 
+    z-index: 1;
+  }
+
+  .nav_listas_responsiva_direita::after {
+    content: "";
+    position: absolute;
+    bottom: 0; /* Alinha no final de .nav_listas */
+    left: 0;
+    width: 100%; /* Mesma largura de .nav_listas */
+    height: 3px; /* Altura da faixa */
+    background-color: #8500F2; /* Cor da faixa */
+  }
+
+  .nav_listas_responsiva_esquerda{
+    display: block;
+    position: fixed;
+    z-index: 4;
+    width: 50%;
+    left: 0;
+    background-color: black;    
+    padding-top: 8px;
+    padding-bottom: 11px;
+    margin: 0; 
+    z-index: 1;
+  }
+
+  .nav_listas_responsiva_esquerda::after {
+    display: none;
+    content: "";
+    position: absolute;
+    bottom: 0; /* Alinha no final de .nav_listas */
+    left: 0;
+    width: 100%; /* Mesma largura de .nav_listas */
+    height: 3px; /* Altura da faixa */
+    /*background-color: #8500F2; /* Cor da faixa */
+  }
+
+  .botao_criar_lista{
+    padding: 0;
+    margin: 16px 32px;
+  }
+
+  .botao_criar_lista .btn{
+    margin: 0;
+    width: 130px;
+    height: 40px;
+    font-size: 16px;
+  }
+
+  .footer_responsivo{
+    margin-top: 0;
+  }
+}

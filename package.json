@@ -4,6 +4,7 @@
     "dotenv": "^16.4.5",
     "express": "^4.21.0",
     "express-session": "^1.18.1",
+    "lucide": "^0.454.0",
     "node": "^22.9.0"
   },
   "name": "wafeel",

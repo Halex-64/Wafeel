@@ -1,11 +1,7 @@
-@import url(nav.css);
 @import url(texts.css);
 @import url(button.css);
-@import url(card.css);
 
-html,
-body {
-  height: 100%;
+html, body{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -13,6 +9,15 @@ body {
   background-color: #000000;
   color: white;
   overflow-x: hidden;
+}
+
+.header_quiz {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
 }
 
 nav {
@@ -46,7 +51,7 @@ nav {
   text-decoration: none;
 }
 
-.header_quiz {
+.header_container {
   color: white;
   display: flex;
   flex-direction: column;
@@ -252,11 +257,83 @@ label {
 footer {
   background-color: #8500f2;
   padding: 8px;
-  margin-top: 96px;
+  margin-top: 136px;
   text-align: center;
+  width: 100%;
+  margin-bottom: 0;
 }
 
-.wrapper {
-  min-height: 100%;
-  margin-bottom: -50px;
+.menu-toggle {
+  background: none;
+  display: none;
+  font-size: 24px;
+  font-weight:bold;
+  border: none;
+  color: #8500F2;
+  cursor: pointer;
+  padding-right: 0;
+}
+
+.header_responsiva{
+  display: none;
+}
+
+.menu_responsivo{
+  display: none;
+}
+
+.footer_responsivo {
+  display: none;
+}
+
+@media (max-width: 768px) {
+
+  .welcomeContainer h2{
+    font-size: 24px;
+    margin-top: 0;
+  }
+  .welcomeContainer p{
+    font-size: 16px;
+    padding: 0 20px 0 20px ;
+    line-height: 125%;
+  }
+
+  .question{
+    margin: 56px;
+  }
+
+  .figura_container .question h3{
+    font-size: 24px;
+  }
+
+  .figura_container .question label{
+    font-size: 16px;
+  }
+
+  .quiz .question label::before{
+    width: 10px;
+    height: 10px;
+  }
+
+  .question_container .question h3{
+    font-size: 24px;
+  }
+
+  .question_container .question label{
+    font-size: 16px;
+  }
+
+  .figura_container_2 .question h3{
+    font-size: 24px;
+  }
+
+  .figura_container_2 .question label{
+    font-size: 16px;
+  }
+
+  .buttons{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }

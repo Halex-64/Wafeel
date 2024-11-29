@@ -1,0 +1,119 @@
+body{
+    margin: 0; /* Remove margens padrão */
+    height: 100vh; /* Define a altura do corpo para preencher toda a janela */
+    display: flex; /* Habilita o Flexbox */
+    align-items: center; /* Centraliza verticalmente */
+    justify-content: center; /* Centraliza horizontalmente */
+    background-color: #ccc;
+}
+
+.pop-up_suporte{
+    width: 447.75px ;
+    height: 514px;
+    display: flex;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.elementos_suporte{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 32px 48px;
+}
+
+.elementos_suporte{
+    background-color: black;
+    position: relative;
+}
+
+.elementos_suporte h2{
+    font-size: 32px;
+    margin: 16px 0;
+}
+
+.elementos_suporte .escreva_duvida {
+    font-size: 18px;
+}
+
+.elementos_suporte .sejamos_capazes {
+    font-size: 16px;
+}
+
+form{
+    padding: 0 16px 24px;
+}
+
+form #comment{
+    width: 283px;
+    height: 138px;
+    resize: none;
+    outline: none;
+    background-color: #E9E9E9;
+}
+
+button{
+    width: 141px;
+    height: 50px;
+    position: relative;
+    overflow: hidden;
+    border: none;
+    font-size: 20px;
+    border-radius: 8px;
+    transition: color 0.3s ease;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%; /* Começa fora do botão, à esquerda */
+    width: 100%; /* Largura do botão */
+    height: 100%; /* Altura do botão */
+    background-color: #8500F2; /* Cor de fundo ao passar o mouse */
+    z-index: 0; /* Coloca o pseudo-elemento atrás do texto */
+    transition: left 0.3s ease; /* Faz o pseudo-elemento deslizar */
+}
+
+button:hover::before {
+    left: 0; /* Move o pseudo-elemento para cobrir todo o botão */
+}
+
+button:hover {
+    color: white; /* Altera a cor do texto */
+    cursor: pointer;
+}
+  
+button span {
+    position: relative;
+    z-index: 1; /* Garante que o texto fique acima do pseudo-elemento */
+}
+
+form .botao_enviar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 16px;
+}
+
+.close {
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    background-color: black; /* A cor desejada aqui */
+    border: 1px solid white;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 13px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    line-height: 24px;
+}

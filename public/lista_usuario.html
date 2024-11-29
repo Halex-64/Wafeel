@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wafeel</title>
+    <link rel="stylesheet" href="CSS/quiz.css">
+    <link rel="stylesheet" href="CSS/listas.css">
+    <link rel="stylesheet" href="CSS/lista_usuario.css">
+    <link rel="stylesheet" href="CSS/responsividade.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.cdnfonts.com/css/coolvetica-2" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> 
+</head>
+<body>
+    <header class="header_quiz">
+        <nav class="barradenavegacao">
+            <img class="logo__image" src="assets/img/logo.png" alt="Logo">
+            <ul class="links">
+                <li><a href="./quiz.html">Quiz</a></li>
+                <li><a href="#">Filmes</a></li>
+                <li><a href="#">Séries</a></li>
+                <li><a id="selecao_roxo" href="./listas.html">Listas</a></li>
+                <li>
+                    <a href="#">
+                        <img class="icon" src="assets/img/favoritosicon.png" alt="Favoritos">
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img class="icon" src="assets/img/usuarioicon.png" alt="Usuário">
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <header class="header_responsiva">
+        <nav class="barradenavegacao_responsiva">
+            <a href="/public/index.html"><img class="logo__image" src="assets/img/logo.png" alt="Logo"></a>
+            <ul class="links" id="mobile-menu">
+                <li><a href="./quiz.html">QUIZ</a></li>
+                <li><a href="./filmes.html">FILMES</a></li>
+                <li><a href="./series.html">SÉRIES</a></li>                                             
+            </ul>
+            <button class="menu-toggle" id="menu-toggle">☰</button>
+        </nav>
+    </header>
+
+    <div class="menu_responsivo">
+        <ul class="links" id="mobile-menu">
+            <li><a href="./quiz.html">QUIZ</a></li>
+            <li><a href="./filmes.html">FILMES</a></li>
+            <li><a href="./series.html">SÉRIES</a></li> 
+            <li><a href="./listas.html">LISTAS</a></li> 
+            <li><a href="./favoritos.html">FAVORITOS</a></li>
+            <li><a href="./perfil.html">PERFIL</a></li>                             
+        </ul>
+    </div>
+
+    <div class="nav_listas">
+        <div class="barra_listas">
+            <li><a href="./listas.html">PRINCIPAIS LISTAS</a></li>
+            <div id="linha_vertical"></div>
+            <li><a id="selecao_roxo" href="./sua_lista.html">SUAS LISTAS</a></li>
+        </div>    
+        <div id="linha_horizontal"></div>
+    </div>
+
+    <div class="nav_listas_responsiva_direita">
+        <div class="barra_listas">           
+            <li><a id="selecao_roxo" href="./lista_usuario.html" class="suas_listas">SUAS LISTAS</a></li>
+        </div>        
+    </div>
+
+    <div class="nav_listas_responsiva_esquerda">
+        <div class="barra_listas">
+            <li><a class="principais_listas" href="./listas.html">PRINCIPAIS LISTAS</a></li>
+        </div>
+    </div>
+
+    <section>
+        <div class="botao_criar_lista">
+            <button type="button" class="btn">Criar Lista</button>
+        </div>
+    </section>
+
+    <footer>
+        <div class="social-icons">
+            <a href="#">
+                <img src="/public/assets/img/whatsapp_icon.png" id="WhatsApp_icon" alt="WhatsApp">
+            </a>
+            <a href="#">
+                <img src="/public/assets/img/instagram_icon.png" id="Instagram_icon" alt="Instagram">
+            </a>
+            <a href="#">
+                <img src="/public/assets/img/help_icon.png" id="suporte_icon" alt="Suporte">
+            </a>
+        </div>
+    </footer>
+
+    <footer class="footer_responsivo">
+        <div class="footer_links">        
+            <a href="#">Login</a>
+            <a href="#">Suporte</a>
+            <a href="#">Sobre Nós</a>        
+        </div>
+        <div class="social-icons">
+            <a href="#"><img src="/public/assets/img/whatsapp_icon.png" id="WhatsApp_icon" alt="WhatsApp"></a>
+            <a href="#"><img src="/public/assets/img/instagram_icon.png" id="Instagram_icon" alt="Instagram"></a>         
+        </div>
+        <h3>Seu mundo de histórias, personalizado.</h3>
+        <a class="logo_footer_responsivo"><img class="logo__image" src="assets/img/logo.png" alt="Logo"></a>
+        <div class="politica_termos">
+            <p class="politica_priv">Política de Privacidade</p>
+            <p class="term_cond">Termos e Condições</p>
+        </div>    
+    </footer>
+
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const menuResponsive = document.querySelector('.menu_responsivo');
+        const headerResponsive = document.querySelector('.header_responsiva');
+        const toggleCor = document.querySelector('.menu-toggle');
+        const logoImage = document.querySelector('.barradenavegacao_responsiva .logo__image'); // Seleção específica
+
+        menuToggle.addEventListener('click', () => {
+            menuResponsive.classList.toggle('show'); // Alterna a classe para abrir/fechar o menu
+            headerResponsive.classList.toggle('header-active'); // Alterna a cor da header_responsiva
+            toggleCor.classList.toggle('menu-toggle-active');
+            logoImage.classList.toggle('logoImage-active'); // Adiciona a classe que ativa o filtro
+        });
+    </script>
+</body>
+</html>
