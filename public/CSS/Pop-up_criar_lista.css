@@ -10,7 +10,7 @@ body{
 .pop-up_criar_lista{
     display: flex;
     border-radius: 5px;
-    overflow: hidden;
+    overflow: visible;
     background-color: white;
 }
 
@@ -19,11 +19,8 @@ body{
     flex-direction: column;
     padding: 24px;
     justify-content: center;
-}
-
-.criar_lista{
     background-color: black;
-    position: relative;
+    border-radius: 5px;
 }
 
 input {
@@ -39,18 +36,28 @@ input {
     box-sizing: border-box;  
     overflow: hidden;
     line-height: 13px;
-    margin-bottom: 24px;
     color: #8500F2;
+}
+
+#list_name{
+    margin-bottom: 16px;
 }
 
 .input_criar_lista{
     font-family: 'Poppins', sans-serif;  
+    position: relative;
+    overflow: visible;
 }
 
-input:focus {
+#list_name:focus {
     border-color: #141414;  
     outline: none;  
     box-shadow: 0 0 2px rgba(49, 49, 49, 0.5);  
+}
+
+#movie_search:focus{
+    outline: none;
+    border-radius: 2px 2px 0 0;
 }
 
 button{
@@ -72,14 +79,12 @@ button{
 
 .criar_cancelar {
     display: flex;
+    margin-top: 24px;
     gap: 32px;
 }
 
 /*-----------------------------------------------------------------------*/
-
-.input_criar_lista{
-    position: relative;
-}
+ 
 .suggestions-container {
     border-radius: 0 0 5px 5px;
     max-height: 200px;
@@ -87,36 +92,59 @@ button{
     position: absolute;
     background-color: #fff;
     width: 100%;
-    display: none;
     z-index: 1000;
     color: #8500F2;
-    position: relative;
-
     scrollbar-width:thin;
     scrollbar-color: #8500F2 transparent;
 
-    position: absolute; /* Permite posicionar em relação ao pai */
-    top: 100%; /* Faz o container aparecer logo abaixo do input */
-    left: 0; /* Alinha com o lado esquerdo do input */
+    top: 100%;
+    left: 0;
+}
+
+input, .suggestions-container {
+    box-sizing: border-box; /* Garante que padding e bordas sejam contabilizados na largura */
 }
 
 .suggestion-item {
     display: flex;
     align-items: center;
+    justify-content: space-between; /* Espaça os elementos horizontalmente */
     padding: 8px;
-    cursor: pointer;
 }
 
 .suggestion-item:hover {
     background-color: #f0f0f0;
 }
 
+.left-container {
+    display: flex;
+    align-items: center; /* Alinha imagem e texto verticalmente */
+}
+
 .movie-poster {
     width: 50px;
     height: 75px;
     object-fit: cover;
-    margin-right: 10px;
+    margin-right: 10px; /* Espaço entre o pôster e o texto */
     border-radius: 4px;
 }
 
+.movie-title {
+    font-size: 16px;
+    color: #8500F2;
+    font-weight: 500;
+}
+
+.plus-icon {
+    font-size: 24px; 
+    color: #8500F2;
+    margin-left: 10px;
+    border-radius: 50%;
+    display: inline-flex; 
+    align-items: center;
+    justify-content: center;
+    margin-right: 16px;
+    margin-left: 16px;
+    cursor: pointer;
+}
 

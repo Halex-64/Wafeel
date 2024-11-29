@@ -17,10 +17,10 @@
         <div class="criar_lista"> <!--cadastro-->
             <div class="input_criar_lista"> <!--input_cadastro-->
                 <label for="message" class="form_message_label">NOME</label>
-                <input type="text" id="username" class="form_input" required>
+                <input type="text" id="list_name" class="form_input" required>
     
                 <label for="movie-search" class="form_message_label">ADICIONAR TÍTULO</label>
-                <input type="text" id="movie-search" class="form_input" required>
+                <input type="text" id="movie_search" class="form_input" required>
                 <div id="suggestions" class="suggestions-container"></div>
             </div>
             <div class="criar_cancelar">
@@ -32,18 +32,17 @@
                 </button>
             </div>
         </div>
-    </div>
+    </div> 
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const inputField = document.getElementById('movie-search');
+            const inputField = document.getElementById('movie_search');
             const suggestionsContainer = document.getElementById('suggestions');
 
             inputField.addEventListener('input', async (event) => {
                 const query = event.target.value;
 
                 if (query.length > 2) {
-                    // Exemplo usando uma API pública como TMDB
                     const apiKey = '4556dc6e1d1a01742122bf8dc0fbae46'; // Substitua com sua chave de API
                     const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${encodeURIComponent(query)}`;
 
@@ -51,7 +50,6 @@
                         const response = await fetch(url);
                         const data = await response.json();
 
-                        // Atualizar sugestões
                         if (data.results) {
                             suggestionsContainer.innerHTML = '';
                             suggestionsContainer.style.display = 'block';
@@ -60,23 +58,38 @@
                                 const suggestion = document.createElement('div');
                                 suggestion.className = 'suggestion-item';
 
-                                // Criar imagem e título
+                                // Criar o contêiner para imagem e título/ano
+                                const leftContainer = document.createElement('div');
+                                leftContainer.className = 'left-container';
+
                                 const img = document.createElement('img');
                                 img.src = `https://image.tmdb.org/t/p/w200${movie.poster_path}`;
                                 img.alt = movie.title;
                                 img.className = 'movie-poster';
 
                                 const title = document.createElement('span');
-                                title.textContent = movie.title;
+                                const releaseYear = movie.release_date ? ` (${new Date(movie.release_date).getFullYear()})` : '';
+                                title.textContent = `${movie.title}${releaseYear}`;
+                                title.className = 'movie-title';
 
-                                // Adicionar evento de clique
-                                suggestion.addEventListener('click', () => {
-                                    inputField.value = movie.title;
-                                    suggestionsContainer.style.display = 'none';
+                                // Adicionar título/ano e imagem ao contêiner esquerdo
+                                leftContainer.appendChild(img);
+                                leftContainer.appendChild(title);
+
+                                // Criar o ícone de "+"
+                                const plusIcon = document.createElement('span');
+                                plusIcon.textContent = '+';
+                                plusIcon.className = 'plus-icon';
+
+                                // Adicionar evento de clique no ícone "+"
+                                plusIcon.addEventListener('click', () => {
+                                    inputField.value = `${movie.title}${releaseYear}`;
+                                    suggestionsContainer.style.display = 'none';  // Fecha as sugestões
                                 });
 
-                                suggestion.appendChild(img);
-                                suggestion.appendChild(title);
+                                // Adicionar os elementos na sugestão
+                                suggestion.appendChild(leftContainer);
+                                suggestion.appendChild(plusIcon);
                                 suggestionsContainer.appendChild(suggestion);
                             });
                         }
