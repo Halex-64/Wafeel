@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/coolvetica-2" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
@@ -28,7 +28,7 @@
         </nav>
     </header>
 
-    <header class="header_responsiva">
+    <!-- <header class="header_responsiva">
         <nav class="barradenavegacao_responsiva">
             <a href="/public/index.html"><img class="logo__image" src="assets/img/logo.png" alt="Logo"></a>
             <ul class="links" id="mobile-menu">
@@ -38,7 +38,7 @@
             </ul>
             <button class="menu-toggle" id="menu-toggle">☰</button>
         </nav>
-    </header>
+    </header> -->
 
     <div class="menu_responsivo">
         <ul class="links" id="mobile-menu">
@@ -57,7 +57,7 @@
             <p class="welcomeDescription">Faça um quiz rápido para descobrir as recomendações certas para você!</p>
         </div>
 
-        <form>
+        <form id="quiz-form">
             <div class="figura_container" id="section1">
                 <div class="question">
                     <h3>Como você descreveria seu humor atual?</h3>
@@ -133,6 +133,13 @@
             <div id="recommendation" class="recommendation"> </div>
         </form>
     </section>
+    <footer>
+        <div class="social-icons">
+            <a href="#"><img src="assets/img/whatsapp_icon.png" id="WhatsApp_icon" alt="WhatsApp"></a>
+            <a href="#"><img src="assets/img/instagram_icon.png" id="Instagram_icon" alt="Instagram"></a>
+            <a href="#"><img src="assets/img/help_icon.png" id="suporte_icon" alt="suporte"></a>
+        </div>
+    </footer>
 </body>
     <footer class="footer_responsivo">
         <div class="footer_links">        
@@ -141,8 +148,8 @@
             <a href="#">Sobre Nós</a>        
         </div>
         <div class="social-icons">
-            <a href="#"><img src="/public/assets/img/whatsapp_icon.png" id="WhatsApp_icon" alt="WhatsApp"></a>
-            <a href="#"><img src="/public/assets/img/instagram_icon.png" id="Instagram_icon" alt="Instagram"></a>         
+            <a href="#"><img src="assets/img/whatsapp_icon.png" id="WhatsApp_icon" alt="WhatsApp"></a>
+            <a href="#"><img src="assets/img/instagram_icon.png" id="Instagram_icon" alt="Instagram"></a>         
         </div>
         <h3>Seu mundo de histórias, personalizado.</h3>
         <a class="logo_footer_responsivo"><img class="logo__image" src="assets/img/logo.png" alt="Logo"></a>
@@ -151,7 +158,7 @@
             <p class="term_cond">Termos e Condições</p>
         </div>    
     </footer>
-
+    <script src="assets/js/quiz.js"></script>
     <script>
         const menuToggle = document.getElementById('menu-toggle');
         const menuResponsive = document.querySelector('.menu_responsivo');

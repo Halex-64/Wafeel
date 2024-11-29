@@ -139,7 +139,7 @@ label {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url("/public/assets/img/filme_garfield.png");
+  background-image: url("../img/filme_garfield.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -165,7 +165,7 @@ label {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url("/public/assets/img/filme_lady_gaga.png");
+  background-image: url("../img/filme_lady_gaga.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -181,6 +181,13 @@ label {
   align-items: center;
   margin: 0 auto;
   z-index: 1;
+}
+
+.recommendation{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 /*----------------------------------------------------------------*/
