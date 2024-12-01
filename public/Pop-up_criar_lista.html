@@ -24,7 +24,7 @@
                 <div id="suggestions" class="suggestions-container"></div>
             </div>
             <div class="criar_cancelar">
-                <button type="criar">
+                <button type="criar" id="create_button" disabled>
                     <span>CRIAR</span>
                 </button>
                 <button type="cancelar">
@@ -38,68 +38,101 @@
         document.addEventListener('DOMContentLoaded', () => {
             const inputField = document.getElementById('movie_search');
             const suggestionsContainer = document.getElementById('suggestions');
+            const createButton = document.getElementById('create_button');
+            const addedTitles = []; // Lista para armazenar os títulos adicionados
 
             inputField.addEventListener('input', async (event) => {
                 const query = event.target.value;
 
-                if (query.length > 2) {
+                if (query.length >= 1) {
                     const apiKey = '4556dc6e1d1a01742122bf8dc0fbae46'; // Substitua com sua chave de API
-                    const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${encodeURIComponent(query)}`;
+                    const movieUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${encodeURIComponent(query)}`;
+                    const seriesUrl = `https://api.themoviedb.org/3/search/tv?api_key=${apiKey}&query=${encodeURIComponent(query)}`;
 
                     try {
-                        const response = await fetch(url);
-                        const data = await response.json();
+                        const [movieResponse, seriesResponse] = await Promise.all([
+                            fetch(movieUrl),
+                            fetch(seriesUrl),
+                        ]);
 
-                        if (data.results) {
-                            suggestionsContainer.innerHTML = '';
-                            suggestionsContainer.style.display = 'block';
+                        const movieData = await movieResponse.json();
+                        const seriesData = await seriesResponse.json();
 
-                            data.results.slice(0, 5).forEach(movie => {
-                                const suggestion = document.createElement('div');
-                                suggestion.className = 'suggestion-item';
+                        const results = [
+                            ...(movieData.results || []).map(item => ({
+                                type: 'movie',
+                                title: item.title,
+                                release_date: item.release_date,
+                                poster_path: item.poster_path,
+                            })),
+                            ...(seriesData.results || []).map(item => ({
+                                type: 'tv',
+                                title: item.name,
+                                release_date: item.first_air_date,
+                                poster_path: item.poster_path,
+                            })),
+                        ];
 
-                                // Criar o contêiner para imagem e título/ano
-                                const leftContainer = document.createElement('div');
-                                leftContainer.className = 'left-container';
+                        suggestionsContainer.innerHTML = '';
+                        suggestionsContainer.style.display = 'block';
 
-                                const img = document.createElement('img');
-                                img.src = `https://image.tmdb.org/t/p/w200${movie.poster_path}`;
-                                img.alt = movie.title;
-                                img.className = 'movie-poster';
+                        results.slice(0, 10).forEach(item => {
+                            const suggestion = document.createElement('div');
+                            suggestion.className = 'suggestion-item';
 
-                                const title = document.createElement('span');
-                                const releaseYear = movie.release_date ? ` (${new Date(movie.release_date).getFullYear()})` : '';
-                                title.textContent = `${movie.title}${releaseYear}`;
-                                title.className = 'movie-title';
+                            const leftContainer = document.createElement('div');
+                            leftContainer.className = 'left-container';
 
-                                // Adicionar título/ano e imagem ao contêiner esquerdo
-                                leftContainer.appendChild(img);
-                                leftContainer.appendChild(title);
+                            const img = document.createElement('img');
+                            img.src = item.poster_path
+                                ? `https://image.tmdb.org/t/p/w200${item.poster_path}`
+                                : 'https://via.placeholder.com/50x75?text=No+Image';
+                            img.alt = item.title;
+                            img.className = 'movie-poster';
 
-                                // Criar o ícone de "+"
-                                const plusIcon = document.createElement('span');
-                                plusIcon.textContent = '+';
-                                plusIcon.className = 'plus-icon';
+                            const title = document.createElement('span');
+                            const releaseYear = item.release_date ? ` (${new Date(item.release_date).getFullYear()})` : '';
+                            title.textContent = `[${item.type === 'movie' ? 'Filme' : 'Série'}] ${item.title}${releaseYear}`;
+                            title.className = 'movie-title';
 
-                                // Adicionar evento de clique no ícone "+"
-                                plusIcon.addEventListener('click', () => {
-                                    inputField.value = `${movie.title}${releaseYear}`;
-                                    suggestionsContainer.style.display = 'none';  // Fecha as sugestões
-                                });
+                            leftContainer.appendChild(img);
+                            leftContainer.appendChild(title);
 
-                                // Adicionar os elementos na sugestão
-                                suggestion.appendChild(leftContainer);
-                                suggestion.appendChild(plusIcon);
-                                suggestionsContainer.appendChild(suggestion);
+                            const plusIcon = document.createElement('span');
+                            plusIcon.textContent = '+';
+                            plusIcon.className = 'plus-icon';
+
+                            // Evento de clique no ícone "+"
+                            plusIcon.addEventListener('click', () => {
+                                const releaseYear = item.release_date ? ` (${new Date(item.release_date).getFullYear()})` : '';
+                                inputField.value = `${item.title}${releaseYear}`; // Define o título no campo de entrada
+                                addedTitles.push(item.title); // Adiciona o título à lista
+                                suggestionsContainer.style.display = 'none'; // Fecha as sugestões
+
+                                // Atualizar botão "CRIAR"
+                                updateCreateButtonState();
                             });
-                        }
+
+                            suggestion.appendChild(leftContainer);
+                            suggestion.appendChild(plusIcon);
+                            suggestionsContainer.appendChild(suggestion);
+                        });
                     } catch (error) {
-                        console.error('Erro ao buscar filmes:', error);
+                        console.error('Erro ao buscar filmes/séries:', error);
                     }
                 } else {
                     suggestionsContainer.style.display = 'none';
                 }
             });
+
+            // Atualizar o estado do botão "CRIAR"
+            function updateCreateButtonState() {
+                if (addedTitles.length > 0) {
+                    createButton.disabled = false; // Habilita o botão
+                } else {
+                    createButton.disabled = true; // Desabilita o botão
+                }
+            }
 
             // Ocultar sugestões se clicar fora
             document.addEventListener('click', (e) => {
