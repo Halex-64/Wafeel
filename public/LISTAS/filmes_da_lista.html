@@ -90,21 +90,10 @@
                         <li><a>GÊNERO</a></li>
                         <div class="arrow"></div>                        
                         <ul id="dropdown-genero" class="options">
-                            <li class="option">Drama</li>
-                            <li class="option">Crime</li>
-                            <li class="option">Terror</li>
-                            <li class="option">Ficção Científica</li>
-                            <li class="option">Animação</li>
-                            <li class="option">Romance</li>
-                            <li class="option">Thriller</li>
-                            <li class="option">Ação e Aventura</li>
-                            <li class="option">Guerra</li>
-                            <li class="option">Sobrenatural</li>
-                            <li class="option">Western</li>
-                            <li class="option">Esporte</li>
+                            <li class="option"></li>                            
                         </ul>
                     </div>
-
+                    
                     <div id="filtro_ano" class="filtro_seta" onclick="toggleDropdown('dropdown-ano', this)">
                         <li><a>ANO</a></li>
                         <div class="arrow"></div>
@@ -142,17 +131,15 @@
                         <li><a>SERVIÇO</a></li>
                         <div class="arrow"></div>
                         <ul id="dropdown-servico" class="options">
-                            <li class="option">Netflix</li>
-                            <li class="option">Max</li>
-                            <li class="option">Prime Video</li>
-                            <li class="option">Disney+</li>
-                            <li class="option">Apple Tv</li>
-                            <li class="option">Paramount+</li>
-                            <li class="option">Globoplay</li> 
-                            <li class="option">MUBI</li>            
+                            <li class="option"></li>                                        
                         </ul>
                     </div>
-                </div>                
+
+                    <!-- Botão para Resetar Filtros (inicialmente oculto) -->
+                    <div class="resetar_filtro" id="resetar-filtro" style="display: none;">
+                        <li><a href="javascript:void(0);" onclick="clearFilters()">Resetar Filtros</a></li>
+                    </div>
+                </div> 
             <div id="linha_horizontal"></div>
         </div>      
         
@@ -168,25 +155,23 @@
             <div id="filtro-container" class="barra_filtro_oculta">
                 <div class="container_filtro">
                     <h1>Gênero</h1>
-                    <ul>
-                        <li class="option">Drama</li>
-                        <li class="option">Crime</li>
-                        <li class="option">Terror</li>
+                    <ul id="dropdown-genero">
+                        <li class="option">Ação</li>
                         <li class="option">Ficção Científica</li>
-                        <li class="option">Animação</li>
-                        <li class="option">Romance</li>
-                        <li class="option">Thriller</li>
-                        <li class="option">Ação e Aventura</li>
+                        <li class="option">Aventura</li>
                         <li class="option">Guerra</li>
-                        <li class="option">Sobrenatural</li>
-                        <li class="option">Western</li>
-                        <li class="option">Esporte</li>
+                        <li class="option">Drama</li>
+                        <li class="option">Terror</li>
+                        <li class="option">Mistério</li>
+                        <li class="option">Thriller</li>
+                        <li class="option">Romance</li>
+                        <li class="option">Crime</li>
                     </ul>
                 </div>
 
                 <div class="container_filtro">
                     <h1>Ano</h1>
-                    <ul>
+                    <ul id="dropdown-ano">
                         <li class="option">2020s</li>
                         <li class="option">2010s</li>
                         <li class="option">2000s</li>
@@ -205,7 +190,7 @@
 
                 <div class="container_filtro">
                     <h1>Fixa Etária</h1>
-                    <ul>
+                    <ul id="dropdown-faixa-etaria">
                         <li class="option">Livre</li>
                         <li class="option">10 Anos</li>
                         <li class="option">12 Anos</li>
@@ -217,19 +202,19 @@
 
                 <div class="container_filtro">
                     <h1>Serviço</h1>
-                    <ul>  
-                        <li class="option">Netflix</li>
+                    <ul id="dropdown-servico">  
                         <li class="option">Max</li>
-                        <li class="option">Prime Video</li>
-                        <li class="option">Disney+</li>
-                        <li class="option">Apple TV</li>
-                        <li class="option">Paramount+</li>
-                        <li class="option">Globoplay</li> 
+                        <li class="option">Claro tv+</li>
+                        <li class="option">Max Amazon Channel</li>
+                        <li class="option">Disney Plus</li>
+                        <li class="option">Amazon Prime Video</li>
+                        <li class="option">Paramount Plus</li>
+                        <li class="option">Paramount+ Amazon Channel</li> 
+                        <li class="option">Paramount Plus Apple TV Channel</li>
                         <li class="option">MUBI</li>
+                        <li class="option">MUBI Amazon Channel</li>
                     </ul>                   
-                </div> 
-                
-                
+                </div>              
             </div>
         <!------------------------------------->
 
@@ -608,6 +593,8 @@
             }
         }
     </script>
-    <script src="/public/LISTAS/card-filmes_lista.js"></script>
+    
+    <script src="/public/LISTAS/filtragem.js"></script>
+    <script src="/public/LISTAS/card-filmes_lista.js"></script>    
 </body>
 </html>
