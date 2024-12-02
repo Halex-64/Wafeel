@@ -63,7 +63,7 @@ async function fetchFilmeDetalhes() {
             <p>${mediaDetails.overview || 'Descrição indisponível.'}</p>
             <p><strong>Data de lançamento:</strong> ${mediaDetails.release_date || mediaDetails.first_air_date || 'Indisponível'}</p>
             <p><strong>Popularidade:</strong> ${mediaDetails.popularity || 'Indisponível'}</p>
-            <p><strong>Avaliação:</strong> ${mediaDetails.vote_average || 'Indisponível'}</p>
+            <p><strong>Avaliação:</strong> ${mediaDetails.vote_average || 'Indisponível'}/10</p>
             <p><strong>Gêneros:</strong> ${generos || 'Indisponível'}</p>
             <div class="providers">
                 <h3>Disponível em:</h3>
@@ -123,9 +123,9 @@ function atualizarBotaoFavorito(filmeId) {
     const favoritarBtn = document.getElementById('favoritar-btn');
 
     if (isFavorito) {
-        favoritarBtn.textContent = '💔 Remover dos Favoritos';
+        favoritarBtn.textContent = 'Remover dos Favoritos';
     } else {
-        favoritarBtn.textContent = '❤️ Adicionar aos Favoritos';
+        favoritarBtn.textContent = 'Adicionar aos Favoritos';
     }
 }
 

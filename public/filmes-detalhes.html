@@ -7,13 +7,54 @@
     <link rel="stylesheet" href="assets/CSS/style.css">
     <title>Detalhes de </title>
 </head>
-
-<body>
+<header class="header_quiz">
+    <nav class="barradenavegacao">
+        <a href="/public/index.html"><img class="logo__image" src="assets/img/logo.png" alt="Logo"></a>            
+        <ul class="links" id="mobile-menu">
+            <li><a href="./quiz.html">Quiz</a></li>
+            <li><a href="./filmes.html">Filmes</a></li>
+            <li><a href="./series.html">Séries</a></li>
+            <li><a href="./listas.html">Listas</a></li>
+            <li><img class="fa-solid fa-heart" src="assets/img/favoritosicon.png"></a></img></li>
+            <li><img class="fa-solid fa-right-to-bracket" src="assets/img/usuarioicon.png"> </img></li>
+        </ul>
+    </nav>
+</header>
+<body id="body-filmes-detalhes">
     <div id="filme-detalhes"></div>
     <button id="favoritar-btn" class="favorito-btn">
         ❤️ Favoritar
     </button>
     <script src="assets/js/filmes-detalhes.js"></script>
 </body>
-
+<footer id="footer-filmes-detalhes">
+    <div class="social-icons">
+        <a href="#">
+            <img src="assets/img/whatsapp_icon.png" id="WhatsApp_icon" alt="WhatsApp">
+        </a>
+        <a href="#">
+            <img src="assets/img/instagram_icon.png" id="Instagram_icon" alt="Instagram">
+        </a>
+        <a href="#">
+            <img src="assets/img/help_icon.png" id="suporte_icon" alt="Suporte">
+        </a>
+    </div>
+</footer>
+<footer class="footer_responsivo">
+    <div class="footer_links">        
+        <a href="#">Login</a>
+        <a href="#">Suporte</a>
+        <a href="#">Sobre Nós</a>        
+    </div>
+    <div class="social-icons">
+        <a href="#"><img src="assets/img/whatsapp_icon.png" id="WhatsApp_icon" alt="WhatsApp"></a>
+        <a href="#"><img src="assets/img/instagram_icon.png" id="Instagram_icon" alt="Instagram"></a>         
+    </div>
+    <h3>Seu mundo de histórias, personalizado.</h3>
+    <a class="logo_footer_responsivo"><img class="logo__image" src="assets/img/logo.png" alt="Logo"></a>
+    <div class="politica_termos">
+        <p class="politica_priv">Política de Privacidade</p>
+        <p class="term_cond">Termos e Condições</p>
+    </div>    
+</footer>
 </html>

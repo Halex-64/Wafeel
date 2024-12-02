@@ -5,6 +5,7 @@ const routes = require('./public/assets/js/routes');
 const session = require('express-session');
 const authRoutes = require('./routes/auth');
 const axios = require('axios');
+const connection = require('./db');
 
 const app = express();
 
@@ -49,6 +50,18 @@ app.get('/api/providers', async (req, res) => {
     res.json(data.results);
 });
 
+app.get('/test-db', (req, res) => {
+    const query = 'SELECT 1 + 1 AS resultado'; // Consulta simples para teste
+    connection.query(query, (error, results) => {
+        if (error) {
+            console.error('Erro ao executar a consulta:', error.message);
+            res.status(500).send('Erro ao conectar ao banco de dados.');
+        } else {
+            console.log('Consulta realizada com sucesso:', results);
+            res.json({ resultado: results[0].resultado }); // Retorna o resultado
+        }
+    });
+});
 
 app.get('/api/movies', (req, res) => {
     const providerId = req.query.provider;
