@@ -11,7 +11,7 @@ body{
     margin-bottom: 16px;
 }
 
-.constainer_filmes {
+.container_filmes {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(432.66px, 1fr));  /* Garante que a largura mínima dos itens seja 432.66px */
     grid-auto-rows: 218px;  /* Altura fixa para os itens */
@@ -186,6 +186,11 @@ body{
 .novo_texto #informacoes_filme li {
     width: auto;
     height: auto;
+}
+
+#informacoes_filme{
+    margin-left: 8px;
+    font-size: 16px;
 }
 
 .resumo_filme_imagem:hover #titulo_filme,
@@ -445,10 +450,13 @@ footer {
         overflow: hidden;
     }
 
-    .constainer_filmes{
-        grid-template-columns: 1fr; /* Apenas uma coluna */
-        gap: 16px; /* Espaçamento vertical entre os itens */
-        justify-items: center;
+    .resumo_filme{
+        display: flex;
+        align-items: center;
         justify-content: center;
-    }     
+    }
+    
+    .container_filmes{
+        gap: 0px;
+    }          
 }
