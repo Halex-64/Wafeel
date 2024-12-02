@@ -17,6 +17,26 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: 933260, containerId: 'resumo_filme_12' }
     ];
 
+    // Função para buscar a classificação indicativa
+    async function getMovieRating(movieId) {
+        const ratingUrl = `https://api.themoviedb.org/3/movie/${movieId}/release_dates?api_key=${apiKey}`;
+        try {
+            const response = await fetch(ratingUrl);
+            const data = await response.json();
+
+            // Encontrar certificação para o Brasil
+            const brazilCertification = data.results.find(entry => entry.iso_3166_1 === 'BR');
+            if (brazilCertification && brazilCertification.release_dates.length > 0) {
+                return brazilCertification.release_dates[0].certification || 'Indefinido';
+            }
+
+            return 'Indefinido'; // Caso não haja certificação para o Brasil
+        } catch (error) {
+            console.error(`Erro ao buscar classificação indicativa do filme com ID ${movieId}:`, error);
+            return 'Erro';
+        }
+    }
+
     // Função para buscar as informações do filme
     async function getMovieDetails(movieId, containerId) {
         const movieUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=pt-BR`;
@@ -60,9 +80,11 @@ document.addEventListener('DOMContentLoaded', () => {
             // Ano de lançamento, duração e classificação indicativa concatenados
             const releaseYear = new Date(movieData.release_date).getFullYear() || 'Ano não disponível';
             const duration = `${Math.floor(movieData.runtime / 60)}h ${movieData.runtime % 60}min` || 'Duração não disponível';
-            const rating = movieData.adult ? '18 Anos' : 'Livre';
-            infoElement.innerHTML = [releaseYear, duration, rating].join(' • ');
 
+            // Obter classificação indicativa
+            const rating = await getMovieRating(movieId);
+
+            infoElement.innerHTML = [releaseYear, duration, rating].join(' • ');
 
             // Imagem de fundo
             if (movieData.backdrop_path) {
@@ -96,4 +118,3 @@ document.addEventListener('DOMContentLoaded', () => {
         getMovieDetails(movie.id, movie.containerId);
     });
 });
-
