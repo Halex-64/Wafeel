@@ -15,6 +15,7 @@ body{
 }
 
 .criar_lista{
+    width: 725.13px;
     display: flex;
     flex-direction: column;
     padding: 24px;
@@ -81,6 +82,7 @@ button{
     display: flex;
     margin-top: 24px;
     gap: 32px;
+    position: relative;
 }
 
 /*-----------------------------------------------------------------------*/
@@ -110,7 +112,6 @@ button{
     color: #8500F2;
     scrollbar-width:thin;
     scrollbar-color: #8500F2 transparent;
-
     top: 100%;
     left: 0;
 }
@@ -160,5 +161,80 @@ input, .suggestions-container {
     margin-right: 16px;
     margin-left: 16px;
     cursor: pointer;
+} 
+
+/*--------------------------------Elemenro roxo do filme------------------------*/
+
+.selected-movies-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+    z-index: 999;
 }
 
+.movie-chip {
+    background-color: #8500F2; /* Cor roxa */
+    color: #ffffff; /* Letras brancas */
+    padding: 5px 10px;
+    border-radius: 20px; /* Borda arredondada */
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+
+.movie-chip span {
+    margin-right: 8px;
+}
+
+.movie-chip .remove-icon {
+    background: #ffffff; /* Botão branco */
+    color: #8500F2; /* Letra roxa no botão */
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .criar_lista {
+        width: 90%; /* Aumenta a largura da lista no mobile */
+    }
+
+    .pop-up_criar_lista {
+        flex-direction: column; /* Coloca os elementos em uma coluna */
+        max-width: none; /* Remove a largura máxima */
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 16px;
+        background: none;
+    }
+
+    .criar_cancelar {
+        flex-direction: column; /* Coloca os botões em uma coluna */
+        align-items:flex-start; /* Centraliza os botões */
+        gap: 8px; /* Espaço entre os botões */
+    }
+
+    .suggestions-container {
+        position: static; /* Remove a posição absoluta para a lista de sugestões */
+        width: 100%; /* Ajusta a largura para 100% */
+        top: auto; /* Ajusta a posição para não ficar no topo */
+    }
+
+    .plus-icon {
+        font-size: 20px; /* Ajusta o tamanho do ícone no mobile */
+    }
+
+    .movie-chip {
+        font-size: 12px; /* Reduz o tamanho da fonte nos chips */
+        padding: 4px 8px; /* Ajusta o padding nos chips */
+    }
+}
