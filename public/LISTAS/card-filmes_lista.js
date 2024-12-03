@@ -3,18 +3,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Filmes a serem carregados, com IDs específicos
     const movies = [
-        { id: 786892, containerId: 'resumo_filme_1' },
-        { id: 929590, containerId: 'resumo_filme_2' },
-        { id: 1023922, containerId: 'resumo_filme_3' },
-        { id: 437342, containerId: 'resumo_filme_4' },
-        { id: 1111873, containerId: 'resumo_filme_5' },
-        { id: 937287, containerId: 'resumo_filme_6' },
-        { id: 762441, containerId: 'resumo_filme_7' },
-        { id: 693134, containerId: 'resumo_filme_8' },
-        { id: 560016, containerId: 'resumo_filme_9' },
-        { id: 948549, containerId: 'resumo_filme_10' },
+        { id: 786892,  containerId: 'resumo_filme_1'  },
+        { id: 929590,  containerId: 'resumo_filme_2'  },
+        { id: 1023922, containerId: 'resumo_filme_3'  },
+        { id: 437342,  containerId: 'resumo_filme_4'  },
+        { id: 1111873, containerId: 'resumo_filme_5'  },
+        { id: 937287,  containerId: 'resumo_filme_6'  },
+        { id: 762441,  containerId: 'resumo_filme_7'  },
+        { id: 693134,  containerId: 'resumo_filme_8'  },
+        { id: 560016,  containerId: 'resumo_filme_9'  },
+        { id: 948549,  containerId: 'resumo_filme_10' },
         { id: 1032823, containerId: 'resumo_filme_11' },
-        { id: 933260, containerId: 'resumo_filme_12' }
+        { id: 933260,  containerId: 'resumo_filme_12' }
     ];
 
     // Lista para armazenar os dados dos filmes carregados
