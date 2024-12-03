@@ -1,17 +1,37 @@
-.frame_1{
+/*.frame_1{
     display: flex;
     justify-content:center;
     align-items: flex-start;
     gap: 72px;
+}*/
+
+body{
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;  
+    flex-direction: column;
 }
 
-.container_filme{
-    width: 390px;
-    margin-bottom: 40px;
+.containers_listas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 390px); /* Define largura fixa para as colunas */
+    gap: 16px;  
+    justify-content: stretch;  
+    align-items: stretch;  
+    padding: 0; 
+    margin-right: 56px;  
+    margin-left: 56px;
+    width: 100%; 
+}
+
+.container_filme {
+    width: 390px;  
+    margin: 0;  
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    gap: 16px;   
+    gap: 16px;
 }
 
 a{
