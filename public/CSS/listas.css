@@ -4,29 +4,22 @@
     align-items: flex-start;
     gap: 72px;
 }*/
-
-body{
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    display: flex;  
-    flex-direction: column;
-}
-
+ 
 .containers_listas {
     display: grid;
-    grid-template-columns: repeat(auto-fit, 390px); /* Define largura fixa para as colunas */
-    gap: 16px;  
-    justify-content: stretch;  
-    align-items: stretch;  
-    padding: 0; 
-    margin-right: 56px;  
+    grid-template-columns: repeat(auto-fill, 390px); /* Define largura fixa para as colunas */
+    gap: 16px;
+    justify-content: stretch;
+    padding: 0;
     margin-left: 56px;
-    width: 100%; 
+    margin-right: 56px;
+    width: 100%; /* Ajusta a largura sem ocupar 100% do elemento pai */
 }
 
+
 .container_filme {
-    width: 390px;  
+    width: calc(232px + 160px);
+    box-sizing: border-box;   
     margin: 0;  
     border-radius: 10px;
     display: flex;
@@ -35,6 +28,7 @@ body{
 }
 
 a{
+    width: calc(232px + 160px);
     text-decoration: none;
 }
 
@@ -54,7 +48,8 @@ a{
 .poster_filmes{
     position: relative;
     border-radius: 10px; 
-    height: 249px;   
+    height: 249px;
+    width: calc(232px + 160px);
 }
 
 .poster_filmes img{
