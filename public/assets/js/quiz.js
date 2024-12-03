@@ -76,7 +76,7 @@ function displayRecommendations(recommendations) {
         const type = media.media_type || 'movie';
 
         const item = document.createElement('div');
-        item.classList.add('recommendation-item'); 
+        item.classList.add('recommendation-item');
         item.innerHTML = `
             <h3>${media.title || media.name}</h3>
             <img src="https://image.tmdb.org/t/p/w500${media.poster_path}" alt="${media.title || media.name}">
