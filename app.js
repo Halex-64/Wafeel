@@ -101,8 +101,7 @@ app.get('/filmes-populares', async (req, res) => {
     }
 });
 
-// Função de exemplo para recomendação
-async function getRecommendation(category, type = 'movie') {
+async function getRecommendations(category, type = 'movie', limit = 5) {
     const API_KEY = process.env.API_KEY;
     const excludedKeywords = ['erótica', 'adulto', 'sensual', 'sexo', 'sexuais'];
 
@@ -114,7 +113,7 @@ async function getRecommendation(category, type = 'movie') {
                 with_genres: category,
                 language: 'pt-BR',
                 sort_by: 'popularity.desc',
-                page: Math.floor(Math.random() * 10) + 1,
+                page: Math.floor(Math.random() * 10) + 1, // Página aleatória
                 certification_country: 'BR',
                 certification_lte: '16',
                 include_adult: false,
@@ -124,6 +123,7 @@ async function getRecommendation(category, type = 'movie') {
 
         let mediaItems = response.data.results;
 
+        // Filtro de itens
         mediaItems = mediaItems.filter(item => {
             const titleOrName = item.title || item.name || '';
             const overview = item.overview || '';
@@ -139,15 +139,11 @@ async function getRecommendation(category, type = 'movie') {
             return !hasExcludedKeyword && hasValidPoster && hasValidTitle;
         });
 
-        if (mediaItems.length === 0) {
-            return null;
-        }
-
-        const randomMedia = mediaItems[Math.floor(Math.random() * mediaItems.length)];
-        return randomMedia;
+        // Retorna os primeiros 'limit' itens ou menos
+        return mediaItems.slice(0, limit);
     } catch (error) {
         console.error(`Erro ao buscar ${type}s:`, error.message);
-        return null;
+        return [];
     }
 }
 
@@ -155,16 +151,18 @@ async function getRecommendation(category, type = 'movie') {
 app.get('/api/recommendation', async (req, res) => {
     const category = req.query.category;
     const type = req.query.type || 'movie'; // Padrão para 'movie' se 'type' não for especificado
+    const limit = parseInt(req.query.limit, 10) || 5; // Padrão: até 5 itens
+
     try {
-        const recommendation = await getRecommendation(category, type);
-        if (recommendation) {
-            res.json(recommendation);
+        const recommendations = await getRecommendations(category, type, limit);
+        if (recommendations.length > 0) {
+            res.json(recommendations);
         } else {
             res.status(404).json({ error: 'Nenhuma recomendação encontrada' });
         }
     } catch (error) {
-        console.error('Erro ao buscar recomendação:', error.message);
-        res.status(500).json({ error: 'Erro ao buscar recomendação' });
+        console.error('Erro ao buscar recomendações:', error.message);
+        res.status(500).json({ error: 'Erro ao buscar recomendações' });
     }
 });
 
