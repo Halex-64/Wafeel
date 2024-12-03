@@ -9,11 +9,12 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, 390px); /* Define largura fixa para as colunas */
     gap: 16px;
-    justify-content: stretch;
+    justify-content: center;
+    justify-items: stretch;
     padding: 0;
     margin-left: 56px;
     margin-right: 56px;
-    width: 100%; /* Ajusta a largura sem ocupar 100% do elemento pai */
+    max-width: 100%; /* Ajusta a largura sem ocupar 100% do elemento pai */
 }
 
 
