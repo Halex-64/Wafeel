@@ -36,7 +36,6 @@ function renderMovies(movies) {
         movieElement.classList.add('movie-item');
         movieElement.innerHTML = `
             <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
-            <h3>${movie.title}</h3>
         `;
         movieElement.addEventListener('click', () => {
             window.location.href = `./filmes-detalhes.html?id=${movie.id}`;
