@@ -246,7 +246,15 @@ app.get('/tv-populares', async (req, res) => {
                 page: 1,
             },
         });
-        res.json(response.data.results);
+
+        // Filtrar resultados para excluir programas de TV não desejados
+        const filteredResults = response.data.results.filter(tvShow => {
+            const unwantedGenres = [10763, 10764, 10767]; // IDs para "Talk", "Reality", etc.
+            const hasUnwantedGenre = tvShow.genre_ids.some(genre => unwantedGenres.includes(genre));
+            return !hasUnwantedGenre; 
+        });
+
+        res.json(filteredResults);
     } catch (error) {
         console.error('Erro ao buscar séries populares:', error.message);
         res.status(500).json({ error: 'Erro ao buscar séries populares.' });

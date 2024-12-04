@@ -43,7 +43,7 @@
   height: auto;
   margin: 10px 0;
   cursor: pointer;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease;  
 }
 
 .provider-logo:hover {

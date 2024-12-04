@@ -16,10 +16,10 @@
   max-width: 1200px;
   width: 100%;
   gap: 10px;
-  background-color: #121212; /* Fundo do container */
+  background-color: #000000a4; /* Fundo do container */
   border-radius: 20px;
   padding: 20px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 0 15px rgba(27, 27, 27, 0.712);
   display: flex;
   flex-direction: column;
   align-items: center; /* Centraliza o conteúdo */
@@ -38,7 +38,7 @@
 #filme-detalhes h1 {
   font-size: 3rem;
   margin-bottom: 10px;
-  color: #8500f2;
+  color: #fff;
 }
 
 #filme-detalhes p {
@@ -56,10 +56,14 @@
 
 /* Estilo das plataformas */
 .providers {
-  margin-top: 20px;
+  margin-top: 10px;
   display: flex;
   gap: 20px;
   padding: 20px;
+}
+
+.providers-title{
+  text-align: center;
 }
 
 .providers h3 {
@@ -75,7 +79,7 @@
 /* Botão de favoritar */
 #favoritar-btn {
   margin-top: 30px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   padding: 10px 20px;
   background-color: #8500f2;
   color: #fff;

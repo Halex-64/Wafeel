@@ -48,9 +48,8 @@ async function fetchFilmeDetalhes() {
 
         const mediaTitle = mediaDetails.title || mediaDetails.name || 'Título indisponível';
         document.title = `Detalhes de ${mediaTitle}`
-        const posterPath = mediaDetails.poster_path
-            ? `https://image.tmdb.org/t/p/w500${mediaDetails.poster_path}`
-            : './placeholder.jpg';
+        // const posterPath = mediaDetails.poster_path? `https://image.tmdb.org/t/p/w500${mediaDetails.poster_path}`: './placeholder.jpg';
+        const backdropPath = mediaDetails.backdrop_path? `https://image.tmdb.org/t/p/w1280${mediaDetails.backdrop_path}` : './placeholder.jpg';
 
         const generos = (mediaDetails.genres || []).map(genre => genre.name).join(", ");
         const providersHTML = (providersData || []).map(provider => `
@@ -59,14 +58,14 @@ async function fetchFilmeDetalhes() {
 
         filmeDetalhesDiv.innerHTML = `
             <h1>${mediaTitle}</h1>
-            <img src="${posterPath}" alt="${mediaTitle}">
+            <img src="${backdropPath}" alt="${mediaTitle}">
             <p>${mediaDetails.overview || 'Descrição indisponível.'}</p>
             <p><strong>Data de lançamento:</strong> ${mediaDetails.release_date || mediaDetails.first_air_date || 'Indisponível'}</p>
             <p><strong>Popularidade:</strong> ${mediaDetails.popularity || 'Indisponível'}</p>
             <p><strong>Avaliação:</strong> ${mediaDetails.vote_average || 'Indisponível'}/10</p>
             <p><strong>Gêneros:</strong> ${generos || 'Indisponível'}</p>
+            <h3 class = 'providers-title'>Disponível em:</h3>
             <div class="providers">
-                <h3>Disponível em:</h3>
                 ${providersHTML || "<p>Sem plataformas disponíveis no momento</p>"}
             </div>
         `;
