@@ -16,6 +16,7 @@
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
+    <!--HEADER-->
     <header class="header_quiz">
         <nav class="barradenavegacao">
             <img class="logo__image" src="../assets/img/logo.png" alt="Logo">
@@ -30,6 +31,7 @@
         </nav>
     </header>
 
+    <!--HEADER RESPONSIVA-->    
     <header class="header_responsiva">
         <nav class="barradenavegacao_responsiva">
             <a href="/public/index.html"><img class="logo__image" src="../assets/img/logo.png" alt="Logo"></a>
@@ -42,6 +44,7 @@
         </nav>
     </header>
 
+    <!--MENU DROP-DOWN RESPONSIVO-->
     <div class="menu_responsivo">
         <ul class="links" id="mobile-menu">
             <li><a href="./quiz.html">QUIZ</a></li>
@@ -53,6 +56,7 @@
         </ul>
     </div>
 
+    <!--BARRA NAVEGAÇÃO ENTRE LISTAS-->
     <div class="nav_listas">
         <div class="barra_listas">
             <li><a href="./listas.html">PRINCIPAIS LISTAS</a></li>
@@ -62,12 +66,12 @@
         <div id="linha_horizontal"></div>
     </div>
 
+    <!--BARRA NAVEGAÇÃO ENTRE LISTAS RESPONSIVA-->
     <div class="nav_listas_responsiva_direita">
         <div class="barra_listas">           
             <li><a id="selecao_roxo" href="./lista_usuario.html" class="suas_listas">SUAS LISTAS</a></li>
         </div>        
     </div>
-
     <div class="nav_listas_responsiva_esquerda">
         <div class="barra_listas">
             <li><a class="principais_listas" href="./listas.html">PRINCIPAIS LISTAS</a></li>
@@ -77,6 +81,14 @@
     <section>
         <div class="botao_criar_lista">
             <button type="button" class="btn" id="botao_criar_lista">Crie uma nova lista</button>
+        </div>
+        <div class="containers_listas">
+            <a id="link_lista_criada" href="">
+                <div class="container_filme">                    
+                    <div class="poster_filmes"></div>
+                    <p id="titulo_lista"></p>                
+                </div>
+            </a>
         </div>
     </section>
 
@@ -98,6 +110,8 @@
             </div>
         </div>
     </div>
+
+    <!--FOOTER-->
     <footer>
         <div class="social-icons">
             <a href="#">
@@ -112,6 +126,7 @@
         </div>
     </footer>
 
+    <!--FOOTER RESPONSIVO-->
     <footer class="footer_responsivo">
         <div class="footer_links">        
             <a href="#">Login</a>
@@ -136,13 +151,13 @@
         const menuResponsive = document.querySelector('.menu_responsivo');
         const headerResponsive = document.querySelector('.header_responsiva');
         const toggleCor = document.querySelector('.menu-toggle');
-        const logoImage = document.querySelector('.barradenavegacao_responsiva .logo__image'); // Seleção específica
+        const logoImage = document.querySelector('.barradenavegacao_responsiva .logo__image');  
 
         menuToggle.addEventListener('click', () => {
-            menuResponsive.classList.toggle('show'); // Alterna a classe para abrir/fechar o menu
-            headerResponsive.classList.toggle('header-active'); // Alterna a cor da header_responsiva
+            menuResponsive.classList.toggle('show');  
+            headerResponsive.classList.toggle('header-active');  
             toggleCor.classList.toggle('menu-toggle-active');
-            logoImage.classList.toggle('logoImage-active'); // Adiciona a classe que ativa o filtro
+            logoImage.classList.toggle('logoImage-active');  
         });
     </script>
 
@@ -153,26 +168,80 @@
             const popupCriarLista = document.getElementById('pop-up_criar_lista');
             const fundoEscuro = document.getElementById('fundo_escuro');
             const botaoCancelar = document.getElementById('cancel_button');
-
-            if (botaoCriarLista && popupCriarLista && botaoCancelar && fundoEscuro) {
-                botaoCriarLista.addEventListener('click', () => {
-                    popupCriarLista.classList.add('show');  
-                    fundoEscuro.classList.add('show');
-                    document.documentElement.style.overflow = 'hidden'; 
-                    document.body.style.overflow = 'hidden';
-                });
-            
-                botaoCancelar.addEventListener('click', () => {
-                    popupCriarLista.classList.remove('show');  
-                    fundoEscuro.classList.remove('show');
-                    document.documentElement.style.overflow = ''; 
-                    document.body.style.overflow = '';
-                });
-            } else {
+            const createButton = document.getElementById('create_button');
+            const listNameInput = document.getElementById('list_name');
+            const selectedMoviesContainer = document.getElementById('selected-movies');
+            const userListsContainer = document.querySelector('.containers_listas'); // Certifique-se de que existe esse container no HTML.
+        
+            if (!botaoCriarLista || !popupCriarLista || !botaoCancelar || !fundoEscuro || !createButton || !listNameInput || !userListsContainer) {
                 console.error('Alguns elementos necessários não foram encontrados no DOM.');
+                return;
             }
+        
+            // Função para salvar lista
+            function saveList(listName, movies) {
+                const lists = JSON.parse(localStorage.getItem('userLists') || '[]');
+                lists.push({ name: listName, movies });
+                localStorage.setItem('userLists', JSON.stringify(lists));
+            }
+        
+            // Função para atualizar as listas do usuário na página
+            function updateUserLists() {
+                const lists = JSON.parse(localStorage.getItem('userLists') || '[]');
+                userListsContainer.innerHTML = ''; // Limpar o conteúdo atual.
+        
+                lists.forEach(list => {
+                    const listCard = document.createElement('a');
+                    listCard.href = `./filmes_da_lista.html?list=${encodeURIComponent(list.name)}`;
+                    listCard.innerHTML = `
+                        <div class="container_filme">
+                            <div class="poster_filmes">
+                                <img src="${list.movies[0]?.poster || ''}" alt="${list.name}">
+                            </div>
+                            <p>${list.name}</p>
+                        </div>
+                    `;
+                    userListsContainer.appendChild(listCard);
+                });
+            }
+        
+            // Evento de clique no botão "CRIAR"
+            createButton.addEventListener('click', () => {
+                const listName = listNameInput.value.trim();
+                const selectedMovies = Array.from(selectedMoviesContainer.querySelectorAll('.movie-item')).map(movie => ({
+                    id: movie.dataset.movieId,
+                    title: movie.querySelector('.movie-title').textContent,
+                    poster: movie.querySelector('img').src,
+                }));
+        
+                // Salvar e atualizar listas mesmo sem validação
+                saveList(listName, selectedMovies);
+                updateUserLists(); // Atualizar as listas na página.
+                window.location.href = `./filmes_da_lista.html?list=${encodeURIComponent(listName)}`;
+            });
+        
+            // Mostrar e ocultar o pop-up de criar lista
+            botaoCriarLista.addEventListener('click', () => {
+                popupCriarLista.classList.add('show');
+                fundoEscuro.classList.add('show');
+                document.documentElement.style.overflow = 'hidden';
+                document.body.style.overflow = 'hidden';
+            });
+        
+            botaoCancelar.addEventListener('click', () => {
+                popupCriarLista.classList.remove('show');
+                fundoEscuro.classList.remove('show');
+                document.documentElement.style.overflow = '';
+                document.body.style.overflow = '';
+            });
+        
+            // Atualizar as listas do usuário ao carregar a página
+            updateUserLists();
         });
     </script>
+    
+    
+    
     <script id="popup_criar_lista" src="./Pop-up_criar_lista.js"></script>        
 </body>
 </html>
