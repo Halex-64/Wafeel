@@ -21,8 +21,8 @@
                 <img class="logo__image" src="assets/img/logo.png" alt="Logo"></a>
             <ul class="links" id="links">
                 <li><a href="./quiz.html">Quiz</a></li>
-                <li><a href="./filmes.html">Filmes</a></li>
-                <li><a href="./series.html">Séries</a></li>
+                <li><a href="./filmess.html">Filmes</a></li>
+                <li><a href="./seriess.html">Séries</a></li>
                 <li><a href="./listas.html">Listas</a></li>
                 <li><img class="fa-solid fa-heart" src="assets/img/favoritosicon.png"></a></img></li>
                 <li><img id="ModalOpen" class="fa-solid fa-right-to-bracket" src="assets/img/usuarioicon.png"></img>
@@ -40,7 +40,7 @@
             <h2 class="textoSecundario_telainicial">Recomendamos os melhores conteúdos com base <br> na forma em que
                 você está se sentindo! Faça já o <br> quiz abaixo</h2>
             <div class="btn animate__animated animate__backInLeft espaco_botao">
-                <button id="quiz" class="btn__quiz"><a href="">Quiz</a></button>
+                <button id="quiz" class="btn__quiz"><a href="./quiz.html">Quiz</a></button>
             </div>
         </div>
     </header>
@@ -115,9 +115,9 @@
                 <img class="emojiAnsiedade" src="assets/img/emojiansiedade.png" alt="">
             </div>
             <div class="emotion-card">
-                <h3>Nostalgia</h3>
-                <p class="subtitulo_card">Volte no tempo e veja alguns clássicos.</p>
-                <img class="emojiNostalgia" src="assets/img/emojinostalgia.png" alt="">
+                <h3>Solidão</h3>
+                <p class="subtitulo_card">Conexão e conforto em histórias.</p>
+                <img class="emojiNostalgia" src="assets/img/solidao.png" alt="">
             </div>
         </div>
     </section>
@@ -264,71 +264,51 @@
         </div>
     </footer>
 <script>
-        document.querySelectorAll('.carousel-container').forEach((carousel) => {
-        const carouselTrack = carousel.querySelector('.carousel-track');
+document.addEventListener('DOMContentLoaded', () => {
+    
+    const carousels = document.querySelectorAll('.carousel-container');
+
+    carousels.forEach(carousel => {
         const prevButton = carousel.querySelector('.carousel-button.prev');
         const nextButton = carousel.querySelector('.carousel-button.next');
+        const carouselTrack = carousel.querySelector('.carousel-track');
         const carouselItems = carousel.querySelectorAll('.carousel-item');
-        
+
         let currentIndex = 0;
-        const itemsVisible = 5;
-        const itemWidth = carouselItems[0].offsetWidth + 80;
+        const itemsVisible = 5; 
+        const itemWidth = carouselItems[0].offsetWidth + 30; 
         const maxIndex = Math.ceil(carouselItems.length / itemsVisible) - 1;
+
+        
+        const moveCarousel = () => {
+            const offset = currentIndex * itemWidth * itemsVisible;
+            carouselTrack.style.transform = `translateX(-${offset}px)`;
+        };
+
+        
         nextButton.addEventListener('click', () => {
             currentIndex++;
             if (currentIndex > maxIndex) {
-                currentIndex = 0;
+                currentIndex = 0; 
             }
-            carouselTrack.style.transform = `translateX(-${currentIndex * itemWidth * itemsVisible}px)`;
+            moveCarousel();
         });
+
+       
         prevButton.addEventListener('click', () => {
             currentIndex--;
             if (currentIndex < 0) {
                 currentIndex = maxIndex;
             }
-            carouselTrack.style.transform = `translateX(-${currentIndex * itemWidth * itemsVisible}px)`;
+            moveCarousel();
         });
     });
-</script>  
-<script>
-document.querySelectorAll('.faq-item h3').forEach(item => {
-         item.addEventListener('click', () => {
-             const parent = item.parentElement;
-             parent.classList.toggle('active');
-         });
-     });
+});
+
 </script>
 </body>
 <!-- <script src="/assets/js/caroussel.js"></script> -->
-<script>
-    const carouselTrack = document.querySelector('.carousel-track');
-    const prevButton = document.querySelector('.carousel-button.prev');
-    const nextButton = document.querySelector('.carousel-button.next');
-    const carouselItems = document.querySelectorAll('.carousel-item');
 
-    let currentIndex = 0;
-    const itemsVisible = 6; // Número de itens visíveis
-    const itemWidth = carouselItems[0].offsetWidth + 30; // Largura do item + margem direita aumentada
-    const maxIndex = Math.ceil(carouselItems.length / itemsVisible) - 1; // Máximo índice baseado em 6 itens por vez
-
-    nextButton.addEventListener('click', () => {
-        currentIndex++;
-        if (currentIndex > maxIndex) {
-            currentIndex = 0; // Volta ao início quando chegar ao fim
-        }
-        carouselTrack.style.transform = `translateX(-${currentIndex * itemWidth * itemsVisible}px)`;
-    });
-
-    prevButton.addEventListener('click', () => {
-        currentIndex--;
-        if (currentIndex < 0) {
-            currentIndex = maxIndex; // Vai para o último conjunto de itens
-        }
-        carouselTrack.style.transform = `translateX(-${currentIndex * itemWidth * itemsVisible}px)`;
-    });
-
-
-</script>
 <script defer src="./assets/js/redirect.js"></script>
 
 </html>
