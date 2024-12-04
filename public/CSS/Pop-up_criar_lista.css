@@ -1,27 +1,23 @@
-body{
-    margin: 0; /* Remove margens padrão */
-    height: 100vh; /* Define a altura do corpo para preencher toda a janela */
-    display: flex; /* Habilita o Flexbox */
-    align-items: center; /* Centraliza verticalmente */
-    justify-content: center; /* Centraliza horizontalmente */
-    background-color: #ccc;
-}
+/*CSS UTILIZADO NA TELA:
+    lista_usuario.html
+*/
 
-.pop-up_criar_lista{
-    display: flex;
-    border-radius: 5px;
-    overflow: visible;
-    background-color: white;
+.pop-up_criar_lista {    
+    border-radius: 15px;
+    padding:0.7px;
+    top: 50%;
+    left: 50%;
 }
-
+ 
 .criar_lista{
+    border: 0.1px solid #8500F2;
     width: 725.13px;
     display: flex;
     flex-direction: column;
     padding: 24px;
     justify-content: center;
     background-color: black;
-    border-radius: 5px;
+    border-radius: 15px;
 }
 
 input {
@@ -203,19 +199,22 @@ input, .suggestions-container {
 }
 
 @media (max-width: 768px) {
-    .criar_lista {
-        width: 90%; /* Aumenta a largura da lista no mobile */
-    }
 
     .pop-up_criar_lista {
         flex-direction: column; /* Coloca os elementos em uma coluna */
         max-width: none; /* Remove a largura máxima */
         justify-content: center;
         align-items: center;
-        width: 100%;
-        padding: 16px;
+        width: 95%;
         background: none;
+        z-index: 7;
+        box-shadow: none;
     }
+    .criar_lista {
+        width:auto;
+        margin: 24px;
+        border: 0.5px solid #8500F2;
+    }   
 
     .criar_cancelar {
         flex-direction: column; /* Coloca os botões em uma coluna */

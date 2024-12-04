@@ -4,42 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wafeel</title>
-    <link rel="stylesheet" href="CSS/quiz.css">
-    <link rel="stylesheet" href="CSS/listas.css">
-    <link rel="stylesheet" href="CSS/lista_usuario.css">
-    <link rel="stylesheet" href="CSS/responsividade.css">
+    <link rel="stylesheet" href="../CSS/quiz.css"> 
+    <link rel="stylesheet" href="../CSS/listas.css">
+    <link rel="stylesheet" href="../CSS/lista_usuario.css">
+    <link rel="stylesheet" href="../CSS/Pop-up_criar_lista.css">
+    <link rel="stylesheet" href="../CSS/responsividade.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.cdnfonts.com/css/coolvetica-2" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> 
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header class="header_quiz">
         <nav class="barradenavegacao">
-            <img class="logo__image" src="assets/img/logo.png" alt="Logo">
+            <img class="logo__image" src="../assets/img/logo.png" alt="Logo">
             <ul class="links">
                 <li><a href="./quiz.html">Quiz</a></li>
                 <li><a href="#">Filmes</a></li>
                 <li><a href="#">Séries</a></li>
                 <li><a id="selecao_roxo" href="./listas.html">Listas</a></li>
-                <li>
-                    <a href="#">
-                        <img class="icon" src="assets/img/favoritosicon.png" alt="Favoritos">
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <img class="icon" src="assets/img/usuarioicon.png" alt="Usuário">
-                    </a>
-                </li>
+                <li><a href="#"><img class="icon" src="../assets/img/favoritosicon.png" alt="Favoritos"></a></li>
+                <li><a href="#"><img class="icon" src="../assets/img/usuarioicon.png" alt="Usuário"></a></li>
             </ul>
         </nav>
     </header>
 
     <header class="header_responsiva">
         <nav class="barradenavegacao_responsiva">
-            <a href="/public/index.html"><img class="logo__image" src="assets/img/logo.png" alt="Logo"></a>
+            <a href="/public/index.html"><img class="logo__image" src="../assets/img/logo.png" alt="Logo"></a>
             <ul class="links" id="mobile-menu">
                 <li><a href="./quiz.html">QUIZ</a></li>
                 <li><a href="./filmes.html">FILMES</a></li>
@@ -83,10 +76,28 @@
 
     <section>
         <div class="botao_criar_lista">
-            <button type="button" class="btn">Criar Lista</button>
+            <button type="button" class="btn" id="botao_criar_lista">Crie uma nova lista</button>
         </div>
     </section>
 
+    <div id="fundo_escuro" class="fundo-escuro"></div>
+    <div id="pop-up_criar_lista" class="pop-up_criar_lista">
+        <div class="criar_lista">
+            <div class="input_criar_lista">
+                <label for="message" class="form_message_label">NOME</label>
+                <input type="text" id="list_name" class="form_input" required>
+    
+                <label for="movie-search" class="form_message_label">ADICIONAR TÍTULO</label>
+                <input type="text" id="movie_search" class="form_input" required>
+                <div id="suggestions" class="suggestions-container"></div>              
+            </div>
+            <div id="selected-movies" class="selected-movies-container"></div>
+            <div class="criar_cancelar">
+                <button type="criar" id="create_button" disabled><span>CRIAR</span></button>
+                <button type="cancelar" id="cancel_button"><span>CANCELAR</span></button>
+            </div>
+        </div>
+    </div>
     <footer>
         <div class="social-icons">
             <a href="#">
@@ -112,13 +123,14 @@
             <a href="#"><img src="/public/assets/img/instagram_icon.png" id="Instagram_icon" alt="Instagram"></a>         
         </div>
         <h3>Seu mundo de histórias, personalizado.</h3>
-        <a class="logo_footer_responsivo"><img class="logo__image" src="assets/img/logo.png" alt="Logo"></a>
+        <a class="logo_footer_responsivo"><img class="logo__image" src="../assets/img/logo.png" alt="Logo"></a>
         <div class="politica_termos">
             <p class="politica_priv">Política de Privacidade</p>
             <p class="term_cond">Termos e Condições</p>
         </div>    
     </footer>
 
+    <!--JAVASCRIPT HEADER RESPONSIVA-->
     <script>
         const menuToggle = document.getElementById('menu-toggle');
         const menuResponsive = document.querySelector('.menu_responsivo');
@@ -133,5 +145,34 @@
             logoImage.classList.toggle('logoImage-active'); // Adiciona a classe que ativa o filtro
         });
     </script>
+
+    <!--JAVASCRIPT DO POP-UP CRIAR LISTA-->
+    <script id="mostrar_pop-up_criar_lista">
+        document.addEventListener('DOMContentLoaded', () => {
+            const botaoCriarLista = document.getElementById('botao_criar_lista');
+            const popupCriarLista = document.getElementById('pop-up_criar_lista');
+            const fundoEscuro = document.getElementById('fundo_escuro');
+            const botaoCancelar = document.getElementById('cancel_button');
+
+            if (botaoCriarLista && popupCriarLista && botaoCancelar && fundoEscuro) {
+                botaoCriarLista.addEventListener('click', () => {
+                    popupCriarLista.classList.add('show');  
+                    fundoEscuro.classList.add('show');
+                    document.documentElement.style.overflow = 'hidden'; 
+                    document.body.style.overflow = 'hidden';
+                });
+            
+                botaoCancelar.addEventListener('click', () => {
+                    popupCriarLista.classList.remove('show');  
+                    fundoEscuro.classList.remove('show');
+                    document.documentElement.style.overflow = ''; 
+                    document.body.style.overflow = '';
+                });
+            } else {
+                console.error('Alguns elementos necessários não foram encontrados no DOM.');
+            }
+        });
+    </script>
+    <script id="popup_criar_lista" src="./Pop-up_criar_lista.js"></script>        
 </body>
 </html>

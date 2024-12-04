@@ -14,65 +14,70 @@
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> 
 </head>  
 <body>
+    <!--HEADER-->
     <header class="header_quiz">
         <nav class="barradenavegacao">
             <a href="/public/index.html"><img class="logo__image" src="../assets/img/logo.png" alt="Logo"></a>
             <ul class="links">
-                <li><a href="./quiz.html">Quiz</a></li>
+                <li><a href="../quiz.html">Quiz</a></li>
                 <li><a href="#">Filmes</a></li>
                 <li><a href="#">Séries</a></li>
-                <li><a id="selecao_roxo" href="/public/lista_usuario.html">Listas</a></li>
+                <li><a id="selecao_roxo" href="../LISTAS/listas.html">Listas</a></li>
                 <li><img class="fa-solid fa-heart" src="../assets/img/favoritosicon.png"></a></img></li> 
                 <li><img class="fa-solid fa-right-to-bracket" src="../assets/img/usuarioicon.png">  </img></li>
             </ul>
         </nav>
     </header>
 
+    <!--HEADER RESPONSIVA-->
     <header class="header_responsiva">
         <nav class="barradenavegacao_responsiva">
             <a href="/public/index.html"><img class="logo__image" src="../assets/img/logo.png" alt="Logo"></a>
             <ul class="links" id="mobile-menu">
-                <li><a href="./quiz.html">QUIZ</a></li>
-                <li><a href="./filmes.html">FILMES</a></li>
-                <li><a href="./series.html">SÉRIES</a></li>                                             
+                <li><a href="../quiz.html">QUIZ</a></li>
+                <li><a href="../filmes.html">FILMES</a></li>
+                <li><a href="../series.html">SÉRIES</a></li>                                             
             </ul>
             <button class="menu-toggle" id="menu-toggle">☰</button>
         </nav>
     </header>
 
+     <!--MENU DROP-DOWN RESPONSIVO-->
     <div class="menu_responsivo">
         <ul class="links" id="mobile-menu">
-            <li><a href="./quiz.html">QUIZ</a></li>
-            <li><a href="./filmes.html">FILMES</a></li>
-            <li><a href="./series.html">SÉRIES</a></li> 
-            <li><a href="./listas.html">LISTAS</a></li> 
-            <li><a href="./favoritos.html">FAVORITOS</a></li>
-            <li><a href="./perfil.html">PERFIL</a></li>                             
+            <li><a href="../quiz.html">QUIZ</a></li>
+            <li><a href="../filmes.html">FILMES</a></li>
+            <li><a href="../series.html">SÉRIES</a></li> 
+            <li><a href="../listas.html">LISTAS</a></li> 
+            <li><a href="../favoritos.html">FAVORITOS</a></li>
+            <li><a href="../perfil.html">PERFIL</a></li>                             
         </ul>
     </div>
 
+    <!--BARRA NAVEGAÇÃO ENTRE LISTAS-->
     <div class="nav_listas">
         <div class="barra_listas">
-            <li><a id="selecao_roxo" class="principais_listas" href="./listas.html">PRINCIPAIS LISTAS</a></li>
+            <li><a id="selecao_roxo" class="principais_listas" href="../LISTAS/listas.html">PRINCIPAIS LISTAS</a></li>
             <div id="linha_vertical"></div>
-            <li><a href="./lista_usuario.html" class="suas_listas">SUAS LISTAS</a></li>
+            <li><a href="../LISTAS/lista_usuario.html" class="suas_listas">SUAS LISTAS</a></li>
         </div>    
         <div id="linha_horizontal"></div>
     </div>
 
-    <div class="nav_listas_responsiva_direita">
-        <div class="barra_listas">           
-            <li><a href="./lista_usuario.html" class="suas_listas">SUAS LISTAS</a></li>
-        </div>        
-    </div>
-
+    <!--BARRA NAVEGAÇÃO ENTRE LISTAS RESPONSIVA-->
     <div class="nav_listas_responsiva_esquerda">
         <div class="barra_listas">
-            <li><a id="selecao_roxo" class="principais_listas" href="./listas.html">PRINCIPAIS LISTAS</a></li>
+            <li><a id="selecao_roxo" class="principais_listas" href="../LISTAS/listas.html">PRINCIPAIS LISTAS</a></li>
         </div>
     </div>
+    <div class="nav_listas_responsiva_direita">
+        <div class="barra_listas">           
+            <li><a href="../LISTAS/lista_usuario.html" class="suas_listas">SUAS LISTAS</a></li>
+        </div>        
+    </div>   
 
     <section>
+        <!--CONTAINER COM AS LISTAS-->
         <div class="containers_listas">             
             <a href="../LISTAS/filmes_da_lista.html">
                 <div class="container_filme">                    
@@ -202,7 +207,9 @@
                 </div>
             </a>             
         </div>
-    </section>   
+    </section>
+    
+    <!--FOOTER-->
     <footer>
         <div class="social-icons">
             <a href="#"><img src="/public/assets/img/whatsapp_icon.png" id="WhatsApp_icon" alt="WhatsApp"></a>
@@ -211,6 +218,7 @@
         </div>
     </footer>
 
+    <!--FOOTER RESPONSIVO-->
     <footer class="footer_responsivo">
         <div class="footer_links">        
             <a href="#">Login</a>
@@ -229,6 +237,7 @@
         </div>    
     </footer>
 
+    <!--JAVASCRIPT HEADER RESPONSIVA-->
     <script>
         const menuToggle = document.getElementById('menu-toggle');
         const menuResponsive = document.querySelector('.menu_responsivo');
@@ -244,6 +253,7 @@
         });
     </script>
 
+    <!--JAVASCRIPT POSTERS DA API-->
     <script class="carregar_posters">
         document.addEventListener('DOMContentLoaded', async () => {
             const apiKey = '4556dc6e1d1a01742122bf8dc0fbae46';

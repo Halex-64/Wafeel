@@ -1,3 +1,7 @@
+/*JS UTILIZADO NA TELA:
+    listas.html
+*/
+
 document.addEventListener('DOMContentLoaded', () => {
     const apiKey = '4556dc6e1d1a01742122bf8dc0fbae46'; // Substitua pela sua chave de API do TMDb
 
