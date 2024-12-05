@@ -17,29 +17,35 @@
 
 <body>
     <header class="header_fundo">
-        <nav class="barradenavegacao"><a href="index.html">
-                <img class="logo__image" src="assets/img/logo.png" alt="Logo"></a>
-            <ul class="links" id="links">
+        <nav class="barradenavegacao">
+            <a href="index.html">
+                <img class="logo__image" src="assets/img/logo.png" alt="Logo">
+            </a>
+            <ul class="links">
                 <li><a href="./quiz.html">Quiz</a></li>
                 <li><a href="./filmess.html">Filmes</a></li>
                 <li><a href="./seriess.html">Séries</a></li>
                 <li><a href="./listas.html">Listas</a></li>
-                <li><img class="fa-solid fa-heart" src="assets/img/favoritosicon.png"></a></img></li>
-                <li><img id="ModalOpen" class="fa-solid fa-right-to-bracket" src="assets/img/usuarioicon.png"></img>
-                </li>
+                <li><img class="fa-solid fa-heart" src="assets/img/favoritosicon.png" alt="Favoritos"></li>
+                <li><img id="ModalOpen" class="fa-solid fa-right-to-bracket" src="assets/img/usuarioicon.png" alt="Usuário"></li>
             </ul>
+            <button class="menu-toggle" id="menu-toggle">☰</button>
         </nav>
-        <div class="menu-icon" id="menu-icon">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
+        <div class="menu_responsivo" id="menu-responsive">
+            <ul class="links">
+                <li><a href="./quiz.html">Quiz</a></li>
+                <li><a href="./filmess.html">Filmes</a></li>
+                <li><a href="./seriess.html">Séries</a></li>
+                <li><a href="./listas.html">Listas</a></li>
+                <li><a href="./favoritos.html">Favoritos</a></li>
+                <li><a href="./perfil.html">Perfil</a></li>
+            </ul>
         </div>
         <div class="header-content">
-            <h1 class="textoPrincipal_telainicial">Filmes e séries de acordo com <br> suas emoções, e tempo disponível!
-            </h1>
+            <h1 class="textoPrincipal_telainicial">Filmes e séries de acordo com <br> suas emoções, e tempo disponível!</h1>
             <h2 class="textoSecundario_telainicial">Recomendamos os melhores conteúdos com base <br> na forma em que
                 você está se sentindo! Faça já o <br> quiz abaixo</h2>
-            <div class="btn animate__animated animate__backInLeft espaco_botao">
+            <div class="btn espaco_botao">
                 <button id="quiz" class="btn__quiz"><a href="./quiz.html">Quiz</a></button>
             </div>
         </div>
@@ -306,9 +312,47 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 </script>
+
+<script>
+const menuIcon = document.querySelector('.menu-icon');
+    const navigationLinks = document.querySelector('.barradenavegacao .links');
+    
+    menuIcon.addEventListener('click', () => {
+        navigationLinks.classList.toggle('show');
+    });
+    </script>
 </body>
 <!-- <script src="/assets/js/caroussel.js"></script> -->
 
 <script defer src="./assets/js/redirect.js"></script>
+
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const menuResponsive = document.querySelector('.menu_responsivo');
+        const headerResponsive = document.querySelector('.header_responsiva');
+        const toggleCor = document.querySelector('.menu-toggle');
+        const logoImage = document.querySelector('.barradenavegacao_responsiva .logo__image'); // Seleção específica
+
+        menuToggle.addEventListener('click', () => {
+            menuResponsive.classList.toggle('show'); // Alterna a classe para abrir/fechar o menu
+            headerResponsive.classList.toggle('header-active'); // Alterna a cor da header_responsiva
+            toggleCor.classList.toggle('menu-toggle-active');
+            logoImage.classList.toggle('logoImage-active'); // Adiciona a classe que ativa o filtro
+        });
+
+        // rolagem automática para próxima questão
+        document.querySelectorAll('input[type="radio"]').forEach((radio) => {
+            radio.addEventListener('click', function() {
+            const currentSection = radio.closest('div.question_container, div.figura_container, div.figura_container_2');
+            const nextSection = currentSection.nextElementSibling;
+        
+            if (nextSection) {                
+                setTimeout(() => {
+                nextSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 300); 
+            }
+            });
+        });
+    </script>
 
 </html>
