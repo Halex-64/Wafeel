@@ -162,86 +162,82 @@
     </script>
 
     <!--JAVASCRIPT DO POP-UP CRIAR LISTA-->
-    <script id="mostrar_pop-up_criar_lista">
+    <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const botaoCriarLista = document.getElementById('botao_criar_lista');
-            const popupCriarLista = document.getElementById('pop-up_criar_lista');
-            const fundoEscuro = document.getElementById('fundo_escuro');
-            const botaoCancelar = document.getElementById('cancel_button');
-            const createButton = document.getElementById('create_button');
-            const listNameInput = document.getElementById('list_name');
-            const selectedMoviesContainer = document.getElementById('selected-movies');
-            const userListsContainer = document.querySelector('.containers_listas'); // Certifique-se de que existe esse container no HTML.
+        const botaoCriarLista = document.getElementById('botao_criar_lista');
+        const popupCriarLista = document.getElementById('pop-up_criar_lista');
+        const fundoEscuro = document.getElementById('fundo_escuro');
+        const botaoCancelar = document.getElementById('cancel_button');
+        const createButton = document.getElementById('create_button');
+        const listNameInput = document.getElementById('list_name');
+        const selectedMoviesContainer = document.getElementById('selected-movies');
+        const userListsContainer = document.querySelector('.containers_listas');
         
-            if (!botaoCriarLista || !popupCriarLista || !botaoCancelar || !fundoEscuro || !createButton || !listNameInput || !userListsContainer) {
-                console.error('Alguns elementos necessários não foram encontrados no DOM.');
-                return;
-            }
-        
-            // Função para salvar lista
-            function saveList(listName, movies) {
-                const lists = JSON.parse(localStorage.getItem('userLists') || '[]');
-                lists.push({ name: listName, movies });
-                localStorage.setItem('userLists', JSON.stringify(lists));
-            }
-        
-            // Função para atualizar as listas do usuário na página
-            function updateUserLists() {
-                const lists = JSON.parse(localStorage.getItem('userLists') || '[]');
-                userListsContainer.innerHTML = ''; // Limpar o conteúdo atual.
-        
-                lists.forEach(list => {
-                    const listCard = document.createElement('a');
-                    listCard.href = `./filmes_da_lista.html?list=${encodeURIComponent(list.name)}`;
-                    listCard.innerHTML = `
-                        <div class="container_filme">
-                            <div class="poster_filmes">
-                                <img src="${list.movies[0]?.poster || ''}" alt="${list.name}">
-                            </div>
-                            <p>${list.name}</p>
+        // Verificação de elementos necessários
+        if (!botaoCriarLista || !popupCriarLista || !botaoCancelar || !fundoEscuro || !createButton || !listNameInput || !userListsContainer) {
+            console.error('Alguns elementos necessários não foram encontrados no DOM.');
+            return;
+        }
+
+        // Função para atualizar as listas do usuário na interface
+        function updateUserLists() {
+            const lists = JSON.parse(localStorage.getItem('userLists') || '[]');
+            userListsContainer.innerHTML = ''; // Limpar o conteúdo atual
+
+            lists.forEach(list => {
+                const listCard = document.createElement('a');
+                listCard.href = `./lista_dinamica.html?list=${encodeURIComponent(list.name)}&movies=${encodeURIComponent(JSON.stringify(list.movies))}`;
+                listCard.innerHTML = `
+                    <div class="container_filme">
+                        <div class="poster_filmes">
+                            <img src="${list.movies[0]?.poster || ''}" alt="${list.name}">
                         </div>
-                    `;
-                    userListsContainer.appendChild(listCard);
-                });
+                        <p>${list.name}</p>
+                    </div>
+                `;
+                userListsContainer.appendChild(listCard);
+            });
+        }
+
+        // Evento para criar a lista e redirecionar
+        createButton.addEventListener('click', () => {
+            const listName = listNameInput.value.trim(); // Remove espaços em branco ao redor do nome
+            const selectedMovies = Array.from(selectedMoviesContainer.querySelectorAll('.movie-item')).map(movie => ({
+                id: movie.dataset.movieId,
+                title: movie.querySelector('.movie-title').textContent,
+                poster: movie.querySelector('img').src,
+            }));
+
+            console.log("List Name:", listName);
+            console.log("Selected Movies:", selectedMovies);
+
+            // Salva a lista no LocalStorage e redireciona
+            if (saveList(listName, selectedMovies)) {
+                updateUserLists(); // Atualizar as listas na página
+                window.location.href = `./lista_dinamica.html?list=${encodeURIComponent(listName)}&movies=${encodeURIComponent(JSON.stringify(selectedMovies))}`;
             }
-        
-            // Evento de clique no botão "CRIAR"
-            createButton.addEventListener('click', () => {
-                const listName = listNameInput.value.trim();
-                const selectedMovies = Array.from(selectedMoviesContainer.querySelectorAll('.movie-item')).map(movie => ({
-                    id: movie.dataset.movieId,
-                    title: movie.querySelector('.movie-title').textContent,
-                    poster: movie.querySelector('img').src,
-                }));
-        
-                // Salvar e atualizar listas mesmo sem validação
-                saveList(listName, selectedMovies);
-                updateUserLists(); // Atualizar as listas na página.
-                window.location.href = `./filmes_da_lista.html?list=${encodeURIComponent(listName)}`;
-            });
-        
-            // Mostrar e ocultar o pop-up de criar lista
-            botaoCriarLista.addEventListener('click', () => {
-                popupCriarLista.classList.add('show');
-                fundoEscuro.classList.add('show');
-                document.documentElement.style.overflow = 'hidden';
-                document.body.style.overflow = 'hidden';
-            });
-        
-            botaoCancelar.addEventListener('click', () => {
-                popupCriarLista.classList.remove('show');
-                fundoEscuro.classList.remove('show');
-                document.documentElement.style.overflow = '';
-                document.body.style.overflow = '';
-            });
-        
-            // Atualizar as listas do usuário ao carregar a página
-            updateUserLists();
         });
+
+        // Mostrar o pop-up de criação de lista
+        botaoCriarLista.addEventListener('click', () => {
+            popupCriarLista.classList.add('show');
+            fundoEscuro.classList.add('show');
+            document.documentElement.style.overflow = 'hidden';
+            document.body.style.overflow = 'hidden';
+        });
+
+        // Ocultar o pop-up de criação de lista
+        botaoCancelar.addEventListener('click', () => {
+            popupCriarLista.classList.remove('show');
+            fundoEscuro.classList.remove('show');
+            document.documentElement.style.overflow = '';
+            document.body.style.overflow = '';
+        });
+
+        // Atualizar as listas do usuário ao carregar a página
+        updateUserLists();
+    }); 
     </script>
-    
-    
-    
     <script id="popup_criar_lista" src="./Pop-up_criar_lista.js"></script>        
 </body>
 </html>
