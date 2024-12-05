@@ -20,7 +20,7 @@
   gap: 10px;
 }
 
-.title-filmes{
+.title-filmes {
   display: flex;
   justify-content: flex-start;
   flex-wrap: initial;
@@ -47,23 +47,17 @@
   border-radius: 10px;
 }
 
-.sidebar {
-  width: 117.7rem;
-  padding: 10px;
+#sidebar {
+  width: 200px;
+  background-color: #111;
   display: flex;
-  align-items: center;
-  overflow-y: auto;
-  border-right: 1px solid #ddd;
+  gap: 10px;
 }
 
 .provider-logo {
-  width: 50px;
-  height: auto;
-  margin: 10px 0;
+  width: 100%;
   cursor: pointer;
-  transition: transform 0.2s ease;
 }
-
 .provider-logo:hover {
   transform: scale(1.1);
 }

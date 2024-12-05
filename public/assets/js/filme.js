@@ -1,3 +1,6 @@
+// Lista de IDs dos provedores específicos
+const selectedProviderIds = [337, 8, 119, 1899, 307, 283]; // Disney+, Netflix, Prime Video, Max, Globoplay, Crunchyroll
+
 // Função para configurar eventos nos logos
 function setupClickEvents() {
     const logos = document.querySelectorAll('.provider-logo');
@@ -46,9 +49,7 @@ function renderMovies(movies) {
 
 // Carregamento inicial dos filmes populares e recentes
 function loadInitialMovies() {
-    const defaultProvider = '8'; // Substitua pelo ID de um provedor padrão
-
-    // Atualização para incluir o parâmetro `plataforma`
+    const defaultProvider = '8'; // Netflix como padrão
     fetch(`/filmes-populares?plataforma=${defaultProvider}`)
         .then(response => {
             if (!response.ok) {
@@ -65,7 +66,6 @@ function loadInitialMovies() {
         })
         .catch(error => console.error('Erro ao carregar filmes populares:', error));
 
-    // Código para carregar filmes recentes permanece inalterado
     fetch('/filmes-recentes')
         .then(response => {
             if (!response.ok) {
@@ -94,21 +94,36 @@ function loadInitialMovies() {
         })
         .catch(error => console.error('Erro ao carregar filmes recentes:', error));
 }
+function loadProviders() {
+    fetch('/api/providers') // Endpoint para carregar provedores
+        .then(response => {
+            if (!response.ok) throw new Error(`Erro na API: ${response.status}`);
+            return response.json();
+        })
+        .then(providers => { // Certifique-se de que o nome está correto
+            console.log('Provedores retornados:', providers); // Debug para garantir que os dados foram retornados
 
-// Carregamento das logos dos provedores e configuração dos eventos
-fetch('/api/providers')
-    .then(response => response.json())
-    .then(providers => {
-        const sidebar = document.getElementById('sidebar');
-        providers.forEach(provider => {
-            const logoElement = document.createElement('img');
-            logoElement.src = `https://image.tmdb.org/t/p/original${provider.logo_path}`;
-            logoElement.alt = provider.provider_name;
-            logoElement.classList.add('provider-logo');
-            logoElement.setAttribute('data-provider-id', provider.provider_id);
-            sidebar.appendChild(logoElement);
-        });
-        setupClickEvents(); // Configura os eventos de clique após adicionar as logos
-    })
-    .catch(error => console.error('Erro ao carregar provedores:', error));
+            const filteredProviders = providers.filter(provider =>
+                selectedProviderIds.includes(provider.provider_id)
+            );
+            console.log('Provedores filtrados:', filteredProviders);
+
+            const sidebar = document.getElementById('sidebar');
+            sidebar.innerHTML = '';
+
+            filteredProviders.forEach(provider => {
+                const logoElement = document.createElement('img');
+                logoElement.src = `https://image.tmdb.org/t/p/original${provider.logo_path}`;
+                logoElement.alt = provider.provider_name;
+                logoElement.classList.add('provider-logo');
+                logoElement.setAttribute('data-provider-id', provider.provider_id);
+                sidebar.appendChild(logoElement);
+            });
+
+            setupClickEvents();
+        })
+        .catch(error => console.error('Erro ao carregar provedores:', error));
+}
+
+loadProviders();
 loadInitialMovies();
