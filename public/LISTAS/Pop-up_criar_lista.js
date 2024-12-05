@@ -50,12 +50,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Combine resultados de filmes e séries com informações de tipo
                 const results = [
                     ...(movieData.results || []).map(item => ({
+                        id: item.id,
                         type: 'movie',
                         title: item.title,
                         release_date: item.release_date,
                         poster_path: item.poster_path,
                     })),
                     ...(seriesData.results || []).map(item => ({
+                        id: item.id,
                         type: 'tv',
                         title: item.name, // Usar "name" para títulos de séries
                         release_date: item.first_air_date,
@@ -94,44 +96,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     // Evento de clique no ícone "+"
                     plusIcon.addEventListener('click', () => {
+                        const movieId = item.id; // Captura o ID do filme ou série
                         const movieTitle = `${item.title}${releaseYear}`;
-
+                    
+                        // Evita duplicatas no container
                         if (!addedTitles.includes(movieTitle)) {
                             addedTitles.push(movieTitle);
-
+                    
                             // Cria o chip estilizado
                             const movieChip = document.createElement('div');
                             movieChip.className = 'movie-chip';
-
+                            movieChip.setAttribute('data-movie-id', movieId); // Adiciona o ID como atributo
+                    
                             const titleSpan = document.createElement('span');
                             titleSpan.textContent = movieTitle;
-
+                    
                             const removeIcon = document.createElement('div');
                             removeIcon.className = 'remove-icon';
                             removeIcon.textContent = '×';
-
+                    
                             // Evento para remover o chip
                             removeIcon.addEventListener('click', () => {
                                 addedTitles.splice(addedTitles.indexOf(movieTitle), 1);
                                 movieChip.remove();
                                 updateCreateButtonState();
                             });
-
+                    
                             movieChip.appendChild(titleSpan);
                             movieChip.appendChild(removeIcon);
                             selectedMoviesContainer.appendChild(movieChip);
-
+                    
                             // Limpa o campo de entrada e oculta as sugestões
                             inputField.value = '';
                             suggestionsContainer.style.display = 'none';
-
+                    
                             // Foca novamente no campo de entrada
                             inputField.focus();
-
+                    
                             updateCreateButtonState();
                         }
                     });
-
+                    
                     suggestion.appendChild(leftContainer);
                     suggestion.appendChild(plusIcon);
                     suggestionsContainer.appendChild(suggestion);
@@ -146,16 +151,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Atualizar o estado do botão "CRIAR"
     createButton.addEventListener('click', () => {
-        const listName = listNameField.value.trim();
-        const selectedMovies = addedTitles.map(title => ({
-            title: title,
+        const listName = listNameField.value.trim(); // Nome da lista
+        const selectedMovies = Array.from(selectedMoviesContainer.querySelectorAll('.movie-chip')).map(chip => ({
+            id: chip.getAttribute('data-movie-id'),  // Captura o ID do filme
+            title: chip.querySelector('span').textContent, // Captura o título
+            poster: chip.querySelector('img')?.src, // Captura o poster
+            genres: chip.querySelector('.genero_um').textContent.split(' • ').slice(0, 2).join(' • '), // Gêneros principais
+            synopsis: chip.querySelector('.sinopse_filme').textContent, // Sinopse
+            releaseYear: chip.querySelector('#ano_lancamento').textContent, // Ano de lançamento
+            duration: chip.querySelector('#duracao').textContent, // Duração
+            rating: chip.querySelector('#classificacao_indicativa').textContent, // Classificação indicativa
         }));
-
-        // Só chama a função de salvar e redireciona se a validação for bem-sucedida
+    
+        // Verifique se os filmes e o nome da lista estão presentes
+        console.log("Filmes selecionados:", selectedMovies);
+    
         if (saveList(listName, selectedMovies)) {
             window.location.href = `./lista_dinamica.html?list=${encodeURIComponent(listName)}&movies=${encodeURIComponent(JSON.stringify(selectedMovies))}`;
         }
     });
+      
+    
 
     // Ocultar sugestões se clicar fora
     document.addEventListener('click', (e) => {

@@ -1,6 +1,7 @@
+const { Script } = require("vm");
+
 document.addEventListener('DOMContentLoaded', () => {
     const apiKey = '4556dc6e1d1a01742122bf8dc0fbae46'; // Substitua pela sua chave de API do TMDb
-    const loadedMovies = [];  // Lista para armazenar os filmes carregados
 
     // Função para obter os parâmetros da URL
     function getQueryParams() {
@@ -10,6 +11,50 @@ document.addEventListener('DOMContentLoaded', () => {
             movies: JSON.parse(params.get('movies') || '[]'), // Desserializa os filmes
         };
     }
+
+    // Obtém os parâmetros da URL
+    const { listName, movies } = getQueryParams();
+
+    // Define o título da lista
+    const tituloListaElement = document.getElementById('titulo_lista');
+    if (listName) {
+        tituloListaElement.textContent = listName;
+    }
+
+    const containerFilmes = document.querySelector('.container_filmes'); // Garantir que o contêiner existe
+    if (!containerFilmes) {
+        console.error('O contêiner de filmes não foi encontrado.');
+        return;
+    }
+
+    // Adiciona os filmes dinamicamente
+    movies.forEach(movie => {
+        const movieCard = document.createElement('div');
+        movieCard.className = 'resumo_filme';
+        movieCard.id = `movie_${movie.id}`; // Adiciona um ID único
+
+        movieCard.innerHTML = `
+            <div class="resumo_filme_imagem">
+                <div class="titulo_genero">
+                    <h3 id="titulo_filme">${movie.title || 'Título não disponível'}</h3>
+                    <ul id="genero_filme">
+                        <li id="genero_um">${movie.genres || 'Gêneros não disponíveis'}</li>
+                    </ul>
+                </div>
+                <div class="novo_texto">
+                    <p id="sinopse_filme">${movie.synopsis || 'Sinopse não disponível'}</p>
+                    <ul id="informacoes_filme">
+                        <li id="ano_lancamento">${movie.releaseYear || 'Ano não disponível'}</li>
+                        <li id="duracao">${movie.duration || 'Duração não disponível'}</li>
+                        <li id="classificacao_indicativa">${movie.rating || 'Classificação não disponível'}</li>
+                    </ul>
+                </div>
+            </div>
+        `;
+
+        // Adiciona o card do filme ao contêiner
+        containerFilmes.appendChild(movieCard);
+    });
 
     // Função para buscar a classificação indicativa do filme
     async function getMovieRating(movieId) {
@@ -44,16 +89,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const movieData = await response.json();
             const rating = await getMovieRating(movieId);
 
-            loadedMovies.push({
-                id: movieId,
-                title: movieData.title,
-                genres: movieData.genres.map(genre => genre.name),
-                releaseYear: new Date(movieData.release_date).getFullYear(),
-                rating: rating, // Salva a classificação indicativa
-                containerId: container.id,
-                backdropPath: movieData.backdrop_path // Salva o backdrop_path
-            });
-
             // Preenchendo os dados no contêiner
             movieTitleElement.textContent = movieData.title || 'Título não disponível';
             movieGenresElement.textContent = movieData.genres.map(genre => genre.name).slice(0, 2).join(' • ') || 'Gêneros não disponíveis';
@@ -77,59 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Função para filtrar filmes por gênero
-    function filterMoviesByGenre(selectedGenre) {
-        loadedMovies.forEach(movie => {
-            const movieElement = document.getElementById(movie.containerId);
-            if (movie.genres.includes(selectedGenre)) {
-                movieElement.style.display = 'block';
-            } else {
-                movieElement.style.display = 'none';
-            }
-        });
-    }
-
-    // Função para filtrar filmes por década
-    function filterMoviesByDecade(selectedDecade) {
-        const startYear = parseInt(selectedDecade.slice(0, -1), 10); // Ex.: "1990s" -> 1990
-        const endYear = startYear + 9;
-
-        loadedMovies.forEach(movie => {
-            const movieElement = document.getElementById(movie.containerId);
-            if (movie.releaseYear >= startYear && movie.releaseYear <= endYear) {
-                movieElement.style.display = 'block';
-            } else {
-                movieElement.style.display = 'none';
-            }
-        });
-    }
-
-    // Função para filtrar filmes por faixa etária
-    function filterMoviesByRating(selectedRating) {
-        loadedMovies.forEach(movie => {
-            const movieElement = document.getElementById(movie.containerId);
-            const rating = movie.rating.split(' ')[0]; // Pega apenas a parte numérica da classificação
-            if (rating === selectedRating || (selectedRating === 'Livre' && rating === 'Indefinido')) {
-                movieElement.style.display = 'block';
-            } else {
-                movieElement.style.display = 'none';
-            }
-        });
-    }
-
-    // Função para filtrar filmes por serviço de streaming
-    function filterMoviesByStreaming(selectedService) {
-        loadedMovies.forEach(movie => {
-            const movieElement = document.getElementById(movie.containerId);
-            if (movie.streamingServices.includes(selectedService)) {
-                movieElement.style.display = 'block';
-            } else {
-                movieElement.style.display = 'none';
-            }
-        });
-    }
-
-    // Função para adicionar filtros de gênero, ano, faixa etária e serviço de streaming
+    // Função para preencher os filtros ao carregar a página
     function populateDropdowns() {
         const genreDropdown = document.getElementById('dropdown-genero');
         const yearDropdown = document.getElementById('dropdown-ano');
@@ -178,41 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Obtém os parâmetros da URL
-    const { listName, movies } = getQueryParams();
-
-    // Define o título da lista
-    const tituloListaElement = document.getElementById('titulo_lista');
-    if (listName) {
-        tituloListaElement.textContent = listName;
-    }
-
-    // Adiciona os filmes dinamicamente
-    const containerFilmes = document.querySelector('.container_filmes');
-    movies.forEach(movie => {
-        const movieCard = document.createElement('div');
-        movieCard.className = 'resumo_filme';
-        movieCard.id = `movie_${movie.id}`; // Adiciona um ID único
-        movieCard.innerHTML = `
-            <div class="resumo_filme_imagem">
-                <div class="titulo_genero">
-                    <li class="titulo_filme"></li>
-                    <ul class="genero_filme">
-                        <li class="genero_um"></li>
-                    </ul>
-                </div>
-                <div class="novo_texto">
-                    <li class="sinopse_filme"></li>
-                    <ul class="informacoes_filme"></ul>
-                </div>
-            </div>
-        `;
-        containerFilmes.appendChild(movieCard);
-
-        // Carrega os detalhes do filme
-        getMovieDetails(movie.id, movieCard);
-    });
-
     // Preencher os filtros ao carregar a página
     populateDropdowns();
 });
+

@@ -401,24 +401,25 @@
                     ? `https://image.tmdb.org/t/p/original${movie.backdrop_path}`
                     : 'https://via.placeholder.com/200x300';
     
-                movieCard.innerHTML = `
-                    <div class="resumo_filme_imagem" style="background-image: url(${backgroundImage});">
-                        <div class="titulo_genero">
-                            <li class="titulo_filme">${movie.title || 'Título não disponível'}</li>
-                            <ul class="genero_filme">
-                                <li class="genero_um">${movie.genres ? movie.genres.join(' • ') : 'Gêneros não disponívis'}</li>
-                            </ul>
-                        </div>
-                        <div class="novo_texto">
-                            <li class="sinopse_filme">${movie.synopsis || 'Sinopse não disponível'}</li>
-                            <ul class="informacoes_filme">
-                                <li class="ano_lancamento">${movie.releaseYear || 'Ano não disponível'}</li>
-                                <li class="duracao">${movie.duration || 'Duração não disponível'}</li>
-                                <li class="classificacao_indicativa">${movie.rating || 'Classificação não disponível'}</li>
-                            </ul>
-                        </div>
-                    </div>
-                `;
+                    movieCard.innerHTML = `
+            <div class="resumo_filme_imagem">
+                <div class="titulo_genero">
+                    <li id="titulo_filme">${movie.title || 'Título não disponível'}</li>
+                    <ul id="genero_filme">
+                        <li id="genero_um">${movie.genres ? movie.genres[0] : 'Gênero não disponível'}</li>
+                        <li id="genero_dois">${movie.genres && movie.genres[1] ? movie.genres[1] : 'Gênero não disponível'}</li>
+                    </ul>
+                </div>
+                <div class="novo_texto">
+                    <li id="sinopse_filme">${movie.synopsis || 'Sinopse não disponível'}</li>
+                    <ul id="informacoes_filme">
+                        <li id="ano_lancamento">${movie.releaseYear || 'Ano não disponível'}</li>
+                        <li id="duracao">${movie.duration || 'Duração não disponível'}</li>
+                        <li id="classificacao_indicativa">${movie.rating || 'Classificação não disponível'}</li>
+                    </ul>
+                </div>
+            </div>
+        `;
                 container.appendChild(movieCard);
             });
         });

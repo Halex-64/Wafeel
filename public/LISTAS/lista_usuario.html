@@ -201,20 +201,23 @@
 
         // Evento para criar a lista e redirecionar
         createButton.addEventListener('click', () => {
-            const listName = listNameInput.value.trim(); // Remove espaços em branco ao redor do nome
+            const listName = listNameInput.value.trim(); // Nome da lista
             const selectedMovies = Array.from(selectedMoviesContainer.querySelectorAll('.movie-item')).map(movie => ({
-                id: movie.dataset.movieId,
-                title: movie.querySelector('.movie-title').textContent,
-                poster: movie.querySelector('img').src,
+                id: movie.dataset.movieId, // ID do filme
+                title: movie.querySelector('.movie-title').textContent, // Título do filme
+                poster: movie.querySelector('img').src, // Poster do filme
             }));
 
-            console.log("List Name:", listName);
-            console.log("Selected Movies:", selectedMovies);
-
-            // Salva a lista no LocalStorage e redireciona
-            if (saveList(listName, selectedMovies)) {
-                updateUserLists(); // Atualizar as listas na página
-                window.location.href = `./lista_dinamica.html?list=${encodeURIComponent(listName)}&movies=${encodeURIComponent(JSON.stringify(selectedMovies))}`;
+            if (listName && selectedMovies.length > 0) {
+                // Monta a URL com os parâmetros
+                const redirectURL = `./lista_dinamica.html?list=${encodeURIComponent(listName)}&movies=${encodeURIComponent(JSON.stringify(selectedMovies))}`;
+                
+                // Redireciona para a página lista_dinamica.html
+                window.location.href = redirectURL;
+            } else {
+                // Exibe o alerta e não executa o redirecionamento
+                alert('Adicione um nome à lista e selecione pelo menos um filme.');
+                return; // Impede qualquer execução adicional
             }
         });
 
