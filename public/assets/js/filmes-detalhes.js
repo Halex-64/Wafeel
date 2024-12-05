@@ -61,7 +61,7 @@ async function fetchFilmeDetalhes() {
             <img src="${backdropPath}" alt="${mediaTitle}">
             <p>${mediaDetails.overview || 'Descrição indisponível.'}</p>
             <p><strong>Data de lançamento:</strong> ${mediaDetails.release_date || mediaDetails.first_air_date || 'Indisponível'}</p>
-            <p><strong>Popularidade:</strong> ${mediaDetails.popularity || 'Indisponível'}</p>
+            <p><strong>Popularidade:</strong> ${mediaDetails.popularity || 'Interações indisponíveis'} Interações</p>
             <p><strong>Avaliação:</strong> ${mediaDetails.vote_average || 'Indisponível'}/10</p>
             <p><strong>Gêneros:</strong> ${generos || 'Indisponível'}</p>
             <h3 class = 'providers-title'>Disponível em:</h3>

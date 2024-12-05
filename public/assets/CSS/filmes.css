@@ -9,6 +9,26 @@
   gap: 10px;
 }
 
+#filmes-recentes {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 10px;
+}
+
+.title-filmes{
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: initial;
+  margin-left: 347px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
 .movie-item {
   flex: 1 1 calc(20% - 20px); /* Cada item ocupa 20% da largura menos o espaçamento */
   max-width: calc(

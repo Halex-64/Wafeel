@@ -79,11 +79,9 @@ function loadInitialMovies() {
                 filmesDiv.innerHTML = ''; // Limpa o conteúdo anterior
                 filmes.forEach(filme => {
                     const filmeElement = document.createElement('div');
-                    filmeElement.classList.add('filme-card');
+                    filmeElement.classList.add('movie-item');
                     filmeElement.innerHTML = `
-                        <h2>${filme.title}</h2>
                         <img src="https://image.tmdb.org/t/p/w500${filme.poster_path}" alt="${filme.title}" />
-                        <p>${filme.overview}</p>
                     `;
                     filmeElement.addEventListener('click', () => {
                         window.location.href = `./filmes-detalhes.html?id=${filme.id}`;
