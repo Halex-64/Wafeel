@@ -80,6 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let movieUrl;
         let additionalInfo = '';
         let duration = '';
+        let servicesList = [];
 
         if (movie.type === 'movie') {
             movieUrl = `https://api.themoviedb.org/3/movie/${movie.id}?api_key=${apiKey}&language=pt-BR`;
@@ -94,6 +95,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch(movieUrl);
             const movieData = await response.json();
             const rating = await getMovieRating(movie.id);
+            const services = await getStreamingServices(movie.id);
+            servicesList = services.map(service => service.id);
 
             if (movie.type === 'tv') {
                 additionalInfo = `Temporadas: ${movieData.number_of_seasons || 'Indefinido'}`;
@@ -103,11 +106,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const releaseYear = new Date(movieData.release_date || movieData.first_air_date)?.getFullYear() || 'Ano não disponível';
-
             const movieCard = document.createElement('div');
             movieCard.className = 'resumo_filme';
             movieCard.setAttribute('data-genres', movieData.genres.map(genre => genre.id).join(','));
-
+            movieCard.setAttribute('data-services', servicesList.join(','));
             movieCard.innerHTML = `
                 <div class="resumo_filme_imagem" style="background-image: url('https://image.tmdb.org/t/p/w500${movieData.backdrop_path || ''}');">
                     <div class="titulo_genero">
@@ -125,7 +127,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             `;
             containerFilmes.appendChild(movieCard);
-
             const titleElement = movieCard.querySelector('#titulo_filme');
             adjustTitleFontSize(titleElement);
 
@@ -185,7 +186,111 @@ document.addEventListener('DOMContentLoaded', () => {
         if (resetButton) resetButton.style.display = 'block';
     }
 
+
+    // Função para obter serviços de streaming da API TMDb
+    async function getStreamingServices(movieId) {
+        const streamingUrl = `https://api.themoviedb.org/3/movie/${movieId}/watch/providers?api_key=${apiKey}&language=pt-BR`;
+
+        try {
+            const response = await fetch(streamingUrl);
+            const data = await response.json();
+
+            // Adiciona um log para depuração
+            console.log('Dados retornados:', data);
+
+            // Verifica se a resposta contém a chave 'results'
+            if (data.results) {
+                // Verifica se a chave 'BR' existe e contém o array 'flatrate'
+                const providers = data.results['BR']?.flatrate || []; // Pega os provedores de streaming no Brasil
+                if (providers.length > 0) {
+                    console.log('Provedores de streaming encontrados:', providers);
+                    return providers.map(provider => ({
+                        id: provider.provider_id,
+                        name: provider.provider_name,
+                        logo: provider.logo_path ? `https://image.tmdb.org/t/p/w92${provider.logo_path}` : null  // URL para o logo do provedor
+                    }));
+                } else {
+                    console.error('Nenhum provedor de streaming encontrado para o Brasil.');
+                    return [];
+                }
+            } else {
+                console.error('A chave "results" não foi encontrada na resposta da API.');
+                return [];
+            }
+        } catch (error) {
+            console.error('Erro ao buscar serviços de streaming:', error);
+            return [];
+        }
+    }
+
+    // Função para popular a barra de filtro de SERVIÇOS
+    async function populateServiceFilter() {
+        // Verifica se há filmes na lista
+        if (!movies || movies.length === 0) {
+            console.error('Nenhum filme disponível na lista.');
+            return;
+        }
+
+        // Cria um conjunto para evitar duplicação de serviços
+        const servicesSet = new Set();
+
+        // Itera sobre os filmes na lista
+        for (const movie of movies) {
+            const services = await getStreamingServices(movie.id);  // Obtém os serviços de streaming para o filme
+
+            services.forEach(service => {
+                if (service.name && service.id) { // Verifica se o serviço possui os campos esperados
+                    // Adiciona ao Set de forma única, armazenando o nome e id de cada serviço
+                    servicesSet.add(JSON.stringify({ id: service.id, name: service.name }));  
+                }
+            });
+        }
+
+        // Converte o conjunto de serviços de volta para uma lista e parse os objetos JSON
+        const servicesList = Array.from(servicesSet).map(service => JSON.parse(service));
+
+        const dropdownServico = document.getElementById('dropdown-servico');
+        if (!dropdownServico) {
+            console.error('Dropdown de serviço não encontrado.');
+            return;
+        }
+
+        dropdownServico.innerHTML = '';  // Limpa o dropdown antes de adicionar as opções
+
+        // Popula o dropdown com os serviços únicos
+        servicesList.forEach(service => {
+            const serviceOption = document.createElement('li');
+            serviceOption.className = 'option';
+            serviceOption.textContent = service.name;
+            serviceOption.dataset.serviced = service.id;
+            serviceOption.onclick = () => filterByService(service.id);
+            dropdownServico.appendChild(serviceOption);
+        });
+    }
+
+    // Função para filtrar filmes/séries pelo serviço de streaming
+    function filterByService(serviceId) {
+        const movieCards = document.querySelectorAll('.resumo_filme');
+        
+        movieCards.forEach(card => {
+            // Obtém a lista de serviços associados ao filme (armazenada no dataset)
+            const services = card.dataset.services ? card.dataset.services.split(',') : [];
+
+            // Verifica se o filme está disponível no serviço selecionado
+            if (services.includes(String(serviceId))) {
+                card.style.display = 'block';  // Exibe o cartão do filme
+            } else {
+                card.style.display = 'none';  // Oculta o cartão do filme
+            }
+        });
+
+        // Exibe o botão de resetar o filtro
+        const resetButton = document.getElementById('resetar-filtro');
+        if (resetButton) resetButton.style.display = 'block';
+    } 
+
     // Inicialização
     populateGenreFilter();
+    movies.forEach(movie => populateServiceFilter(movie.id));
     movies.forEach(movie => getMovieDetails(movie));
 });
