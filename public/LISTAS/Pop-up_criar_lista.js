@@ -34,24 +34,40 @@ document.addEventListener('DOMContentLoaded', () => {
         return true; // Retorna true se os dados forem válidos
     }
 
+    // Função para obter o URL do pôster do filme
+    async function getPosterUrl(movieId, apiKey) {
+        const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`);
+        const data = await response.json();
+        return data.poster_path ? `https://image.tmdb.org/t/p/w200${data.poster_path}` : 'https://via.placeholder.com/50x75?text=No+Image';
+    }
+
     // Função para atualizar as listas do usuário na interface
-    function updateUserLists() {
+    async function updateUserLists() {
+        const apiKey = '4556dc6e1d1a01742122bf8dc0fbae46';
         const lists = JSON.parse(localStorage.getItem('userLists') || '[]');
         userListsContainer.innerHTML = ''; // Limpar o conteúdo atual
 
-        lists.forEach(list => {
+        for (const list of lists) {
             const listCard = document.createElement('a');
             listCard.href = `./lista_dinamica.html?list=${encodeURIComponent(list.name)}&movies=${encodeURIComponent(JSON.stringify(list.movies))}`;
+            
+            const posterPromises = list.movies.slice(0, 5).map(async movie => {
+                const posterUrl = await getPosterUrl(movie.id, apiKey);
+                return `<img src="${posterUrl}" alt="${movie.title}">`;
+            });
+
+            const posters = await Promise.all(posterPromises);
+
             listCard.innerHTML = `
                 <div class="container_filme">
-                    <div class="poster_filmes">
-                        <img src="${list.movies[0]?.poster || ''}" alt="${list.name}">
+                    <div class="poster_filmes" id="poster_filmes_${list.name}">
+                        ${posters.join('')}
                     </div>
                     <p>${list.name}</p>
                 </div>
             `;
             userListsContainer.appendChild(listCard);
-        });
+        }
     }
 
     // Evento de busca de filmes
