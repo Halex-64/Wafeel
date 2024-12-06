@@ -1,14 +1,26 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const inputField = document.getElementById('movie_search');
-    const listNameField = document.getElementById('list_name'); // Campo de nome da lista
-    const suggestionsContainer = document.getElementById('suggestions');
+document.addEventListener('DOMContentLoaded', () => { 
+    // Elementos do DOM
+    const botaoCriarLista = document.getElementById('botao_criar_lista');
+    const popupCriarLista = document.getElementById('pop-up_criar_lista');
+    const fundoEscuro = document.getElementById('fundo_escuro');
+    const botaoCancelar = document.getElementById('cancel_button');
     const createButton = document.getElementById('create_button');
-    const selectedMoviesContainer = document.getElementById('selected-movies'); // Contêiner para os chips
+    const listNameInput = document.getElementById('list_name');
+    const selectedMoviesContainer = document.getElementById('selected-movies');
+    const userListsContainer = document.querySelector('.containers_listas');
+    const inputField = document.getElementById('movie_search');
+    const suggestionsContainer = document.getElementById('suggestions');
     const addedTitles = []; // Lista para armazenar os títulos adicionados
+
+    // Verificação de elementos necessários
+    if (!botaoCriarLista || !popupCriarLista || !botaoCancelar || !fundoEscuro || !createButton || !listNameInput || !userListsContainer) {
+        console.error('Alguns elementos necessários não foram encontrados no DOM.');
+        return;
+    }
 
     // Atualiza o estado do botão "CRIAR"
     function updateCreateButtonState() {
-        const isListNameFilled = listNameField.value.trim() !== ''; // Verifica se o nome da lista está preenchido
+        const isListNameFilled = listNameInput.value.trim() !== ''; // Verifica se o nome da lista está preenchido
         const hasTitles = addedTitles.length > 0; // Verifica se há títulos adicionados
 
         createButton.disabled = !(isListNameFilled && hasTitles); // Desabilita o botão se o nome não estiver preenchido ou não houver filmes
@@ -22,50 +34,57 @@ document.addEventListener('DOMContentLoaded', () => {
         return true; // Retorna true se os dados forem válidos
     }
 
+    // Função para atualizar as listas do usuário na interface
+    function updateUserLists() {
+        const lists = JSON.parse(localStorage.getItem('userLists') || '[]');
+        userListsContainer.innerHTML = ''; // Limpar o conteúdo atual
+
+        lists.forEach(list => {
+            const listCard = document.createElement('a');
+            listCard.href = `./lista_dinamica.html?list=${encodeURIComponent(list.name)}&movies=${encodeURIComponent(JSON.stringify(list.movies))}`;
+            listCard.innerHTML = `
+                <div class="container_filme">
+                    <div class="poster_filmes">
+                        <img src="${list.movies[0]?.poster || ''}" alt="${list.name}">
+                    </div>
+                    <p>${list.name}</p>
+                </div>
+            `;
+            userListsContainer.appendChild(listCard);
+        });
+    }
+
     // Evento de busca de filmes
     inputField.addEventListener('input', async (event) => {
-        const query = event.target.value.trim(); // Remove espaços à esquerda/direita
-
+        const query = event.target.value.trim();
         if (query.length >= 1) {
             const apiKey = '4556dc6e1d1a01742122bf8dc0fbae46';
-
-            // Extrair o ano da consulta (assumindo que o ano está no final)
-            const possibleYear = query.split(/\s+/).pop(); // Dividir por espaços e pegar o último elemento
-            const year = parseInt(possibleYear, 10); // Tentar converter para inteiro
-
-            // Construir as URLs de pesquisa para filmes e séries com filtro opcional de ano
-            const movieUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${encodeURIComponent(query)}&${year ? `primary_release_year=${year}` : ''}`;
-            const seriesUrl = `https://api.themoviedb.org/3/search/tv?api_key=${apiKey}&query=${encodeURIComponent(query)}&${year ? `first_air_date_year=${year}` : ''}`;
+            const movieUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${encodeURIComponent(query)}`;
+            const seriesUrl = `https://api.themoviedb.org/3/search/tv?api_key=${apiKey}&query=${encodeURIComponent(query)}`;
 
             try {
-                // Buscando filmes e séries simultaneamente
-                const [movieResponse, seriesResponse] = await Promise.all([
-                    fetch(movieUrl),
-                    fetch(seriesUrl),
-                ]);
-
+                const [movieResponse, seriesResponse] = await Promise.all([fetch(movieUrl), fetch(seriesUrl)]);
                 const movieData = await movieResponse.json();
                 const seriesData = await seriesResponse.json();
 
-                // Combine resultados de filmes e séries com informações de tipo
                 const results = [
                     ...(movieData.results || []).map(item => ({
                         id: item.id,
-                        type: 'movie',
+                        type: 'movie', // Adiciona o tipo 'movie'
                         title: item.title,
                         release_date: item.release_date,
                         poster_path: item.poster_path,
                     })),
                     ...(seriesData.results || []).map(item => ({
                         id: item.id,
-                        type: 'tv',
-                        title: item.name, // Usar "name" para títulos de séries
+                        type: 'tv', // Adiciona o tipo 'tv' para séries
+                        title: item.name,
                         release_date: item.first_air_date,
                         poster_path: item.poster_path,
                     })),
                 ];
 
-                suggestionsContainer.innerHTML = ''; // Limpa sugestões antigas
+                suggestionsContainer.innerHTML = '';
                 suggestionsContainer.style.display = 'block';
 
                 results.slice(0, 10).forEach(item => {
@@ -94,49 +113,43 @@ document.addEventListener('DOMContentLoaded', () => {
                     plusIcon.textContent = '+';
                     plusIcon.className = 'plus-icon';
 
-                    // Evento de clique no ícone "+"
                     plusIcon.addEventListener('click', () => {
-                        const movieId = item.id; // Captura o ID do filme ou série
+                        const movieId = item.id;
                         const movieTitle = `${item.title}${releaseYear}`;
-                    
-                        // Evita duplicatas no container
+
                         if (!addedTitles.includes(movieTitle)) {
                             addedTitles.push(movieTitle);
-                    
-                            // Cria o chip estilizado
+
                             const movieChip = document.createElement('div');
                             movieChip.className = 'movie-chip';
-                            movieChip.setAttribute('data-movie-id', movieId); // Adiciona o ID como atributo
-                    
+                            movieChip.setAttribute('data-movie-id', movieId);
+                            movieChip.setAttribute('data-type', item.type);  // Define o tipo para filme ou série
+
                             const titleSpan = document.createElement('span');
                             titleSpan.textContent = movieTitle;
-                    
+
                             const removeIcon = document.createElement('div');
                             removeIcon.className = 'remove-icon';
                             removeIcon.textContent = '×';
-                    
-                            // Evento para remover o chip
+
                             removeIcon.addEventListener('click', () => {
                                 addedTitles.splice(addedTitles.indexOf(movieTitle), 1);
                                 movieChip.remove();
                                 updateCreateButtonState();
                             });
-                    
+
                             movieChip.appendChild(titleSpan);
                             movieChip.appendChild(removeIcon);
                             selectedMoviesContainer.appendChild(movieChip);
-                    
-                            // Limpa o campo de entrada e oculta as sugestões
+
                             inputField.value = '';
                             suggestionsContainer.style.display = 'none';
-                    
-                            // Foca novamente no campo de entrada
                             inputField.focus();
-                    
+
                             updateCreateButtonState();
                         }
                     });
-                    
+
                     suggestion.appendChild(leftContainer);
                     suggestion.appendChild(plusIcon);
                     suggestionsContainer.appendChild(suggestion);
@@ -149,37 +162,47 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Atualizar o estado do botão "CRIAR"
+    // Criar lista
     createButton.addEventListener('click', () => {
-        const listName = listNameField.value.trim(); // Nome da lista
+        const listName = listNameInput.value.trim();
         const selectedMovies = Array.from(selectedMoviesContainer.querySelectorAll('.movie-chip')).map(chip => ({
-            id: chip.getAttribute('data-movie-id'),  // Captura o ID do filme
-            title: chip.querySelector('span').textContent, // Captura o título
-            poster: chip.querySelector('img')?.src, // Captura o poster
-            genres: chip.querySelector('.genero_um').textContent.split(' • ').slice(0, 2).join(' • '), // Gêneros principais
-            synopsis: chip.querySelector('.sinopse_filme').textContent, // Sinopse
-            releaseYear: chip.querySelector('#ano_lancamento').textContent, // Ano de lançamento
-            duration: chip.querySelector('#duracao').textContent, // Duração
-            rating: chip.querySelector('#classificacao_indicativa').textContent, // Classificação indicativa
+            id: chip.getAttribute('data-movie-id'),
+            type: chip.getAttribute('data-type'),  // Passa o tipo (filme ou série)
+            title: chip.querySelector('span').textContent,
+            poster: chip.querySelector('img')?.src,
         }));
-    
-        // Verifique se os filmes e o nome da lista estão presentes
-        console.log("Filmes selecionados:", selectedMovies);
-    
+
         if (saveList(listName, selectedMovies)) {
             window.location.href = `./lista_dinamica.html?list=${encodeURIComponent(listName)}&movies=${encodeURIComponent(JSON.stringify(selectedMovies))}`;
         }
     });
-      
-    
 
-    // Ocultar sugestões se clicar fora
+    // Mostrar pop-up de criação de lista
+    botaoCriarLista.addEventListener('click', () => {
+        popupCriarLista.classList.add('show');
+        fundoEscuro.classList.add('show');
+        document.documentElement.style.overflow = 'hidden';
+        document.body.style.overflow = 'hidden';
+    });
+
+    // Ocultar pop-up de criação de lista
+    botaoCancelar.addEventListener('click', () => {
+        popupCriarLista.classList.remove('show');
+        fundoEscuro.classList.remove('show');
+        document.documentElement.style.overflow = '';
+        document.body.style.overflow = '';
+    });
+
+    // Ocultar sugestões ao clicar fora
     document.addEventListener('click', (e) => {
         if (!suggestionsContainer.contains(e.target) && e.target !== inputField) {
             suggestionsContainer.style.display = 'none';
         }
     });
 
-    // Adicionar evento no campo de nome da lista
-    listNameField.addEventListener('input', updateCreateButtonState);
+    // Atualizar as listas do usuário ao carregar a página
+    updateUserLists();
+
+    // Atualizar estado do botão "CRIAR" ao digitar no campo de nome
+    listNameInput.addEventListener('input', updateCreateButtonState);
 });

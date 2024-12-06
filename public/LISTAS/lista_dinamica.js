@@ -1,4 +1,11 @@
-const { Script } = require("vm");
+// Função para resetar os filtros
+function clearFilters() {
+    const movieCards = document.querySelectorAll('.resumo_filme');
+    movieCards.forEach(card => card.style.display = 'block');
+
+    const resetButton = document.getElementById('resetar-filtro');
+    if (resetButton) resetButton.style.display = 'none';
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     const apiKey = '4556dc6e1d1a01742122bf8dc0fbae46'; // Substitua pela sua chave de API do TMDb
@@ -15,46 +22,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // Obtém os parâmetros da URL
     const { listName, movies } = getQueryParams();
 
+    // Exibir no console os dados de filmes
+    console.log(movies);
+
     // Define o título da lista
     const tituloListaElement = document.getElementById('titulo_lista');
     if (listName) {
         tituloListaElement.textContent = listName;
     }
 
-    const containerFilmes = document.querySelector('.container_filmes'); // Garantir que o contêiner existe
+    const containerFilmes = document.querySelector('.container_filmes');
     if (!containerFilmes) {
         console.error('O contêiner de filmes não foi encontrado.');
         return;
     }
-
-    // Adiciona os filmes dinamicamente
-    movies.forEach(movie => {
-        const movieCard = document.createElement('div');
-        movieCard.className = 'resumo_filme';
-        movieCard.id = `movie_${movie.id}`; // Adiciona um ID único
-
-        movieCard.innerHTML = `
-            <div class="resumo_filme_imagem">
-                <div class="titulo_genero">
-                    <h3 id="titulo_filme">${movie.title || 'Título não disponível'}</h3>
-                    <ul id="genero_filme">
-                        <li id="genero_um">${movie.genres || 'Gêneros não disponíveis'}</li>
-                    </ul>
-                </div>
-                <div class="novo_texto">
-                    <p id="sinopse_filme">${movie.synopsis || 'Sinopse não disponível'}</p>
-                    <ul id="informacoes_filme">
-                        <li id="ano_lancamento">${movie.releaseYear || 'Ano não disponível'}</li>
-                        <li id="duracao">${movie.duration || 'Duração não disponível'}</li>
-                        <li id="classificacao_indicativa">${movie.rating || 'Classificação não disponível'}</li>
-                    </ul>
-                </div>
-            </div>
-        `;
-
-        // Adiciona o card do filme ao contêiner
-        containerFilmes.appendChild(movieCard);
-    });
 
     // Função para buscar a classificação indicativa do filme
     async function getMovieRating(movieId) {
@@ -63,105 +44,148 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch(ratingUrl);
             const data = await response.json();
 
-            // Encontrar certificação para o Brasil
             const brazilCertification = data.results.find(entry => entry.iso_3166_1 === 'BR');
-            return brazilCertification && brazilCertification.release_dates.length > 0
-                ? brazilCertification.release_dates[0].certification || 'Indefinido'
-                : 'Indefinido';
+            const usCertification = data.results.find(entry => entry.iso_3166_1 === 'US');
+
+            if (brazilCertification && brazilCertification.release_dates.length > 0) {
+                return brazilCertification.release_dates[0].certification || 'Indefinido';
+            } else if (usCertification && usCertification.release_dates.length > 0) {
+                return usCertification.release_dates[0].certification || 'Indefinido';
+            } else {
+                return 'Indefinido';
+            }
         } catch (error) {
             console.error(`Erro ao buscar classificação indicativa do filme com ID ${movieId}:`, error);
-            return 'Erro';
+            return 'Indefinido';
         }
     }
 
-    // Função para buscar detalhes do filme
-    async function getMovieDetails(movieId, container) {
-        const movieUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=pt-BR`;
+    // Função para ajustar o tamanho da fonte do título
+    function adjustTitleFontSize(titleElement) {
+        const titleLength = titleElement.textContent.length;
 
-        const movieTitleElement = container.querySelector('.titulo_filme');
-        const movieGenresElement = container.querySelector('.genero_um');
-        const movieSynopsisElement = container.querySelector('.sinopse_filme');
-        const movieInfoElement = container.querySelector('.informacoes_filme');
-        const movieImageElement = container.querySelector('.resumo_filme_imagem');
+        if (titleLength <= 15) {
+            titleElement.style.fontSize = '48px';
+        } else if (titleLength <= 30) {
+            titleElement.style.fontSize = '40px';
+        } else if (titleLength <= 45) {
+            titleElement.style.fontSize = '32px';
+        } else {
+            titleElement.style.fontSize = '24px';
+        }
+    }
+
+    // Função para buscar detalhes do filme ou série
+    async function getMovieDetails(movie) {
+        let movieUrl;
+        let additionalInfo = '';
+        let duration = '';
+
+        if (movie.type === 'movie') {
+            movieUrl = `https://api.themoviedb.org/3/movie/${movie.id}?api_key=${apiKey}&language=pt-BR`;
+        } else if (movie.type === 'tv') {
+            movieUrl = `https://api.themoviedb.org/3/tv/${movie.id}?api_key=${apiKey}&language=pt-BR`;
+        } else {
+            console.error('Tipo de item desconhecido');
+            return;
+        }
 
         try {
             const response = await fetch(movieUrl);
             const movieData = await response.json();
-            const rating = await getMovieRating(movieId);
+            const rating = await getMovieRating(movie.id);
 
-            // Preenchendo os dados no contêiner
-            movieTitleElement.textContent = movieData.title || 'Título não disponível';
-            movieGenresElement.textContent = movieData.genres.map(genre => genre.name).slice(0, 2).join(' • ') || 'Gêneros não disponíveis';
-
-            const shortSynopsis = movieData.overview?.length > 125
-                ? movieData.overview.slice(0, 125) + '...'
-                : movieData.overview || 'Sinopse não disponível';
-            movieSynopsisElement.textContent = shortSynopsis;
-
-            const releaseYear = new Date(movieData.release_date).getFullYear() || 'Ano não disponível';
-            const duration = `${Math.floor(movieData.runtime / 60)}h ${movieData.runtime % 60}min` || 'Duração não disponível';
-            movieInfoElement.textContent = [releaseYear, duration, rating].join(' • ');
-
-            // Imagem de fundo
-            if (movieData.backdrop_path) {
-                movieImageElement.style.backgroundImage = `url(https://image.tmdb.org/t/p/original${movieData.backdrop_path})`;
+            if (movie.type === 'tv') {
+                additionalInfo = `Temporadas: ${movieData.number_of_seasons || 'Indefinido'}`;
+                duration = '';
+            } else {
+                duration = `${Math.floor(movieData.runtime / 60)}h ${movieData.runtime % 60}min`;
             }
 
+            const releaseYear = new Date(movieData.release_date || movieData.first_air_date)?.getFullYear() || 'Ano não disponível';
+
+            const movieCard = document.createElement('div');
+            movieCard.className = 'resumo_filme';
+            movieCard.setAttribute('data-genres', movieData.genres.map(genre => genre.id).join(','));
+
+            movieCard.innerHTML = `
+                <div class="resumo_filme_imagem" style="background-image: url('https://image.tmdb.org/t/p/w500${movieData.backdrop_path || ''}');">
+                    <div class="titulo_genero">
+                        <li id="titulo_filme">${movieData.title || movieData.name || 'Título não disponível'}</li>
+                        <ul id="genero_filme">
+                            <li>${movieData.genres?.map(genre => genre.name).slice(0, 2).join(' • ') || 'Gêneros não disponíveis'}</li>
+                        </ul>
+                    </div>
+                    <div class="novo_texto">
+                        <li id="sinopse_filme">${movieData.overview?.length > 125 ? `${movieData.overview.slice(0, 125)}...` : movieData.overview || 'Sinopse não disponível'}</li>
+                        <ul id="informacoes_filme">
+                            <li id="informacoes">${[releaseYear, duration, additionalInfo, rating].filter(Boolean).join(' • ')}</li>
+                        </ul>
+                    </div>
+                </div>
+            `;
+            containerFilmes.appendChild(movieCard);
+
+            const titleElement = movieCard.querySelector('#titulo_filme');
+            adjustTitleFontSize(titleElement);
+
         } catch (error) {
-            console.error(`Erro ao buscar dados do filme com ID ${movieId}:`, error);
+            console.error(`Erro ao buscar dados do filme com ID ${movie.id}:`, error);
         }
     }
 
-    // Função para preencher os filtros ao carregar a página
-    function populateDropdowns() {
-        const genreDropdown = document.getElementById('dropdown-genero');
-        const yearDropdown = document.getElementById('dropdown-ano');
-        const ratingDropdown = document.getElementById('dropdown-faixa-etaria');
-        const serviceDropdown = document.getElementById('dropdown-servico');
+    // Função para obter gêneros da API TMDb
+    async function getGenres() {
+        const genresUrl = `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=pt-BR`;
+        try {
+            const response = await fetch(genresUrl);
+            const data = await response.json();
+            return data.genres || [];
+        } catch (error) {
+            console.error('Erro ao buscar gêneros:', error);
+            return [];
+        }
+    }
 
-        const uniqueGenres = [...new Set(loadedMovies.flatMap(movie => movie.genres))];
-        const uniqueYears = [...new Set(loadedMovies.map(movie => movie.releaseYear))].sort();
-        const uniqueRatings = [...new Set(loadedMovies.map(movie => movie.rating.split(' ')[0]))];
-        const uniqueServices = [...new Set(loadedMovies.flatMap(movie => movie.streamingServices))];
+    // Função para popular a barra de filtro de gêneros
+    async function populateGenreFilter() {
+        const genres = await getGenres();
+        const dropdownGenero = document.getElementById('dropdown-genero');
 
-        // Preencher dropdown de gêneros
-        uniqueGenres.forEach(genre => {
-            const li = document.createElement('li');
-            li.className = 'option';
-            li.textContent = genre;
-            li.addEventListener('click', () => filterMoviesByGenre(genre));
-            genreDropdown.appendChild(li);
-        });
+        if (!dropdownGenero) {
+            console.error('Dropdown de gêneros não encontrado.');
+            return;
+        }
 
-        // Preencher dropdown de ano
-        uniqueYears.forEach(year => {
-            const li = document.createElement('li');
-            li.className = 'option';
-            li.textContent = year;
-            li.addEventListener('click', () => filterMoviesByDecade(`${Math.floor(year / 10) * 10}s`));
-            yearDropdown.appendChild(li);
-        });
+        dropdownGenero.innerHTML = '';
 
-        // Preencher dropdown de faixa etária
-        uniqueRatings.forEach(rating => {
-            const li = document.createElement('li');
-            li.className = 'option';
-            li.textContent = rating;
-            li.addEventListener('click', () => filterMoviesByRating(rating));
-            ratingDropdown.appendChild(li);
-        });
-
-        // Preencher dropdown de serviços de streaming
-        uniqueServices.forEach(service => {
-            const li = document.createElement('li');
-            li.className = 'option';
-            li.textContent = service;
-            li.addEventListener('click', () => filterMoviesByStreaming(service));
-            serviceDropdown.appendChild(li);
+        genres.forEach(genre => {
+            const genreOption = document.createElement('li');
+            genreOption.className = 'option';
+            genreOption.textContent = genre.name;
+            genreOption.dataset.genreId = genre.id;
+            genreOption.onclick = () => filterByGenre(genre.id);
+            dropdownGenero.appendChild(genreOption);
         });
     }
 
-    // Preencher os filtros ao carregar a página
-    populateDropdowns();
-});
+    // Função para filtrar filmes/séries pelo gênero
+    function filterByGenre(genreId) {
+        const movieCards = document.querySelectorAll('.resumo_filme');
+        movieCards.forEach(card => {
+            const genres = card.dataset.genres ? card.dataset.genres.split(',') : [];
+            if (genres.includes(String(genreId))) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
 
+        const resetButton = document.getElementById('resetar-filtro');
+        if (resetButton) resetButton.style.display = 'block';
+    }
+
+    // Inicialização
+    populateGenreFilter();
+    movies.forEach(movie => getMovieDetails(movie));
+});
