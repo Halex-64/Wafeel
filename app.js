@@ -63,20 +63,42 @@ app.get('/test-db', (req, res) => {
     });
 });
 
-app.get('/api/movies', (req, res) => {
-    const providerId = req.query.provider;
+// Função para buscar filmes por provedor
+async function fetchMoviesByProvider(providerId) {
+    const apiUrl = 'https://api.themoviedb.org/3/discover/movie';
+    try {
+        const response = await axios.get(apiUrl, {
+            params: {
+                api_key: API_KEY, // Substitua pela sua API Key
+                with_watch_providers: providerId,
+                watch_region: 'BR', // Altere para sua região, se necessário
+                language: 'pt-BR', // Idioma dos resultados
+            },
+        });
+        return response.data.results; // Retorna os filmes
+    } catch (error) {
+        console.error('Erro ao buscar filmes por provedor:', error.message);
+        throw error;
+    }
+}
 
+
+// Endpoint para a rota /api/movies
+app.get('/api/movies', async (req, res) => {
+    const providerId = req.query.provider; // Obtém o ID do provedor via query string
     if (!providerId) {
-        return res.status(400).json({ error: 'Provider ID é obrigatório' });
+        return res.status(400).send('Provider ID não fornecido');
     }
 
-    fetchMoviesByProvider(providerId) // Função que busca filmes pelo provedor
-        .then(movies => res.json(movies))
-        .catch(error => {
-            console.error('Erro ao buscar filmes pelo provedor:', error);
-            res.status(500).json({ error: 'Erro ao buscar filmes pelo provedor' });
-        });
+    try {
+        const movies = await fetchMoviesByProvider(providerId);
+        res.json({ results: movies });
+    } catch (error) {
+        console.error('Erro ao processar /api/movies:', error.message);
+        res.status(500).send('Erro ao buscar filmes');
+    }
 });
+
 
 async function fetchPopularMovies() {
     const url = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=pt-BR&page=1`;
@@ -103,7 +125,7 @@ app.get('/filmes-populares', async (req, res) => {
 
 async function getRecommendations(category, type = 'movie', limit = 5) {
     const API_KEY = process.env.API_KEY;
-    const excludedKeywords = ['erótica', 'adulto', 'sensual', 'sexo', 'sexuais'];
+    const excludedKeywords = ['erótica', 'adulto', 'sensual', 'sexo', 'sexuais',];
 
     try {
         // Faz uma requisição para buscar filmes ou séries
@@ -117,7 +139,7 @@ async function getRecommendations(category, type = 'movie', limit = 5) {
                 certification_country: 'BR',
                 certification_lte: '16',
                 include_adult: false,
-                with_original_language: 'en'
+                with_original_language: 'en',
             }
         });
 

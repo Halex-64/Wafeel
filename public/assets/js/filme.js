@@ -100,13 +100,11 @@ function loadProviders() {
             if (!response.ok) throw new Error(`Erro na API: ${response.status}`);
             return response.json();
         })
-        .then(providers => { // Certifique-se de que o nome está correto
-            console.log('Provedores retornados:', providers); // Debug para garantir que os dados foram retornados
+        .then(providers => {
 
             const filteredProviders = providers.filter(provider =>
                 selectedProviderIds.includes(provider.provider_id)
             );
-            console.log('Provedores filtrados:', filteredProviders);
 
             const sidebar = document.getElementById('sidebar');
             sidebar.innerHTML = '';

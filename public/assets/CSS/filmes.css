@@ -1,6 +1,6 @@
 #movie-container {
   display: flex;
-  justify-content: start;
+  justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   padding: 20px;
@@ -11,7 +11,7 @@
 
 #filmes-recentes {
   display: flex;
-  justify-content: start;
+  justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   padding: 20px;
@@ -20,13 +20,21 @@
   gap: 10px;
 }
 
-.title-filmes {
+.title-streaming {
   display: flex;
   justify-content: flex-start;
   flex-wrap: initial;
-  margin-left: 347px;
+  /* margin-left: 65px;
   margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 20px; */
+}
+.title-filmes {
+  display: flex;
+  justify-content: center;
+  flex-wrap: initial;
+  /* margin-left: 65px;
+  margin-top: 20px;
+  margin-bottom: 20px; */
 }
 
 .movie-item {
@@ -48,21 +56,34 @@
 }
 
 #sidebar {
-  width: 200px;
-  background-color: #111;
   display: flex;
-  gap: 10px;
+  flex-direction: row;
+  gap: 2.2rem;
+  padding: 2.2rem;
+  background-color: #000;
+  border-radius: 10px; 
+  justify-content: center;
 }
 
+/* Estilos para os logos */
 .provider-logo {
-  width: 100%;
-  cursor: pointer;
+  width: 120px !important; /* Tamanho fixo do logo */
+  height: auto; /* Mantém a proporção */
+  border: 2px solid #8500f2; /* Borda com cor roxa */
+  border-radius: 10px; /* Bordas arredondadas nos logos */
+  padding: 5px; /* Espaçamento interno */
+  background-color: #000; /* Fundo preto para os logos */
+  cursor: pointer; /* Cursor muda para pointer ao passar o mouse */
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Animação */
 }
+
 .provider-logo:hover {
-  transform: scale(1.1);
+  transform: scale(1.1); /* Aumenta levemente o tamanho */
+  box-shadow: 0 0 10px #8c00ff; /* Adiciona um brilho ao redor */
 }
 
 .content {
   flex-grow: 1;
   padding: 20px;
 }
+  
