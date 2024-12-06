@@ -141,6 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const response = await fetch(genresUrl);
             const data = await response.json();
+            console.log("Gêneros recebidos: ", data.genres);
             return data.genres || [];
         } catch (error) {
             console.error('Erro ao buscar gêneros:', error);
@@ -157,6 +158,8 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Dropdown de gêneros não encontrado.');
             return;
         }
+
+        console.log("Gêneros carregados: ", genres);
 
         dropdownGenero.innerHTML = '';
 
