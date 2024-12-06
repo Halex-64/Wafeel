@@ -86,17 +86,29 @@ async function fetchMoviesByProvider(providerId) {
 // Endpoint para a rota /api/movies
 app.get('/api/movies', async (req, res) => {
     const providerId = req.query.provider; // Obtém o ID do provedor via query string
+    const type = req.query.type;
     if (!providerId) {
         return res.status(400).send('Provider ID não fornecido');
     }
 
     try {
+        let url;
         const movies = await fetchMoviesByProvider(providerId);
         res.json({ results: movies });
+        if (type === 'popular') {
+            url = `https://api.themoviedb.org/3/discover/movie?with_watch_providers=${providerId}&sort_by=popularity.desc&api_key=${process.env.API_KEY}&language=pt-BR&watch_region=BR`;
+            console.log('Requisição para TMDb:', url);
+        } else if (type === 'recent') {
+            url = `https://api.themoviedb.org/3/discover/movie?with_watch_providers=${providerId}&sort_by=release_date.desc&api_key=${process.env.API_KEY}&language=pt-BR&watch_region=BR`;
+            console.log('Requisição para TMDb:', url);
+        } else {
+            return res.status(400).json({ error: 'Tipo inválido. Use "popular" ou "recent".' });
+        }
     } catch (error) {
         console.error('Erro ao processar /api/movies:', error.message);
         res.status(500).send('Erro ao buscar filmes');
     }
+
 });
 
 
@@ -273,7 +285,7 @@ app.get('/tv-populares', async (req, res) => {
         const filteredResults = response.data.results.filter(tvShow => {
             const unwantedGenres = [10763, 10764, 10767]; // IDs para "Talk", "Reality", etc.
             const hasUnwantedGenre = tvShow.genre_ids.some(genre => unwantedGenres.includes(genre));
-            return !hasUnwantedGenre; 
+            return !hasUnwantedGenre;
         });
 
         res.json(filteredResults);

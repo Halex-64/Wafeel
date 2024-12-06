@@ -14,7 +14,8 @@ function setupClickEvents() {
 
 // Função para filtrar filmes por provedor
 function filterMoviesByProvider(providerId) {
-    fetch(`/api/movies?provider=${providerId}`)
+    // Filtrar filmes populares
+    fetch(`/api/movies?provider=${providerId}&type=popular`)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Erro na resposta: ${response.status}`);
@@ -23,16 +24,37 @@ function filterMoviesByProvider(providerId) {
         })
         .then(data => {
             if (Array.isArray(data.results)) {
-                renderMovies(data.results);
+                renderMovies(data.results, 'movie-container'); // Renderiza no container de filmes populares
             } else {
-                console.error('Estrutura de dados inesperada:', data);
+                console.error('Estrutura de dados inesperada para filmes populares:', data);
             }
         })
-        .catch(error => console.error('Erro ao filtrar filmes:', error));
+        .catch(error => console.error('Erro ao filtrar filmes populares:', error));
+
+    // Filtrar filmes recentes
+    fetch(`/api/movies?provider=${providerId}&type=recent`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Erro na resposta: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (Array.isArray(data.results)) {
+                renderMovies(data.results, 'filmes-recentes'); // Renderiza no container de filmes recentes
+            } else {
+                console.error('Estrutura de dados inesperada para filmes recentes:', data);
+            }
+        })
+        .catch(error => console.error('Erro ao filtrar filmes recentes:', error));
 }
 
 function renderMovies(movies) {
     const movieContainer = document.getElementById('movie-container');
+    if (!movieContainer) {
+        console.error("Elemento 'movie-container' não encontrado no DOM.");
+        return;
+    }
     movieContainer.innerHTML = ''; // Limpa os filmes atuais
     movies.forEach(movie => {
         const movieElement = document.createElement('div');
@@ -94,6 +116,7 @@ function loadInitialMovies() {
         })
         .catch(error => console.error('Erro ao carregar filmes recentes:', error));
 }
+
 function loadProviders() {
     fetch('/api/providers') // Endpoint para carregar provedores
         .then(response => {
