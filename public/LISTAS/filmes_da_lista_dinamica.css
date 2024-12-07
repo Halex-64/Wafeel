@@ -31,8 +31,7 @@ body{
 
 .barra_filtro{
     display: flex;
-    align-items: center;
-    gap: 24px;
+    flex-direction: row;
     margin-bottom: 10px;
     padding-top: 2px;
     padding-bottom: 2px;
@@ -44,6 +43,12 @@ body{
     text-decoration: none;
     color: white;
     font-family: "Poppins", sans-serif;
+}
+
+.filtro_categorias{
+    display: flex;
+    align-items: center;
+    gap: 24px;
 }
 
 .filtro_seta {
@@ -189,7 +194,7 @@ body{
 }
 
 #informacoes_filme{
-    margin-left: 8px;
+    margin-left: 0px;
     font-size: 16px;
 }
 
@@ -204,6 +209,8 @@ body{
 
 #titulo_filme {
     font-size: 48px;
+    padding-left: 16px;
+    padding-right: 16px;
 }
 
 #genero_filme {
@@ -211,12 +218,12 @@ body{
 }
 
 .titulo_genero{
-    display: flex; /* Usa flexbox para organizar os itens */
-    flex-direction: column; /* Organiza os filhos na vertical */
-    align-items: center; /* Centraliza os itens horizontalmente */
-    justify-content: center; /* Opcional: centraliza verticalmente no container pai */
-    text-align: center; /* Centraliza o texto */
-    gap: 8px; /* Espaçamento entre o título e o gênero */
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;  
+    justify-content: center;  
+    text-align: center;  
+    gap: 8px;  
 }
 
 #botao-filtro{
@@ -239,9 +246,9 @@ body{
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7); /* Fundo escuro com opacidade */
-    display: none; /* Inicialmente escondido */
-    z-index: 5; /* Fica abaixo do filtro */
+    background-color: rgba(0, 0, 0, 0.7);  
+    display: none;  
+    z-index: 5;  
 }
 
 .nav_listas{
@@ -270,6 +277,53 @@ footer {
 
 .resetar_filtro li a:hover {
     color: #8500F2;
+}
+
+/* Barra de rolagem da sinopse */
+.sinopse-scroll {
+    max-height: 200px;  
+    overflow-y: auto; 
+    scrollbar-width: thin;  
+    scrollbar-color: #888 #444;  
+}
+
+/* Para navegadores baseados em WebKit (Chrome, Safari, etc.) */
+.sinopse-scroll::-webkit-scrollbar {
+    width: 8px;  
+}
+
+.sinopse-scroll::-webkit-scrollbar-track {
+    background: #444;  
+}
+
+.sinopse-scroll::-webkit-scrollbar-thumb {
+    background-color: #888;  
+    border-radius: 10px;  
+    border: 2px solid #444; 
+}
+
+.editar_lista{
+    display: flex;
+    flex-direction: row;
+    margin-left: auto;
+    align-items: center;
+}
+
+.editar_lista button{
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.editar_lista #excluir_lista{
+    padding-right: 2px;
+}  
+.editar_lista #excluir_lista{
+    color: #ccc;
+}
+
+.editar_lista #excluir_lista:hover{
+    color: #D40000;
 }
 
 @media (max-width: 768px) {

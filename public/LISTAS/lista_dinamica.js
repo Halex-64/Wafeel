@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let additionalInfo = '';
         let duration = '';
         let servicesList = [];
-
+    
         if (movie.type === 'movie') {
             movieUrl = `https://api.themoviedb.org/3/movie/${movie.id}?api_key=${apiKey}&language=pt-BR`;
         } else if (movie.type === 'tv') {
@@ -90,26 +90,32 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Tipo de item desconhecido');
             return;
         }
-
+    
         try {
             const response = await fetch(movieUrl);
             const movieData = await response.json();
             const rating = await getMovieRating(movie.id);
             const services = await getStreamingServices(movie.id);
             servicesList = services.map(service => service.id);
-
+    
             if (movie.type === 'tv') {
                 additionalInfo = `Temporadas: ${movieData.number_of_seasons || 'Indefinido'}`;
                 duration = '';
             } else {
                 duration = `${Math.floor(movieData.runtime / 60)}h ${movieData.runtime % 60}min`;
             }
-
+    
             const releaseYear = new Date(movieData.release_date || movieData.first_air_date)?.getFullYear() || 'Ano não disponível';
+            let sinopse = movieData.overview || 'Sinopse não disponível';
+            const sinopseDisplay = sinopse.length > 125 ? `${sinopse.slice(0, 125)}...` : sinopse;
+            const leiaMais = sinopse.length > 125 ? `<a style="color:#ccc; cursor: pointer;" onclick="showFullSynopsis('${movie.id}')">Leia mais</a>` : '';
+    
             const movieCard = document.createElement('div');
             movieCard.className = 'resumo_filme';
             movieCard.setAttribute('data-genres', movieData.genres.map(genre => genre.id).join(','));
             movieCard.setAttribute('data-services', servicesList.join(','));
+            movieCard.setAttribute('data-release-year', new Date(movieData.release_date || movieData.first_air_date)?.getFullYear() || '');
+            movieCard.setAttribute('data-rating', rating || '');
             movieCard.innerHTML = `
                 <div class="resumo_filme_imagem" style="background-image: url('https://image.tmdb.org/t/p/w500${movieData.backdrop_path || ''}');">
                     <div class="titulo_genero">
@@ -119,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         </ul>
                     </div>
                     <div class="novo_texto">
-                        <li id="sinopse_filme">${movieData.overview?.length > 125 ? `${movieData.overview.slice(0, 125)}...` : movieData.overview || 'Sinopse não disponível'}</li>
+                        <li id="sinopse_filme_${movie.id}" data-full-synopsis="${sinopse}" data-truncated-synopsis="${sinopseDisplay}">${sinopseDisplay} ${leiaMais}</li>
                         <ul id="informacoes_filme">
                             <li id="informacoes">${[releaseYear, duration, additionalInfo, rating].filter(Boolean).join(' • ')}</li>
                         </ul>
@@ -129,10 +135,36 @@ document.addEventListener('DOMContentLoaded', () => {
             containerFilmes.appendChild(movieCard);
             const titleElement = movieCard.querySelector('#titulo_filme');
             adjustTitleFontSize(titleElement);
-
+    
         } catch (error) {
             console.error(`Erro ao buscar dados do filme com ID ${movie.id}:`, error);
+            const errorMessage = document.createElement('div');
+            errorMessage.className = 'erro_filme';
+            errorMessage.textContent = 'Ocorreu um erro ao buscar os detalhes do filme. Por favor, tente novamente mais tarde.';
+            containerFilmes.appendChild(errorMessage);
         }
+    }    
+
+    // Função para exibir a sinopse completa 
+    function showFullSynopsis(movieId) { 
+        const sinopseElement = document.getElementById(`sinopse_filme_${movieId}`); 
+        if (sinopseElement) { 
+            const fullSynopsis = sinopseElement.dataset.fullSynopsis; 
+            sinopseElement.innerHTML = `${fullSynopsis} <a style="color:#ccc; cursor: pointer;" onclick="hideFullSynopsis('${movieId}')">Mostrar menos</a>`; 
+            sinopseElement.style.maxHeight = '111px';   
+            sinopseElement.classList.add('sinopse-scroll');  
+            }
+    }
+
+    // Função para ocultar a sinopse completa 
+    function hideFullSynopsis(movieId) { 
+        const sinopseElement = document.getElementById(`sinopse_filme_${movieId}`); 
+        if (sinopseElement) { 
+            const truncatedSynopsis = sinopseElement.dataset.truncatedSynopsis; 
+            sinopseElement.innerHTML = `${truncatedSynopsis} <a style="color:#ccc; cursor: pointer;" onclick="showFullSynopsis('${movieId}')">Leia mais</a>`; 
+            sinopseElement.style.maxHeight = '';  
+            sinopseElement.classList.remove('sinopse-scroll');  
+        } 
     }
 
     // Função para obter gêneros da API TMDb
@@ -189,6 +221,37 @@ document.addEventListener('DOMContentLoaded', () => {
         if (resetButton) resetButton.style.display = 'block';
     }
 
+    // Função para filtrar filmes/séries por década
+    function filterByDecade(decade) {
+        const movieCards = document.querySelectorAll('.resumo_filme');
+        movieCards.forEach(card => {
+            const releaseYear = card.dataset.releaseYear ? parseInt(card.dataset.releaseYear) : null;
+            if (releaseYear && Math.floor(releaseYear / 10) === Math.floor(decade / 10)) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        const resetButton = document.getElementById('resetar-filtro');
+        if (resetButton) resetButton.style.display = 'block';
+    }
+
+    // Função para filtrar filmes/séries por classificação indicativa
+    function filterByRating(rating) {
+        const movieCards = document.querySelectorAll('.resumo_filme');
+        movieCards.forEach(card => {
+            const cardRating = card.dataset.rating || '';
+            if (cardRating === rating) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        const resetButton = document.getElementById('resetar-filtro');
+        if (resetButton) resetButton.style.display = 'block';
+    }
 
     // Função para obter serviços de streaming da API TMDb
     async function getStreamingServices(movieId) {
@@ -294,6 +357,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Inicialização
     populateGenreFilter();
+    window.showFullSynopsis = showFullSynopsis;
+    window.hideFullSynopsis = hideFullSynopsis; 
+    window.filterByDecade = filterByDecade;
+    window.filterByRating = filterByRating;
     movies.forEach(movie => populateServiceFilter(movie.id));
     movies.forEach(movie => getMovieDetails(movie));
 });

@@ -14,6 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> <!--Impede de dar zoom-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>  
 <body>
     <!--HEADER-->
@@ -86,58 +87,72 @@
         <div class="nav_filtro">            
             <div id="linha_horizontal"></div>
                 <div class="barra_filtro">                    
-                    <div id="filtro_genero" class="filtro_seta" onclick="toggleDropdown('dropdown-genero', this)">
-                        <li><a>GÊNERO</a></li>
-                        <div class="arrow"></div>                        
-                        <ul id="dropdown-genero" class="options">
-                            <li class="option"></li>                            
-                        </ul>
-                    </div>
-                    
-                    <div id="filtro_ano" class="filtro_seta" onclick="toggleDropdown('dropdown-ano', this)">
-                        <li><a>ANO</a></li>
-                        <div class="arrow"></div>
-                        <ul id="dropdown-ano" class="options">
-                            <li class="option">2020s</li>
-                            <li class="option">2010s</li>
-                            <li class="option">2000s</li>
-                            <li class="option">1990s</li>
-                            <li class="option">1980s</li>
-                            <li class="option">1970s</li>
-                            <li class="option">1960s</li>
-                            <li class="option">1950s</li>
-                            <li class="option">1940s</li>
-                            <li class="option">1930s</li>
-                            <li class="option">1920s</li>
-                            <li class="option">1910s</li>
-                            <li class="option">1900s</li>
-                        </ul>
+                    <div class="filtro_categorias">
+                        <div id="filtro_genero" class="filtro_seta" onclick="toggleDropdown('dropdown-genero', this)">
+                            <li><a>GÊNERO</a></li>
+                            <div class="arrow"></div>                        
+                            <ul id="dropdown-genero" class="options">
+                                <li class="option"></li>                            
+                            </ul>
+                        </div>
+                        
+                        <div id="filtro_ano" class="filtro_seta" onclick="toggleDropdown('dropdown-ano', this)">
+                            <li><a>ANO</a></li>
+                            <div class="arrow"></div>
+                            <ul id="dropdown-ano" class="options">
+                                <li class="option" onclick="filterByDecade(2020)">2020s</li>
+                                <li class="option" onclick="filterByDecade(2010)">2010s</li>
+                                <li class="option" onclick="filterByDecade(2000)">2000s</li>
+                                <li class="option" onclick="filterByDecade(1990)">1990s</li>
+                                <li class="option" onclick="filterByDecade(1980)">1980s</li>
+                                <li class="option" onclick="filterByDecade(1970)">1970s</li>
+                                <li class="option" onclick="filterByDecade(1960)">1960s</li>
+                                <li class="option" onclick="filterByDecade(1950)">1950s</li>
+                                <li class="option" onclick="filterByDecade(1940)">1940s</li>
+                                <li class="option" onclick="filterByDecade(1930)">1930s</li>
+                                <li class="option" onclick="filterByDecade(1920)">1920s</li>
+                                <li class="option" onclick="filterByDecade(1910)">1910s</li>
+                                <li class="option" onclick="filterByDecade(1900)">1900s</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="filtro_faixa_etaria" class="filtro_seta" onclick="toggleDropdown('dropdown-faixa-etaria', this)">
+                            <li><a>FAIXA ETÁRIA</a></li>
+                            <div class="arrow"></div>
+                            <ul id="dropdown-faixa-etaria" class="options">
+                                <li class="option" onclick="filterByRating('Livre')">Livre</li>
+                                <li class="option" onclick="filterByRating('10')">10 Anos</li>
+                                <li class="option" onclick="filterByRating('12')">12 Anos</li>
+                                <li class="option" onclick="filterByRating('14')">14 Anos</li>
+                                <li class="option" onclick="filterByRating('16')">16 Anos</li>
+                                <li class="option" onclick="filterByRating('18')">18 Anos</li>
+                            </ul>
+                        </div>
+    
+                        <div id="filtro_servico" class="filtro_seta" onclick="toggleDropdown('dropdown-servico', this)">
+                            <li><a>SERVIÇO</a></li>
+                            <div class="arrow"></div>
+                            <ul id="dropdown-servico" class="options">
+                                <li class="option"></li>                                        
+                            </ul>
+                        </div>
+
+                        <!-- Botão para Resetar Filtros (inicialmente oculto) -->
+                        <div class="resetar_filtro" id="resetar-filtro" style="display: none;">
+                            <li><a href="javascript:void(0);" onclick="clearFilters()">Resetar Filtros</a></li>
+                        </div>
                     </div>
 
-                    <div id="filtro_faixa_etaria" class="filtro_seta" onclick="toggleDropdown('dropdown-faixa-etaria', this)">
-                        <li><a>FAIXA ETÁRIA</a></li>
-                        <div class="arrow"></div>
-                        <ul id="dropdown-faixa-etaria" class="options">
-                            <li class="option">Livre</li>
-                            <li class="option">10 Anos</li>
-                            <li class="option">12 Anos</li>
-                            <li class="option">14 Anos</li>
-                            <li class="option">16 Anos</li>
-                            <li class="option">18 Anos</li>           
-                        </ul>
-                    </div>
-
-                    <div id="filtro_servico" class="filtro_seta" onclick="toggleDropdown('dropdown-servico', this)">
-                        <li><a>SERVIÇO</a></li>
-                        <div class="arrow"></div>
-                        <ul id="dropdown-servico" class="options">
-                            <li class="option"></li>                                        
-                        </ul>
-                    </div>
-
-                    <!-- Botão para Resetar Filtros (inicialmente oculto) -->
-                    <div class="resetar_filtro" id="resetar-filtro" style="display: none;">
-                        <li><a href="javascript:void(0);" onclick="clearFilters()">Resetar Filtros</a></li>
+                    <div class="editar_lista">
+                        <button id="renomear_lista" onclick="editarTitulo()">
+                            <li><a>RENOMEAR LISTA</a></li>
+                        </button>                   
+                        <button id="adicionar_titulo" onclick="">
+                            <li><a>ADICIONAR TÍTULO</a></li>
+                        </button>
+                        <button id="excluir_lista" onclick="">
+                            <i class="fas fa-trash-alt icone-grande"></i>
+                        </button>                          
                     </div>
                 </div> 
             <div id="linha_horizontal"></div>
@@ -172,21 +187,22 @@
                 <div class="container_filtro">
                     <h1>Ano</h1>
                     <ul id="dropdown-ano">
-                        <li class="option">2020s</li>
-                        <li class="option">2010s</li>
-                        <li class="option">2000s</li>
-                        <li class="option">1990s</li>
-                        <li class="option">1980s</li>
-                        <li class="option">1970s</li>
-                        <li class="option">1960s</li>
-                        <li class="option">1950s</li>
-                        <li class="option">1940s</li>
-                        <li class="option">1930s</li>
-                        <li class="option">1920s</li>
-                        <li class="option">1910s</li>
-                        <li class="option">1900s</li>
+                        <li class="option" onclick="filterByDecade(2020)">2020s</li>
+                        <li class="option" onclick="filterByDecade(2010)">2010s</li>
+                        <li class="option" onclick="filterByDecade(2000)">2000s</li>
+                        <li class="option" onclick="filterByDecade(1990)">1990s</li>
+                        <li class="option" onclick="filterByDecade(1980)">1980s</li>
+                        <li class="option" onclick="filterByDecade(1970)">1970s</li>
+                        <li class="option" onclick="filterByDecade(1960)">1960s</li>
+                        <li class="option" onclick="filterByDecade(1950)">1950s</li>
+                        <li class="option" onclick="filterByDecade(1940)">1940s</li>
+                        <li class="option" onclick="filterByDecade(1930)">1930s</li>
+                        <li class="option" onclick="filterByDecade(1920)">1920s</li>
+                        <li class="option" onclick="filterByDecade(1910)">1910s</li>
+                        <li class="option" onclick="filterByDecade(1900)">1900s</li>
                     </ul>
-                </div>
+                    <button id="resetar-filtro" onclick="resetFilters()" style="display: none;">Resetar Filtro</button>
+                </div>                
 
                 <div class="container_filtro">
                     <h1>Fixa Etária</h1>

@@ -84,14 +84,14 @@ button{
 /*-----------------------------------------------------------------------*/
 
 #create_button:disabled {
-    color: #e9e9e9; /* Botão desabilitado fica cinza */
-    cursor:default; /* Cursor indica que não está clicável */
+    color: #e9e9e9;  
+    cursor:default;  
 }
 
 #create_button:enabled {
-    color: #8500F2; /* Letras brancas */
-    cursor: pointer; /* Cursor padrão de clique */
-    transition: background-color 0.3s; /* Suaviza a transição de cores */
+    color: #8500F2;  
+    cursor: pointer;  
+    transition: background-color 0.3s;  
 }
 
 
@@ -113,13 +113,13 @@ button{
 }
 
 input, .suggestions-container {
-    box-sizing: border-box; /* Garante que padding e bordas sejam contabilizados na largura */
+    box-sizing: border-box;  
 }
 
 .suggestion-item {
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Espaça os elementos horizontalmente */
+    justify-content: space-between;  
     padding: 8px;
 }
 
@@ -129,14 +129,14 @@ input, .suggestions-container {
 
 .left-container {
     display: flex;
-    align-items: center; /* Alinha imagem e texto verticalmente */
+    align-items: center;  
 }
 
 .movie-poster {
     width: 50px;
     height: 75px;
     object-fit: cover;
-    margin-right: 10px; /* Espaço entre o pôster e o texto */
+    margin-right: 10px;  
     border-radius: 4px;
 }
 
@@ -170,10 +170,10 @@ input, .suggestions-container {
 }
 
 .movie-chip {
-    background-color: #8500F2; /* Cor roxa */
-    color: #ffffff; /* Letras brancas */
+    background-color: #8500F2;  
+    color: #ffffff;  
     padding: 5px 10px;
-    border-radius: 20px; /* Borda arredondada */
+    border-radius: 20px;  
     font-family: 'Poppins', sans-serif;
     display: flex;
     align-items: center;
@@ -185,8 +185,8 @@ input, .suggestions-container {
 }
 
 .movie-chip .remove-icon {
-    background: #ffffff; /* Botão branco */
-    color: #8500F2; /* Letra roxa no botão */
+    background: #ffffff;  
+    color: #8500F2;  
     border-radius: 50%;
     width: 18px;
     height: 18px;
@@ -201,8 +201,8 @@ input, .suggestions-container {
 @media (max-width: 768px) {
 
     .pop-up_criar_lista {
-        flex-direction: column; /* Coloca os elementos em uma coluna */
-        max-width: none; /* Remove a largura máxima */
+        flex-direction: column;  
+        max-width: none;  
         justify-content: center;
         align-items: center;
         width: 95%;
@@ -217,23 +217,23 @@ input, .suggestions-container {
     }   
 
     .criar_cancelar {
-        flex-direction: column; /* Coloca os botões em uma coluna */
-        align-items:flex-start; /* Centraliza os botões */
-        gap: 0px; /* Espaço entre os botões */
+        flex-direction: column;  
+        align-items:flex-start;  
+        gap: 0px;  
     }
 
     .suggestions-container {
-        position: static; /* Remove a posição absoluta para a lista de sugestões */
-        width: 100%; /* Ajusta a largura para 100% */
-        top: auto; /* Ajusta a posição para não ficar no topo */
+        position: static;  
+        width: 100%;  
+        top: auto;  
     }
 
     .plus-icon {
-        font-size: 20px; /* Ajusta o tamanho do ícone no mobile */
+        font-size: 20px;  
     }
 
     .movie-chip {
-        font-size: 12px; /* Reduz o tamanho da fonte nos chips */
-        padding: 4px 8px; /* Ajusta o padding nos chips */
+        font-size: 12px;  
+        padding: 4px 8px;  
     }
 }

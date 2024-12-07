@@ -8,7 +8,7 @@ body{
 
 .containers_listas {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(390px, 1fr)); /* Define largura fixa para as colunas */
+  grid-template-columns: repeat(auto-fill, minmax(390px, 1fr));  
   gap: 16px;
   padding: 0;
   margin-top: 24px;
@@ -65,22 +65,22 @@ a{
 }
 
 .poster_filmes img:nth-child(2) {
-  left: 70px; /* Aumentado levemente de 64px para 72px */
+  left: 70px;  
   z-index: 4;
 }
 
 .poster_filmes img:nth-child(3) {
-  left: 138px; /* Aumentado levemente de 120px para 140px */
+  left: 138px;  
   z-index: 3;
 }
 
 .poster_filmes img:nth-child(4) {
-  left: 206px; /* Aumentado levemente de 176px para 208px */
+  left: 206px;  
   z-index: 2;
 }
 
 .poster_filmes img:nth-child(5) {
-  left: 274px; /* Aumentado levemente de 232px para 276px */
+  left: 274px;  
   z-index: 1;
 }
 
@@ -157,7 +157,7 @@ a{
 }
 
 section {
-  flex-grow: 1; /* Faz o section expandir para ocupar o espaço restante */
+  flex-grow: 1;  
   margin-top: 0;
   margin-bottom: 140px;
   height: auto;
@@ -303,11 +303,11 @@ footer {
   }
 
   .container_filme p{
-    position: absolute; /* Torna o <p> posicionado */
-    top: -24px; /* Ajusta a distância acima do container */
+    position: absolute;  
+    top: -24px;  
     left: 0;
-    width: 100%; /* Garante que o <p> ocupe a largura do container */
-    text-align: left; /* Centraliza o texto */
+    width: 100%;  
+    text-align: left;  
     margin: 0;
     font-size: 13.5px;
   }
@@ -320,8 +320,8 @@ footer {
 
   .poster_filmes img {
     position: absolute;
-    width: 100px; /* Largura aumentada */
-    height: 150px; /* Altura aumentada */
+    width: 100px;  
+    height: 150px;  
     border-radius: 5px;
     box-shadow: 5px 0px 15px rgb(0, 0, 0, 1.0);
   }
@@ -332,22 +332,22 @@ footer {
   }
 
   .poster_filmes img:nth-child(2) {
-    left: 62.5px; /* Ajustado */
+    left: 62.5px;  
     z-index: 4;
   }
 
   .poster_filmes img:nth-child(3) {
-    left: 125px; /* Ajustado */
+    left: 125px;  
     z-index: 3;
   }
 
   .poster_filmes img:nth-child(4) {
-    left: 187.5px; /* Ajustado */
+    left: 187.5px;  
     z-index: 2;
   }
 
   .poster_filmes img:nth-child(5) {
-    left: 250px; /* Ajustado */
+    left: 250px;  
     z-index: 1;
   }
 
@@ -366,5 +366,4 @@ footer {
   .fundo-escuro{
     z-index: 5;
   }
-
 }
