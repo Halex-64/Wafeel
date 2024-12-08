@@ -238,17 +238,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Função para filtrar filmes/séries por classificação indicativa
-    function filterByRating(rating) {
+    function filterByRating(...ratings) {
         const movieCards = document.querySelectorAll('.resumo_filme');
         movieCards.forEach(card => {
-            const cardRating = card.dataset.rating || '';
-            if (cardRating === rating) {
-                card.style.display = 'block';
+            const cardRatings = card.dataset.rating ? card.dataset.rating.split(',') : [];
+            const isMatch = ratings.some(rating => cardRatings.includes(rating));  
+            if (isMatch) {
+                card.style.display = 'block';  
             } else {
-                card.style.display = 'none';
+                card.style.display = 'none';  
             }
         });
-
+    
         const resetButton = document.getElementById('resetar-filtro');
         if (resetButton) resetButton.style.display = 'block';
     }
