@@ -1,16 +1,4 @@
-#movie-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-  gap: 10px;
-  overflow: hidden; /* Esconde o conteúdo excedente */
-  height: calc(2 * 275px); /* Altura baseada em 2 fileiras de 300px */
-}
-
+#movie-container,
 #series-container {
   display: flex;
   justify-content: center;
@@ -24,19 +12,7 @@
   height: calc(2 * 275px); /* Altura baseada em 2 fileiras de 300px */
 }
 
-#filmes-recentes {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-  gap: 10px;
-  overflow: hidden; /* Esconde o conteúdo excedente */
-  height: calc(2 * 275px); /* Altura baseada em 2 fileiras de 300px */
-}
-
+#filmes-recentes,
 #series-recentes {
   display: flex;
   justify-content: center;
@@ -126,4 +102,8 @@
 .content {
   flex-grow: 1;
   padding: 20px;
+}
+
+.main-container {
+  text-align: center;
 }

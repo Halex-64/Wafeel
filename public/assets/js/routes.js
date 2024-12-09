@@ -170,29 +170,73 @@ router.get('/series-detalhes', async (req, res) => {
 router.get('/series-recentes', async (req, res) => {
     try {
         const response = await axios.get(
-            `https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}&first_air_date_year=2022&include_adult=false&include_null_first_air_dates=false&language=pt-BR&page=1&sort_by=popularity.desc&watch_region=br&with_original_language=en`
+            `https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}&include_adult=false&include_null_first_air_dates=false&language=pt-BR&page=1&sort_by=popularity.desc&watch_region=br&with_original_language=en`
         );
 
         const data = response.data; // Resposta da API
+
+        // IDs dos gêneros que você deseja excluir
+        const excludedGenres = [10764, 10766, 10763, 10767, 10762]; // 10764: Reality, 10766: Drama televisivo, 10763: Jornais/News, 10767: Talk, 10762: Kids
+
         if (Array.isArray(data.results) && data.results.length > 0) {
-            // Filtrar séries lançadas em 2023 ou posterior
+            // Filtrar séries lançadas até o ano atual e excluir gêneros indesejados
             const filteredSeries = data.results.filter(serie => {
                 const releaseYear = parseInt(serie.first_air_date?.split('-')[0], 10); // Extrai o ano de lançamento
-                return releaseYear <= 2023; // Séries de 2023 ou mais recentes
+                const hasExcludedGenre = serie.genre_ids.some(id => excludedGenres.includes(id)); // Verifica se contém gênero excluído
+                return releaseYear <= 2024 && !hasExcludedGenre; // Inclui apenas séries sem os gêneros excluídos
             });
 
-            return res.json(filteredSeries); // Envia a resposta filtrada de séries e interrompe a execução aqui
+            // Ordenar os resultados de forma decrescente pelo ano de lançamento
+            const sortedSeries = filteredSeries.sort((a, b) => {
+                const yearA = parseInt(a.first_air_date?.split('-')[0], 10);
+                const yearB = parseInt(b.first_air_date?.split('-')[0], 10);
+                return yearB - yearA; // Ordem decrescente
+            });
+
+            return res.json(sortedSeries); // Envia a resposta ordenada
         }
 
         // Se não houver resultados, retorna um array vazio
         console.warn('Nenhuma série encontrada:', data);
-        return res.json([]); 
+        return res.json([]);
 
     } catch (error) {
         console.error('Erro ao buscar séries recentes:', error);
         return res.status(500).json({ error: 'Erro ao buscar séries recentes' });
     }
 });
+
+router.get('/series-melhores-avaliacoes', async (req, res) => {
+    try {
+        const response = await axios.get(
+            `https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}&include_adult=false&include_null_first_air_dates=false&language=pt-BR&page=1&sort_by=vote_average.desc&vote_count.gte=50&watch_region=br&with_original_language=en`
+        );
+
+        const data = response.data; // Resposta da API
+
+        // IDs dos gêneros que você deseja excluir (opcional)
+        const excludedGenres = [10764, 10766, 10763, 10767, 10762]; // 10764: Reality, 10766: Drama televisivo, 10763: Jornais/News, 10767: Talk, 10762: Kids
+
+        if (Array.isArray(data.results) && data.results.length > 0) {
+            // Filtrar séries que não contenham gêneros excluídos
+            const filteredSeries = data.results.filter(serie => {
+                const hasExcludedGenre = serie.genre_ids.some(id => excludedGenres.includes(id)); // Verifica se contém gênero excluído
+                return !hasExcludedGenre; // Inclui apenas séries sem os gêneros excluídos
+            });
+
+            return res.json(filteredSeries); // Envia a resposta filtrada
+        }
+
+        // Se não houver resultados, retorna um array vazio
+        console.warn('Nenhuma série encontrada:', data);
+        return res.json([]);
+
+    } catch (error) {
+        console.error('Erro ao buscar séries com melhor avaliação:', error);
+        return res.status(500).json({ error: 'Erro ao buscar séries com melhor avaliação' });
+    }
+});
+
 
 
 module.exports = router;
