@@ -19,7 +19,7 @@ function filterSeriesByProvider(providerId) {
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Erro na resposta: ${response.status}`);
-            }
+            }   
             return response.json();
         })
         .then(data => {

@@ -166,4 +166,33 @@ router.get('/series-detalhes', async (req, res) => {
         res.status(500).send('Erro ao buscar detalhes do serie');
     }
 });
+
+router.get('/series-recentes', async (req, res) => {
+    try {
+        const response = await axios.get(
+            `https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}&first_air_date_year=2022&include_adult=false&include_null_first_air_dates=false&language=pt-BR&page=1&sort_by=popularity.desc&watch_region=br&with_original_language=en`
+        );
+
+        const data = response.data; // Resposta da API
+        if (Array.isArray(data.results) && data.results.length > 0) {
+            // Filtrar séries lançadas em 2023 ou posterior
+            const filteredSeries = data.results.filter(serie => {
+                const releaseYear = parseInt(serie.first_air_date?.split('-')[0], 10); // Extrai o ano de lançamento
+                return releaseYear <= 2023; // Séries de 2023 ou mais recentes
+            });
+
+            return res.json(filteredSeries); // Envia a resposta filtrada de séries e interrompe a execução aqui
+        }
+
+        // Se não houver resultados, retorna um array vazio
+        console.warn('Nenhuma série encontrada:', data);
+        return res.json([]); 
+
+    } catch (error) {
+        console.error('Erro ao buscar séries recentes:', error);
+        return res.status(500).json({ error: 'Erro ao buscar séries recentes' });
+    }
+});
+
+
 module.exports = router;
