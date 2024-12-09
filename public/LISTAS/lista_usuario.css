@@ -188,7 +188,7 @@ footer {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(49, 49, 49, 0.5);
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease;
