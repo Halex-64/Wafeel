@@ -1,81 +1,150 @@
-// Função para buscar séries populares
-async function fetchSeriesPopulares() {
-    try {
-        const response = await fetch('/tv-populares'); // Endpoint para séries populares
-        const series = await response.json();
+// Lista de IDs dos provedores específicos
+const selectedProviderIds = [337, 8, 119, 1899, 307, 283]; // Disney+, Netflix, Prime Video, Max, Globoplay, Crunchyroll
 
-        const seriesDiv = document.getElementById('series-populares');
-        series.forEach(serie => {
-            const serieElement = document.createElement('div');
-            serieElement.classList.add('serie-card');
+// Função para configurar eventos nos logos
+function setupSeriesClickEvents() {
+    const logos = document.querySelectorAll('.provider-logo');
+    logos.forEach(logo => {
+        logo.addEventListener('click', (event) => {
+            const providerId = event.target.getAttribute('data-provider-id');
+            filterSeriesByProvider(providerId);
+        });
+    });
+}
 
-            serieElement.innerHTML = `
-                <h2 class="titulo">${serie.name}</h2>
-                <img src="https://image.tmdb.org/t/p/w500${serie.poster_path || '/path/to/default/image.jpg'}" alt="${serie.name}" />
-                <p>${serie.overview || 'Sem descrição disponível.'}</p>
-                <p><strong>Popularidade:</strong> ${serie.popularity || 'N/A'}</p>
-            `;
+// Função para filtrar séries por provedor
+function filterSeriesByProvider(providerId) {
+    // Filtrar séries populares
+    fetch(`/api/tv?provider=${providerId}&type=popular`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Erro na resposta: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (Array.isArray(data.results)) {
+                renderSeries(data.results, 'series-container'); // Renderiza no container de séries populares
+            } else {
+                console.error('Estrutura de dados inesperada para séries populares:', data);
+            }
+        })
+        .catch(error => console.error('Erro ao filtrar séries populares:', error));
 
-            // Adiciona evento para ir para a página de detalhes da série
-            serieElement.addEventListener('click', () => {
-                window.location.href = `/series-detalhes.html?id=${serie.id}`;
+    // Filtrar séries recentes
+    fetch(`/api/tv?provider=${providerId}&type=recent`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Erro na resposta: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (Array.isArray(data.results)) {
+                renderSeries(data.results, 'series-recentes'); // Renderiza no container de séries recentes
+            } else {
+                console.error('Estrutura de dados inesperada para séries recentes:', data);
+            }
+        })
+        .catch(error => console.error('Erro ao filtrar séries recentes:', error));
+}
+
+function renderSeries(series, containerId) {
+    const seriesContainer = document.getElementById(containerId);
+    if (!seriesContainer) {
+        console.error(`Elemento '${containerId}' não encontrado no DOM.`);
+        return;
+    }
+    seriesContainer.innerHTML = ''; // Limpa as séries atuais
+    series.forEach(serie => {
+        const serieElement = document.createElement('div');
+        serieElement.classList.add('serie-item');
+        serieElement.innerHTML = `
+            <img src="https://image.tmdb.org/t/p/w500${serie.poster_path}" alt="${serie.name}">
+        `;
+        serieElement.addEventListener('click', () => {
+            window.location.href = `./series-detalhes.html?id=${serie.id}`;
+        });
+        seriesContainer.appendChild(serieElement);
+    });
+}
+
+// Carregamento inicial das séries populares e recentes
+function loadInitialSeries() {
+    const defaultProvider = '8'; // Netflix como padrão
+    fetch(`/series-populares?plataforma=${defaultProvider}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Erro na resposta: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(series => {
+            if (Array.isArray(series)) {
+                renderSeries(series, 'series-container');
+            } else {
+                console.error('Estrutura inesperada para séries populares:', series);
+            }
+        })
+        .catch(error => console.error('Erro ao carregar séries populares:', error));
+
+    fetch('/series-recentes')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Erro na resposta: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(series => {
+            if (Array.isArray(series)) {
+                const seriesDiv = document.getElementById('series-recentes');
+                seriesDiv.innerHTML = ''; // Limpa o conteúdo anterior
+                series.forEach(serie => {
+                    const serieElement = document.createElement('div');
+                    serieElement.classList.add('serie-item');
+                    serieElement.innerHTML = `
+                        <img src="https://image.tmdb.org/t/p/w500${serie.poster_path}" alt="${serie.name}" />
+                    `;
+                    serieElement.addEventListener('click', () => {
+                        window.location.href = `./series-detalhes.html?id=${serie.id}`;
+                    });
+                    seriesDiv.appendChild(serieElement);
+                });
+            } else {
+                console.error('Estrutura inesperada para séries recentes:', series);
+            }
+        })
+        .catch(error => console.error('Erro ao carregar séries recentes:', error));
+}
+
+function loadSeriesProviders() {
+    fetch('/api/providers') // Endpoint para carregar provedores
+        .then(response => {
+            if (!response.ok) throw new Error(`Erro na API: ${response.status}`);
+            return response.json();
+        })
+        .then(providers => {
+
+            const filteredProviders = providers.filter(provider =>
+                selectedProviderIds.includes(provider.provider_id)
+            );
+
+            const sidebar = document.getElementById('sidebar');
+            sidebar.innerHTML = '';
+
+            filteredProviders.forEach(provider => {
+                const logoElement = document.createElement('img');
+                logoElement.src = `https://image.tmdb.org/t/p/original${provider.logo_path}`;
+                logoElement.alt = provider.provider_name;
+                logoElement.classList.add('provider-logo');
+                logoElement.setAttribute('data-provider-id', provider.provider_id);
+                sidebar.appendChild(logoElement);
             });
 
-            seriesDiv.appendChild(serieElement);
-        });
-    } catch (error) {
-        console.error('Erro ao carregar séries populares:', error);
-    }
+            setupSeriesClickEvents();
+        })
+        .catch(error => console.error('Erro ao carregar provedores:', error));
 }
-fetchSeriesPopulares();
 
-async function fetchSeriesDetalhes() {
-    try {
-        const serieId = new URLSearchParams(window.location.search).get('id');
-        if (!serieId) {
-            document.getElementById('serie-detalhes').innerHTML = `<p>Série não encontrada.</p>`;
-            return;
-        }
-
-        // Busca detalhes da série
-        const response = await fetch(`/api/tv/${serieId}`);
-        const serie = await response.json();
-
-        // Busca provedores de streaming
-        const providersResponse = await fetch(`/api/tv/${serieId}/providers`);
-        const providers = await providersResponse.json();
-
-        const genres = serie.genres.map(genre => genre.name).join(', ');
-        const detailsDiv = document.getElementById('serie-detalhes');
-
-        document.title = `Detalhes de ${serie.name}`
-
-        // Gera o HTML dos provedores
-        const providersHTML = providers.flatrate?.map(provider => `
-            <a href="${provider.link || '#'}" target="_blank" rel="noopener noreferrer">
-                <img src="https://image.tmdb.org/t/p/original${provider.logo_path}" 
-                     alt="${provider.provider_name}" 
-                     title="${provider.provider_name}" 
-                     class="provider-logo">
-            </a>
-        `).join('') || '<p>Sem plataformas disponíveis no momento.</p>';
-
-        detailsDiv.innerHTML = `
-            <h1>${serie.name}</h1>
-            <img src="https://image.tmdb.org/t/p/w500${serie.poster_path || '/path/to/default/image.jpg'}" alt="${serie.name}" />
-            <p>${serie.overview || 'Sem descrição disponível.'}</p>
-            <p><strong>Data de Lançamento:</strong> ${serie.first_air_date || 'N/A'}</p>
-            <p><strong>Gêneros:</strong> ${genres}</p>
-            <p><strong>Avaliação:</strong> ${serie.vote_average || 'N/A'}</p>
-            <p><strong>Popularidade:</strong> ${serie.popularity || 'N/A'}</p>
-            <div class="providers">
-                <h3>Disponível em:</h3>
-                ${providersHTML}
-            </div>
-        `;
-    } catch (error) {
-        console.error('Erro ao carregar detalhes da série:', error);
-        document.getElementById('serie-detalhes').innerHTML = `<p>Erro ao carregar os detalhes da série.</p>`;
-    }
-}
-fetchSeriesDetalhes();
+loadSeriesProviders();
+loadInitialSeries();
