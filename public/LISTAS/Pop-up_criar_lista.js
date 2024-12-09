@@ -35,11 +35,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Função para obter o URL do pôster do filme
-    async function getPosterUrl(movieId, apiKey) {
-        const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`);
+    async function getPosterUrl(itemId, type, apiKey) {
+        const endpoint = type === 'movie' ? 'movie' : 'tv'; // Define o endpoint baseado no tipo
+        const response = await fetch(`https://api.themoviedb.org/3/${endpoint}/${itemId}?api_key=${apiKey}`);
         const data = await response.json();
         return data.poster_path ? `https://image.tmdb.org/t/p/w200${data.poster_path}` : 'https://via.placeholder.com/50x75?text=No+Image';
     }
+    
 
     // Função para atualizar as listas do usuário na interface
     async function updateUserLists() {
@@ -51,10 +53,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const listCard = document.createElement('a');
             listCard.href = `./lista_dinamica.html?list=${encodeURIComponent(list.name)}&movies=${encodeURIComponent(JSON.stringify(list.movies))}`;
             
-            const posterPromises = list.movies.slice(0, 5).map(async movie => {
-                const posterUrl = await getPosterUrl(movie.id, apiKey);
-                return `<img src="${posterUrl}" alt="${movie.title}">`;
-            });
+            const posterPromises = list.movies.slice(0, 5).map(async item => {
+                const posterUrl = await getPosterUrl(item.id, item.type, apiKey);
+                return `<img src="${posterUrl}" alt="${item.title}">`;
+            });            
 
             const posters = await Promise.all(posterPromises);
 
