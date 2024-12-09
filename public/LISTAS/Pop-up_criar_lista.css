@@ -214,7 +214,7 @@ input, .suggestions-container {
     .criar_lista {
         width:auto;
         margin: 24px;
-        border: 0.5px solid #8500F2;
+        box-shadow: rgba(0, 0, 0, 0.5) 5px 5px 15px 3px;
     }   
 
     .criar_cancelar {
