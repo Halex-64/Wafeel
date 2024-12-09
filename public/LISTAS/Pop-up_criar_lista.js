@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 suggestionsContainer.innerHTML = '';
                 suggestionsContainer.style.display = 'block';
 
-                results.slice(0, 10).forEach(item => {
+                results.forEach(item => {
                     const suggestion = document.createElement('div');
                     suggestion.className = 'suggestion-item';
 
