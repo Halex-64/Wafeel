@@ -1,17 +1,16 @@
 /* CSS DO FOOTER */
 
 footer{
-    display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     width:auto;
     background-color: #8500F2;
-    margin-top: 136px;
+    margin-top: 200px;
     padding: 56px 0 16px 0 ;
   }
   .footer_conteudo{
     display: flex;
+    align-items: center;
+    justify-content: center;
     gap: 64px;
   }
   .cr6{
