@@ -167,6 +167,37 @@ router.get('/series-detalhes', async (req, res) => {
     }
 });
 
+// Rota para filtrar séries populares por provedor
+router.get('/api/tv', async (req, res) => {
+    const { provider, type } = req.query;
+
+    if (!provider || !type) {
+        return res.status(400).send('Parâmetros provider e type são necessários');
+    }
+
+    let url = `https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}&language=pt-BR`;
+
+    if (type === 'popular') {
+        url += `&sort_by=popularity.desc`;
+    } else if (type === 'recent') {
+        url += `&sort_by=first_air_date.desc`;
+    } else if (type === 'top-rated') {
+        url += `&sort_by=vote_average.desc`;
+    }
+
+    // Adicionando o provedor de streaming
+    url += `&with_watch_providers=${provider}`;
+
+    try {
+        const response = await axios.get(url);
+        res.json(response.data.results);
+    } catch (error) {
+        console.error(`Erro ao buscar séries ${type}: `, error.message);
+        res.status(500).send(`Erro ao buscar séries ${type}`);
+    }
+});
+
+
 router.get('/series-recentes', async (req, res) => {
     try {
         const response = await axios.get(

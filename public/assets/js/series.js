@@ -12,7 +12,6 @@ function setupSeriesClickEvents() {
     });
 }
 
-// Função para filtrar séries por provedor
 function filterSeriesByProvider(providerId) {
     // Filtrar séries populares
     fetch(`/api/tv?provider=${providerId}&type=popular`)
@@ -24,6 +23,7 @@ function filterSeriesByProvider(providerId) {
         })
         .then(data => {
             if (Array.isArray(data.results)) {
+                console.log('Dados recebidos para séries populares:', data.results); // Verifique a resposta
                 renderSeries(data.results, 'series-container'); // Renderiza no container de séries populares
             } else {
                 console.error('Estrutura de dados inesperada para séries populares:', data);
@@ -41,6 +41,7 @@ function filterSeriesByProvider(providerId) {
         })
         .then(data => {
             if (Array.isArray(data.results)) {
+                console.log('Dados recebidos para séries recentes:', data.results); // Verifique a resposta
                 renderSeries(data.results, 'series-recentes'); // Renderiza no container de séries recentes
             } else {
                 console.error('Estrutura de dados inesperada para séries recentes:', data);
@@ -58,13 +59,13 @@ function filterSeriesByProvider(providerId) {
         })
         .then(data => {
             if (Array.isArray(data.results)) {
+                console.log('Dados recebidos para séries com melhores avaliações:', data.results); // Verifique a resposta
                 renderSeries(data.results, 'series-top-rated'); // Renderiza no container de melhores avaliações
             } else {
                 console.error('Estrutura de dados inesperada para séries com melhores avaliações:', data);
             }
         })
         .catch(error => console.error('Erro ao filtrar séries com melhores avaliações:', error));
-
 }
 
 function renderSeries(series, containerId) {
@@ -73,21 +74,33 @@ function renderSeries(series, containerId) {
         console.error(`Elemento '${containerId}' não encontrado no DOM.`);
         return;
     }
+
     seriesContainer.innerHTML = ''; // Limpa as séries atuais
+
     series.forEach(serie => {
         const serieElement = document.createElement('div');
         serieElement.classList.add('serie-item');
+
+        // Acesse as propriedades corretamente conforme a estrutura dos dados
+        const posterPath = serie.poster_path ? `https://image.tmdb.org/t/p/w500${serie.poster_path}` : 'default-image.jpg'; // Substitua por uma imagem padrão caso não haja poster
+        const serieName = serie.name || 'Nome desconhecido';
+
         serieElement.innerHTML = `
-            <img src="https://image.tmdb.org/t/p/w500${serie.poster_path}" alt="${serie.name}">
+            <img src="${posterPath}" alt="${serieName}">
         `;
+
+        // Adiciona um evento de clique para redirecionar para os detalhes da série
         serieElement.addEventListener('click', () => {
             window.location.href = `./series-detalhes.html?id=${serie.id}`;
         });
+
+        // Adiciona o item ao container
         seriesContainer.appendChild(serieElement);
     });
 }
 
-// Carregamento inicial das séries populares e recentes
+
+
 function loadInitialSeries() {
     const defaultProvider = '8'; // Netflix como padrão
     fetch(`/series-populares?plataforma=${defaultProvider}`)
@@ -98,7 +111,7 @@ function loadInitialSeries() {
             return response.json();
         })
         .then(series => {
-            if (Array.isArray(series)) {
+            if (series && Array.isArray(series)) {
                 renderSeries(series, 'series-container');
             } else {
                 console.error('Estrutura inesperada para séries populares:', series);
@@ -114,7 +127,7 @@ function loadInitialSeries() {
             return response.json();
         })
         .then(series => {
-            if (Array.isArray(series)) {
+            if (series && Array.isArray(series)) {
                 const seriesDiv = document.getElementById('series-recentes');
                 seriesDiv.innerHTML = ''; // Limpa o conteúdo anterior
                 series.forEach(serie => {
@@ -137,6 +150,7 @@ function loadInitialSeries() {
     loadTopRatedSeries();
 }
 
+
 function loadSeriesProviders() {
     fetch('/api/providers') // Endpoint para carregar provedores
         .then(response => {
@@ -144,28 +158,30 @@ function loadSeriesProviders() {
             return response.json();
         })
         .then(providers => {
+            if (Array.isArray(providers)) {
+                const filteredProviders = providers.filter(provider =>
+                    selectedProviderIds.includes(provider.provider_id)
+                );
 
-            const filteredProviders = providers.filter(provider =>
-                selectedProviderIds.includes(provider.provider_id)
-            );
+                const sidebar = document.getElementById('sidebar');
+                sidebar.innerHTML = '';
 
-            const sidebar = document.getElementById('sidebar');
-            sidebar.innerHTML = '';
+                filteredProviders.forEach(provider => {
+                    const logoElement = document.createElement('img');
+                    logoElement.src = `https://image.tmdb.org/t/p/original${provider.logo_path}`;
+                    logoElement.alt = provider.provider_name;
+                    logoElement.classList.add('provider-logo');
+                    logoElement.setAttribute('data-provider-id', provider.provider_id);
+                    sidebar.appendChild(logoElement);
+                });
 
-            filteredProviders.forEach(provider => {
-                const logoElement = document.createElement('img');
-                logoElement.src = `https://image.tmdb.org/t/p/original${provider.logo_path}`;
-                logoElement.alt = provider.provider_name;
-                logoElement.classList.add('provider-logo');
-                logoElement.setAttribute('data-provider-id', provider.provider_id);
-                sidebar.appendChild(logoElement);
-            });
-
-            setupSeriesClickEvents();
+                setupSeriesClickEvents();
+            } else {
+                console.error('Estrutura inesperada para provedores:', providers);
+            }
         })
         .catch(error => console.error('Erro ao carregar provedores:', error));
 }
-
 function loadTopRatedSeries() {
     fetch('/series-melhores-avaliacoes')
         .then(response => {
