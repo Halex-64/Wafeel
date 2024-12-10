@@ -19,7 +19,7 @@ function filterSeriesByProvider(providerId) {
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Erro na resposta: ${response.status}`);
-            }   
+            }
             return response.json();
         })
         .then(data => {
@@ -47,6 +47,24 @@ function filterSeriesByProvider(providerId) {
             }
         })
         .catch(error => console.error('Erro ao filtrar séries recentes:', error));
+
+    // Filtrar séries com melhores avaliações
+    fetch(`/api/tv?provider=${providerId}&type=top-rated`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Erro na resposta: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (Array.isArray(data.results)) {
+                renderSeries(data.results, 'series-top-rated'); // Renderiza no container de melhores avaliações
+            } else {
+                console.error('Estrutura de dados inesperada para séries com melhores avaliações:', data);
+            }
+        })
+        .catch(error => console.error('Erro ao filtrar séries com melhores avaliações:', error));
+
 }
 
 function renderSeries(series, containerId) {
@@ -115,6 +133,8 @@ function loadInitialSeries() {
             }
         })
         .catch(error => console.error('Erro ao carregar séries recentes:', error));
+
+    loadTopRatedSeries();
 }
 
 function loadSeriesProviders() {
@@ -144,6 +164,24 @@ function loadSeriesProviders() {
             setupSeriesClickEvents();
         })
         .catch(error => console.error('Erro ao carregar provedores:', error));
+}
+
+function loadTopRatedSeries() {
+    fetch('/series-melhores-avaliacoes')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Erro na resposta: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(series => {
+            if (Array.isArray(series)) {
+                renderSeries(series, 'series-top-rated'); // Renderiza no container de melhores avaliações
+            } else {
+                console.error('Estrutura inesperada para séries com melhores avaliações:', series);
+            }
+        })
+        .catch(error => console.error('Erro ao carregar séries com melhores avaliações:', error));
 }
 
 loadSeriesProviders();

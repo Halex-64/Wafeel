@@ -104,7 +104,7 @@ router.get('/filmes-streaming', async (req, res) => {
 
 router.get('/filmes-populares', async (req, res) => {
     const plataforma = req.query.plataforma;
-    let url = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=pt-BR&region=BR`;
+    let url = `https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}&language=pt-BR`;
 
     if (plataforma) {
         url += `&with_watch_providers=${plataforma}`;
@@ -214,8 +214,8 @@ router.get('/series-melhores-avaliacoes', async (req, res) => {
 
         const data = response.data; // Resposta da API
 
-        // IDs dos gêneros que você deseja excluir (opcional)
-        const excludedGenres = [10764, 10766, 10763, 10767, 10762]; // 10764: Reality, 10766: Drama televisivo, 10763: Jornais/News, 10767: Talk, 10762: Kids
+        // IDs dos gêneros que você deseja excluir
+        const excludedGenres = [10764, 10766, 10763, 10767, 10762, 99]; // 10764: Reality, 10766: Drama televisivo, 10763: Jornais/News, 10767: Talk, 10762: Kids, 99: Documentários
 
         if (Array.isArray(data.results) && data.results.length > 0) {
             // Filtrar séries que não contenham gêneros excluídos
@@ -234,6 +234,72 @@ router.get('/series-melhores-avaliacoes', async (req, res) => {
     } catch (error) {
         console.error('Erro ao buscar séries com melhor avaliação:', error);
         return res.status(500).json({ error: 'Erro ao buscar séries com melhor avaliação' });
+    }
+});
+
+router.get('/filmes-melhores-avaliacoes', async (req, res) => {
+    try {
+        const response = await axios.get(
+            `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&include_adult=false&include_video=false&language=pt-BR&page=1&sort_by=vote_average.desc&vote_count.gte=50&watch_region=br&with_original_language=en`
+        );
+
+        const data = response.data; // Resposta da API
+
+        // IDs dos gêneros que você deseja excluir
+        const excludedGenres = [10749, 16, 99]; // Exemplo: 10749: Romance, 16: Animação, 99: Documentário
+
+        if (Array.isArray(data.results) && data.results.length > 0) {
+            // Filtrar filmes que não contenham gêneros excluídos
+            const filteredMovies = data.results.filter(movie => {
+                const hasExcludedGenre = movie.genre_ids.some(id => excludedGenres.includes(id)); // Verifica se contém gênero excluído
+                return !hasExcludedGenre; // Inclui apenas filmes sem os gêneros excluídos
+            });
+
+            return res.json(filteredMovies); // Envia a resposta filtrada
+        }
+
+        // Se não houver resultados, retorna um array vazio
+        console.warn('Nenhum filme encontrado:', data);
+        return res.json([]);
+
+    } catch (error) {
+        console.error('Erro ao buscar filmes com melhor avaliação:', error);
+        return res.status(500).json({ error: 'Erro ao buscar filmes com melhor avaliação' });
+    }
+});
+
+router.get('/api/movies', async (req, res) => {
+    const { provider, type } = req.query;
+
+    if (!provider || !type) {
+        return res.status(400).json({ error: 'Os parâmetros "provider" e "type" são obrigatórios.' });
+    }
+
+    try {
+        let sortBy;
+        if (type === 'popular') {
+            sortBy = 'popularity.desc';
+        } else if (type === 'recent') {
+            sortBy = 'release_date.desc';
+        } else if (type === 'top-rated') {
+            sortBy = 'vote_average.desc';
+        } else {
+            return res.status(400).json({ error: 'O parâmetro "type" é inválido.' });
+        }
+
+        const tmdbResponse = await axios.get(
+            `https://api.themoviedb.org/3/discover/movie?with_watch_providers=${provider}&sort_by=${sortBy}&api_key=${API_KEY}&language=pt-BR&watch_region=BR`
+        );
+
+        console.log('Requisição para TMDb:', tmdbResponse.config.url);
+
+        // Retorne os resultados ao cliente
+        return res.json(tmdbResponse.data.results);
+    } catch (error) {
+        console.error('Erro ao processar /api/movies:', error.message);
+
+        // Retorne apenas uma vez o erro ao cliente
+        return res.status(500).json({ error: 'Erro ao buscar filmes.' });
     }
 });
 

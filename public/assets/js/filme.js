@@ -47,15 +47,33 @@ function filterMoviesByProvider(providerId) {
             }
         })
         .catch(error => console.error('Erro ao filtrar filmes recentes:', error));
+
+    // Filtrar filmes com melhores avaliações
+    fetch(`/api/movies?provider=${providerId}&type=top-rated`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Erro na resposta: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (Array.isArray(data.results)) {
+                renderMovies(data.results, 'filmes-top-rated'); // Renderiza no container de melhores avaliações
+            } else {
+                console.error('Estrutura de dados inesperada para filmes com melhores avaliações:', data);
+            }
+        })
+        .catch(error => console.error('Erro ao filtrar filmes com melhores avaliações:', error));
 }
 
-function renderMovies(movies) {
-    const movieContainer = document.getElementById('movie-container');
-    if (!movieContainer) {
-        console.error("Elemento 'movie-container' não encontrado no DOM.");
+// Função para renderizar filmes no container especificado
+function renderMovies(movies, containerId) {
+    const moviesContainer = document.getElementById(containerId);
+    if (!moviesContainer) {
+        console.error(`Elemento '${containerId}' não encontrado no DOM.`);
         return;
     }
-    movieContainer.innerHTML = ''; // Limpa os filmes atuais
+    moviesContainer.innerHTML = ''; // Limpa os filmes atuais
     movies.forEach(movie => {
         const movieElement = document.createElement('div');
         movieElement.classList.add('movie-item');
@@ -65,7 +83,7 @@ function renderMovies(movies) {
         movieElement.addEventListener('click', () => {
             window.location.href = `./filmes-detalhes.html?id=${movie.id}`;
         });
-        movieContainer.appendChild(movieElement);
+        moviesContainer.appendChild(movieElement);
     });
 }
 
@@ -81,7 +99,7 @@ function loadInitialMovies() {
         })
         .then(filmes => {
             if (Array.isArray(filmes)) {
-                renderMovies(filmes);
+                renderMovies(filmes, 'movie-container'); // Corrigido para usar o ID correto
             } else {
                 console.error('Estrutura inesperada para filmes populares:', filmes);
             }
@@ -97,19 +115,7 @@ function loadInitialMovies() {
         })
         .then(filmes => {
             if (Array.isArray(filmes)) {
-                const filmesDiv = document.getElementById('filmes-recentes');
-                filmesDiv.innerHTML = ''; // Limpa o conteúdo anterior
-                filmes.forEach(filme => {
-                    const filmeElement = document.createElement('div');
-                    filmeElement.classList.add('movie-item');
-                    filmeElement.innerHTML = `
-                        <img src="https://image.tmdb.org/t/p/w500${filme.poster_path}" alt="${filme.title}" />
-                    `;
-                    filmeElement.addEventListener('click', () => {
-                        window.location.href = `./filmes-detalhes.html?id=${filme.id}`;
-                    });
-                    filmesDiv.appendChild(filmeElement);
-                });
+                renderMovies(filmes, 'filmes-recentes'); // Corrigido para usar o ID correto
             } else {
                 console.error('Estrutura inesperada para filmes recentes:', filmes);
             }
@@ -117,6 +123,7 @@ function loadInitialMovies() {
         .catch(error => console.error('Erro ao carregar filmes recentes:', error));
 }
 
+// Função para carregar provedores
 function loadProviders() {
     fetch('/api/providers') // Endpoint para carregar provedores
         .then(response => {
@@ -124,7 +131,6 @@ function loadProviders() {
             return response.json();
         })
         .then(providers => {
-
             const filteredProviders = providers.filter(provider =>
                 selectedProviderIds.includes(provider.provider_id)
             );
@@ -146,5 +152,28 @@ function loadProviders() {
         .catch(error => console.error('Erro ao carregar provedores:', error));
 }
 
-loadProviders();
-loadInitialMovies();
+// Função para carregar filmes com as melhores avaliações
+function loadTopRatedMovies() {
+    fetch('/filmes-melhores-avaliacoes')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Erro na resposta: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(movies => {
+            if (Array.isArray(movies)) {
+                renderMovies(movies, 'filmes-top-rated'); // Renderiza no container de melhores avaliações
+            } else {
+                console.error('Estrutura inesperada para filmes com melhores avaliações:', movies);
+            }
+        })
+        .catch(error => console.error('Erro ao carregar filmes com melhores avaliações:', error));
+}
+
+// Inicialização
+document.addEventListener('DOMContentLoaded', () => {
+    loadProviders();
+    loadInitialMovies();
+    loadTopRatedMovies();
+});
