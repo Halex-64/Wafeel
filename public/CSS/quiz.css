@@ -254,13 +254,104 @@ label{
 }
 
 footer{
+  display: flex;
+  justify-content: center;
+  width:auto;
   background-color: #8500F2;
-  padding: 8px;
+  padding: 48px;
   margin-top: 136px;
-  text-align: center;
-  width: 100%;
-  margin-bottom: 0;
 }
+.cr6{
+  padding: 0 16px;
+}
+.footer_logo_texto{
+  border-right: 1px solid grey;
+  width: 400px;
+  height: 100%;
+}
+.logo_footer{
+  margin: 0 0 40px;
+  filter: invert(1) brightness(100);
+}
+.footer_logo_texto p {
+  margin: 0 0 16px; 
+}
+
+.cr7{
+  padding: 0 24px;
+}
+.h2_footer h2{
+  margin: 0 0 40px;
+  position: relative;
+}
+.h2_footer h2::after{
+  position: absolute;
+  content: "";
+  background: grey;
+  width: 16%;
+  height: 1px;
+  left: 0;
+  bottom: -20px;
+}
+.texto_cadastro_footer{
+  width: 250px;
+  margin: 0 0 16px 0;
+}
+.botao_footer{
+  width: 112.16px;
+  text-decoration: none;
+  color: #ccc;
+  background: none;
+  border: 1px solid;
+  border-radius: 43px;
+  font-size: 13px;
+  padding: 7px 30px; 
+  margin-bottom: 16px;
+  cursor: pointer;
+}
+.botao_footer:hover{
+  color: white;
+}
+
+.cr8{
+  padding: 0 24px;
+}
+.footer_menu {
+  display: flex;
+  
+}
+.footer_menu ul{
+  padding-left: 0;
+}
+.footer_menu_esquerda{
+  padding-right: 15px;
+  line-height: 1.5rem;
+}
+.footer_menu_direita {
+  padding-left: 1.5rem !important;
+  padding-right: 1.5rem !important;
+  line-height: 1.5rem;
+}
+.footer_menu_esquerda ul li a,
+.footer_menu_direita ul li a{
+  color: white;
+  text-decoration: none;
+  font-size: 17.5px;
+}
+
+.cr9{
+  padding: 0 16px;
+}
+
+
+
+
+
+
+
+
+
+
 
 .menu-toggle {
   background: none;
