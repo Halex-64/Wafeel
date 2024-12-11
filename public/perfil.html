@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wafeel</title>
+    <link rel="stylesheet" href="CSS/quiz.css">
+    <link rel="stylesheet" href="CSS/perfil.css">
+    <link rel="stylesheet" href="CSS/responsividade.css">
+    <link rel="stylesheet" href="/public/LISTAS/lista_usuario.css">
+    <link rel="stylesheet" href="CSS/footer.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">    
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.cdnfonts.com/css/coolvetica-2" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> <!--Impede de dar zoom-->
+</head>  
+<body>
+    <!--HEADER-->
+    <header class="header_quiz">
+        <nav class="barradenavegacao">
+            <a href="/public/index.html"><img class="logo__image" src="assets/img/logo.png" alt="Logo"></a>
+            <ul class="links">
+                <li><a href="/public/quiz.html">Quiz</a></li>
+                <li><a href="#">Filmes</a></li>
+                <li><a href="#">Séries</a></li>
+                <li><a href="./listas.html">Listas</a></li>
+                <li><img class="fa-solid fa-heart" src="assets/img/favoritosicon.png"></a></img></li> 
+                <li><img class="fa-solid fa-right-to-bracket" src="assets/img/usuarioicon.png">  </img></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!--HEADER RESPONSIVA-->
+    <header class="header_responsiva">
+        <nav class="barradenavegacao_responsiva">
+            <a href="/public/index.html"><img class="logo__image" src="assets/img/logo.png" alt="Logo"></a>
+            <ul class="links" id="mobile-menu">
+                <li><a href="/public/quiz.html">QUIZ</a></li>
+                <li><a href="/public/filmes.html">FILMES</a></li>
+                <li><a href="/public/series.html">SÉRIES</a></li>                                             
+            </ul>
+            <button class="menu-toggle" id="menu-toggle">☰</button>
+        </nav>
+    </header>
+
+    <!--MENU DROP-DOWN RESPONSIVO-->
+    <div class="menu_responsivo">
+        <ul class="links" id="mobile-menu">
+            <li><a href="/public/quiz.html">QUIZ</a></li>
+            <li><a href="/public/filmes.html">FILMES</a></li>
+            <li><a href="/public/series.html">SÉRIES</a></li> 
+            <li><a href="/public/LISTAS/listas.html">LISTAS</a></li> 
+            <li><a href="/public/favoritos.html">FAVORITOS</a></li>
+            <li><a href="/public/perfil.html">PERFIL</a></li>                             
+        </ul>
+    </div>
+
+    <section>
+        <div class="perfil_usuario">
+            <h3>Olá, <span id="nome_usuario"></span></h3>
+            <div class="perfil_informacoes">
+                <div class="input_perfil">
+                    <label for="nome">Usuário</label>
+                    <input type="text" id="nome" value="">
+                </div>
+                <div class="input_perfil">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" value="">
+                </div>
+                <div class="input_perfil">
+                    <label for="senha">Senha</label>
+                    <input type="password" id="senha" value="">
+                </div>
+            </div>
+            <div class="perfil_buttons">
+                <button class="editar" onclick="editarInformacoes()">Editar Informações</button>
+                <button class="sair" onclick="sair()">Sair</button>
+                <button class="tres_pontos" onclick="toggleExcluirConta()">⋮</button>
+                <button class="excluir_conta" id="excluirConta" style="display: none;">Excluir Conta</button>
+            </div>
+        </div>
+    </section>
+     
+
+    <footer> <!--NOVO FOOTER-->
+        <div class="footer_conteudo">
+            <div class="cr6">
+                <div class="footer_logo_texto">
+                    <img class="logo_footer" src="/public/assets/img/logo.png" alt="Logo">
+                    <p>Desbloqueie histórias únicas e mágicas a cada clique.</p> 
+                    <p>Mergulhe em uma experiência cinematográfica onde suas emoções ditam a próxima trama.</p>  
+                </div>
+            </div>    
+            <div class="cr7">
+                <div class="h2_footer"> 
+                    <h2>Cadastre-se</h2>      
+                </div>
+                <p class="texto_cadastro_footer">Faça login para aproveitar ao máximo nosso site</p>
+                <button class="botao_footer">Login</button>
+                <button class="botao_footer">Cadastro</button>
+            </div>    
+            <div class="cr8">
+                <div class="h2_footer"> 
+                    <h2>Menu</h2>      
+                </div>
+                <div class="footer_menu">
+                    <div class="footer_menu_esquerda">
+                        <ul>
+                            <li><a href="">Home</a></li>
+                            <li><a href="">Quiz</a></li>
+                            <li><a href="">Filmes</a></li>
+                            <li><a href="">Séries</a></li>
+                            <li><a href="">Listas</a></li>
+                            <li><a href="">Favoritos</a></li>                    
+                        </ul>
+                    </div>
+                    <div class="footer_menu_direita">
+                        <ul>
+                            <li><a href="">Perfil</a></li>
+                            <li><a href="">Ajuda</a></li>
+                            <li><a href="">Termos</a></li>
+                            <li><a href="">Suporte</a></li>
+                            <li><a href="">Contato</a></li>
+                            <li><a href="">Sobre Nós</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>    
+            <div class="cr9">
+                <div class="h2_footer"> 
+                    <h2>Conecte-se conosco</h2>      
+                </div>
+                <div class="footer_contato_icones">
+                    <a href="#" class="circle"><img src="/public/assets/img/whatsapp_icon.png" id="WhatsApp_icon" alt="WhatsApp"></a>
+                    <a href="#" class="circle"><img src="/public/assets/img/instagram_icon.png" id="Instagram_icon" alt="Instagram"></a>
+                </div>
+                
+                <form class="footer_input">
+                    <input type="text" name="search" placeholder="Pesquise aqui...">
+                    <input type="button" value="🔍︎">
+                </form>
+            </div>
+        </div>
+        <div class="footer_termos">
+            <div class="footer_politica">
+                <p>&copy; 2024 Wafeel. Todos os direitos reservados.</p> 
+            </div>
+        </div>
+    </footer>
+
+    <!--FOOTER RESPONSIVO-->
+    <footer class="footer_responsivo">
+        <div class="footer_links">        
+            <a href="#">Login</a>
+            <a href="#">Suporte</a>
+            <a href="#">Sobre Nós</a>        
+        </div>
+        <div class="social-icons">
+            <a href="#"><img src="/public/assets/img/whatsapp_icon.png" id="WhatsApp_icon" alt="WhatsApp"></a>
+            <a href="#"><img src="/public/assets/img/instagram_icon.png" id="Instagram_icon" alt="Instagram"></a>         
+        </div>
+        <h3>Seu mundo de histórias, personalizado.</h3>
+        <a class="logo_footer_responsivo"><img class="logo__image" src="assets/img/logo.png" alt="Logo"></a>
+        <div class="politica_termos">
+            <p class="politica_priv">Política de Privacidade</p>
+            <p class="term_cond">Termos e Condições</p>
+        </div>    
+    </footer>
+
+    <script>
+        //JAVASCRIPT HEADER RESPONSIVA
+        const menuToggle = document.getElementById('menu-toggle');
+        const menuResponsive = document.querySelector('.menu_responsivo');
+        const headerResponsive = document.querySelector('.header_responsiva');
+        const toggleCor = document.querySelector('.menu-toggle');
+        const logoImage = document.querySelector('.barradenavegacao_responsiva .logo__image'); // Seleção específica
+
+        menuToggle.addEventListener('click', () => {
+            menuResponsive.classList.toggle('show'); // Alterna a classe para abrir/fechar o menu
+            headerResponsive.classList.toggle('header-active'); // Alterna a cor da header_responsiva
+            toggleCor.classList.toggle('menu-toggle-active');
+            logoImage.classList.toggle('logoImage-active'); // Adiciona a classe que ativa o filtro
+        });
+    </script>
+
+    <script>
+        function toggleExcluirConta() {
+            const excluirContaBtn = document.getElementById('excluirConta');
+            // Verifica e alterna a visibilidade
+            if (excluirContaBtn.style.display === 'none' || excluirContaBtn.style.display === '') {
+                excluirContaBtn.style.display = 'block';
+            } else {
+                excluirContaBtn.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

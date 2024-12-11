@@ -1,0 +1,123 @@
+section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.perfil_usuario{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    gap: 32px
+}
+
+.perfil_usuario h3{
+    font-size: 40px;
+}
+
+.perfil_informacoes{
+    display: flex;
+    flex-direction: column;
+    font-size: 24px;
+    gap: 16px;
+}
+
+.perfil_informacoes .input_perfil{
+    display: flex;
+    flex-direction: column;
+}
+
+.perfil_informacoes .input_perfil input{
+    padding: 8px 16px;
+    color: #8500F2; 
+    font-family: 'Coolvetica', normal;
+    font-size: 16px;
+    outline: none;
+    border-radius: 2px;
+    border: none;
+}
+
+.perfil_buttons{
+    display: flex;
+    align-items: start;
+    gap: 16px;
+}
+
+.perfil_buttons button{
+    color: #ccc;
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    padding: 0;
+    border: none;
+    align-items: start;
+    background: none;
+    cursor: pointer;
+}
+.perfil_buttons .editar:hover,
+.perfil_buttons .sair:hover,
+.perfil_buttons .tres_pontos:hover{
+    color: white;
+}
+
+.excluir_conta {
+    cursor: pointer;
+    display: none;  
+}
+.excluir_conta:hover {
+    color: red;
+}
+
+@media (max-width: 768px) {
+    section{
+        margin-bottom: 900px;
+    }
+    .perfil_usuario {
+        width: 80%; /* Ajusta a largura em telas menores */
+    }
+
+    .perfil_usuario h3 {
+        font-size: 28px; /* Reduz o tamanho do título */
+    }
+
+    .perfil_informacoes {
+        font-size: 20px; /* Ajusta a fonte */
+        padding: 8px;
+        gap: 12px;
+    }
+
+    .perfil_informacoes .input_perfil input {
+        font-size: 14px; /* Diminui o tamanho da fonte no input */
+    }
+
+    .perfil_usuario .perfil_buttons {
+        padding: 0 8px;
+        gap: 12px;
+    }
+
+    .perfil_usuario .perfil_buttons button {
+        font-size: 14px; /* Ajusta o tamanho do texto */
+    }
+}
+
+@media (max-width: 480px) {
+    .perfil_usuario {
+        width: 95%; /* Quase tela cheia para dispositivos muito pequenos */
+    }
+
+    .perfil_usuario h3 {
+        font-size: 24px;
+        text-align: center; /* Centraliza o texto em telas pequenas */
+    }
+
+    .perfil_buttons {
+        align-items: center; /* Centraliza os botões */
+    }
+
+    .perfil_buttons button {
+        font-size: 12px; /* Ajusta o tamanho dos botões */
+    }
+}
+
+
+
