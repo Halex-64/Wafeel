@@ -9,6 +9,7 @@ footer{
   }
   .footer_conteudo{
     display: flex;
+    text-align: start;
     justify-content: center;
     gap: 48px;
   }
