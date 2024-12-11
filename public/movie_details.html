@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/public/LISTAS/lista_usuario.css">
     <link rel="stylesheet" href="/public/LISTAS/filmes_da_lista_dinamica.css">
     <link rel="stylesheet" href="/public/assets/CSS/responsividade.css">
+    <link rel="stylesheet" href="/public/assets/CSS/movie_details.css">
     <link rel="stylesheet" href="/public/assets/CSS/footer.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">    
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -66,22 +67,82 @@
             <li><a href="/public/favoritos.html">FAVORITOS</a></li>
             <li><a href="/public/perfil.html">PERFIL</a></li>                             
         </ul>
-    </div>    
+    </div>
 
     <section>
-        <div class="poster_do_filme">
-            <img id="poster_filme" src="" alt="">
+        <div class="box-container">
+            <div class="side_bar">
+                <div id="container_poster_favoritar">
+                    <img id="id_poster_filme" src="/public/assets/img/Deadpool & Wolverine.png" alt="">
+                    <div class="popularidade_favoritar">
+                        <div class="popularidade_container">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
+                                <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
+                            </svg>
+                            <p id="id_popularidade"></p>
+                        </div>                        
+                        <div class="favoritar_container">
+                            <svg id="id_favoritar" xmlns="http://www.w3.org/2000/svg" width="38" height="38" fill="currentColor" class="bi bi-suit-heart-fill" viewBox="0 0 16 16">
+                                <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1"/>
+                            </svg>
+                            <p>Favoritar</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="informacoes_do_titulo">
+                    <div class="detalhes_infomacoes">
+                        <h3>Gêneros</h3>
+                        <p id="id_generos"></p>
+                    </div>
+                    <div class="detalhes_infomacoes">
+                        <h3>Duração</h3>
+                        <p id="id_duracao"></p>
+                    </div>
+                    <div class="detalhes_infomacoes">
+                        <h3>Faixa Etária</h3>
+                        <p id="id_classificacao"></p>
+                    </div>
+                    <div class="detalhes_infomacoes">
+                        <h3>País de Origem</h3>
+                        <p id="id_pais_origem"></p>
+                    </div>
+                    <div class="detalhes_infomacoes">
+                        <h3>Realizador</h3>
+                        <p id="id_realizador"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right_bar">
+                <div class="trailer_titulo">
+                    <video id="trailer_titulo" width="750" height="auto">
+                        <source src="" type="video/mp4">
+                        Seu navegador não suporta a tag de vídeo.
+                    </video>
+                    <button id="playButton" onclick="togglePlay()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-play" viewBox="0 0 16 16">
+                            <path d="M10.804 8 5 4.633v6.734zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696z"/>
+                          </svg>
+                    </button>
+                </div>
+
+                <div class="informacoes_sinopse">
+                    <div class="titulo_ano">
+                        <h3 id="titulo_filme" class="titulo_da_obra"></h3>
+                        <p id="ano_lancamento">()</p>
+                    </div>
+                    <p id="sinopse_titulo"></p>
+                </div>
+                <div class="streamins_titulo">
+                    <p class="">
+                        Disponíveis em:
+                    </p>
+
+                </div>
+            </div>
         </div>
-
-
-
-
-
-
-
-
-
-
     </section>   
 
     <footer> <!--NOVO FOOTER-->
@@ -183,6 +244,21 @@
             toggleCor.classList.toggle('menu-toggle-active');
             logoImage.classList.toggle('logoImage-active'); // Adiciona a classe que ativa o filtro
         });  
+    </script>
+
+    <script>
+        var video = document.getElementById("myVideo");
+        var playButton = document.getElementById("playButton");
+
+        function togglePlay() {
+            if (video.paused) {
+                video.play();
+                playButton.textContent = "Pause";
+            } else {
+                video.pause();
+                playButton.textContent = "Play";
+            }
+        }
     </script>
 </body>
 </html>
