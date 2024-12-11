@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wafeel</title>
+    <link rel="stylesheet" href="../CSS/quiz.css">
+    <link rel="stylesheet" href="/public/LISTAS/listas.css">
+    <link rel="stylesheet" href="../CSS/responsividade.css">
+    <link rel="stylesheet" href="../CSS/footer.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/coolvetica-2" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> 
+</head>  
+<body>
+    <!--HEADER-->
+    <header class="header_quiz">
+        <nav class="barradenavegacao">
+            <a href="/public/index.html"><img class="logo__image" src="../assets/img/logo.png" alt="Logo"></a>
+            <ul class="links">
+                <li><a href="../quiz.html">Quiz</a></li>
+                <li><a href="#">Filmes</a></li>
+                <li><a href="#">Séries</a></li>
+                <li><a id="selecao_roxo" href="../LISTAS/listas.html">Listas</a></li>
+                <li><img class="fa-solid fa-heart" src="../assets/img/favoritosicon.png"></a></img></li> 
+                <li><img class="fa-solid fa-right-to-bracket" src="../assets/img/usuarioicon.png">  </img></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!--HEADER RESPONSIVA-->
+    <header class="header_responsiva">
+        <nav class="barradenavegacao_responsiva">
+            <a href="/public/index.html"><img class="logo__image" src="../assets/img/logo.png" alt="Logo"></a>
+            <ul class="links" id="mobile-menu">
+                <li><a href="../quiz.html">QUIZ</a></li>
+                <li><a href="../filmes.html">FILMES</a></li>
+                <li><a href="../series.html">SÉRIES</a></li>                                             
+            </ul>
+            <button class="menu-toggle" id="menu-toggle">☰</button>
+        </nav>
+    </header>
+
+     <!--MENU DROP-DOWN RESPONSIVO-->
+    <div class="menu_responsivo">
+        <ul class="links" id="mobile-menu">
+            <li><a href="/public/quiz.html">QUIZ</a></li>
+            <li><a href="/public/filmes.html">FILMES</a></li>
+            <li><a href="/public/series.html">SÉRIES</a></li> 
+            <li><a href="/public/LISTAS/listas.html">LISTAS</a></li> 
+            <li><a href="/public/favoritos.html">FAVORITOS</a></li>
+            <li><a href="/public/perfil.html">PERFIL</a></li>                             
+        </ul>
+    </div>
+
+    <!--BARRA NAVEGAÇÃO ENTRE LISTAS-->
+    <div class="nav_listas">
+        <div class="barra_listas">
+            <li><a id="selecao_roxo" class="principais_listas" href="../LISTAS/listas.html">PRINCIPAIS LISTAS</a></li>
+            <div id="linha_vertical"></div>
+            <li><a href="../LISTAS/lista_usuario.html" class="suas_listas">SUAS LISTAS</a></li>
+        </div>    
+        <div id="linha_horizontal"></div>
+    </div>
+
+    <!--BARRA NAVEGAÇÃO ENTRE LISTAS RESPONSIVA-->
+    <div class="nav_listas_responsiva_esquerda">
+        <div class="barra_listas">
+            <li><a id="selecao_roxo" class="principais_listas" href="../LISTAS/listas.html">PRINCIPAIS LISTAS</a></li>
+        </div>
+    </div>
+    <div class="nav_listas_responsiva_direita">
+        <div class="barra_listas">           
+            <li><a href="../LISTAS/lista_usuario.html" class="suas_listas">SUAS LISTAS</a></li>
+        </div>        
+    </div>   
+
+    <section>
+        <!--CONTAINER COM AS LISTAS-->
+        <div class="containers_listas">             
+            <a href="../LISTAS/filmes_da_lista.html">
+                <div class="container_filme">                    
+                    <div class="poster_filmes primeira-lista">                             
+                    </div>
+                    <p>FILMES POPULARES DE 2024</p>                
+                </div>
+            </a>
+
+            <a href="">
+                <div class="container_filme">
+                    <div class="poster_filmes segunda-lista">                             
+                    </div>
+                    <p>ERA DE OURO DE HOLLYWOOD</p>
+                </div>
+            </a>
+
+            <a href="">
+                <div class="container_filme">
+                    <div class="poster_filmes terceira-lista">
+                    </div>
+                    <p>HISTÓRIAS INSPIRADORAS</p>
+                </div>
+            </a>
+
+            <a href="">
+                <div class="container_filme">
+                    <div class="poster_filmes quarta-lista">                            
+                    </div>
+                    <p>TERROR E SOBRENATURAL</p>
+                </div>
+            </a>          
+             
+            <a href="">
+                <div class="container_filme">
+                    <div class="poster_filmes quinta-lista">                            
+                    </div>
+                    <p>SUSPENSE E MISTÉRIO</p>
+                </div>
+            </a>
+
+            <a href="">
+                <div class="container_filme">
+                    <div class="poster_filmes sexta-lista">                            
+                    </div>
+                    <p>CLÁSSICOS IMPERDÍVEIS</p>
+                </div>
+            </a>
+
+            <a href="">
+                <div class="container_filme">
+                    <div class="poster_filmes setima-lista">                             
+                    </div>
+                    <p>CINEMA NOIR</p>
+                </div>
+            </a>
+
+            <a href="">
+                <div class="container_filme">
+                    <div class="poster_filmes oitava-lista">
+                    </div>
+                    <p>O MELHOR DO CINEMA BRASILEIRO</p>
+                </div>
+            </a>
+             
+            <a href="">
+                <div class="container_filme">
+                    <div class="poster_filmes nona-lista">
+                    </div>
+                    <p>RETROPESCTIVA DOS ANOS 90</p>
+                </div>
+            </a>
+
+            <a href="">
+                <div class="container_filme">
+                    <div class="poster_filmes decima-lista">
+                    </div>
+                    <p>CONFLITOS ÉPICOS E BATALHAS</p>
+                </div>
+            </a>
+
+            <a href="">
+                <div class="container_filme">
+                    <div class="poster_filmes decima-primeira-lista">
+                    </div>
+                    <p>AÇÃO DOS ANOS 80</p>
+                </div>
+            </a>
+
+            <a href="">
+                <div class="container_filme">
+                    <div class="poster_filmes decima-segunda-lista">
+                    </div>
+                    <p>MUSICAIS DOS ANOS 40</p>
+                </div>
+            </a>
+            
+            <a href="">
+                <div class="container_filme">
+                    <div class="poster_filmes decima-terceira-lista">
+                    </div>
+                    <p>Melhores da década de 2010</p>
+                </div>
+            </a>
+
+            <a href="">
+                <div class="container_filme">
+                    <div class="poster_filmes decima-quarta-lista">
+                    </div>
+                    <p>ANIMAÇÕES DOS ANOS 2010</p>
+                </div>
+            </a>
+
+            <a href="">
+                <div class="container_filme">
+                    <div class="poster_filmes decima-quinta-lista">
+                    </div>
+                    <p>DOCUMENTÁRIOS BRASILEIROS</p>
+                </div>
+            </a>
+
+            <a href="">
+                <div class="container_filme">
+                    <div class="poster_filmes decima-sexta-lista">
+                    </div>
+                    <p>MELHORES ANIMAÇÕES DA PIXAR</p>
+                </div>
+            </a>             
+        </div>
+    </section>
+    
+    <footer> <!--NOVO FOOTER-->
+        <div class="footer_conteudo">
+            <div class="cr6">
+                <div class="footer_logo_texto">
+                    <img class="logo_footer" src="/public/assets/img/logo.png" alt="Logo">
+                    <p>Desbloqueie histórias únicas e mágicas a cada clique.</p> 
+                    <p>Mergulhe em uma experiência cinematográfica onde suas emoções ditam a próxima trama.</p>  
+                </div>
+            </div>    
+            <div class="cr7">
+                <div class="h2_footer"> 
+                    <h2>Cadastre-se</h2>      
+                </div>
+                <p class="texto_cadastro_footer">Faça login para aproveitar ao máximo nosso site</p>
+                <button class="botao_footer">Login</button>
+                <button class="botao_footer">Cadastro</button>
+            </div>    
+            <div class="cr8">
+                <div class="h2_footer"> 
+                    <h2>Menu</h2>      
+                </div>
+                <div class="footer_menu">
+                    <div class="footer_menu_esquerda">
+                        <ul>
+                            <li><a href="">Home</a></li>
+                            <li><a href="">Quiz</a></li>
+                            <li><a href="">Filmes</a></li>
+                            <li><a href="">Séries</a></li>
+                            <li><a href="">Listas</a></li>
+                            <li><a href="">Favoritos</a></li>                    
+                        </ul>
+                    </div>
+                    <div class="footer_menu_direita">
+                        <ul>
+                            <li><a href="">Perfil</a></li>
+                            <li><a href="">Ajuda</a></li>
+                            <li><a href="">Termos</a></li>
+                            <li><a href="">Suporte</a></li>
+                            <li><a href="">Contato</a></li>
+                            <li><a href="">Sobre Nós</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>    
+            <div class="cr9">
+                <div class="h2_footer"> 
+                    <h2>Conecte-se conosco</h2>      
+                </div>
+                <div class="footer_contato_icones">
+                    <a href="#" class="circle"><img src="/public/assets/img/whatsapp_icon.png" id="WhatsApp_icon" alt="WhatsApp"></a>
+                    <a href="#" class="circle"><img src="/public/assets/img/instagram_icon.png" id="Instagram_icon" alt="Instagram"></a>
+                </div>
+                
+                <form class="footer_input">
+                    <input type="text" name="search" placeholder="Pesquise aqui...">
+                    <input type="button" value="🔍︎">
+                </form>
+            </div>
+        </div>
+        <div class="footer_termos">
+            <div class="footer_politica">
+                <p>&copy; 2024 Wafeel. Todos os direitos reservados.</p> 
+            </div>
+        </div>
+    </footer>
+
+    <!--FOOTER RESPONSIVO-->
+    <footer class="footer_responsivo">
+        <div class="footer_links">        
+            <a href="#">Login</a>
+            <a href="#">Suporte</a>
+            <a href="#">Sobre Nós</a>        
+        </div>
+        <div class="social-icons">
+            <a href="#"><img src="/public/assets/img/whatsapp_icon.png" id="WhatsApp_icon" alt="WhatsApp"></a>
+            <a href="#"><img src="/public/assets/img/instagram_icon.png" id="Instagram_icon" alt="Instagram"></a>         
+        </div>
+        <h3>Seu mundo de histórias, personalizado.</h3>
+        <a class="logo_footer_responsivo"><img class="logo__image" src="../assets/img/logo.png" alt="Logo"></a>
+        <div class="politica_termos">
+            <p class="politica_priv">Política de Privacidade</p>
+            <p class="term_cond">Termos e Condições</p>
+        </div>    
+    </footer>
+
+    <!--JAVASCRIPT HEADER RESPONSIVA-->
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const menuResponsive = document.querySelector('.menu_responsivo');
+        const headerResponsive = document.querySelector('.header_responsiva');
+        const toggleCor = document.querySelector('.menu-toggle');
+        const logoImage = document.querySelector('.barradenavegacao_responsiva .logo__image'); // Seleção específica
+
+        menuToggle.addEventListener('click', () => {
+            menuResponsive.classList.toggle('show'); // Alterna a classe para abrir/fechar o menu
+            headerResponsive.classList.toggle('header-active'); // Alterna a cor da header_responsiva
+            toggleCor.classList.toggle('menu-toggle-active');
+            logoImage.classList.toggle('logoImage-active'); // Adiciona a classe que ativa o filtro
+        });
+    </script>
+
+    <!--JAVASCRIPT POSTERS DA API-->
+    <script class="carregar_posters">
+        document.addEventListener('DOMContentLoaded', async () => {
+            const apiKey = '4556dc6e1d1a01742122bf8dc0fbae46';
+        
+            // Arrays de IDs de filmes para diferentes contêineres
+            const movieLists = [
+                { ids: [786892, 929590, 1023922, 437342, 1111873], container: '.poster_filmes.primeira-lista' },
+                { ids: [289, 630, 599, 23220, 244], container: '.poster_filmes.segunda-lista' },
+                { ids: [423, 489, 38, 205596, 207], container: '.poster_filmes.terceira-lista' },  
+                { ids: [756999, 948, 9552, 4232, 138843], container: '.poster_filmes.quarta-lista' },
+                { ids: [170, 938614, 1813, 44214, 11324], container: '.poster_filmes.quinta-lista' },
+                { ids: [33813, 597, 680, 603, 274], container: '.poster_filmes.sexta-lista' },
+                { ids: [3767, 18671, 877, 21336, 28663], container: '.poster_filmes.setima-lista' },
+                { ids: [186738, 86320, 67612, 166184, 42031], container: '.poster_filmes.oitava-lista' },
+                { ids: [769, 329, 949, 9479, 686], container: '.poster_filmes.nona-lista' },
+                { ids: [49046, 530915, 2604, 228150, 10110], container: '.poster_filmes.decima-lista' },
+                { ids: [9659, 78, 105, 218, 1368], container: '.poster_filmes.decima-primeira-lista' },
+                { ids: [909, 756, 29380, 11360, 43447], container: '.poster_filmes.decima-segunda-lista' },
+                { ids: [458723, 376867, 244786, 324552, 157336], container: '.poster_filmes.decima-terceira-lista' },
+                { ids: [372058, 324857, 399174, 340357, 242828], container: '.poster_filmes.decima-quarta-lista' },
+                { ids: [60142, 913849, 163936, 374552, 229280], container: '.poster_filmes.decima-quinta-lista' },
+                { ids: [9806, 863, 38757, 12, 585], container: '.poster_filmes.decima-sexta-lista' }
+            ];
+        
+            // Função genérica para preencher um contêiner com pôsteres
+            async function fetchPosters(movieIds) {
+                const promises = movieIds.map(async (movieId) => {
+                    const imagesUrl = `https://api.themoviedb.org/3/movie/${movieId}/images?api_key=${apiKey}`;
+                    try {
+                        const response = await fetch(imagesUrl);
+                        const imageData = await response.json();
+        
+                        // Tentar encontrar pôster em português
+                        let selectedPoster = imageData.posters.find(poster => poster.iso_639_1 === 'pt');
+        
+                        // Se não houver pôster em português, usar o primeiro pôster disponível
+                        if (!selectedPoster && imageData.posters.length > 0) {
+                            selectedPoster = imageData.posters[0];
+                        }
+        
+                        // Garantir que um pôster foi encontrado
+                        if (selectedPoster) {
+                            const posterPath = selectedPoster.file_path;
+                            return `https://image.tmdb.org/t/p/w500${posterPath}`;
+                        } else {
+                            console.warn(`O filme com ID ${movieId} não possui pôster disponível.`);
+                        }
+                    } catch (error) {
+                        console.error(`Erro ao carregar as imagens do filme com ID ${movieId}:`, error);
+                    }
+                });
+        
+                return Promise.all(promises);
+            }
+        
+            // Preencher os contêineres com os pôsteres correspondentes
+            movieLists.forEach(async (list) => {
+                const container = document.querySelector(list.container);
+                const posterUrls = await fetchPosters(list.ids);
+                posterUrls.forEach(url => {
+                    if (url) {
+                        const posterImg = document.createElement('img');
+                        posterImg.src = url;
+                        container.appendChild(posterImg);
+                    }
+                });
+            });
+        });
+    </script>        
+</body>               
+</html>

@@ -4,38 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wafeel</title>
-    <link rel="stylesheet" href="CSS/quiz.css">
-    <link rel="stylesheet" href="CSS/perfil.css">
-    <link rel="stylesheet" href="CSS/responsividade.css">
-    <link rel="stylesheet" href="/public/LISTAS/lista_usuario.css">
-    <link rel="stylesheet" href="CSS/footer.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">    
+    <link rel="stylesheet" href="../CSS/quiz.css">
+    <link rel="stylesheet" href="../LISTAS/lista_usuario.css">
+    <link rel="stylesheet" href="/public/LISTAS/Pop-up_criar_lista.css">
+    <link rel="stylesheet" href="../CSS/responsividade.css">
+    <link rel="stylesheet" href="/public/CSS/footer.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.cdnfonts.com/css/coolvetica-2" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> <!--Impede de dar zoom-->
-</head>  
+</head>
 <body>
     <!--HEADER-->
     <header class="header_quiz">
         <nav class="barradenavegacao">
-            <a href="/public/index.html"><img class="logo__image" src="assets/img/logo.png" alt="Logo"></a>
+            <img class="logo__image" src="../assets/img/logo.png" alt="Logo">
             <ul class="links">
                 <li><a href="/public/quiz.html">Quiz</a></li>
                 <li><a href="#">Filmes</a></li>
                 <li><a href="#">Séries</a></li>
-                <li><a href="./listas.html">Listas</a></li>
-                <li><img class="fa-solid fa-heart" src="assets/img/favoritosicon.png"></a></img></li> 
-                <li><img class="fa-solid fa-right-to-bracket" src="assets/img/usuarioicon.png">  </img></li>
+                <li><a id="selecao_roxo" href="./listas.html">Listas</a></li>
+                <li><a href="#"><img class="icon" src="../assets/img/favoritosicon.png" alt="Favoritos"></a></li>
+                <li><a href="#"><img class="icon" src="../assets/img/usuarioicon.png" alt="Usuário"></a></li>
             </ul>
         </nav>
     </header>
 
-    <!--HEADER RESPONSIVA-->
+    <!--HEADER RESPONSIVA-->    
     <header class="header_responsiva">
         <nav class="barradenavegacao_responsiva">
-            <a href="/public/index.html"><img class="logo__image" src="assets/img/logo.png" alt="Logo"></a>
+            <a href="/public/index.html"><img class="logo__image" src="../assets/img/logo.png" alt="Logo"></a>
             <ul class="links" id="mobile-menu">
                 <li><a href="/public/quiz.html">QUIZ</a></li>
                 <li><a href="/public/filmes.html">FILMES</a></li>
@@ -49,40 +48,68 @@
     <div class="menu_responsivo">
         <ul class="links" id="mobile-menu">
             <li><a href="/public/quiz.html">QUIZ</a></li>
-            <li><a href="/public/filmes.html">FILMES</a></li>
-            <li><a href="/public/series.html">SÉRIES</a></li> 
+            <li><a href="./filmes.html">FILMES</a></li>
+            <li><a href="./series.html">SÉRIES</a></li> 
             <li><a href="/public/LISTAS/listas.html">LISTAS</a></li> 
-            <li><a href="/public/favoritos.html">FAVORITOS</a></li>
-            <li><a href="/public/perfil.html">PERFIL</a></li>                             
+            <li><a href="./favoritos.html">FAVORITOS</a></li>
+            <li><a href="./perfil.html">PERFIL</a></li>                             
         </ul>
     </div>
 
+    <!--BARRA NAVEGAÇÃO ENTRE LISTAS-->
+    <div class="nav_listas">
+        <div class="barra_listas">
+            <li><a href="./listas.html">PRINCIPAIS LISTAS</a></li>
+            <div id="linha_vertical"></div>
+            <li><a id="selecao_roxo" href="./lista_usuario.html">SUAS LISTAS</a></li>
+        </div>    
+        <div id="linha_horizontal"></div>
+    </div>
+
+    <!--BARRA NAVEGAÇÃO ENTRE LISTAS RESPONSIVA-->
+    <div class="nav_listas_responsiva_direita">
+        <div class="barra_listas">           
+            <li><a id="selecao_roxo" href="./lista_usuario.html" class="suas_listas">SUAS LISTAS</a></li>
+        </div>        
+    </div>
+    <div class="nav_listas_responsiva_esquerda">
+        <div class="barra_listas">
+            <li><a class="principais_listas" href="./listas.html">PRINCIPAIS LISTAS</a></li>
+        </div>
+    </div>
+
     <section>
-        <div class="perfil_usuario">
-            <h3>Olá, <span id="nome_usuario"></span></h3>
-            <div class="perfil_informacoes">
-                <div class="input_perfil">
-                    <label for="nome">Usuário</label>
-                    <input type="text" id="nome" value="">
+        <div class="botao_criar_lista">
+            <button type="button" class="btn" id="botao_criar_lista">Crie uma nova lista</button>
+        </div>
+        <div class="containers_listas">
+            <a id="link_lista_criada" href="">
+                <div class="container_filme">                    
+                    <div class="poster_filmes"></div>
+                    <p id="titulo_lista"></p>                
                 </div>
-                <div class="input_perfil">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" value="">
-                </div>
-                <div class="input_perfil">
-                    <label for="senha">Senha</label>
-                    <input type="password" id="senha" value="">
-                </div>
-            </div>
-            <div class="perfil_buttons">
-                <button class="editar" onclick="editarInformacoes()">Editar Informações</button>
-                <button class="sair" onclick="sair()">Sair</button>
-                <button class="tres_pontos" onclick="toggleExcluirConta()">⋮</button>
-                <button class="excluir_conta" id="excluirConta" style="display: none;">Excluir Conta</button>
-            </div>
+            </a>
         </div>
     </section>
-     
+
+    <div id="fundo_escuro" class="fundo-escuro"></div>
+    <div id="pop-up_criar_lista" class="pop-up_criar_lista">
+        <div class="criar_lista">
+            <div class="input_criar_lista">
+                <label for="message" class="form_message_label">NOME</label>
+                <input type="text" id="list_name" class="form_input" required>
+    
+                <label for="movie-search" class="form_message_label">ADICIONAR TÍTULO</label>
+                <input type="text" id="movie_search" class="form_input" required>
+                <div id="suggestions" class="suggestions-container"></div>              
+            </div>
+            <div id="selected-movies" class="selected-movies-container"></div>
+            <div class="criar_cancelar">
+                <button type="criar" id="create_button" disabled><span>CRIAR</span></button>
+                <button type="cancelar" id="cancel_button"><span>CANCELAR</span></button>
+            </div>
+        </div>
+    </div>
 
     <footer> <!--NOVO FOOTER-->
         <div class="footer_conteudo">
@@ -162,40 +189,28 @@
             <a href="#"><img src="/public/assets/img/instagram_icon.png" id="Instagram_icon" alt="Instagram"></a>         
         </div>
         <h3>Seu mundo de histórias, personalizado.</h3>
-        <a class="logo_footer_responsivo"><img class="logo__image" src="assets/img/logo.png" alt="Logo"></a>
+        <a class="logo_footer_responsivo"><img class="logo__image" src="../assets/img/logo.png" alt="Logo"></a>
         <div class="politica_termos">
             <p class="politica_priv">Política de Privacidade</p>
             <p class="term_cond">Termos e Condições</p>
         </div>    
     </footer>
 
+    <!--JAVASCRIPT HEADER RESPONSIVA-->
     <script>
-        //JAVASCRIPT HEADER RESPONSIVA
         const menuToggle = document.getElementById('menu-toggle');
         const menuResponsive = document.querySelector('.menu_responsivo');
         const headerResponsive = document.querySelector('.header_responsiva');
         const toggleCor = document.querySelector('.menu-toggle');
-        const logoImage = document.querySelector('.barradenavegacao_responsiva .logo__image'); // Seleção específica
+        const logoImage = document.querySelector('.barradenavegacao_responsiva .logo__image');  
 
         menuToggle.addEventListener('click', () => {
-            menuResponsive.classList.toggle('show'); // Alterna a classe para abrir/fechar o menu
-            headerResponsive.classList.toggle('header-active'); // Alterna a cor da header_responsiva
+            menuResponsive.classList.toggle('show');  
+            headerResponsive.classList.toggle('header-active');  
             toggleCor.classList.toggle('menu-toggle-active');
-            logoImage.classList.toggle('logoImage-active'); // Adiciona a classe que ativa o filtro
+            logoImage.classList.toggle('logoImage-active');  
         });
     </script>
-
-    <script>
-        function toggleExcluirConta() {
-            const excluirContaBtn = document.getElementById('excluirConta');
-            // Verifica e alterna a visibilidade
-            if (excluirContaBtn.style.display === 'none' || excluirContaBtn.style.display === '') {
-                excluirContaBtn.style.display = 'block';
-            } else {
-                excluirContaBtn.style.display = 'none';
-            }
-        }
-    </script>
+    <script id="popup_criar_lista" src="./Pop-up_criar_lista.js"></script>        
 </body>
-<script src="/assets/js/check-session.js"></script>
 </html>

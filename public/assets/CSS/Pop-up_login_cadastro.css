@@ -137,6 +137,26 @@ button span {
 
 .login{
     padding-top: 0;
+    position: relative;
+}
+
+.close_responsivo{
+    display:none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    background-color: white ;  
+    border: 1px solid black;
+    color: black;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    text-align: center;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    line-height: 24px;
 }
 
 .close {
@@ -145,11 +165,9 @@ button span {
     height: 24px;
     background-color: black; /* A cor desejada aqui */
     border: 1px solid white;
-    color: white;
-    display: flex;
+    color: white;    
     align-items: center;
     justify-content: center;
-    font-size: 20px;
     text-align: center;
     cursor: pointer;
     font-size: 13px;
@@ -157,4 +175,36 @@ button span {
     top: 10px;
     right: 10px;
     line-height: 24px;
+}
+
+@media (max-width: 768px) {
+    body{
+        background-color: rgb(0, 0, 0);
+    }
+
+    .pop-up_login_cadastro{
+        height: auto;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        border-radius: 0;
+        margin-top: 100%;
+        box-shadow: rgba(204, 142, 255, 0.5) 0px -5px 100px 10px;
+        animation: 0.4s ease 0s 1 normal none running animation-1r0k3hp;
+        position: relative;
+    }
+
+    .login, .cadastro{
+        padding: 0;       
+    }
+
+    .close{
+        display: none;
+    }
+
+    .close_responsivo { 
+        display: block;
+        top: 10px; 
+        right: 24px; 
+    }
 }

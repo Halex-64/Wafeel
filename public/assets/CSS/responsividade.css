@@ -114,7 +114,8 @@
     .footer_responsivo{
       display: flex; /* Exibe o footer */
       flex-direction: column;
-      background-color: #8500F2; /* Adicione um fundo para o footer */   
+      background-color: #8500F2; /* Adicione um fundo para o footer */  
+      margin-top: 80px; 
       padding: 0;  
     }
   

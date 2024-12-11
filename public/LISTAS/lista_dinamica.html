@@ -1,34 +1,34 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wafeel</title>
-    <link rel="stylesheet" href="CSS/quiz.css">
-    <link rel="stylesheet" href="CSS/responsividade.css">
-    <link rel="stylesheet" href="/public/LISTAS/lista_usuario.css">
-    <link rel="stylesheet" href="/public/LISTAS/filmes_da_lista_dinamica.css">
-    <link rel="stylesheet" href="CSS/footer.css">
+    <link rel="stylesheet" href="../CSS/quiz.css">
+    <link rel="stylesheet" href="../LISTAS/lista_usuario.css">
+    <link rel="stylesheet" href="./filmes_da_lista_dinamica.css">
+    <link rel="stylesheet" href="../CSS/responsividade.css">
+    <link rel="stylesheet" href="/public/CSS/footer.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">    
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.cdnfonts.com/css/coolvetica-2" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> <!--Impede de dar zoom-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>  
 <body>
     <!--HEADER-->
-    <header class="header_quiz">
+    <header class="header_container">
         <nav class="barradenavegacao">
-            <a href="/public/index.html"><img class="logo__image" src="assets/img/logo.png" alt="Logo"></a>
+            <a href="/public/index.html"><img class="logo__image" src="../assets/img/logo.png" alt="Logo"></a>
             <ul class="links">
                 <li><a href="/public/quiz.html">Quiz</a></li>
                 <li><a href="#">Filmes</a></li>
                 <li><a href="#">Séries</a></li>
-                <li><a href="./listas.html">Listas</a></li>
-                <li><img class="fa-solid fa-heart" src="assets/img/favoritosicon.png"></a></img></li> 
-                <li><img class="fa-solid fa-right-to-bracket" src="assets/img/usuarioicon.png">  </img></li>
+                <li><a id="selecao_roxo" href="./listas.html">Listas</a></li>
+                <li><img class="fa-solid fa-heart" src="../assets/img/favoritosicon.png"></a></img></li> 
+                <li><img class="fa-solid fa-right-to-bracket" src="../assets/img/usuarioicon.png">  </img></li>
             </ul>
         </nav>
     </header>
@@ -36,7 +36,7 @@
     <!--HEADER RESPONSIVA-->
     <header class="header_responsiva">
         <nav class="barradenavegacao_responsiva">
-            <a href="/public/index.html"><img class="logo__image" src="assets/img/logo.png" alt="Logo"></a>
+            <a href="/public/index.html"><img class="logo__image" src="../assets/img/logo.png" alt="Logo"></a>
             <ul class="links" id="mobile-menu">
                 <li><a href="/public/quiz.html">QUIZ</a></li>
                 <li><a href="/public/filmes.html">FILMES</a></li>
@@ -58,9 +58,31 @@
         </ul>
     </div>
 
+    <!--BARRA NAVEGAÇÃO ENTRE LISTAS-->
+    <div class="nav_listas">
+        <div class="barra_listas">
+            <li><a href="./listas.html">PRINCIPAIS LISTAS</a></li>
+            <div id="linha_vertical"></div>
+            <li><a id="selecao_roxo" href="./lista_usuario.html">SUAS LISTAS</a></li>
+        </div>    
+        <div id="linha_horizontal"></div>            
+    </div>
+
+    <!--BARRA NAVEGAÇÃO ENTRE LISTAS RESPONSIVA-->
+    <div class="nav_listas_responsiva_direita">
+        <div class="barra_listas">           
+            <li><a id="selecao_roxo" class="suas_listas" href="./lista_usuario.html">SUAS LISTAS</a></li>
+        </div>        
+    </div>
+    <div class="nav_listas_responsiva_esquerda">
+        <div class="barra_listas">
+            <li><a class="principais_listas" href="./listas.html">PRINCIPAIS LISTAS</a></li>
+        </div>
+    </div>
+
     <section>
         <!--TÍTULO DA LISTA-->
-        <h1 class="titulo_lista">SEUS FAVORITOS</h1>
+        <h1 id="titulo_lista" class="titulo_lista"></h1>
 
         <!--BARRA DE FILTRAGEM-->
         <div class="nav_filtro">            
@@ -123,9 +145,15 @@
                     </div>
 
                     <div class="editar_lista">
-                        <button id="renomear_lista" onclick="excluirTitulo()">
-                            <li><a>EXCLUIR TÍTULO</a></li>
-                        </button>                         
+                        <button id="renomear_lista" onclick="editarTitulo()">
+                            <li><a>RENOMEAR LISTA</a></li>
+                        </button>                   
+                        <button id="adicionar_titulo" onclick="">
+                            <li><a>ADICIONAR TÍTULO</a></li>
+                        </button>
+                        <button id="excluir_lista" onclick="">
+                            <i class="fas fa-trash-alt icone-grande"></i>
+                        </button>                          
                     </div>
                 </div> 
             <div id="linha_horizontal"></div>
@@ -290,7 +318,7 @@
             <a href="#"><img src="/public/assets/img/instagram_icon.png" id="Instagram_icon" alt="Instagram"></a>         
         </div>
         <h3>Seu mundo de histórias, personalizado.</h3>
-        <a class="logo_footer_responsivo"><img class="logo__image" src="assets/img/logo.png" alt="Logo"></a>
+        <a class="logo_footer_responsivo"><img class="logo__image" src="../assets/img/logo.png" alt="Logo"></a>
         <div class="politica_termos">
             <p class="politica_priv">Política de Privacidade</p>
             <p class="term_cond">Termos e Condições</p>
@@ -391,6 +419,6 @@
             }
         }
     </script>
-    <script src="colocar js para adicionar filme favorito"></script>
+    <script src="/public/LISTAS/lista_dinamica.js"></script>
 </body>
 </html>

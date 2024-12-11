@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wafeel</title>
-    <link rel="stylesheet" href="assets/CSS/style.css">
+    <link rel="stylesheet" href="CSS/quiz.css">
+    <link rel="stylesheet" href="CSS/responsividade.css">
+    <link rel="stylesheet" href="CSS/footer.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
@@ -16,21 +18,21 @@
 <body>
     <header class="header_quiz">
         <nav class="barradenavegacao">
-            <a href="/public/index.html"><img class="logo__image" src="assets/img/logo.png" alt="Logo"></a>            
+            <a href="/public/index.html"><img class="logo__image" src="../public/assets/img/logo.png" alt="Logo"></a>            
             <ul class="links" id="mobile-menu">
                 <li><a href="./quiz.html">Quiz</a></li>
                 <li><a href="./filmes.html">Filmes</a></li>
-                <li><a href="./series.html">Séries</a></li>
-                <li><a href="./listas.html">Listas</a></li>
-                <li><img class="fa-solid fa-heart" src="assets/img/favoritosicon.png"></a></img></li>
-                <li><img class="fa-solid fa-right-to-bracket" src="assets/img/usuarioicon.png"> </img></li>
+                <li><a href="./series.html">Séries</a></li> 
+                <li><a href="/public/LISTAS/listas.html">Listas</a></li> 
+                <li><img class="fa-solid fa-heart" src="../public/assets/img/favoritosicon.png"></a></img></li>
+                <li><img class="fa-solid fa-right-to-bracket" src="../public/assets/img/usuarioicon.png"> </img></li>
             </ul>
         </nav>
     </header>
 
     <!-- <header class="header_responsiva">
         <nav class="barradenavegacao_responsiva">
-            <a href="/public/index.html"><img class="logo__image" src="assets/img/logo.png" alt="Logo"></a>
+            <a href="/public/index.html"><img class="logo__image" src="../public/assets/img/logo.png" alt="Logo"></a>
             <ul class="links" id="mobile-menu">
                 <li><a href="./quiz.html">QUIZ</a></li>
                 <li><a href="./filmes.html">FILMES</a></li>
@@ -45,7 +47,7 @@
             <li><a href="./quiz.html">QUIZ</a></li>
             <li><a href="./filmes.html">FILMES</a></li>
             <li><a href="./series.html">SÉRIES</a></li> 
-            <li><a href="./listas.html">LISTAS</a></li> 
+            <li><a href="/public/LISTAS/listas.html">LISTAS</a></li> 
             <li><a href="./favoritos.html">FAVORITOS</a></li>
             <li><a href="./perfil.html">PERFIL</a></li>                             
         </ul>
@@ -134,11 +136,70 @@
             <div id="recommendation-list" class="recommendation-list"></div>
         </form>
     </section>
-    <footer>
-        <div class="social-icons">
-            <a href="#"><img src="assets/img/whatsapp_icon.png" id="WhatsApp_icon" alt="WhatsApp"></a>
-            <a href="#"><img src="assets/img/instagram_icon.png" id="Instagram_icon" alt="Instagram"></a>
-            <a href="#"><img src="assets/img/help_icon.png" id="suporte_icon" alt="suporte"></a>
+
+    <footer> <!--NOVO FOOTER-->
+        <div class="footer_conteudo">
+            <div class="cr6">
+                <div class="footer_logo_texto">
+                    <img class="logo_footer" src="../public/assets/img/logo.png" alt="Logo">
+                    <p>Desbloqueie histórias únicas e mágicas a cada clique.</p> 
+                    <p>Mergulhe em uma experiência cinematográfica onde suas emoções ditam a próxima trama.</p>  
+                </div>
+            </div>    
+            <div class="cr7">
+                <div class="h2_footer"> 
+                    <h2>Cadastre-se</h2>      
+                </div>
+                <p class="texto_cadastro_footer">Faça login para aproveitar ao máximo nosso site</p>
+                <button class="botao_footer">Login</button>
+                <button class="botao_footer">Cadastro</button>
+            </div>    
+            <div class="cr8">
+                <div class="h2_footer"> 
+                    <h2>Menu</h2>      
+                </div>
+                <div class="footer_menu">
+                    <div class="footer_menu_esquerda">
+                        <ul>
+                            <li><a href="">Home</a></li>
+                            <li><a href="">Quiz</a></li>
+                            <li><a href="">Filmes</a></li>
+                            <li><a href="">Séries</a></li>
+                            <li><a href="">Listas</a></li>
+                            <li><a href="">Favoritos</a></li>                    
+                        </ul>
+                    </div>
+                    <div class="footer_menu_direita">
+                        <ul>
+                            <li><a href="">Perfil</a></li>
+                            <li><a href="">Ajuda</a></li>
+                            <li><a href="">Termos</a></li>
+                            <li><a href="">Suporte</a></li>
+                            <li><a href="">Contato</a></li>
+                            <li><a href="">Sobre Nós</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>    
+            <div class="cr9">
+                <div class="h2_footer"> 
+                    <h2>Conecte-se conosco</h2>      
+                </div>
+                <div class="footer_contato_icones">
+                    <a href="#" class="circle"><img src="/public/assets/img/whatsapp_icon.png" id="WhatsApp_icon" alt="WhatsApp"></a>
+                    <a href="#" class="circle"><img src="/public/assets/img/instagram_icon.png" id="Instagram_icon" alt="Instagram"></a>
+                </div>
+                
+                <form class="footer_input">
+                    <input type="text" name="search" placeholder="Pesquise aqui...">
+                    <input type="button" value="🔍︎">
+                </form>
+            </div>
+        </div>
+        <div class="footer_termos">
+            <div class="footer_politica">
+                <p>&copy; 2024 Wafeel. Todos os direitos reservados.</p> 
+            </div>
         </div>
     </footer>
 </body>

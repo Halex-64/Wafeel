@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wafeel</title>
+    <link rel="stylesheet" href="../CSS/quiz.css">
+    <link rel="stylesheet" href="/public/LISTAS/listas.css">
+    <link rel="stylesheet" href="/public/LISTAS/filmes_da_lista.css">
+    <link rel="stylesheet" href="../CSS/responsividade.css">
+    <link rel="stylesheet" href="../CSS/footer.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">    
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/coolvetica-2" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> <!--Impede de dar zoom-->
+</head>  
+<body>
+    <!--HEADER-->
+    <header class="header_container">
+        <nav class="barradenavegacao">
+            <a href="/public/index.html"><img class="logo__image" src="../assets/img/logo.png" alt="Logo"></a>
+            <ul class="links">
+                <li><a href="/public/quiz.html">Quiz</a></li>
+                <li><a href="#">Filmes</a></li>
+                <li><a href="#">Séries</a></li>
+                <li><a id="selecao_roxo" href="./listas.html">Listas</a></li>
+                <li><img class="fa-solid fa-heart" src="../assets/img/favoritosicon.png"></a></img></li> 
+                <li><img class="fa-solid fa-right-to-bracket" src="../assets/img/usuarioicon.png">  </img></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!--HEADER RESPONSIVA-->
+    <header class="header_responsiva">
+        <nav class="barradenavegacao_responsiva">
+            <a href="/public/index.html"><img class="logo__image" src="../assets/img/logo.png" alt="Logo"></a>
+            <ul class="links" id="mobile-menu">
+                <li><a href="./quiz.html">QUIZ</a></li>
+                <li><a href="./filmes.html">FILMES</a></li>
+                <li><a href="./series.html">SÉRIES</a></li>                                             
+            </ul>
+            <button class="menu-toggle" id="menu-toggle">☰</button>
+        </nav>
+    </header>
+
+    <!--MENU DROP-DOWN RESPONSIVO-->
+    <div class="menu_responsivo">
+        <ul class="links" id="mobile-menu">
+            <li><a href="./quiz.html">QUIZ</a></li>
+            <li><a href="./filmes.html">FILMES</a></li>
+            <li><a href="./series.html">SÉRIES</a></li> 
+            <li><a href="./listas.html">LISTAS</a></li> 
+            <li><a href="./favoritos.html">FAVORITOS</a></li>
+            <li><a href="./perfil.html">PERFIL</a></li>                             
+        </ul>
+    </div>
+
+    <!--BARRA NAVEGAÇÃO ENTRE LISTAS-->
+    <div class="nav_listas">
+        <div class="barra_listas">
+            <li><a id="selecao_roxo" href="./listas.html">PRINCIPAIS LISTAS</a></li>
+            <div id="linha_vertical"></div>
+            <li><a href="./lista_usuario.html">SUAS LISTAS</a></li>
+        </div>    
+        <div id="linha_horizontal"></div>            
+    </div>
+
+    <!--BARRA NAVEGAÇÃO ENTRE LISTAS RESPONSIVA-->
+    <div class="nav_listas_responsiva_direita">
+        <div class="barra_listas">           
+            <li><a class="suas_listas" href="./lista_usuario.html">SUAS LISTAS</a></li>
+        </div>        
+    </div>
+    <div class="nav_listas_responsiva_esquerda">
+        <div class="barra_listas">
+            <li><a id="selecao_roxo" class="principais_listas" href="./listas.html">PRINCIPAIS LISTAS</a></li>
+        </div>
+    </div>
+
+    <section>
+        <!--TÍTULO DA LISTA-->
+        <h1 class="titulo_lista">FILMES POPULARES DE 2024</h1>
+
+        <!--BARRA DE FILTRAGEM-->
+        <div class="nav_filtro">            
+            <div id="linha_horizontal"></div>
+                <div class="barra_filtro">                    
+                    <div id="filtro_genero" class="filtro_seta" onclick="toggleDropdown('dropdown-genero', this)">
+                        <li><a>GÊNERO</a></li>
+                        <div class="arrow"></div>                        
+                        <ul id="dropdown-genero" class="options">
+                            <li class="option"></li>                            
+                        </ul>
+                    </div>
+                    
+                    <div id="filtro_ano" class="filtro_seta" onclick="toggleDropdown('dropdown-ano', this)">
+                        <li><a>ANO</a></li>
+                        <div class="arrow"></div>
+                        <ul id="dropdown-ano" class="options">
+                            <li class="option">2020s</li>
+                            <li class="option">2010s</li>
+                            <li class="option">2000s</li>
+                            <li class="option">1990s</li>
+                            <li class="option">1980s</li>
+                            <li class="option">1970s</li>
+                            <li class="option">1960s</li>
+                            <li class="option">1950s</li>
+                            <li class="option">1940s</li>
+                            <li class="option">1930s</li>
+                            <li class="option">1920s</li>
+                            <li class="option">1910s</li>
+                            <li class="option">1900s</li>
+                        </ul>
+                    </div>
+
+                    <div id="filtro_faixa_etaria" class="filtro_seta" onclick="toggleDropdown('dropdown-faixa-etaria', this)">
+                        <li><a>FAIXA ETÁRIA</a></li>
+                        <div class="arrow"></div>
+                        <ul id="dropdown-faixa-etaria" class="options">
+                            <li class="option">Livre</li>
+                            <li class="option">10 Anos</li>
+                            <li class="option">12 Anos</li>
+                            <li class="option">14 Anos</li>
+                            <li class="option">16 Anos</li>
+                            <li class="option">18 Anos</li>           
+                        </ul>
+                    </div>
+
+                    <div id="filtro_servico" class="filtro_seta" onclick="toggleDropdown('dropdown-servico', this)">
+                        <li><a>SERVIÇO</a></li>
+                        <div class="arrow"></div>
+                        <ul id="dropdown-servico" class="options">
+                            <li class="option"></li>                                        
+                        </ul>
+                    </div>
+
+                    <!-- Botão para Resetar Filtros (inicialmente oculto) -->
+                    <div class="resetar_filtro" id="resetar-filtro" style="display: none;">
+                        <li><a href="javascript:void(0);" onclick="clearFilters()">Resetar Filtros</a></li>
+                    </div>
+                </div> 
+            <div id="linha_horizontal"></div>
+        </div>      
+        
+        <!--BARRA DE FILTRAGEM >>RESPONSIVA<<-->
+            <!-- Sobreposição de fundo escuro -->
+            <div id="overlay" class="overlay"></div>
+            <!--BOTÃO DE FILTRO<<-->
+            <button id="botao-filtro" onclick="toggleFiltro()">
+                &#10011; Adicionar Filtro
+            </button>
+            
+            <!--CONTAINER ROXO COM OS FILTROS<<-->
+            <div id="filtro-container" class="barra_filtro_oculta">
+                <div class="container_filtro">
+                    <h1>Gênero</h1>
+                    <ul id="dropdown-genero">
+                        <li class="option">Ação</li>
+                        <li class="option">Ficção Científica</li>
+                        <li class="option">Aventura</li>
+                        <li class="option">Guerra</li>
+                        <li class="option">Drama</li>
+                        <li class="option">Terror</li>
+                        <li class="option">Mistério</li>
+                        <li class="option">Thriller</li>
+                        <li class="option">Romance</li>
+                        <li class="option">Crime</li>
+                    </ul>
+                </div>
+
+                <div class="container_filtro">
+                    <h1>Ano</h1>
+                    <ul id="dropdown-ano">
+                        <li class="option">2020s</li>
+                        <li class="option">2010s</li>
+                        <li class="option">2000s</li>
+                        <li class="option">1990s</li>
+                        <li class="option">1980s</li>
+                        <li class="option">1970s</li>
+                        <li class="option">1960s</li>
+                        <li class="option">1950s</li>
+                        <li class="option">1940s</li>
+                        <li class="option">1930s</li>
+                        <li class="option">1920s</li>
+                        <li class="option">1910s</li>
+                        <li class="option">1900s</li>
+                    </ul>
+                </div>
+
+                <div class="container_filtro">
+                    <h1>Fixa Etária</h1>
+                    <ul id="dropdown-faixa-etaria">
+                        <li class="option">Livre</li>
+                        <li class="option">10 Anos</li>
+                        <li class="option">12 Anos</li>
+                        <li class="option">14 Anos</li>
+                        <li class="option">16 Anos</li>
+                        <li class="option">18 Anos</li>
+                    </ul>
+                </div>
+
+                <div class="container_filtro">
+                    <h1>Serviço</h1>
+                    <ul id="dropdown-servico">  
+                        <li class="option">Max</li>
+                        <li class="option">Claro tv+</li>
+                        <li class="option">Max Amazon Channel</li>
+                        <li class="option">Disney Plus</li>
+                        <li class="option">Amazon Prime Video</li>
+                        <li class="option">Paramount Plus</li>
+                        <li class="option">Paramount+ Amazon Channel</li> 
+                        <li class="option">Paramount Plus Apple TV Channel</li>
+                        <li class="option">MUBI</li>
+                        <li class="option">MUBI Amazon Channel</li>
+                    </ul>                   
+                </div>              
+            </div>
+        <!------------------------------------->
+
+        <!--CARDS COM O RESUMO DOS FILMES-->        
+         <div class="container_filmes">
+            <div id="resumo_filme_1"  class="resumo_filme">
+                <div class="resumo_filme_imagem">
+                    <div class="titulo_genero">
+                        <li id="titulo_filme"></li>
+                        <ul id="genero_filme">
+                            <li id="genero_um"></li>                        
+                            <li id="genero_dois"></li>
+                        </ul>
+                    </div>
+                    <div class="novo_texto">
+                        <li id="sinopse_filme"></li>
+                        <ul id="informacoes_filme">
+                            <li id="ano_lancamento"></li>                            
+                            <li id="duracao"></li>                            
+                            <li id="classificacao_indicativa"></li>
+                        </ul>
+                    </div>
+                </div> 
+            </div>
+
+            <div id="resumo_filme_2" class="resumo_filme">
+                <div class="resumo_filme_imagem">
+                    <div class="titulo_genero">
+                        <li id="titulo_filme"></li>
+                        <ul id="genero_filme">
+                            <li id="genero_um"></li>                        
+                            <li id="genero_dois"></li>
+                        </ul>
+                    </div>
+                    <div class="novo_texto">
+                        <li id="sinopse_filme"></li>
+                        <ul id="informacoes_filme">
+                            <li id="ano_lancamento"></li>                            
+                            <li id="duracao"></li>                            
+                            <li id="classificacao_indicativa"></li>
+                        </ul>
+                    </div>
+                </div> 
+            </div>
+
+            <div id="resumo_filme_3" class="resumo_filme">
+                <div class="resumo_filme_imagem">
+                    <div class="titulo_genero">
+                        <li id="titulo_filme"></li>
+                        <ul id="genero_filme">
+                            <li id="genero_um"></li>                        
+                            <li id="genero_dois"></li>
+                        </ul>
+                    </div>
+                    <div class="novo_texto">
+                        <li id="sinopse_filme"></li>
+                        <ul id="informacoes_filme">
+                            <li id="ano_lancamento"></li>                            
+                            <li id="duracao"></li>                            
+                            <li id="classificacao_indicativa"></li>
+                        </ul>
+                    </div>
+                </div> 
+            </div>
+
+            <div id="resumo_filme_4" class="resumo_filme">
+                <div class="resumo_filme_imagem">
+                    <div class="titulo_genero">
+                        <li id="titulo_filme"></li>
+                        <ul id="genero_filme">
+                            <li id="genero_um"></li>                        
+                            <li id="genero_dois"></li>
+                        </ul>
+                    </div>
+                    <div class="novo_texto">
+                        <li id="sinopse_filme"></li>
+                        <ul id="informacoes_filme">
+                            <li id="ano_lancamento"></li>                            
+                            <li id="duracao"></li>                            
+                            <li id="classificacao_indicativa"></li>
+                        </ul>
+                    </div>
+                </div> 
+            </div>
+
+            <div id="resumo_filme_5" class="resumo_filme">
+                <div class="resumo_filme_imagem">
+                    <div class="titulo_genero">
+                        <li id="titulo_filme"></li>
+                        <ul id="genero_filme">
+                            <li id="genero_um"></li>                        
+                            <li id="genero_dois"></li>
+                        </ul>
+                    </div>
+                    <div class="novo_texto">
+                        <li id="sinopse_filme"></li>
+                        <ul id="informacoes_filme">
+                            <li id="ano_lancamento"></li>                            
+                            <li id="duracao"></li>                            
+                            <li id="classificacao_indicativa"></li>
+                        </ul>
+                    </div>
+                </div> 
+            </div>
+
+            <div id="resumo_filme_6" class="resumo_filme">
+                <div class="resumo_filme_imagem">
+                    <div class="titulo_genero">
+                        <li id="titulo_filme"></li>
+                        <ul id="genero_filme">
+                            <li id="genero_um"></li>                        
+                            <li id="genero_dois"></li>
+                        </ul>
+                    </div>
+                    <div class="novo_texto">
+                        <li id="sinopse_filme"></li>
+                        <ul id="informacoes_filme">
+                            <li id="ano_lancamento"></li>                            
+                            <li id="duracao"></li>                            
+                            <li id="classificacao_indicativa"></li>
+                        </ul>
+                    </div>
+                </div> 
+            </div>
+
+            <div id="resumo_filme_7" class="resumo_filme">
+                <div class="resumo_filme_imagem">
+                    <div class="titulo_genero">
+                        <li id="titulo_filme"></li>
+                        <ul id="genero_filme">
+                            <li id="genero_um"></li>                        
+                            <li id="genero_dois"></li>
+                        </ul>
+                    </div>
+                    <div class="novo_texto">
+                        <li id="sinopse_filme"></li>
+                        <ul id="informacoes_filme">
+                            <li id="ano_lancamento"></li>                            
+                            <li id="duracao"></li>                            
+                            <li id="classificacao_indicativa"></li>
+                        </ul>
+                    </div>
+                </div> 
+            </div>
+
+            <div id="resumo_filme_8" class="resumo_filme">
+                <div class="resumo_filme_imagem">
+                    <div class="titulo_genero">
+                        <li id="titulo_filme"></li>
+                        <ul id="genero_filme">
+                            <li id="genero_um"></li>                        
+                            <li id="genero_dois"></li>
+                        </ul>
+                    </div>
+                    <div class="novo_texto">
+                        <li id="sinopse_filme"></li>
+                        <ul id="informacoes_filme">
+                            <li id="ano_lancamento"></li>                            
+                            <li id="duracao"></li>                            
+                            <li id="classificacao_indicativa"></li>
+                        </ul>
+                    </div>
+                </div> 
+            </div>
+
+            <div id="resumo_filme_9" class="resumo_filme">
+                <div class="resumo_filme_imagem">
+                    <div class="titulo_genero">
+                        <li id="titulo_filme"></li>
+                        <ul id="genero_filme">
+                            <li id="genero_um"></li>                        
+                            <li id="genero_dois"></li>
+                        </ul>
+                    </div>
+                    <div class="novo_texto">
+                        <li id="sinopse_filme"></li>
+                        <ul id="informacoes_filme">
+                            <li id="ano_lancamento"></li>                            
+                            <li id="duracao"></li>                            
+                            <li id="classificacao_indicativa"></li>
+                        </ul>
+                    </div>
+                </div> 
+            </div>
+
+            <div id="resumo_filme_10" class="resumo_filme">
+                <div class="resumo_filme_imagem">
+                    <div class="titulo_genero">
+                        <li id="titulo_filme"></li>
+                        <ul id="genero_filme">
+                            <li id="genero_um"></li>                        
+                            <li id="genero_dois"></li>
+                        </ul>
+                    </div>
+                    <div class="novo_texto">
+                        <li id="sinopse_filme"></li>
+                        <ul id="informacoes_filme">
+                            <li id="ano_lancamento"></li>                            
+                            <li id="duracao"></li>                            
+                            <li id="classificacao_indicativa"></li>
+                        </ul>
+                    </div>
+                </div> 
+            </div>
+
+            <div id="resumo_filme_11" class="resumo_filme">
+                <div class="resumo_filme_imagem">
+                    <div class="titulo_genero">
+                        <li id="titulo_filme"></li>
+                        <ul id="genero_filme">
+                            <li id="genero_um"></li>                        
+                            <li id="genero_dois"></li>
+                        </ul>
+                    </div>
+                    <div class="novo_texto">
+                        <li id="sinopse_filme"></li>
+                        <ul id="informacoes_filme">
+                            <li id="ano_lancamento"></li>                            
+                            <li id="duracao"></li>                            
+                            <li id="classificacao_indicativa"></li>
+                        </ul>
+                    </div>
+                </div> 
+            </div>
+
+            <div id="resumo_filme_12" class="resumo_filme">
+                <div class="resumo_filme_imagem">
+                    <div class="titulo_genero">
+                        <li id="titulo_filme"></li>
+                        <ul id="genero_filme">
+                            <li id="genero_um"></li>                        
+                            <li id="genero_dois"></li>
+                        </ul>
+                    </div>
+                    <div class="novo_texto">
+                        <li id="sinopse_filme"></li>
+                        <ul id="informacoes_filme">
+                            <li id="ano_lancamento"></li>                            
+                            <li id="duracao"></li>                            
+                            <li id="classificacao_indicativa"></li>
+                        </ul>
+                    </div>
+                </div> 
+            </div>
+        </div>                       
+    </section>   
+
+    <footer> <!--NOVO FOOTER-->
+        <div class="footer_conteudo">
+            <div class="cr6">
+                <div class="footer_logo_texto">
+                    <img class="logo_footer" src="/public/assets/img/logo.png" alt="Logo">
+                    <p>Desbloqueie histórias únicas e mágicas a cada clique.</p> 
+                    <p>Mergulhe em uma experiência cinematográfica onde suas emoções ditam a próxima trama.</p>  
+                </div>
+            </div>    
+            <div class="cr7">
+                <div class="h2_footer"> 
+                    <h2>Cadastre-se</h2>      
+                </div>
+                <p class="texto_cadastro_footer">Faça login para aproveitar ao máximo nosso site</p>
+                <button class="botao_footer">Login</button>
+                <button class="botao_footer">Cadastro</button>
+            </div>    
+            <div class="cr8">
+                <div class="h2_footer"> 
+                    <h2>Menu</h2>      
+                </div>
+                <div class="footer_menu">
+                    <div class="footer_menu_esquerda">
+                        <ul>
+                            <li><a href="">Home</a></li>
+                            <li><a href="">Quiz</a></li>
+                            <li><a href="">Filmes</a></li>
+                            <li><a href="">Séries</a></li>
+                            <li><a href="">Listas</a></li>
+                            <li><a href="">Favoritos</a></li>                    
+                        </ul>
+                    </div>
+                    <div class="footer_menu_direita">
+                        <ul>
+                            <li><a href="">Perfil</a></li>
+                            <li><a href="">Ajuda</a></li>
+                            <li><a href="">Termos</a></li>
+                            <li><a href="">Suporte</a></li>
+                            <li><a href="">Contato</a></li>
+                            <li><a href="">Sobre Nós</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>    
+            <div class="cr9">
+                <div class="h2_footer"> 
+                    <h2>Conecte-se conosco</h2>      
+                </div>
+                <div class="footer_contato_icones">
+                    <a href="#" class="circle"><img src="/public/assets/img/whatsapp_icon.png" id="WhatsApp_icon" alt="WhatsApp"></a>
+                    <a href="#" class="circle"><img src="/public/assets/img/instagram_icon.png" id="Instagram_icon" alt="Instagram"></a>
+                </div>
+                
+                <form class="footer_input">
+                    <input type="text" name="search" placeholder="Pesquise aqui...">
+                    <input type="button" value="🔍︎">
+                </form>
+            </div>
+        </div>
+        <div class="footer_termos">
+            <div class="footer_politica">
+                <p>&copy; 2024 Wafeel. Todos os direitos reservados.</p> 
+            </div>
+        </div>
+    </footer>
+
+    <!--FOOTER RESPONSIVO-->
+    <footer class="footer_responsivo">
+        <div class="footer_links">        
+            <a href="#">Login</a>
+            <a href="#">Suporte</a>
+            <a href="#">Sobre Nós</a>        
+        </div>
+        <div class="social-icons">
+            <a href="#"><img src="/public/assets/img/whatsapp_icon.png" id="WhatsApp_icon" alt="WhatsApp"></a>
+            <a href="#"><img src="/public/assets/img/instagram_icon.png" id="Instagram_icon" alt="Instagram"></a>         
+        </div>
+        <h3>Seu mundo de histórias, personalizado.</h3>
+        <a class="logo_footer_responsivo"><img class="logo__image" src="../assets/img/logo.png" alt="Logo"></a>
+        <div class="politica_termos">
+            <p class="politica_priv">Política de Privacidade</p>
+            <p class="term_cond">Termos e Condições</p>
+        </div>    
+    </footer>
+
+    <script>
+        //JAVASCRIPT HEADER RESPONSIVA
+        const menuToggle = document.getElementById('menu-toggle');
+        const menuResponsive = document.querySelector('.menu_responsivo');
+        const headerResponsive = document.querySelector('.header_responsiva');
+        const toggleCor = document.querySelector('.menu-toggle');
+        const logoImage = document.querySelector('.barradenavegacao_responsiva .logo__image'); // Seleção específica
+
+        menuToggle.addEventListener('click', () => {
+            menuResponsive.classList.toggle('show'); // Alterna a classe para abrir/fechar o menu
+            headerResponsive.classList.toggle('header-active'); // Alterna a cor da header_responsiva
+            toggleCor.classList.toggle('menu-toggle-active');
+            logoImage.classList.toggle('logoImage-active'); // Adiciona a classe que ativa o filtro
+        });
+        
+        //FUNCIONAMENTO DO DROP-DOWN NA BARRA DE FILTRAGEM
+        function toggleDropdown(dropdownId, button) {
+            const dropdowns = document.querySelectorAll('.options');
+            
+            // Ocultar todos os outros dropdowns
+            dropdowns.forEach(dropdown => {
+                if (dropdown.id !== dropdownId) {
+                    dropdown.style.display = 'none';
+                }
+            });
+    
+            const dropdown = document.getElementById(dropdownId);
+            const isVisible = dropdown.style.display === "block";
+            
+            // Alterna a visibilidade do dropdown clicado
+            dropdown.style.display = isVisible ? "none" : "block";
+    
+            // Calcula a posição do botão
+            if (!isVisible) {                    
+                // Calculate adjusted top position for the dropdown
+                const adjustedTop = rect.bottom + windowTop - parentRect.top + 'px'; // Corrected calculation
+
+                // Set the dropdown's position and width
+                dropdown.style.top = adjustedTop;
+                dropdown.style.width = button.offsetWidth + 'px';
+            }
+        }
+                
+        //DROP-DOWN FECHA AO CLICAR FORA
+        document.addEventListener('click', (event) => {
+            const dropdowns = document.querySelectorAll('.options');
+            dropdowns.forEach(dropdown => {
+                const button = document.querySelector(`.filtro_seta[onclick*="${dropdown.id}"]`);
+                if (!dropdown.contains(event.target) && !button.contains(event.target)) {
+                    dropdown.style.display = 'none';
+                }
+            });
+        });        
+
+        //CONTAINER ROXO DA FILTRAGEM RESPONSIVA
+        function toggleFiltro() {
+            const filtroContainer = document.getElementById('filtro-container');
+            const body = document.body;
+            const overlay = document.getElementById('overlay');
+
+            // Alterna a classe "ativo" no filtro
+            const isActive = filtroContainer.classList.toggle('ativo');
+
+            // Alterna a classe "no-scroll" no body para desativar o scroll
+            if (isActive) {
+                body.classList.add('no-scroll');
+                overlay.style.display = 'block'; // Mostra a sobreposição escura
+                // Adiciona o event listener para fechar o filtro ao clicar fora
+                document.addEventListener('click', outsideClickListener);
+            } else {
+                body.classList.remove('no-scroll');
+                overlay.style.display = 'none'; // Esconde a sobreposição escura
+                // Remove o event listener quando o filtro for fechado
+                document.removeEventListener('click', outsideClickListener);
+            }
+        }
+
+        function outsideClickListener(event) {
+            const filtroContainer = document.getElementById('filtro-container');
+            const botaoFiltro = document.getElementById('botao-filtro');
+            const overlay = document.getElementById('overlay');
+
+            // Verifica se o clique foi fora do filtro container e do botão de filtro
+            if (!filtroContainer.contains(event.target) && event.target !== botaoFiltro) {
+                // Fecha o filtro, remove o scroll e esconde a sobreposição
+                filtroContainer.classList.remove('ativo');
+                document.body.classList.remove('no-scroll');
+                overlay.style.display = 'none';
+                
+                // Remove o listener após fechar
+                document.removeEventListener('click', outsideClickListener);
+            }
+        }
+    </script>    
+    <script src="/public/LISTAS/card-filmes_lista.js"></script>
+</body>
+</html>

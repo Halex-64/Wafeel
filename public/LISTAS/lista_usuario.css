@@ -1,0 +1,369 @@
+body{
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex; 
+  flex-direction: column;  
+}
+
+.containers_listas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(390px, 1fr));  
+  gap: 16px;
+  padding: 0;
+  margin-top: 24px;
+  margin-left: 56px;
+  margin-right: 56px;
+}
+
+.container_filme {
+  width: 100%;
+  box-sizing: border-box;   
+  margin: 0;  
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+a{
+  text-decoration: none;
+}
+
+.container_filme p{
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+  margin: 0;
+  color: white;
+  text-decoration: none;
+}
+
+.container_filme:hover{
+  cursor: pointer;
+}
+
+.poster_filmes{
+  position: relative;
+  border-radius: 10px; 
+  height: 249px;
+  width: 434px;
+  background-color: rgb(16, 16, 16);
+}
+
+.poster_filmes img{
+  position: absolute;
+  width: 160px;
+  height: 249px;
+  border-radius: 5px;
+  box-shadow: 5px 0px 15px rgb(0, 0, 0, 1.0);
+}
+
+.poster_filmes img:nth-child(1) {
+  left: 0px;
+  z-index: 5;
+}
+
+.poster_filmes img:nth-child(2) {
+  left: 70px;  
+  z-index: 4;
+}
+
+.poster_filmes img:nth-child(3) {
+  left: 138px;  
+  z-index: 3;
+}
+
+.poster_filmes img:nth-child(4) {
+  left: 206px;  
+  z-index: 2;
+}
+
+.poster_filmes img:nth-child(5) {
+  left: 274px;  
+  z-index: 1;
+}
+
+.poster_filmes:hover{
+  box-shadow: 5px 0px 15px rgba(255, 255, 255, 0.315);
+}
+
+.barra_listas{
+  display: flex;
+  padding-left: 56px;
+  gap: 24px;
+  margin: 10px 0;
+}
+
+.barra_listas li a{
+  text-decoration: none;
+  color: white;
+  font-family: "Poppins", sans-serif;
+}
+
+#linha_horizontal{
+  height: 0.5px;             
+  background-color: #f7f7f7; 
+  border: none;              
+  margin-top: -10px; 
+  margin-left: 56px;
+  margin-right: 56px;     
+}
+
+#linha_vertical{
+  width: 0.5px;
+  height: 20px;
+  background-color: #f7f7f7   
+}
+
+.nav_listas {
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.nav_listas_responsiva_direita{
+  margin-bottom: 40px;
+  display: none;
+}
+
+.nav_listas_responsiva_esquerda{
+  margin-bottom: 40px;
+  display: none;
+}
+
+.botao_criar_lista{
+  text-align: center;
+  display: flex;
+  margin: 0 56px;
+  padding:  0px;
+}
+  
+.botao_criar_lista .btn {
+  background-color: #8500F2;
+  color: #fff;
+  font-size: 16px;
+  font-family: "Poppins", sans-serif;
+  font-weight: normal;
+  border: none;
+  padding: 8px 24px;
+  margin: 0;
+  cursor: pointer;
+  border-radius: 3px;
+  height: auto;
+}
+  
+.botao_criar_lista .btn:hover {
+  background-color: #5e02aa;
+}
+
+section {
+  flex-grow: 1;  
+  margin-top: 0;
+  margin-bottom: 140px;
+  height: auto;
+}
+
+footer {
+  margin-top: 0;
+  flex-shrink: 0;
+}
+
+/*----POP_UP CRIAR LISTA----*/
+.pop-up_criar_lista {
+  position: fixed;
+  transform: translate(-50%, -50%) scale(0.1);
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease; 
+}
+
+.pop-up_criar_lista.show {
+  transform: translate(-50%, -50%) scale(1); 
+  opacity: 1; 
+}
+
+.fundo-escuro {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(49, 49, 49, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+  z-index: 999;
+}
+
+.fundo-escuro.show {
+  opacity: 1;
+  visibility: visible;
+} 
+
+@media (max-width: 768px) {
+
+  section{
+    margin-top: 44px;        
+    margin-bottom: 140px;
+  }
+
+  /*-----------------------------------------------------------*/
+
+  .nav_listas{
+    display: none;
+  }
+
+  .nav_listas_responsiva_direita {
+    display: block;
+    position: fixed;
+    z-index: 4;
+    width: 50%;
+    right: 0;
+    background-color: black;    
+    padding-top: 8px;
+    padding-bottom: 11px;
+    margin: 0; 
+    z-index: 1;
+  }
+
+  .nav_listas_responsiva_direita::after {
+    content: "";
+    position: absolute;
+    bottom: 0;  
+    left: 0;
+    width: 100%;  
+    height: 3px;     
+    background-color: #8500F2; 
+  }
+
+  .nav_listas_responsiva_esquerda{
+    display: block;
+    position: fixed;
+    z-index: 4;
+    width: 50%;
+    left: 0;
+    background-color: black;    
+    padding-top: 8px;
+    padding-bottom: 11px;
+    margin: 0; 
+    z-index: 1;
+  }
+
+  .nav_listas_responsiva_esquerda::after {
+    display: none;
+    content: "";
+    position: absolute;
+    bottom: 0;  
+    left: 0;
+    width: 100%;  
+    height: 3px;  
+    /*background-color: #8500F2; /* Cor da faixa */
+  }
+
+  /*-----------------------------------------------------------*/
+
+  .barra_listas{
+    align-items: center;
+    justify-self: center;
+    padding:0;
+    margin: 0;
+    gap: 0;
+    display: flex;
+  }
+
+  #linha_horizontal{ 
+    display: none;
+  }
+
+  #linha_vertical{
+    display: none;
+  }
+
+  /*-----------------------------------------------------------*/
+
+  .containers_listas{
+   margin: 0 24px;
+   margin-top: 48px;
+   gap: 54px;
+  }    
+
+  .container_filme{
+    width: 350px;
+    height: 150px;
+    margin-bottom: 0;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;  
+    position: relative;
+    background-color: rgb(16, 16, 16);
+  }
+
+  .container_filme .poster_filmes{
+    z-index: 0;
+  }
+
+  .container_filme p{
+    position: absolute;  
+    top: -24px;  
+    left: 0;
+    width: 100%;  
+    text-align: left;  
+    margin: 0;
+    font-size: 13.5px;
+  }
+
+  .poster_filmes{
+    position: relative;
+    border-radius: 10px; 
+    height: auto;   
+  }      
+
+  .poster_filmes img {
+    position: absolute;
+    width: 100px;  
+    height: 150px;  
+    border-radius: 5px;
+    box-shadow: 5px 0px 15px rgb(0, 0, 0, 1.0);
+  }
+
+  .poster_filmes img:nth-child(1) {
+    left: 0px;
+    z-index: 5;
+  }
+
+  .poster_filmes img:nth-child(2) {
+    left: 62.5px;  
+    z-index: 4;
+  }
+
+  .poster_filmes img:nth-child(3) {
+    left: 125px;  
+    z-index: 3;
+  }
+
+  .poster_filmes img:nth-child(4) {
+    left: 187.5px;  
+    z-index: 2;
+  }
+
+  .poster_filmes img:nth-child(5) {
+    left: 250px;  
+    z-index: 1;
+  }
+
+  .botao_criar_lista{
+    padding: 0;
+    margin: 32px 24px;
+  }
+
+  .botao_criar_lista .btn{
+    margin: 0;
+    width: auto;
+    height: 40px;
+    font-size: 12.5px;
+  }
+
+  .fundo-escuro{
+    z-index: 5;
+  }
+}
