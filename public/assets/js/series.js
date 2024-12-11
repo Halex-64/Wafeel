@@ -1,12 +1,15 @@
 // Lista de IDs dos provedores específicos
 const selectedProviderIds = [337, 8, 119, 1899, 307, 283]; // Disney+, Netflix, Prime Video, Max, Globoplay, Crunchyroll
 
-// Função para configurar eventos nos logos
 function setupSeriesClickEvents() {
     const logos = document.querySelectorAll('.provider-logo');
     logos.forEach(logo => {
         logo.addEventListener('click', (event) => {
             const providerId = event.target.getAttribute('data-provider-id');
+            if (!providerId) {
+                console.error('O ID do provedor não foi encontrado no elemento clicado.');
+                return;
+            }
             filterSeriesByProvider(providerId);
         });
     });
@@ -22,9 +25,10 @@ function filterSeriesByProvider(providerId) {
             return response.json();
         })
         .then(data => {
-            if (Array.isArray(data.results)) {
-                console.log('Dados recebidos para séries populares:', data.results); // Verifique a resposta
-                renderSeries(data.results, 'series-container'); // Renderiza no container de séries populares
+            // Verifique se a resposta é um array
+            if (Array.isArray(data)) {
+                console.log('Dados recebidos para séries populares:', data); // Verifique a resposta
+                renderSeries(data, 'series-container'); // Renderiza no container de séries populares
             } else {
                 console.error('Estrutura de dados inesperada para séries populares:', data);
             }
@@ -40,9 +44,10 @@ function filterSeriesByProvider(providerId) {
             return response.json();
         })
         .then(data => {
-            if (Array.isArray(data.results)) {
-                console.log('Dados recebidos para séries recentes:', data.results); // Verifique a resposta
-                renderSeries(data.results, 'series-recentes'); // Renderiza no container de séries recentes
+            // Verifique se a resposta é um array
+            if (Array.isArray(data)) {
+                console.log('Dados recebidos para séries recentes:', data); // Verifique a resposta
+                renderSeries(data, 'series-recentes'); // Renderiza no container de séries recentes
             } else {
                 console.error('Estrutura de dados inesperada para séries recentes:', data);
             }
@@ -58,9 +63,10 @@ function filterSeriesByProvider(providerId) {
             return response.json();
         })
         .then(data => {
-            if (Array.isArray(data.results)) {
-                console.log('Dados recebidos para séries com melhores avaliações:', data.results); // Verifique a resposta
-                renderSeries(data.results, 'series-top-rated'); // Renderiza no container de melhores avaliações
+            // Verifique se a resposta é um array
+            if (Array.isArray(data)) {
+                console.log('Dados recebidos para séries com melhores avaliações:', data); // Verifique a resposta
+                renderSeries(data, 'series-top-rated'); // Renderiza no container de melhores avaliações
             } else {
                 console.error('Estrutura de dados inesperada para séries com melhores avaliações:', data);
             }

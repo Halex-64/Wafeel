@@ -71,6 +71,7 @@ async function fetchMoviesByProvider(providerId) {
             params: {
                 api_key: API_KEY, // Substitua pela sua API Key
                 with_watch_providers: providerId,
+                with_original_language: en,
                 watch_region: 'BR', // Altere para sua região, se necessário
                 language: 'pt-BR', // Idioma dos resultados
             },
