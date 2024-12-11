@@ -5,7 +5,7 @@ html, body{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Coolvetica', normal;
+  font-family: "Coolvetica", sans-serif;
   background-color: #000000;
   color: white;
   overflow-x: hidden;
@@ -41,45 +41,45 @@ html, body{
 
 /*----------------------------------------------------------------*/
 
-section{
-  margin-top:40px;
+section {
+  margin-top: 40px;
 }
 
-section h2{
+section h2 {
   font-size: 32px;
 }
 
-section P{
+section P {
   font-size: 24px;
   font-family: "Poppins", sans-serif;
   font-style: normal;
 }
 
-.welcomeContainer{
+.welcomeContainer {
   text-align: center;
-  line-height:  0.8;
+  line-height: 0.8;
 }
 
 /*----------------------------------------------------------------*/
 
-form{
+form {
   padding-top: 16px;
 }
 
-.quiz .question h3{
+.quiz .question h3 {
   font-size: 32px;
   margin-bottom: 10px;
 }
 
 .quiz .question label {
-  font-size: 24px; 
+  font-size: 24px;
   font-family: "Poppins", sans-serif;
-  font-style:normal;
+  font-style: normal;
 }
 
 /*----------------------------------------------------------------*/
 
-.quiz{
+.quiz {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -87,13 +87,13 @@ form{
 
 .question {
   text-align: left;
-  width: 100%; 
+  width: 100%;
   max-width: 600px;
   margin-bottom: 20px;
 }
 
-label{
-  line-height:  2;
+label {
+  line-height: 2;
 }
 
 .question label {
@@ -101,66 +101,115 @@ label{
   margin-bottom: 8px;
 }
 
-.figura_container{
-  position: relative; 
+.figura_container {
+  position: relative;
   width: 100vw;
-  height: 450px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
-  z-index: 1; 
-}
-
-.figura_container::before {
-  content: ''; 
-  position: absolute; 
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('/public/assets/img/filme_garfield.png'); 
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0.2; 
-  z-index: -1; 
-}
-
-.figura_container_2 {
-  position: relative; 
-  width: 100vw;
-  height: 450px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
-  z-index: 1; 
-}
-
-.figura_container_2::before {
-  content: ''; 
-  position: absolute; 
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('/public/assets/img/filme_lady_gaga.png'); 
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0.2; 
-  z-index: -1; 
-}
-
-.question_container{
-  position: relative; 
   height: 450px;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 0 auto;
   z-index: 1;
+}
+
+.figura_container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("../img/filme_garfield.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.2;
+  z-index: -1;
+}
+
+.figura_container_2 {
+  position: relative;
+  width: 100vw;
+  height: 450px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  z-index: 1;
+}
+
+.figura_container_2::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("../img/filme_lady_gaga.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.2;
+  z-index: -1;
+}
+
+.question_container {
+  position: relative;
+  height: 450px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  z-index: 1;
+}
+
+/*----------------------------------------------------------------*/
+
+.recommendation{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.recommendation img{
+  border-radius: 8px;
+}
+
+.recommendation img:hover{
+  transform: scale(1.025);
+}
+
+#recommendation-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 16px;
+} 
+
+.recommendation-item {
+  border-radius: 8px;
+  overflow: hidden;
+  max-width: 200px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.recommendation-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.recommendation-item:hover {
+  transform: scale(1.05);
+}
+
+.titulo-lista-recomendacoes {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
 }
 
 /*----------------------------------------------------------------*/
@@ -176,7 +225,7 @@ label{
 }
 
 .question label::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   top: 50%;
@@ -189,17 +238,17 @@ label{
   transition: background-color 0.3s, border-color 0.3s; /* Transição suave */
 }
 
-.question label:hover::before{
-  background-color: #8500F2;
+.question label:hover::before {
+  background-color: #8500f2;
 }
 
 .question input[type="radio"]:checked + label::before {
-  background-color: #8500F2; /* Cor da bolinha quando o rádio for selecionado */
+  background-color: #8500f2; /* Cor da bolinha quando o rádio for selecionado */
 }
 
 /*----------------------------------------------------------------*/
 
-.buttons{
+.buttons {
   text-align: center;
   display: flex;
   justify-content: center;
@@ -207,7 +256,7 @@ label{
 }
 
 .buttons .btn {
-  background-color: #8500F2;
+  background-color: #8500f2;
   color: #fff;
   font-size: 24px;
   border: none;
@@ -223,7 +272,25 @@ label{
   background-color: #5e02aa;
 }
 
-/*-------------------------------------*/
+#WhatsApp_icon {
+  width: 56px;
+  margin: 0 40px;
+}
+
+#Instagram_icon,
+#suporte_icon {
+  width: 48px;
+  margin: 0 40px;
+}
+
+footer {
+  background-color: #8500f2;
+  padding: 8px;
+  margin-top: 136px;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 0;
+}
 
 .menu-toggle {
   background: none;

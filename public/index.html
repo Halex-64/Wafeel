@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wafeel</title>
+    <link rel="stylesheet" href="./assets/CSS/style.css">
+    <script defer src="./scripts/modal.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header class="header_fundo">
+        <nav class="barradenavegacao"><a href="index.html">
+                <img class="logo__image" src="assets/img/logo.png" alt="Logo"></a>
+            <ul class="links" id="links">
+                <li><a href="./quiz.html">Quiz</a></li>
+                <li><a href="./filmes.html">Filmes</a></li>
+                <li><a href="./series.html">Séries</a></li>
+                <li><a href="./pesquisa.html">Listas</a></li>
+                <li><a id="favLink" href="./login.html"><img class="fa-solid fa-heart" src="assets/img/favoritosicon.png"></a></img></li>
+                <li><a id="userLink" href="./login.html"><img id="ModalOpen" class="fa-solid fa-right-to-bracket" src="assets/img/usuarioicon.png"></img></a>
+                </li>
+            </ul>
+        </nav>
+        <div class="menu-icon" id="menu-icon">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <div class="header-content">
+            <h1 class="textoPrincipal_telainicial">Filmes e séries de acordo com <br> suas emoções, e tempo disponível!
+            </h1>
+            <h2 class="textoSecundario_telainicial">Recomendamos os melhores conteúdos com base <br> na forma em que
+                você está se sentindo! Faça já o <br> quiz abaixo</h2>
+            <div class="btn animate__animated animate__backInLeft espaco_botao">
+                <button class="btn__quiz"><a href="">Quiz</a></button>
+            </div>
+        </div>
+    </header>
+    <section class="emotion-cards">
+        <h2 class="textoSecundario_telainicial">Na dúvida do que assistir?</h2>
+        <p class="textoSecundario_telainicial">Veja nossos filmes e séries filtrados por emoção.</p>
+        <div class="cards-container">
+            <div class="emotion-card">
+                <h3>Felicidade</h3>
+                <p class="subtitulo_card">Mantenha seu bom humor e diversão.</p>
+                <img class="emojiFeliz" src="assets/img/emojifeliz.png" alt="">
+            </div>
+            <div class="emotion-card">
+                <h3>Tristeza</h3>
+                <p class="subtitulo_card">Seu conforto para momentos difíceis.</p>
+                <img class="emojiTriste" src="assets/img/emojitriste.png" alt="">
+            </div>
+            <div class="emotion-card">
+                <h3>Tédio</h3>
+                <p class="subtitulo_card">Transforme seu tédio em diversão.</p>
+                <img class="emojiTedio" src="assets/img/emojitedio.png" alt="">
+            </div>
+            <div class="emotion-card">
+                <h3>Estresse</h3>
+                <p class="subtitulo_card">Escolha relaxar e aliviar o estresse.</p>
+                <img class="emojiEstresse" src="assets/img/emojiestresse.png" alt="">
+            </div>
+            <div class="emotion-card">
+                <h3>Ansiedade</h3>
+                <p class="subtitulo_card">Para distrair e acalmar sua mente.</p>
+                <img class="emojiAnsiedade" src="assets/img/emojiansiedade.png" alt="">
+            </div>
+            <div class="emotion-card">
+                <h3>Nostalgia</h3>
+                <p class="subtitulo_card">Volte no tempo e veja alguns clássicos.</p>
+                <img class="emojiNostalgia" src="assets/img/emojinostalgia.png" alt="">
+            </div>
+        </div>
+    </section>
+    <section class="texto_filmesTelaInicial">
+        <h2>Lançamentos recentes</h2>
+        <div class="carousel-container">
+            <button class="carousel-button prev">&#10094;</button>
+            <div class="carousel">
+                <div class="carousel-track" id="carouselTrack">
+                </div>
+            </div>
+            <button class="carousel-button next">&#10095;</button>
+        </div>
+    </section>    
+</body>
+<script src="/assets/js/caroussel.js"></script>
+<script defer src="./assets/js/redirect.js"></script>
+</html>

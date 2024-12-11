@@ -1,0 +1,121 @@
+#movie-container,
+#series-container,
+#series-top-rated,
+#filmes-top-rated {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 15px;
+  overflow: hidden; /* Esconde o conteúdo excedente */
+  height: calc(2 * 275px); /* Altura baseada em 2 fileiras de 300px */
+}
+
+#filmes-recentes,
+#series-recentes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 15px;
+  overflow: hidden; /* Esconde o conteúdo excedente */
+  height: calc(2 * 275px); /* Altura baseada em 2 fileiras de 300px */
+}
+
+.title-streaming {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: initial;
+  /* margin-left: 65px;
+  margin-top: 20px;
+  margin-bottom: 20px; */
+}
+
+.title-filmes {
+  display: flex;
+  justify-content: center;
+  flex-wrap: initial;
+  padding: 20px;
+}
+
+.title-series {
+  padding: 20px;
+}
+
+.movie-item .serie-item {
+  flex: 1 1 calc(20% - 20px); /* Cada item ocupa 20% da largura menos o espaçamento */
+  max-width: calc(
+    20% - 20px
+  ); /* Limita o tamanho máximo para manter 5 por linha */
+  box-sizing: border-box; /* Garante que padding e border sejam incluídos no tamanho total */
+  overflow: hidden;
+}
+
+.movie-item:hover {
+  transform: scale(1.05);
+}
+
+.serie-item:hover {
+  transform: scale(1.05);
+}
+
+.movie-item img {
+  width: 191px;
+  height: 272px;
+  border-radius: 10px;
+}
+
+.serie-item img {
+  width: 191px;
+  height: 272px;
+  border-radius: 10px;
+}
+
+#sidebar {
+  display: flex;
+  flex-direction: row;
+  gap: 2.2rem;
+  padding: 1.2rem;
+  background-color: #000;
+  border-radius: 10px;
+  justify-content: center;
+}
+
+/* Estilos para os logos */
+.provider-logo {
+  width: 120px !important; /* Tamanho fixo do logo */
+  height: auto; /* Mantém a proporção */
+  border: 2px solid #8500f2; /* Borda com cor roxa */
+  border-radius: 10px; /* Bordas arredondadas nos logos */
+  padding: 5px; /* Espaçamento interno */
+  background-color: #000; /* Fundo preto para os logos */
+  cursor: pointer; /* Cursor muda para pointer ao passar o mouse */
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Animação */
+}
+
+.provider-logo:hover {
+  transform: scale(1.1); /* Aumenta levemente o tamanho */
+  box-shadow: 0 0 10px #8c00ff; /* Adiciona um brilho ao redor */
+}
+
+.content#content {
+  flex-grow: 1;
+  padding: 20px;
+  margin-top: 0;
+}
+
+.main-container {
+  text-align: center;
+}
+
+.direitos-reservados {
+  width: 100%;
+  text-align: center;
+  padding: 20px;
+}

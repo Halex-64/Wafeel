@@ -1,0 +1,114 @@
+#body-filmes-detalhes {
+  background-color: #000; /* Fundo preto */
+  color: #fff; /* Texto branco */
+  line-height: 1.6;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+#footer-filmes-detalhes {
+  width: 100%;
+}
+/* Container principal para os detalhes */
+#filme-detalhes {
+  max-width: 1200px;
+  width: 100%;
+  gap: 10px;
+  background-color: #000000a4; /* Fundo do container */
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 0 15px rgba(27, 27, 27, 0.712);
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centraliza o conteúdo */
+  text-align: center; /* Centraliza os textos */
+}
+
+/* Estilo da imagem do poster */
+#filme-detalhes img {
+  width: 700px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.8);
+}
+
+/* Detalhes do texto */
+#filme-detalhes h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+#filme-detalhes p {
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+}
+
+#filme-detalhes strong {
+  color: #8500f2;
+}
+
+#filme-detalhes h3 {
+  font-size: 1.5rem;
+}
+
+/* Estilo das plataformas */
+.providers {
+  margin-top: 10px;
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+.providers-title {
+  text-align: center;
+}
+
+.providers h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.provider-logo {
+  width: 20px;
+  height: auto;
+}
+
+/* Botão de favoritar */
+#favoritar-btn {
+  margin-top: 30px;
+  margin-bottom: 5px;
+  padding: 10px 20px;
+  background-color: #8500f2;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#favoritar-btn:hover {
+  background-color: #460080;
+}
+
+/* Estilo do rodapé */
+footer {
+  margin-top: 10px;
+  text-align: center;
+  color: #bbb;
+  font-size: 0.9rem;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  #filme-detalhes {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  #filme-detalhes img {
+    margin: 0 auto;
+  }
+}
