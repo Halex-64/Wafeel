@@ -11,52 +11,32 @@ html, body{
   overflow-x: hidden;
 }
 
-.header_quiz {
-  color: white;
+.barradenavegacao{
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  text-align: center;
-  position: relative;
+  width: auto;
+  padding:24px 56px;
 }
 
-nav {
+.barradenavegacao .links{
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 1800px;
-  padding: 20px;
+  gap:72px;
+}
+.barradenavegacao a{
+  color: white;
+  text-decoration: none;
+  font-weight: 100px; 
+  font-size: 1.8rem;
+  transition: color 0.2s
+}.barradenavegacao a:hover{
+  color: #8500F2;
+  transition: color 0.2s;
 }
 
 .logo__image {
   width: 150px;
   height: auto;
-  display: flex;
-  justify-content: flex-start;
-  padding-right: 300px;
-}
-
-.links {
-  display: flex;
-  justify-content: center;
-  gap: 150px;
-  list-style-type: none;
-}
-
-.links a {
-  color: white;
-  font-weight: 100;
-  font-size: 1.8rem;
-  text-decoration: none;
-}
-
-.header_container {
-  color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
 }
 
 /*----------------------------------------------------------------*/

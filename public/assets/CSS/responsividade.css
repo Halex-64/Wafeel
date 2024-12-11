@@ -1,6 +1,9 @@
 /* MENU e FOOTER responsivos */
 
 @media (max-width: 768px) {
+  .barradenavegacao{
+    display: none;
+  }
 
     body {
       margin-top: 85.8px; /* Ajuste de acordo com a altura da .header_responsiva */
@@ -41,6 +44,8 @@
   
     .barradenavegacao_responsiva .links li a{
       font-size: 16px;
+      color: white;
+      text-decoration: none;
     }
   
     .barradenavegacao_responsiva .links{
