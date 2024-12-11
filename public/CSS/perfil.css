@@ -8,6 +8,7 @@ section{
 .perfil_usuario{
     display: flex;
     flex-direction: column;
+    margin-top: 24px;
     width: 30%;
     gap: 32px
 }
