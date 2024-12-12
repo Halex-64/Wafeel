@@ -1,14 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-// Simulação de banco de dados (incluindo favoritos por usuário)
-const users = [
-    {
-        email: 'nokotan@123',
-        password: '12345678',
-        favoritos: [] // Cada usuário tem sua lista de favoritos
-    }
-];
 
 // Middleware para verificar se o usuário está logado
 function verificarLogin(req, res, next) {
@@ -43,31 +35,15 @@ router.post('/cadastro', (req, res) => {
     res.redirect('/login.html');
 });
 
-// Rota de login
-router.post('/login', (req, res) => {
-    const { email, password } = req.body;
-
-    // Verificar se o usuário existe e a senha está correta
-    const user = users.find(user => user.email === email && user.password === password);
-    if (!user) {
-        return res.status(400).send('Email ou senha inválidos!');
-    }
-
-    req.session.isLoggedin = true;
-    req.session.user = user;
-
-    res.redirect('/index.html');
-});
-
 // Rota de logout
 router.get('/logout', (req, res) => {
-    req.session.destroy(err => {
-        if (err) {
-            return res.redirect('/');
-        }
+    if (req.session.isLoggedin) {
+        req.session.destroy();
         res.clearCookie('connect.sid');
         res.redirect('/login.html');
-    });
+    } else {
+        res.redirect('/login.html');
+    }
 });
 
 router.get('/check-session', (req, res) => {
@@ -76,13 +52,13 @@ router.get('/check-session', (req, res) => {
     }
     return res.json({ loggedIn: false });
 });
+
 // Rota para obter os favoritos do usuário logado
 router.get('/favoritos', verificarLogin, (req, res) => {
     const user = req.session.user;
     res.json(user.favoritos);
 });
 
-// Rota para adicionar/remover favoritos
 router.post('/favoritos', verificarLogin, (req, res) => {
     const user = req.session.user;
     const { id, title, poster_path, media_type } = req.body;
@@ -90,14 +66,18 @@ router.post('/favoritos', verificarLogin, (req, res) => {
     const favoritoExistente = user.favoritos.find(f => f.id === id);
 
     if (favoritoExistente) {
-        // Remove dos favoritos
         user.favoritos = user.favoritos.filter(f => f.id !== id);
         res.json({ message: 'Removido dos favoritos.', favoritos: user.favoritos });
     } else {
-        // Adiciona aos favoritos
         const novoFavorito = { id, title, poster_path, media_type };
         user.favoritos.push(novoFavorito);
         res.json({ message: 'Adicionado aos favoritos!', favoritos: user.favoritos });
+    }
+
+    // Atualizar a lista de usuários (simulação de persistência)
+    const userIndex = users.findIndex(u => u.email === user.email);
+    if (userIndex !== -1) {
+        users[userIndex].favoritos = user.favoritos;
     }
 });
 

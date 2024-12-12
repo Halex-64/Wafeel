@@ -6,6 +6,8 @@ const session = require('express-session');
 const authRoutes = require('./routes/auth');
 const axios = require('axios');
 const connection = require('./db');
+const SQLiteStore = require('connect-sqlite3')(session);
+
 
 const app = express();
 
@@ -14,6 +16,7 @@ const PORT = 3000;
 const API_KEY = process.env.API_KEY;
 
 app.use(session({
+    store: new SQLiteStore(),
     secret: 'chave-secreta',
     resave: false,
     saveUninitialized: false,

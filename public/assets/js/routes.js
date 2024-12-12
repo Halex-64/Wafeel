@@ -4,6 +4,10 @@ const axios = require('axios');
 const { isLoggedIn } = require('../../../routes/auth');
 require('dotenv').config();
 
+const { users } = require('./user');
+
+console.log(users);
+
 //Chave da API
 const API_KEY = process.env.API_KEY;
 
@@ -54,6 +58,7 @@ router.get('/perfil', (req, res) => {
     }
 });
 
+
 // Rota que checa se o Usuario está logado ou não
 router.get('/api/check-login', (req, res) => {
     if (req.session.isLoggedin) {
@@ -68,9 +73,22 @@ router.get('/cadastro', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'cadastro.html'));
 });
 
-// Rota para a página de Login
-router.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'login.html'));
+//Rota de login
+router.post('/login', (req, res) => {
+    const { email, password } = req.body;
+    console.log('Requisição de login recebida');
+
+    // Verificar se o usuário existe e a senha está correta
+    const user = users.find(user => user.email === email && user.password === password);
+    if (!user) {
+        return res.status(400).send('Email ou senha inválidos!');
+    };
+
+    req.session.isLoggedin = true;
+    req.session.user = user;
+
+    res.redirect('/perfil.html');
+    console.log('isLoggedin: ', req.session.isLoggedin);
 });
 
 router.get('/providers', async (req, res) => {
