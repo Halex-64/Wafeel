@@ -4,24 +4,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/CSS/quiz.css">
     <link rel="stylesheet" href="./assets/CSS/style.css">
-    <link rel="icon" type="image/png" href="assets/img/icon.png">
+    <link rel="stylesheet" href="./assets/CSS/responsividade.css">
+    <link rel="stylesheet" href="./assets/CSS/footer.css">
+    <script defer src="./scripts/modal.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <title>Séries</title>
 </head>
 
 <body>
     <header class="header_sem_fundo">
-        <nav><a href="index.html">
-                <img class="logo__image" src="assets/img/logo.png" alt="Logo"></a>
-            <ul class="links" id="links">
+        <nav class="barradenavegacao">
+            <a href="index.html"><img class="logo__image" src="assets/img/logo.png" alt="Logo"></a>
+            <ul class="links" id="mobile-menu">
                 <li><a href="./quiz.html">Quiz</a></li>
                 <li><a href="./filmes.html">Filmes</a></li>
                 <li><a href="./series.html">Séries</a></li>
-                <li><a href="./listas.html">Listas</a></li>
-                <li><a id="favLink" href="./login.html"><img class="fa-solid fa-heart"
-                            src="assets/img/favoritosicon.png"></a></img></li>
-                <li><a id="userLink" href="./login.html"><img id="ModalOpen" class="fa-solid fa-right-to-bracket"
-                            src="assets/img/usuarioicon.png"></img></a>
+                <li><a href="./LISTAS/listas.html">Listas</a></li>
+                <li><a href="./favoritos.html" id="favLink">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor"
+                            class="bi bi-heart" id="favLink" viewBox="0 0 16 16">
+                            <path
+                                d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    <a href="perfil.html" id="userLink">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor"
+                            class="bi bi-person-circle" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                            <path fill-rule="evenodd"
+                                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+                        </svg>
+                    </a>
                 </li>
             </ul>
         </nav>
@@ -43,36 +65,72 @@
         <h1 class="title-series">Melhores Avaliados</h1>
         <div id="series-top-rated" class="series-container"></div>
     </div>
-    <div class="direitos-reservados">2024 Wafeel - Todos os conteúdos são propriedade de suas legitimas empresas</div>
 </body>
-<footer id="footer-filmes-detalhes">
-    <div class="social-icons">
-        <a href="#">
-            <img src="assets/img/whatsapp_icon.png" id="WhatsApp_icon" alt="WhatsApp">
-        </a>
-        <a href="#">
-            <img src="assets/img/instagram_icon.png" id="Instagram_icon" alt="Instagram">
-        </a>
-        <a href="#">
-            <img src="assets/img/help_icon.png" id="suporte_icon" alt="Suporte">
-        </a>
+<footer> <!--NOVO FOOTER-->
+    <div class="footer_conteudo">
+        <div class="cr6">
+            <div class="footer_logo_texto">
+                <img class="logo_footer" src="assets/img/logo.png" alt="Logo">
+                <p>Desbloqueie histórias únicas e mágicas a cada clique.</p>
+                <p>Mergulhe em uma experiência cinematográfica onde suas emoções ditam a próxima trama.</p>
+            </div>
+        </div>
+        <div class="cr7">
+            <div class="h2_footer">
+                <h2>Cadastre-se</h2>
+            </div>
+            <p class="texto_cadastro_footer">Faça login para aproveitar ao máximo nosso site</p>
+            <button class="botao_footer">Login</button>
+            <button class="botao_footer">Cadastro</button>
+        </div>
+        <div class="cr8">
+            <div class="h2_footer">
+                <h2>Menu</h2>
+            </div>
+            <div class="footer_menu">
+                <div class="footer_menu_esquerda">
+                    <ul>
+                        <li><a href="">Home</a></li>
+                        <li><a href="">Quiz</a></li>
+                        <li><a href="">Filmes</a></li>
+                        <li><a href="">Séries</a></li>
+                        <li><a href="">Listas</a></li>
+                        <li><a href="">Favoritos</a></li>
+                    </ul>
+                </div>
+                <div class="footer_menu_direita">
+                    <ul>
+                        <li><a href="">Perfil</a></li>
+                        <li><a href="">Ajuda</a></li>
+                        <li><a href="">Termos</a></li>
+                        <li><a href="">Suporte</a></li>
+                        <li><a href="">Contato</a></li>
+                        <li><a href="">Sobre Nós</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="cr9">
+            <div class="h2_footer">
+                <h2>Conecte-se conosco</h2>
+            </div>
+            <div class="footer_contato_icones">
+                <a href="#" class="circle"><img src="assets/img/whatsapp_icon.png" id="WhatsApp_icon"
+                        alt="WhatsApp"></a>
+                <a href="#" class="circle"><img src="assets/img/instagram_icon.png" id="Instagram_icon"
+                        alt="Instagram"></a>
+            </div>
+
+            <form class="footer_input">
+                <input type="text" name="search" placeholder="Pesquise aqui...">
+                <input type="button" value="🔍︎">
+            </form>
+        </div>
     </div>
-</footer>
-<footer class="footer_responsivo">
-    <div class="footer_links">
-        <a href="#">Login</a>
-        <a href="#">Suporte</a>
-        <a href="#">Sobre Nós</a>
-    </div>
-    <div class="social-icons">
-        <a href="#"><img src="assets/img/whatsapp_icon.png" id="WhatsApp_icon" alt="WhatsApp"></a>
-        <a href="#"><img src="assets/img/instagram_icon.png" id="Instagram_icon" alt="Instagram"></a>
-    </div>
-    <h3>Seu mundo de histórias, personalizado.</h3>
-    <a class="logo_footer_responsivo"><img class="logo__image" src="assets/img/logo.png" alt="Logo"></a>
-    <div class="politica_termos">
-        <p class="politica_priv">Política de Privacidade</p>
-        <p class="term_cond">Termos e Condições</p>
+    <div class="footer_termos">
+        <div class="footer_politica">
+            <p>&copy; 2024 Wafeel. Todos os direitos reservados.</p>
+        </div>
     </div>
 </footer>
 <script src="assets/js/series.js"></script>
