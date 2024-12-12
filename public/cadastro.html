@@ -5,20 +5,122 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/CSS/style.css">
+    <link rel="stylesheet" href="./assets/CSS/responsividade.css">
+    <link rel="stylesheet" href="./assets/CSS/footer.css">
     <title>Cadastro</title>
 </head>
 
 <body>
-    <h2>Cadastro</h2>
-    <form action="/cadastro" method="POST">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required><br>
-        <label for="password">Senha:</label>
-        <input type="password" id="password" name="password" required><br>
-        <label for="password">Confirmar Senha:</label>
-        <input type="password" id="confirm_password" name="confirm_password" required><br>
-        <button type="submit">Cadastrar</button>
-    </form>
+    <header class="header_sem_fundo">
+        <nav class="barradenavegacao"><a href="./index.html">
+                <img class="logo__image" src="assets/img/logo.png" alt="Logo"></a>
+            <ul class="links" id="links">
+                <li><a href="./quiz.html">Quiz</a></li>
+                <li><a href="./filmes.html">Filmes</a></li>
+                <li><a href="./series.html">Séries</a></li>
+                <li><a href="./listas.html">Listas</a></li>
+                <li><a id="favLink" href="./login.html"><img class="fa-solid fa-heart"
+                            src="assets/img/favoritosicon.png"></a></img></li>
+                <li><a id="userLink" href="./login.html"><img id="ModalOpen" class="fa-solid fa-right-to-bracket"
+                            src="assets/img/usuarioicon.png"></img></a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <h1 class="title-cadastro">Cadastro</h1>
+    <section class="body-form">
+        <form class="form-cadastro" action="/cadastro" method="POST">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" required><br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br>
+            <label for="password">Senha:</label>
+            <input type="password" id="senha" name="senha" required><br>
+            <button type="submit">Cadastrar</button>
+        </form>
+    </section>
 </body>
+<style>
+    /* Estilo do título do formulário */
+    .title-cadastro {
+        font-size: 40px;
+        text-align: center;
+        margin-top: 50px;
+        color: #fff;
+    }
+
+    /* Estilo do formulário */
+    .body-form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 40vh;
+    }
+
+    .form-cadastro {
+        width: 100%;
+        max-width: 400px;
+        background-color: #222;
+        /* Fundo escuro para o formulário */
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Labels do formulário */
+    .form-cadastro label {
+        font-size: 14px;
+        color: #fff;
+        /* Labels brancas */
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    /* Campos de input */
+    .form-cadastro input[type="text"],
+    .form-cadastro input[type="email"],
+    .form-cadastro input[type="password"] {
+        width: 100%;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        background-color: #333;
+        /* Fundo escuro para os inputs */
+        color: #fff;
+        /* Texto branco nos inputs */
+        transition: border-color 0.3s ease;
+    }
+
+    /* Estilo ao focar nos campos */
+    .form-cadastro input[type="text"]:focus,
+    .form-cadastro input[type="email"]:focus,
+    .form-cadastro input[type="password"]:focus {
+        border-color: #6c63ff;
+        /* Cor ao focar no campo */
+        outline: none;
+    }
+
+    /* Botão de envio */
+    .form-cadastro button[type="submit"] {
+        width: 100%;
+        padding: 12px;
+        background-color: #6c63ff;
+        /* Cor do botão de submit */
+        border: none;
+        border-radius: 5px;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    /* Estilo ao passar o mouse no botão */
+    .form-cadastro button[type="submit"]:hover {
+        background-color: #5740d4;
+        /* Cor do botão ao passar o mouse */
+    }
+</style>
 
 </html>

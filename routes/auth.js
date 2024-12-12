@@ -11,29 +11,8 @@ function verificarLogin(req, res, next) {
     }
 }
 
-// Rota de cadastro
-router.post('/cadastro', (req, res) => {
-    const { email, password, confirm_password } = req.body;
 
-    // Validação e verificação de usuário já existente
-    const userExists = users.find(user => user.email === email);
-    if (userExists) {
-        return res.status(400).send('Usuário já cadastrado!');
-    }
 
-    // Validação da senha
-    if (password.length < 8) {
-        return res.status(400).send('Senha muito curta');
-    }
-
-    if (password !== confirm_password) {
-        return res.status(400).send('Senhas diferentes!');
-    }
-
-    // Cadastrar novo usuário
-    users.push({ email, password, favoritos: [] });
-    res.redirect('/login.html');
-});
 
 // Rota de logout
 router.get('/logout', (req, res) => {

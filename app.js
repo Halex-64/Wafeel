@@ -5,8 +5,9 @@ const routes = require('./public/assets/js/routes');
 const session = require('express-session');
 const authRoutes = require('./routes/auth');
 const axios = require('axios');
-const connection = require('./db');
+const pool = require('./db');
 const SQLiteStore = require('connect-sqlite3')(session);
+const cors = require('cors');
 
 
 const app = express();
@@ -29,6 +30,7 @@ app.use((req, res, next) => {
     res.locals.isLoggedin = req.session.isLoggedin || false;
     next();
 });
+app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -46,6 +48,101 @@ app.use((req, res, next) => {
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
 });
+
+// Rota de cadastro
+app.post('/cadastro', async (req, res) => {
+    const { email, senha, nome } = req.body;
+
+    if (!email || !senha || !nome) {
+        return res.status(400).json({
+            success: false,
+            message: 'Campos obrigatórios: email, senha e nome',
+        });
+    }
+
+    let connection;
+    try {
+        connection = await pool.promise().getConnection();
+
+        // Verificar se o email já está cadastrado
+        const [results] = await connection.execute('SELECT * FROM Usuario WHERE email = ?', [email]);
+
+        if (results.length > 0) {
+            return res.status(400).json({
+                success: false,
+                message: 'Email já está em uso',
+            });
+        }
+
+        // Inserir o novo usuário
+        await connection.execute(
+            'INSERT INTO Usuario (email, senha, nome, role, excluido) VALUES (?, ?, ?, 2, 0)',
+            [email, senha, nome]
+        );
+
+        res.status(200).json({
+            success: true,
+            message: 'Usuário cadastrado com sucesso!',
+        });
+    } catch (err) {
+        console.error('Erro ao processar a requisição:', err);
+        res.status(500).json({
+            success: false,
+            message: 'Erro ao cadastrar usuário',
+        });
+    } finally {
+        if (connection) {
+            await connection.end();
+        }
+    }
+});
+
+app.post('/login', async (req, res) => {
+    const { email, senha } = req.body;
+
+    if (!email || !senha) {
+        return res.status(400).json({
+            success: false,
+            message: 'Campos obrigatórios: email e senha',
+        });
+    }
+
+    let connection;
+    try {
+        connection = await pool.promise().getConnection();
+
+        // Verificar se o usuário existe e a senha está correta
+        const [results] = await connection.execute('SELECT * FROM Usuario WHERE email = ?', [email]);
+
+        if (results.length === 0 || results[0].senha !== senha) {
+            return res.status(400).json({
+                success: false,
+                message: 'Email ou senha inválidos',
+            });
+        }
+
+        // Configurar sessão
+        req.session.isLoggedin = true;
+        req.session.user = results[0];
+
+        res.status(200).json({
+            success: true,
+            message: 'Login realizado com sucesso!',
+            user: results[0],
+        });
+    } catch (err) {
+        console.error('Erro ao processar a requisição:', err);
+        res.status(500).json({
+            success: false,
+            message: 'Erro ao realizar login',
+        });
+    } finally {
+        if (connection) {
+            await connection.end();
+        }
+    }
+});
+
 
 app.get('/api/providers', async (req, res) => {
     const response = await fetch(`https://api.themoviedb.org/3/watch/providers/movie?api_key=${API_KEY}&watch_region=BR`);
@@ -85,36 +182,6 @@ async function fetchMoviesByProvider(providerId) {
         throw error;
     }
 }
-
-
-// Endpoint para a rota /api/movies
-app.get('/api/movies', async (req, res) => {
-    const providerId = req.query.provider; // Obtém o ID do provedor via query string
-    const type = req.query.type;
-    if (!providerId) {
-        return res.status(400).send('Provider ID não fornecido');
-    }
-
-    try {
-        let url;
-        const movies = await fetchMoviesByProvider(providerId);
-        res.json({ results: movies });
-        if (type === 'popular') {
-            url = `https://api.themoviedb.org/3/discover/movie?with_watch_providers=${providerId}&sort_by=popularity.desc&api_key=${process.env.API_KEY}&language=pt-BR&watch_region=BR`;
-            console.log('Requisição para TMDb:', url);
-        } else if (type === 'recent') {
-            url = `https://api.themoviedb.org/3/discover/movie?with_watch_providers=${providerId}&sort_by=release_date.desc&api_key=${process.env.API_KEY}&language=pt-BR&watch_region=BR`;
-            console.log('Requisição para TMDb:', url);
-        } else {
-            return res.status(400).json({ error: 'Tipo inválido. Use "popular" ou "recent".' });
-        }
-    } catch (error) {
-        console.error('Erro ao processar /api/movies:', error.message);
-        res.status(500).send('Erro ao buscar filmes');
-    }
-
-});
-
 
 async function fetchPopularMovies() {
     const url = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=pt-BR&page=1`;

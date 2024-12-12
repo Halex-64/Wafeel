@@ -20,6 +20,18 @@ router.get('/', (req, res) => {
     res.render('index', { isLoggedIn: isLoggedIn });
 });
 
+router.get('/test-connection', async (req, res) => {
+    connection.connect((err) => {
+        if (err) {
+            console.error('Erro ao conectar ao banco de dados:', err.message);
+            return res.status(500).json({ success: false, message: 'Falha na conexão com o banco de dados', error: err.message });
+        } else {
+            console.log('Conexão bem-sucedida ao banco de dados MySQL!');
+            return res.status(200).json({ success: true, message: 'Conexão bem-sucedida ao banco de dados MySQL!' });
+        }
+    });
+});
+
 // Rota para a página de filmes
 router.get('/filmes', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'filmes.html'));

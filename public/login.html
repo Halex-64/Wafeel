@@ -32,18 +32,100 @@
             </ul>
         </nav>
     </header>
-    <h2>Login</h2>
-    <form id="loginForm" action="/login" method="POST">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required><br><br>
+    <h1 class="title-cadastro">Login</h1>
+    <section class="body-form">
+        <form class="form-cadastro" id="loginForm" action="/login" method="POST">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br><br>
 
-        <label for="senha">Senha:</label>
-        <input type="password" id="senha" name="password" required><br><br>
+            <label for="senha">Senha:</label>
+            <input type="password" id="senha" name="senha" required><br><br>
 
-        <button type="submit">Entrar</button>
-        <button onclick="window.location.href='/cadastro.html'">Cadastrar-se</button>
-    </form>
+            <button type="submit">Entrar</button>
+        </form>
 </body>
+</section>
+<style>
+    /* Estilo do título do formulário */
+    .title-cadastro {
+        font-size: 40px;
+        text-align: center;
+        margin-top: 50px;
+        color: #fff;
+    }
+
+    /* Estilo do formulário */
+    .body-form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 40vh;
+    }
+
+    .form-cadastro {
+        width: 100%;
+        max-width: 400px;
+        background-color: #222;
+        /* Fundo escuro para o formulário */
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Labels do formulário */
+    .form-cadastro label {
+        font-size: 14px;
+        color: #fff;
+        /* Labels brancas */
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    /* Campos de input */
+    .form-cadastro input[type="text"],
+    .form-cadastro input[type="email"],
+    .form-cadastro input[type="password"] {
+        width: 100%;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        background-color: #333;
+        /* Fundo escuro para os inputs */
+        color: #fff;
+        /* Texto branco nos inputs */
+        transition: border-color 0.3s ease;
+    }
+
+    /* Estilo ao focar nos campos */
+    .form-cadastro input[type="text"]:focus,
+    .form-cadastro input[type="email"]:focus,
+    .form-cadastro input[type="password"]:focus {
+        border-color: #6c63ff;
+        /* Cor ao focar no campo */
+        outline: none;
+    }
+
+    /* Botão de envio */
+    .form-cadastro button[type="submit"] {
+        width: 100%;
+        padding: 12px;
+        background-color: #6c63ff;
+        /* Cor do botão de submit */
+        border: none;
+        border-radius: 5px;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    /* Estilo ao passar o mouse no botão */
+    .form-cadastro button[type="submit"]:hover {
+        background-color: #5740d4;
+        /* Cor do botão ao passar o mouse */
+    }
+</style>
 <script src="/assets/js/check-session.js"></script>
 <script src="/public/assets/js/redirect.js"></script>
 
