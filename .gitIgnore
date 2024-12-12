@@ -2,3 +2,4 @@ node_modules
 .env
 replace.txt
 modal.txt
+sessions
