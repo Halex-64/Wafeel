@@ -49,7 +49,7 @@ async function fetchFilmeDetalhes() {
         const mediaTitle = mediaDetails.title || mediaDetails.name || 'Título indisponível';
         document.title = `Detalhes de ${mediaTitle}`
         // const posterPath = mediaDetails.poster_path? `https://image.tmdb.org/t/p/w500${mediaDetails.poster_path}`: './placeholder.jpg';
-        const backdropPath = mediaDetails.backdrop_path? `https://image.tmdb.org/t/p/w1280${mediaDetails.backdrop_path}` : './placeholder.jpg';
+        const backdropPath = mediaDetails.backdrop_path ? `https://image.tmdb.org/t/p/w1280${mediaDetails.backdrop_path}` : './placeholder.jpg';
 
         const generos = (mediaDetails.genres || []).map(genre => genre.name).join(", ");
         const providersHTML = (providersData || []).map(provider => `
@@ -122,9 +122,9 @@ function atualizarBotaoFavorito(filmeId) {
     const favoritarBtn = document.getElementById('favoritar-btn');
 
     if (isFavorito) {
-        favoritarBtn.textContent = 'Remover dos Favoritos';
-    } else {
         favoritarBtn.textContent = 'Adicionar aos Favoritos';
+    } else {
+        favoritarBtn.textContent = 'Remover dos Favoritos';
     }
 }
 
