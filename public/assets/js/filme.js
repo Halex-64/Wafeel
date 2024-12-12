@@ -81,7 +81,7 @@ function renderMovies(movies, containerId) {
             <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
         `;
         movieElement.addEventListener('click', () => {
-            window.location.href = `./filmes-detalhes.html?id=${movie.id}`;
+            window.location.href = `./movie_details.html?id=${movie.id}`;
         });
         moviesContainer.appendChild(movieElement);
     });
